@@ -1,0 +1,20 @@
+Package: stochZika
+Type: Package
+Title: What the Package Does (Title Case)
+Version: 0.1.0
+Author: person(given = "Lorenzo", 
+               family = "Cattarino", 
+               role = c("aut"), 
+               email =  "l.cattarino@imperial.ac.uk")
+Maintainer: L Cattarino <l.cattarino@imperial.ac.uk>
+Description: Stochastic implementation of the Zika model 
+    (Ferguson et al. 2016, Science) using the package odin.
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    reshape2,
+    ggplot2
+Remotes:
+    richfitz/odin,
+RoxygenNote: 6.1.1
