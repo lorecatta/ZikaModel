@@ -22,6 +22,113 @@ model_param_list_create(YL = 364, DT = 1, NP = 21, age_per = 52,
   propTransNN = 0.005, BG_FOI = 1e-06, AGE_REC = 2,
   PropDiseaseReported = 0.1)
 }
+\arguments{
+\item{YL}{Duration of a calendar year. Default = 364.}
+
+\item{DT}{Time step size. Default = 1.}
+
+\item{NP}{Number of patches. Default = 21.}
+
+\item{age_per}{Time (weeks) between age updates. Default = 52 weeks.}
+
+\item{N_human}{Human population in each patch. Default = 30000000.}
+
+\item{Omega}{Density dependent power. Default = 1.}
+
+\item{DeltaBase}{Adult mosquito mortality rate. Default = 0.2.}
+
+\item{Sigma}{Larval mosquito mortality rate. Default = 0.025}
+
+\item{Epsilon}{Larval mean development rate (1 / larvae mean development time in days). Default = 1/19.}
+
+\item{Rm}{Mosquito reproduction number (based on adult female fecundity and mortality rates). Default = 2.69.}
+
+\item{Mwt_mean}{Mean of the lognorm distribution of the at-equilibrium number of adult female mosquitos per person, per patch, without seasonality. Default = 1.5.}
+
+\item{Mwt_cv}{Standard deviation of the lognorm distribution of the at-equilibrium number of adult female mosquitos per person, per patch, without seasonality. Default = 0.15}
+
+\item{eip_mean}{Mean Extrinsic Incubation Period (days). Default = 8.4.}
+
+\item{incub}{Intrinsic Incubation Period (days). Default = 5.}
+
+\item{inf_per}{Total duration of human infectiousness (days). Default = 5.}
+
+\item{nu}{Inverse of virus generation time (1 / days). Virus generation time = serial interval. Default = 1 / 21.}
+
+\item{Kappa}{Mosquito biting rate. Default = 0.5.}
+
+\item{Beta_hm_1}{Per bite transmission probability from humans to mosquitoes. Default = 0.7.}
+
+\item{Beta_mh_1}{Per bite transmission probability from mosquitoes to humans. Default = 0.7.}
+
+\item{Delta_season}{Scaling factor (between 0 and 1) for effect of seasonality on adult mosquitoes mortality. 1 = maximum effect of seasonality. 0 = no effect of seasonality. Default = 1.}
+
+\item{Kc_season}{Scaling factor (between 0 and 1) for effect of seasonality on mosquito larvae carrying capacity. Default = 1.}
+
+\item{eip_season}{Scaling factor (between 0 and 1) for effect of seasonality on Extrinsic Incubation Period. Default = 1.}
+
+\item{propMwtControl}{Proportion of adult wild type mosquitoes which are killed by control. Default = 0.}
+
+\item{TimeMwtControlOn}{Year of start of control of adult wild type mosquitoes. Default = 4.}
+
+\item{TimeMwtControlOff}{Year of end of control of adult wild type mosquitoes. Default = 5.}
+
+\item{Wb_cyto}{Default = 1.}
+
+\item{Wb_mat}{Default = 1.}
+
+\item{Wb_fM}{Default = 0.95.}
+
+\item{Wb_fF}{Default = 0.95.}
+
+\item{Wb_relsusc1}{Default = 0.9.}
+
+\item{Wb_relinf1}{Default = 0.75.}
+
+\item{Wb_starttime}{Default = 140.}
+
+\item{Wb_introlevel}{Default = 0.5.}
+
+\item{Wb_introduration}{Default = 60.}
+
+\item{vacc_cu_minage}{Default = 2.}
+
+\item{vacc_cu_maxage}{Default = 15.}
+
+\item{vacc_cu_coverage}{Default = 0.7.}
+
+\item{vacc_cu_time}{Default = 100.}
+
+\item{vacc_child_age}{Deafult = 3.}
+
+\item{vacc_child_coverage}{Default = 0.75.}
+
+\item{vacc_child_starttime}{Default = 30.}
+
+\item{vacc_child_stoptime}{Default = 30.}
+
+\item{dis_pri}{Proportion of infections which are symptomatic. Default = 0.2.}
+
+\item{rho_prim}{Default = 1.}
+
+\item{phi_prim}{Default = 1.}
+
+\item{vacceff_prim}{Efficacy of vaccination in reducing infection. Default = 0.3.}
+
+\item{other_foi}{Default = 0.05.}
+
+\item{other_prop_immune}{Default = 0.5.}
+
+\item{propTransGlobal}{Proportion of transmission between all patches. Default = 0.0005.}
+
+\item{propTransNN}{Proportion of transmssion with nearest-neighbor patches. Default = 0.005.}
+
+\item{BG_FOI}{Background FOI. Default = 1e-6.}
+
+\item{AGE_REC}{Default = 2.}
+
+\item{PropDiseaseReported}{Reporting rate of symptomatic cases. Default = 0.1.}
+}
 \description{
 \code{model_param_list_create} creates a list of user-defined
 parameters.
