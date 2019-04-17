@@ -1,11 +1,8 @@
 
-library(stochZika)
-
-
 # define parameters -----------------------------------------------------------
 
 
-out_fig_path <- file.path("figures", "zika_model")
+out_fig_path <- file.path("figures")
 
 diagno_hum <- c("Susceptibles" = "S",
                 "Infectious" = "I1",
@@ -19,18 +16,11 @@ diagno_hum <- c("Susceptibles" = "S",
                 "Fraction of infectious h per patch" = "infectious1",
                 "Incidence of cases" = "disease1",
                 "Cumulative cases" = "disease1inc")
-                # "Suscep Out" = "O_S",
-                # "Suscep ageing" = "age_S",
-                # "Infectious Out" = "O_I1",
-                # "Infectious recovered" = "recov1",
-                # "Infectious ageing" = "age_I1",
-                # "Recovered Out" = "O_R1",
-                # "Recovered ageing" = "age_R1")
 
 diagno_hum_summary <- c("R0" = "R0t_1av",
-                        "FOI on humans" = "FOI1av")
-                        #"Averaged mortality rate per patch" = "Deltaav",
-                        #"Mean daily mortality rate" = "DeltaMean")
+                        "FOI on humans" = "FOI1av",
+                        "Averaged mortality rate per patch" = "Deltaav",
+                        "Mean daily mortality rate" = "DeltaMean")
 
 extra_diagno_hum <- c("Weekly infections/1000" = "w_Ir_infections")
 
@@ -41,17 +31,13 @@ diagno_mos <- c("Susceptibles wt" = "Mwt_S",
                 "Total wt" = "Mwt_tot",
                 "Larvae wt birth" = "Lwt_birth",
                 "Larvae wt" = "Lwt",
-                # "Susceptibles wb" = "Mwb_S",
-                # "Infected 1 wb" = "Mwb_E1",
-                # "Infected 2 wb" = "Mwb_E2",
-                # "Infectious wb" = "Mwb_I1",
-                # "Total wb" = "Mwb_tot",
-                # "Larvae wb birth" = "Lwb_birth",
-                # "Larvae wb" = "Lwb",
-                "Incidence of infected wt mos" = "Mwt_inf1",
-                # "Incidence of infected 1 wt mos leaving" = "O_Mwt_E1",
-                "Incidence of suscept wt mos leaving" = "O_Mwt_S",
-                "Incidence of wt larvae maturing to adults" = "Lwt_mature")
+                "Susceptibles wb" = "Mwb_S",
+                "Infected 1 wb" = "Mwb_E1",
+                "Infected 2 wb" = "Mwb_E2",
+                "Infectious wb" = "Mwb_I1",
+                "Total wb" = "Mwb_tot",
+                "Larvae wb birth" = "Lwb_birth",
+                "Larvae wb" = "Lwb")
 
 diagno_mos_summary <- c("FOI on wt mos" = "Mwt_FOI1av")
 
@@ -59,24 +45,24 @@ mos_comparts <- c("Mwt_S",
                   "Mwt_E1",
                   "Mwt_E2",
                   "Mwt_I1",
-                  "Mwt_tot")
-                  # "Mwb_S",
-                  # "Mwb_E1",
-                  # "Mwb_E2",
-                  # "Mwb_I1",
-                  # "Mwb_tot")
+                  "Mwt_tot",
+                  "Mwb_S",
+                  "Mwb_E1",
+                  "Mwb_E2",
+                  "Mwb_I1",
+                  "Mwb_tot")
 
 
 # odin ------------------------------------------------------------------------
 
 
-out <- model_run$
+out <- model_run$dat
+
+tt <- seq(1, dim(out$S)[1], 1)
 
 
 # post processing -------------------------------------------------------------
 
-# diagnostics
-hum <- setNames(out[diagno_hum[1:5]], diagno_hum[1:5])
 
 mos <- setNames(out[diagno_mos[diagno_mos %in% mos_comparts]], diagno_mos[diagno_mos %in% mos_comparts])
 
@@ -85,9 +71,6 @@ dia_hum <- setNames(out[c(diagno_hum, diagno_hum_summary)],
 
 dia_mos <- setNames(out[c(diagno_mos, diagno_mos_summary)],
                     c(diagno_mos, diagno_mos_summary))
-
-# sum across age groups, patches and vaccine statuses
-humsum <- lapply(hum, function(x){apply(x, sum, MARGIN = 1)})
 
 # sum across patches
 mossum <- lapply(mos, function(x){apply(x, sum, MARGIN = 1)})
@@ -101,30 +84,6 @@ dia_mossum <- lapply(dia_mos[diagno_mos],
                      function(x) {apply(x, sum, MARGIN = 1)})
 
 dia_mossum <- c(dia_mossum, dia_mos[diagno_mos_summary])
-
-
-# plot human compartments -----------------------------------------------------
-
-
-mat_H <- do.call("cbind", humsum[c("S", "I1", "R1")])
-
-mat_H <- mat_H / humsum$Ntotal
-
-mat_H[is.na(mat_H)] <- 0
-
-df_H <- as.data.frame(mat_H)
-
-df_H$time <- tt
-
-df_H_melt <- melt(df_H,
-                  id.vars = "time",
-                  variable.name = "compartment")
-
-plot_compartments(df_H_melt,
-                  out_fig_path,
-                  "compartments_human.png",
-                  names(diagno_hum[1:4]),
-                  "SEIR Zika model - human states")
 
 
 # plot wild type mosquitoes compartments --------------------------------------
@@ -144,35 +103,43 @@ df_Mwt_melt <- melt(df_Mwt,
                     id.vars = "time",
                     variable.name = "compartment")
 
-plot_compartments(df_Mwt_melt,
-                  out_fig_path,
-                  "compartments_mosquitoes_wt.png",
-                  names(diagno_mos[1:4]),
-                  "SEIR Zika model - wild type mosquitoes")
+wt_mos_comp_plot <- plot_compartments(df_Mwt_melt,
+                                      names(diagno_mos[1:4]),
+                                      "SEIR Zika model - wild type mosquitoes")
+
+save_plot(wt_mos_comp_plot,
+          "figures",
+          "compartments_mosquitoes_wt",
+          wdt = 17,
+          hgt = 12)
 
 
 # plot wolbachia mosquitoes compartments --------------------------------------
 
 
-# mat_Mwb <- do.call("cbind", mossum[mos_comparts[6:9]])
-#
-# mat_Mwb <- mat_Mwb / mossum$Mwb_tot
-#
-# mat_Mwb[is.na(mat_Mwb)] <- 0
-#
-# df_Mwb <- as.data.frame(mat_Mwb)
-#
-# df_Mwb$time <- tt
-#
-# df_Mwb_melt <- melt(df_Mwb,
-#                     id.vars = "time",
-#                     variable.name = "compartment")
-#
-# plot_compartments(df_Mwb_melt,
-#                   out_fig_path,
-#                   "compartments_mosquitoes_wb.png",
-#                   names(diagno_mos[5:8]),
-#                   "SEIR Zika model - wolbachia mosquitoes")
+mat_Mwb <- do.call("cbind", mossum[mos_comparts[6:9]])
+
+mat_Mwb <- mat_Mwb / mossum$Mwb_tot
+
+mat_Mwb[is.na(mat_Mwb)] <- 0
+
+df_Mwb <- as.data.frame(mat_Mwb)
+
+df_Mwb$time <- tt
+
+df_Mwb_melt <- melt(df_Mwb,
+                    id.vars = "time",
+                    variable.name = "compartment")
+
+wb_mos_comp_plot <- plot_compartments(df_Mwb_melt,
+                                      names(diagno_mos[5:8]),
+                                      "SEIR Zika model - wolbachia mosquitoes")
+
+save_plot(wb_mos_comp_plot,
+          "figures",
+          "compartments_mosquitoes_wb",
+          wdt = 17,
+          hgt = 12)
 
 
 # plot human diagnostics ------------------------------------------------------
