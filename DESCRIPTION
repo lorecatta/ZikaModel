@@ -14,7 +14,8 @@ Encoding: UTF-8
 LazyData: true
 Imports: 
     reshape2,
-    ggplot2
+    ggplot2,
+    ggforce
 Remotes:
     richfitz/odin,
 RoxygenNote: 6.1.1
