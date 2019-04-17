@@ -2,7 +2,7 @@
 #' model_param_list_create
 #'
 #' \code{model_param_list_create} creates a list of user-defined
-#' parameters
+#' parameters.
 #'
 #' @export
 
