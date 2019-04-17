@@ -1,7 +1,11 @@
 #------------------------------------------------
 #' plot_compartments
 #'
-#' \code{plot_compartments} makes a plot of the model compartments
+#' \code{plot_compartments} makes a plot of the model compartments.
+#'
+#' @param df The dataframe with the data to plot.
+#' @param compart_names The full name of the model compartments.
+#' @param ttl The plot title.
 #'
 #' @importFrom ggplot2 aes scale_colour_manual scale_x_continuous
 #'   scale_y_continuous xlab ylab geom_line ggplot theme_bw
@@ -10,7 +14,7 @@
 #' @export
 
 
-plot_compartments <- function(df, compart_names, ttl, out_pth = NULL, out_fl_nm = NULL){
+plot_compartments <- function(df, compart_names, ttl){
 
   brks <- seq(from = 0, to = time, by = 364*5)
 
@@ -34,22 +38,6 @@ plot_compartments <- function(df, compart_names, ttl, out_pth = NULL, out_fl_nm 
           plot.title = element_text(margin = margin(0,0,0.5,0,"cm"))) +
     ggtitle(ttl)
 
-  if(!is.null(out_pth)){
-
-    dir.create(out_pth, FALSE, TRUE)
-    png(file.path(out_pth, out_fl_nm),
-        width = 17,
-        height = 12,
-        units = "cm",
-        pointsize = 12,
-        res = 300)
-    print(ret)
-    dev.off()
-
-  } else {
-
-    ret
-
-  }
+  ret
 
 }
