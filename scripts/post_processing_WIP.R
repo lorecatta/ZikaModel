@@ -53,16 +53,12 @@ mos_comparts <- c("Mwt_S",
                   "Mwb_tot")
 
 
-# odin ------------------------------------------------------------------------
+# post processing -------------------------------------------------------------
 
 
 out <- model_run$dat
 
 tt <- seq(1, dim(out$S)[1], 1)
-
-
-# post processing -------------------------------------------------------------
-
 
 mos <- setNames(out[diagno_mos[diagno_mos %in% mos_comparts]], diagno_mos[diagno_mos %in% mos_comparts])
 
@@ -132,7 +128,7 @@ df_Mwb_melt <- melt(df_Mwb,
                     variable.name = "compartment")
 
 wb_mos_comp_plot <- plot_compartments(df_Mwb_melt,
-                                      names(diagno_mos[5:8]),
+                                      names(diagno_mos[8:11]),
                                       "SEIR Zika model - wolbachia mosquitoes")
 
 save_plot(wb_mos_comp_plot,
