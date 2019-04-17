@@ -4,9 +4,15 @@
 \alias{plot_compartments}
 \title{plot_compartments}
 \usage{
-plot_compartments(df, compart_names, ttl, out_pth = NULL,
-  out_fl_nm = NULL)
+plot_compartments(df, compart_names, ttl)
+}
+\arguments{
+\item{df}{The dataframe with the data to plot.}
+
+\item{compart_names}{The full name of the model compartments.}
+
+\item{ttl}{The plot title.}
 }
 \description{
-\code{plot_compartments} makes a plot of the model compartments
+\code{plot_compartments} makes a plot of the model compartments.
 }

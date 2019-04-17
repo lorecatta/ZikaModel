@@ -4,10 +4,18 @@
 \alias{equilibrium_init_create}
 \title{equilibrium_init_create}
 \usage{
-equilibrium_init_create(agec, death, nearest_neighbor_patches,
-  model_parameter_list)
+equilibrium_init_create(agec, death, nn_links, model_parameter_list)
+}
+\arguments{
+\item{death}{Numeric of mortality rates.}
+
+\item{nn_links}{8 nearest-neigbors to each patch.}
+
+\item{model_parameter_list}{list of user-defined model parameters.}
+
+\item{age}{Vector of age group widths.}
 }
 \description{
 \code{equilibrium_init_create} creates an equilibrium initialisation
-state to be used within later model runs
+state to be used within later model runs.
 }

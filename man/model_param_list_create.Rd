@@ -24,5 +24,5 @@ model_param_list_create(YL = 364, DT = 1, NP = 21, age_per = 52,
 }
 \description{
 \code{model_param_list_create} creates a list of user-defined
-parameters
+parameters.
 }
