@@ -2,15 +2,20 @@
 #' equilibrium_init_create
 #'
 #' \code{equilibrium_init_create} creates an equilibrium initialisation
-#' state to be used within later model runs
+#' state to be used within later model runs.
 #'
+#' @param age Vector of age group widths.
+#' @param death Numeric of mortality rates.
+#' @param nn_links 8 nearest-neigbors to each patch.
+#' @param model_parameter_list list of user-defined model parameters.
+
 #' @export
 
 
-equilibrium_init_create <- function(agec, death, nearest_neighbor_patches, model_parameter_list){
+equilibrium_init_create <- function(agec, death, nn_links, model_parameter_list){
 
   mpl <- model_parameter_list
-  nn <- nearest_neighbor_patches
+  nn <- nn_links
 
   NP <- mpl$NP
 
