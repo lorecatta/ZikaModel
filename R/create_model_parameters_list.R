@@ -4,43 +4,93 @@
 #' \code{model_param_list_create} creates a list of user-defined
 #' parameters.
 #'
+#' @param YL Duration of a calendar year. Default = 364.
+#' @param DT Time step size. Default = 1.
+#' @param NP Number of patches. Default = 21.
+#' @param age_per Time (weeks) between age updates. Default = 52 weeks.
+#' @param N_human Human population in each patch. Default = 30000000.
+#' @param Omega Density dependent power. Default = 1.
+#' @param DeltaBase Adult mosquito mortality rate. Default = 0.2.
+#' @param Sigma Larval mosquito mortality rate. Default = 0.025
+#' @param Epsilon Larval mean development rate (1 / larvae mean development time in days). Default = 1/19.
+#' @param Rm Mosquito reproduction number (based on adult female fecundity and mortality rates). Default = 2.69.
+#' @param Mwt_mean Mean of the lognorm distribution of the at-equilibrium number of adult female mosquitos per person, per patch, without seasonality. Default = 1.5.
+#' @param Mwt_cv Standard deviation of the lognorm distribution of the at-equilibrium number of adult female mosquitos per person, per patch, without seasonality. Default = 0.15
+#' @param eip_mean Mean Extrinsic Incubation Period (days). Default = 8.4.
+#' @param incub Intrinsic Incubation Period (days). Default = 5.
+#' @param inf_per Total duration of human infectiousness (days). Default = 5.
+#' @param nu Inverse of virus generation time (1 / days). Virus generation time = serial interval. Default = 1 / 21.
+#' @param Kappa Mosquito biting rate. Default = 0.5.
+#' @param Beta_hm_1 Per bite transmission probability from humans to mosquitoes. Default = 0.7.
+#' @param Beta_mh_1 Per bite transmission probability from mosquitoes to humans. Default = 0.7.
+#' @param Delta_season Scaling factor (between 0 and 1) for effect of seasonality on adult mosquitoes mortality. 1 = maximum effect of seasonality. 0 = no effect of seasonality. Default = 1.
+#' @param Kc_season Scaling factor (between 0 and 1) for effect of seasonality on mosquito larvae carrying capacity. Default = 1.
+#' @param eip_season Scaling factor (between 0 and 1) for effect of seasonality on Extrinsic Incubation Period. Default = 1.
+#' @param propMwtControl Proportion of adult wild type mosquitoes which are killed by control. Default = 0.
+#' @param TimeMwtControlOn Year of start of control of adult wild type mosquitoes. Default = 4.
+#' @param TimeMwtControlOff Year of end of control of adult wild type mosquitoes. Default = 5.
+#' @param Wb_cyto Default = 1.
+#' @param Wb_mat Default = 1.
+#' @param Wb_fM Default = 0.95.
+#' @param Wb_fF Default = 0.95.
+#' @param Wb_relsusc1 Default = 0.9.
+#' @param Wb_relinf1 Default = 0.75.
+#' @param Wb_starttime Default = 140.
+#' @param Wb_introlevel Default = 0.5.
+#' @param Wb_introduration Default = 60.
+#' @param vacc_cu_minage Default = 2.
+#' @param vacc_cu_maxage Default = 15.
+#' @param vacc_cu_coverage Default = 0.7.
+#' @param vacc_cu_time Default = 100.
+#' @param vacc_child_age Deafult = 3.
+#' @param vacc_child_coverage Default = 0.75.
+#' @param vacc_child_starttime Default = 30.
+#' @param vacc_child_stoptime Default = 30.
+#' @param dis_pri Proportion of infections which are symptomatic. Default = 0.2.
+#' @param rho_prim Default = 1.
+#' @param phi_prim Default = 1.
+#' @param vacceff_prim Efficacy of vaccination in reducing infection. Default = 0.3.
+#' @param other_foi Default = 0.05.
+#' @param other_prop_immune Default = 0.5.
+#' @param propTransGlobal Proportion of transmission between all patches. Default = 0.0005.
+#' @param propTransNN Proportion of transmssion with nearest-neighbor patches. Default = 0.005.
+#' @param BG_FOI Background FOI. Default = 1e-6.
+#' @param AGE_REC Default = 2.
+#' @param PropDiseaseReported Reporting rate of symptomatic cases. Default = 0.1.
+
 #' @export
 
 
 model_param_list_create <- function(
 
-                             # GENERAL
-
-  YL = 364,                  # duration of year
-  DT = 1,                    # size of time step
-  NP = 21,                   # number of patches
-  age_per = 52,              # time (weeks) between age updates
-  N_human = 30000000,        # human population of each patch
+  YL = 364,
+  DT = 1,
+  NP = 21,
+  age_per = 52,
+  N_human = 30000000,
   Omega = 1,
-  DeltaBase = 0.2,           # adult mosquito mortality rate
-  Sigma = 0.025,             # larval mosquito mortality rate
-  Epsilon = 1/19,            # inverse of mean development time of larvae (1 / days)
-  Rm = 2.69,                 # mosquito reproduction number (based on adult female fecundity and mortality rates)
-  Mwt_mean = 1.5,            # mean of the lognorm distrib of eq number of adult female mosquitos per person, per patch, without seasonality
-  Mwt_cv = 0.15,             # sd of the lognorm distrib ... (as above)
-  eip_mean = 8.4,            # mean EIP
-  incub = 5,                 # intrinsic incubation period (days)
-  inf_per = 5,               # total duration of human infectiousness (days)
-  nu = 1/21,                 # inverse of virus generation time (1 / days). Virus generation time = serial interval.
-  Kappa = 0.5,               # biting rate per mosquito
-  Beta_hm_1 = 0.7,           # per bite transmission probability from humans to mosquitoes
-  Beta_mh_1 = 0.7,           # per bite transmission probability from mosquitoes to humans
-  Delta_season = 1,          # scaling factor for effect of seasonality on adult mortality
-  Kc_season = 1,             # scaling factor for effect of seasonality on larval carrying capacity
-  eip_season = 1,            # scaling factor for effect of seasonality on EIP
+  DeltaBase = 0.2,
+  Sigma = 0.025,
+  Epsilon = 1/19,
+  Rm = 2.69,
+  Mwt_mean = 1.5,
+  Mwt_cv = 0.15,
+  eip_mean = 8.4,
+  incub = 5,
+  inf_per = 5,
+  nu = 1/21,
+  Kappa = 0.5,
+  Beta_hm_1 = 0.7,
+  Beta_mh_1 = 0.7,
+  Delta_season = 1,
+  Kc_season = 1,
+  eip_season = 1,
 
-                             # INTERVENTIONS
-
-  propMwtControl = 0,        # Vector control / spraying (0.33)
+  propMwtControl = 0,        # (0.33)
   TimeMwtControlOn = 4,
   TimeMwtControlOff = 5,
 
-  Wb_cyto = 1,               # Wolbachia
+  Wb_cyto = 1,
   Wb_mat = 1,
   Wb_fM = 0.95,
   Wb_fF = 0.95,
@@ -50,7 +100,7 @@ model_param_list_create <- function(
   Wb_introlevel = 0.5,
   Wb_introduration = 60,
 
-  vacc_cu_minage = 2,        # Vaccine
+  vacc_cu_minage = 2,
   vacc_cu_maxage = 15,
   vacc_cu_coverage = 0.7,
   vacc_cu_time = 100,
@@ -59,14 +109,14 @@ model_param_list_create <- function(
   vacc_child_starttime = 30,
   vacc_child_stoptime = 30,
 
-  dis_pri = 0.2,             # proportion of infections which are symptomatic
+  dis_pri = 0.2,
   rho_prim = 1,
   phi_prim = 1,
   vacceff_prim = 0.3,
   other_foi = 0.05,
   other_prop_immune = 0.5,
-  propTransGlobal = 0.0005,  # proportion of transmission between all patches
-  propTransNN = 0.005,       # proportion of transmssion with nearest-neighbor patches
+  propTransGlobal = 0.0005,
+  propTransNN = 0.005,
   BG_FOI = 1e-6,
   AGE_REC = 2,
   PropDiseaseReported = 0.1
