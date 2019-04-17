@@ -1,3 +1,6 @@
+
+devtools::load_all()
+
 agec <- c(1, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10)
 
 death <- c(1e-10,
@@ -20,3 +23,9 @@ model_run <- run_model(age,
                        death,
                        nn_links,
                        time = time)
+
+save_plot(model_run$plot,
+          "figures",
+          "compartments_human",
+          wdt = 17,
+          hgt = 12)
