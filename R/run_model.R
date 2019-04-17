@@ -3,9 +3,8 @@
 #'
 #' \code{run_model} runs model using declared agec, death and nn_links
 #'
-#' @param age Vector of age group widths.
-#' @param death Numeric of mortality rates.
-#' @param nn_links 8 nearest-neigbors to each patch.
+#' @inheritParams equilibrium_init_create
+#'
 #' @param time time in days.
 #'   Default=18200
 #'
@@ -25,7 +24,7 @@ run_model <- function(age,
   # generate initial state variables from equilibrium solution
   state_init <- equilibrium_init_create(agec = agec,
                                         death = death,
-                                        nearest_neighbor_patches = nn_links,
+                                        nn_links = nn_links,
                                         model_parameter_list = mpl)
 
   # create odin generator
