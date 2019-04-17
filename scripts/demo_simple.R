@@ -14,6 +14,8 @@ death <- c(1e-10,
 
 time <- 18200 # 50 years
 
+set.seed(786808741)
+
 model_run <- run_model(age,
                        death,
                        nn_links,
