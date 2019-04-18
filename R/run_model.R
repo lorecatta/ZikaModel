@@ -42,8 +42,6 @@ run_model <- function(age,
   # run model
   mod_run <- mod$run(tt)
 
-  # browser()
-
   # shape output
   out <- mod$transform_variables(mod_run)
   hum <- list("S" = out$S, "I" = out$I1, "R" = out$R1, "Nt" = out$Ntotal)
@@ -56,8 +54,11 @@ run_model <- function(age,
   df_H_melt <- melt(df_H,
                     id.vars = "time",
                     variable.name = "compartment")
+
   ret <- plot_compartments(df_H_melt,
                            c("Susceptibles", "Infectious", "Recovered"),
                            "SEIR Zika model - human states")
-  return(list("plot"=ret,"dat"=out))
+
+  list("plot" = ret, "dat" = out)
+
 }
