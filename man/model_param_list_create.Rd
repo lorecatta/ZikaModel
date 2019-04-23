@@ -60,7 +60,7 @@ model_param_list_create(YL = 364, DT = 1, NP = 21, age_per = 52,
 
 \item{Beta_mh_1}{Per bite transmission probability from mosquitoes to humans. Default = 0.7.}
 
-\item{season}{logical for controlling the effect of seasonality on on adult mosquitoes mortality, mosquito larvae carrying capacity and Extrinsic Incubation Period}
+\item{season}{Logical for controlling the effect of seasonality on on adult mosquitoes mortality, mosquito larvae carrying capacity and Extrinsic Incubation Period}
 
 \item{propMwtControl}{Proportion of adult wild type mosquitoes which are killed by control. Default = 0.}
 
