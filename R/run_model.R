@@ -4,6 +4,7 @@
 #' \code{run_model} runs model using declared agec, death and nn_links
 #'
 #' @inheritParams equilibrium_init_create
+#' @inheritParams model_param_list_create
 #'
 #' @param time time in days.
 #'   Default=18200
@@ -20,7 +21,7 @@ run_model <- function(age,
                       time = 18200,
                       season = FALSE){
 
-  mpl <- model_param_list_create(season)
+  mpl <- model_param_list_create(season = season)
 
   # generate initial state variables from equilibrium solution
   state_init <- equilibrium_init_create(agec = agec,
