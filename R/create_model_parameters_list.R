@@ -82,9 +82,7 @@ model_param_list_create <- function(
   Kappa = 0.5,
   Beta_hm_1 = 0.7,
   Beta_mh_1 = 0.7,
-  Delta_season = 1,
-  Kc_season = 1,
-  eip_season = 1,
+  season,
 
   propMwtControl = 0,        # (0.33)
   TimeMwtControlOn = 4,
@@ -122,6 +120,20 @@ model_param_list_create <- function(
   PropDiseaseReported = 0.1
 
 ){
+
+  if(season) {
+
+    Delta_season <- 1
+    Kc_season <- 1
+    eip_season <- 1
+
+  } else {
+
+    Delta_season <- 0
+    Kc_season <- 0
+    eip_season <- 0
+
+  }
 
   # set up model param list
   mp_list <- list()

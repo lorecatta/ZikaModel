@@ -17,9 +17,10 @@
 run_model <- function(age,
                       death,
                       nn_links,
-                      time = 18200){
+                      time = 18200,
+                      season = FALSE){
 
-  mpl <- model_param_list_create()
+  mpl <- model_param_list_create(season)
 
   # generate initial state variables from equilibrium solution
   state_init <- equilibrium_init_create(agec = agec,
