@@ -8,8 +8,7 @@ model_param_list_create(YL = 364, DT = 1, NP = 21, age_per = 52,
   N_human = 3e+07, Omega = 1, DeltaBase = 0.2, Sigma = 0.025,
   Epsilon = 1/19, Rm = 2.69, Mwt_mean = 1.5, Mwt_cv = 0.15,
   eip_mean = 8.4, incub = 5, inf_per = 5, nu = 1/21, Kappa = 0.5,
-  Beta_hm_1 = 0.7, Beta_mh_1 = 0.7, Delta_season = 1,
-  Kc_season = 1, eip_season = 1, propMwtControl = 0,
+  Beta_hm_1 = 0.7, Beta_mh_1 = 0.7, season, propMwtControl = 0,
   TimeMwtControlOn = 4, TimeMwtControlOff = 5, Wb_cyto = 1,
   Wb_mat = 1, Wb_fM = 0.95, Wb_fF = 0.95, Wb_relsusc1 = 0.9,
   Wb_relinf1 = 0.75, Wb_starttime = 140, Wb_introlevel = 0.5,
@@ -60,12 +59,6 @@ model_param_list_create(YL = 364, DT = 1, NP = 21, age_per = 52,
 \item{Beta_hm_1}{Per bite transmission probability from humans to mosquitoes. Default = 0.7.}
 
 \item{Beta_mh_1}{Per bite transmission probability from mosquitoes to humans. Default = 0.7.}
-
-\item{Delta_season}{Scaling factor (between 0 and 1) for effect of seasonality on adult mosquitoes mortality. 1 = maximum effect of seasonality. 0 = no effect of seasonality. Default = 1.}
-
-\item{Kc_season}{Scaling factor (between 0 and 1) for effect of seasonality on mosquito larvae carrying capacity. Default = 1.}
-
-\item{eip_season}{Scaling factor (between 0 and 1) for effect of seasonality on Extrinsic Incubation Period. Default = 1.}
 
 \item{propMwtControl}{Proportion of adult wild type mosquitoes which are killed by control. Default = 0.}
 
@@ -128,6 +121,12 @@ model_param_list_create(YL = 364, DT = 1, NP = 21, age_per = 52,
 \item{AGE_REC}{Default = 2.}
 
 \item{PropDiseaseReported}{Reporting rate of symptomatic cases. Default = 0.1.}
+
+\item{Delta_season}{Scaling factor (between 0 and 1) for effect of seasonality on adult mosquitoes mortality. 1 = maximum effect of seasonality. 0 = no effect of seasonality. Default = 1.}
+
+\item{Kc_season}{Scaling factor (between 0 and 1) for effect of seasonality on mosquito larvae carrying capacity. Default = 1.}
+
+\item{eip_season}{Scaling factor (between 0 and 1) for effect of seasonality on Extrinsic Incubation Period. Default = 1.}
 }
 \description{
 \code{model_param_list_create} creates a list of user-defined

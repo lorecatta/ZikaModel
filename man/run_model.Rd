@@ -4,7 +4,7 @@
 \alias{run_model}
 \title{run_model}
 \usage{
-run_model(age, death, nn_links, time = 18200)
+run_model(age, death, nn_links, time = 18200, season = FALSE)
 }
 \arguments{
 \item{age}{Vector of age group widths.}
