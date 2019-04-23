@@ -1,6 +1,7 @@
 
 DT <- user()
 YL <- user()
+na <- user()
 
 YEAR <- step/YL # current year (step is in days)
 
@@ -37,16 +38,16 @@ Sigma <- user() # larvae mortality rate
 Omega <- user() # 1
 
 # rate at which adult female produce larvae. Rm is fixed.
-Gamma <- Rm * DeltaMean * (Epsilon + Sigma) / Epsilon 
+Gamma <- Rm * DeltaMean * (Epsilon + Sigma) / Epsilon
 
 
 # -----------------------------------------------------------------------------
-# Mean value of mosquito mortality, carrying capacity and EIP 
+# Mean value of mosquito mortality, carrying capacity and EIP
 # without the effect of seasonality
 
 
 # mean adult mosquito mortality rate, corrected by the effect of control
-DeltaMean <- DeltaBase / MwtCont 
+DeltaMean <- DeltaBase / MwtCont
 
 # mean larval mosquito carrying capacity. DeltaMean is fixed.
 Kc_mean <- DeltaMean * ((Epsilon * (Gamma - DeltaMean) / (DeltaMean * Sigma) - 1) ^ (-1 / Omega)) / Epsilon
@@ -59,7 +60,7 @@ R0_1 <- Kappa * Kappa * Mwt_mean * Beta_hm_1 * inf_per * Beta_mh_1 / (1 + DeltaM
 
 
 # -----------------------------------------------------------------------------
-# Mean value of mosquito mortality, carrying capacity and EIP 
+# Mean value of mosquito mortality, carrying capacity and EIP
 # with the effect of seasonality
 
 
@@ -71,7 +72,7 @@ dim(season_amp) <- NP
 dim(corr_season) <- NP
 Mwt_mean <- user()
 pi <- user()
-Delta_season <- user()  
+Delta_season <- user()
 Kc_season <- user()
 eip_season <- user()
 dim(Delta) <- NP
@@ -120,7 +121,6 @@ Delta_wb[] <- Delta[i] / Wb_fM
 # Vaccine-related variables
 
 
-na <- user()
 vacc_child_starttime <- user()
 vacc_child_stoptime <- user()
 vacc_child_age <- user()
@@ -130,12 +130,12 @@ vacc_cu_minage <- user()
 vacc_cu_maxage <- user()
 vacc_cu_coverage <- user()
 
-vacc_noncov_norow <- na + 1 # position 1 is like position 0 in BM 
+vacc_noncov_norow <- na + 1 # position 1 is like position 0 in BM
 dim(vacc_noncov) <- c(vacc_noncov_norow, 2)
 
-vacc_noncov[,1] <- (if ((step >= YL*vacc_child_starttime) && (step < YL*vacc_child_stoptime) && (i == (vacc_child_age+1))) 
-  (1 - vacc_child_coverage) else 1) * 
-  (if ((step == vacc_cu_rndtime) && (i >= (vacc_cu_minage+1)) && (i <= (vacc_cu_maxage+1))) 
+vacc_noncov[,1] <- (if ((step >= YL*vacc_child_starttime) && (step < YL*vacc_child_stoptime) && (i == (vacc_child_age+1)))
+  (1 - vacc_child_coverage) else 1) *
+  (if ((step == vacc_cu_rndtime) && (i >= (vacc_cu_minage+1)) && (i <= (vacc_cu_maxage+1)))
     (1 - vacc_cu_coverage) else 1)
 vacc_noncov[,2] <- 1
 
@@ -173,8 +173,8 @@ dim(Mwt_E1) <- NP
 dim(Mwt_E2) <- NP
 dim(Mwt_I1) <- NP
 
-initial(Lwt[]) <- trunc(Mwt[i]*N_eq[i]*Delta[i]/Epsilon)
-initial(Mwt_S[]) <- trunc(Mwt[i]*N_eq[i])
+initial(Lwt[]) <- trunc(Mwt[i] * N_eq[i] * Delta[i] / Epsilon)
+initial(Mwt_S[]) <- trunc(Mwt[i] * N_eq[i])
 initial(Mwt_E1[]) <- 0
 initial(Mwt_E2[]) <- 0
 initial(Mwt_I1[]) <- 0
@@ -218,7 +218,7 @@ Mwt_FOI1[] <- DT*Beta_hm_1*Kappa*infectious1[i]
 # dim(infectious1_del) <- NP
 
 Mwt_FOI1av <- (sum(Mwt_FOI1[])-Mwt_FOI1[NP])/(NP-1)
-  
+
 dim(O_Mwt_S) <- NP
 dim(O_Mwt_S_prob) <- NP
 O_Mwt_S_prob[] <- max(min(DT * Delta[i] + Mwt_FOI1[i], 1), 0)
@@ -305,7 +305,7 @@ prop_wb[] <- Mwb_tot[i]/(M_tot[i]+1e-10)
 
 dim(Lwb_birth) <- NP
 dim(Lwb_birth_lambda) <- NP
-Lwb_birth_lambda[] <- DT * Gamma * Wb_fF * Wb_mat * Mwb_tot[i] 
+Lwb_birth_lambda[] <- DT * Gamma * Wb_fF * Wb_mat * Mwb_tot[i]
 Lwb_birth[] <- rpois(Lwb_birth_lambda[i])
 # Lwb_birth[1..NP]=poisson(DT*Gamma*Wb_fF*Wb_mat*Mwb_tot[i],seed+i)
 
@@ -340,14 +340,15 @@ Mwb_inf1[] <- rbinom(O_Mwb_S[i], Mwb_inf1_prob[i])
 # Mwb_inf1[1..NP]=binomial(Mwb_FOI1[i]/(DT*Delta_wb[i]+Mwb_FOI1[i]),O_Mwb_S[i],seed+i)
 
 dim(Mwb_intro) <- NP
-Mwb_intro[] <- if ((step >= Wb_introtime[i] * YL) && (step < Wb_introtime[i] * YL + Wb_introduration))
-   rpois(Wb_introrate[i]) else 0
+Mwb_intro[] <- if ((step >= Wb_introtime[i] * YL) &&
+                   (step < Wb_introtime[i] * YL + Wb_introduration))
+  rpois(Wb_introrate[i]) else 0
 # Mwb_intro[1..NP]=if((TIME>=Wb_introtime[i]*YL) and(TIME<Wb_introtime[i]*YL+Wb_introduration)) then poisson(Wb_introrate[i]) else 0
 
 update(Mwb_S[]) <- Lwb_mature[i]+Mwb_intro[i]+Mwb_S[i]-O_Mwb_S[i]
 
 dim(O_Mwb_E1) <- NP
-dim(O_Mwb_E1_prob) <- NP 
+dim(O_Mwb_E1_prob) <- NP
 O_Mwb_E1_prob[] <- max(min(DT * (Delta_wb[i] + 1 / eip[i]), 1), 0)
 O_Mwb_E1[] <- rbinom(Mwb_E1[i], O_Mwb_E1_prob[i])
 # O_Mwb_E1[1..NP]=binomial(DT*(Delta_wb[i]+1/eip[i]),Mwb_E1[i],seed+i)
@@ -438,7 +439,7 @@ R0t_1av <- (sum(R0t_1[])-R0t_1[NP])/(NP-1)
 # O_R1 - number of R1 which leave the compartment
 # age_R1 - number of R1 which get older
 
-# sinf1 - cumulative incidence of infections (per age group, vaccine status, patch) 
+# sinf1 - cumulative incidence of infections (per age group, vaccine status, patch)
 
 # Ntotal - total number of individual (S + R1 + I1) by age, vaccine status and patch
 # NT - total number of individuals
@@ -503,7 +504,7 @@ len_surv <- na+1
 dim(surv) <- len_surv
 dim(R1) <- c(na,2,NP)
 init_R1_nv[,] <- user()
-dim(init_R1_nv) <- c(na,NP) 
+dim(init_R1_nv) <- c(na,NP)
 initial(R1[,1,]) <- init_R1_nv[i,j]
 initial(R1[,2,]) <- 0
 
@@ -553,12 +554,12 @@ Y1T[] <- Y1T_sum[na,i]/NTp[i]
 
 # -----------------------------------------------------------------------------
 #
-# Keep track of infectious humans 
+# Keep track of infectious humans
 #
 # -----------------------------------------------------------------------------
 
-# 2 human incubation and infectious classes (instead of 1) 
-# are needed for a gamma rather than 
+# 2 human incubation and infectious classes (instead of 1)
+# are needed for a gamma rather than
 # an exponentially distributed human infectious period
 
 incub <- user()
@@ -568,18 +569,18 @@ initial(incubA[]) <- 0
 dim(incubB) <- NP
 initial(incubB[]) <- 0
 dim(infectiousA) <- NP
-initial(infectiousA[]) <- 0  
+initial(infectiousA[]) <- 0
 dim(infectiousB) <- NP
-initial(infectiousB[]) <- 0  
+initial(infectiousB[]) <- 0
 dim(infectious1) <- NP
 
-update(incubA[]) <- incubA[i] + Y1T[i] - DT * 2 * incubA[i] / incub 
+update(incubA[]) <- incubA[i] + Y1T[i] - DT * 2 * incubA[i] / incub
 
-update(incubB[]) <- incubB[i] + DT * 2 * (incubA[i] - incubB[i]) / incub 
+update(incubB[]) <- incubB[i] + DT * 2 * (incubA[i] - incubB[i]) / incub
 
 update(infectiousA[]) <- infectiousA[i] + DT * 2 * (incubB[i] / incub - infectiousA[i] / inf_per)
 
-update(infectiousB[]) <- infectiousB[i] + DT * 2 * (infectiousA[i] - infectiousB[i]) / inf_per 
+update(infectiousB[]) <- infectiousB[i] + DT * 2 * (infectiousA[i] - infectiousB[i]) / inf_per
 
 infectious1[] <- infectiousA[i] + infectiousB[i]
 
@@ -607,16 +608,16 @@ dim(FOI1Y) <- NP
 FOI1Y[] <- YL*FOI1p[i]/DT
 
 FOI1av <- (sum(FOI1p[])-FOI1p[NP])/(NP-1)
-                  
+
 dim(FOI1nn) <- NP
 nn[,] <- user()
 dim(nn) <- c(NP, 8)
 FOI1nn[1:(NP-1)] <- (FOI1p[nn[i,1]]+FOI1p[nn[i,2]]+FOI1p[nn[i,3]]+FOI1p[nn[i,4]]+FOI1p[nn[i,5]]+FOI1p[nn[i,6]]+FOI1p[nn[i,7]]+FOI1p[nn[i,8]])/8
 
 dim(FOI1) <- NP
-propTransGlobal <- user()                          
+propTransGlobal <- user()
 propTransGlobal_bigpatch <- propTransGlobal/10
-propTransNN <- user() 
+propTransNN <- user()
 BG_FOI <- user()
 FOI1[1:(NP-1)] <- propTransNN*FOI1nn[i]+propTransGlobal*FOI1av+(1-propTransGlobal-propTransNN)*FOI1p[i]+DT*BG_FOI/YL
 # FOI1[NP]=propTransGlobal_bigpatch*FOI1av+(1-propTransGlobal_bigpatch)*FOI1p[i]
@@ -740,14 +741,14 @@ update(disease1vinc) <- disease1vinc+sum(disease1v[,])
 
 # -----------------------------------------------------------------------------
 #
-# Compartmental dynamics
+# Human compartmental dynamics
 #
 # -----------------------------------------------------------------------------
 
 
 
 age_per <- user()
-agerts <- if (trunc(step/age_per)==step/age_per) age_per/YL else 0 
+agerts <- if (trunc(step/age_per)==step/age_per) age_per/YL else 0
 # agerts=DT/YL
 dim(agert) <- na
 agec[] <- user()
@@ -807,8 +808,8 @@ recov1[,,] <- rbinom(O_I1[i,j,k], recov1_prob[i])
 # recov1[1..NA,1..2,1..NP]=binomial(nu/(nu+agert[i]+deathrt[i]),O_I1[i,j,k],seed+(i*2+j-1)*NP+k)
 
 dim(age_I1) <- c(na,2,NP)
-dim(age_I1_prob) <- na 
-dim(age_I1_trials) <- c(na,2,NP) 
+dim(age_I1_prob) <- na
+dim(age_I1_trials) <- c(na,2,NP)
 age_I1_trials[,,] <- O_I1[i,j,k] - recov1[i,j,k]
 age_I1_prob[] <- max(min(agert[i] / (agert[i] + deathrt[i]), 1), 0)
 age_I1[,,] <- rbinom(age_I1_trials[i,j,k], age_I1_prob[i])
@@ -821,13 +822,13 @@ dim(death_I1) <- c(na,2,NP)
 death_I1[,,] <- O_I1[i,j,k] - recov1[i,j,k] - age_I1[i,j,k]
 
 dim(O_R1) <- c(na,2,NP)
-dim(O_R1_prob) <- na 
+dim(O_R1_prob) <- na
 O_R1_prob[] <- max(min(agert[i] + deathrt[i], 1), 0)
 O_R1[,,] <- rbinom(R1[i,j,k], O_R1_prob[i])
 # O_R1[1..NA,1..2,1..NP]=binomial(agert[i]+deathrt[i],R1[i,j,k],seed+(i*2+j-1)*NP+k)
 
 dim(age_R1) <- c(na,2,NP)
-dim(age_R1_prob) <- na 
+dim(age_R1_prob) <- na
 age_R1_prob[] <- max(min(agert[i] / (agert[i] + deathrt[i]), 1), 0)
 age_R1[,,] <- rbinom(O_R1[i,j,k], age_R1_prob[i])
 # age_R1[1..NA,1..2,1..NP]=binomial(agert[i]/(agert[i]+deathrt[i]),O_R1[i,j,k],seed+(i*2+j-1)*NP+k)
@@ -840,7 +841,7 @@ death_R1[,,] <- O_R1[i,j,k] - age_R1[i,j,k]
 
 dim(deaths) <- c(na,2,NP)
 deaths[,,] <- death_S[i,j,k] + death_I1[i,j,k] + death_R1[i,j,k]
-  
+
 dim(sinf1) <- c(na,2,NP)
 initial(sinf1[,,]) <- 0
 update(sinf1[,,]) <- sinf1[i,j,k] + inf_1[i,j,k]
@@ -881,15 +882,15 @@ p_age_dist1[] <- p_age_inf1[i]/(1e-20+sum(p_age_inf1[]))
 
 
 # -----------------------------------------------------------------------------
-# 
+#
 # The outputs you want
 #
 # -----------------------------------------------------------------------------
 
 
 
-# diagnostics for humans 
-output(agert[]) <- TRUE 
+# diagnostics for humans
+output(agert[]) <- TRUE
 output(death[]) <- TRUE
 output(deathrt[]) <- TRUE
 output(births[]) <- TRUE
@@ -928,7 +929,7 @@ output(infectious1[]) <- TRUE
 # output(disease_patch[]) <- TRUE
 # output(p_age_dist1[]) <- TRUE
 
-# diagnostics for mosquitoes 
+# diagnostics for mosquitoes
 output(Mwt_tot[]) <- TRUE
 output(Mwb_tot[]) <- TRUE
 output(Mwb_intro[]) <- TRUE
