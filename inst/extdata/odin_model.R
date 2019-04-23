@@ -10,7 +10,7 @@ dim(death) <- na
 mean_surv[] <- user()
 dim(mean_surv) <- na
 dim(av_age_s) <- na
-av_age_s[] <- agec[i]*mean_surv[i]
+av_age_s[] <- agec[i] * mean_surv[i]
 
 TimeMwtControlOn <- user()
 TimeMwtControlOff <- user()
@@ -30,7 +30,8 @@ Mwt[] <- Mwt_base[i]
 
 DeltaBase <- user()
 
-MwtCont <- if ((step >= TimeMwtControlOn*YL) && (step < TimeMwtControlOff*YL)) (1-propMwtControl) else 1
+MwtCont <- if ((step >= TimeMwtControlOn * YL) &&
+               (step < TimeMwtControlOff * YL)) (1-propMwtControl) else 1
 
 Rm <- user() # mosquito reproduction number
 Epsilon <- user() # larvae development rate
@@ -50,13 +51,15 @@ Gamma <- Rm * DeltaMean * (Epsilon + Sigma) / Epsilon
 DeltaMean <- DeltaBase / MwtCont
 
 # mean larval mosquito carrying capacity. DeltaMean is fixed.
-Kc_mean <- DeltaMean * ((Epsilon * (Gamma - DeltaMean) / (DeltaMean * Sigma) - 1) ^ (-1 / Omega)) / Epsilon
+Kc_mean <- DeltaMean * ((Epsilon * (Gamma - DeltaMean) /
+                           (DeltaMean * Sigma) - 1) ^ (-1 / Omega)) / Epsilon
 
 eip_mean <- user()
 
 # calculate R0 at equilibrium ?
 Beta_mh_1 <- user()
-R0_1 <- Kappa * Kappa * Mwt_mean * Beta_hm_1 * inf_per * Beta_mh_1 / (1 + DeltaMean * eip_mean) / DeltaMean
+R0_1 <- Kappa * Kappa * Mwt_mean * Beta_hm_1 * inf_per * Beta_mh_1 /
+  (1 + DeltaMean * eip_mean) / DeltaMean
 
 
 # -----------------------------------------------------------------------------
@@ -79,13 +82,18 @@ dim(Delta) <- NP
 dim(Kc) <- NP
 dim(eip) <- NP
 
-Delta[1:(NP-1)] <- DeltaMean / (1 + season_amp[i] * Delta_season * cos(2 * pi * (step + season_phase[i]) / YL))
+Delta[1:(NP-1)] <- DeltaMean /
+  (1 + season_amp[i] * Delta_season * cos(2 * pi * (step + season_phase[i]) / YL))
 Delta[NP] <- DeltaMean
 
-Kc[1:(NP-1)] <- Mwt[i] * Kc_mean * (1 + season_amp[i] * Kc_season * cos(2 * pi * (step + season_phase[i]) / YL))
-Kc[NP] <- MwtCont * Mwt_mean * Kc_mean * (1 + season_amp[i] * Kc_season * cos(2 * pi * (step + season_phase[i]) / YL))
+Kc[1:(NP-1)] <- Mwt[i] * Kc_mean *
+  (1 + season_amp[i] * Kc_season * cos(2 * pi * (step + season_phase[i]) / YL))
 
-eip[] <- eip_mean * (1 - season_amp[i] * eip_season * cos(2 * pi * (step + season_phase[i]) / YL))
+Kc[NP] <- MwtCont * Mwt_mean * Kc_mean *
+  (1 + season_amp[i] * Kc_season * cos(2 * pi * (step + season_phase[i]) / YL))
+
+eip[] <- eip_mean *
+  (1 - season_amp[i] * eip_season * cos(2 * pi * (step + season_phase[i]) / YL))
 
 Deltaav <- (sum(Delta[])-Delta[NP])/(NP-1)
 
@@ -133,9 +141,13 @@ vacc_cu_coverage <- user()
 vacc_noncov_norow <- na + 1 # position 1 is like position 0 in BM
 dim(vacc_noncov) <- c(vacc_noncov_norow, 2)
 
-vacc_noncov[,1] <- (if ((step >= YL*vacc_child_starttime) && (step < YL*vacc_child_stoptime) && (i == (vacc_child_age+1)))
+vacc_noncov[,1] <- (if ((step >= YL * vacc_child_starttime) &&
+                        (step < YL * vacc_child_stoptime) &&
+                        (i == (vacc_child_age + 1)))
   (1 - vacc_child_coverage) else 1) *
-  (if ((step == vacc_cu_rndtime) && (i >= (vacc_cu_minage+1)) && (i <= (vacc_cu_maxage+1)))
+  (if ((step == vacc_cu_rndtime) &&
+       (i >= (vacc_cu_minage + 1)) &&
+       (i <= (vacc_cu_maxage + 1)))
     (1 - vacc_cu_coverage) else 1)
 vacc_noncov[,2] <- 1
 
