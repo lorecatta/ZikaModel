@@ -23,9 +23,7 @@
 #' @param Kappa Mosquito biting rate. Default = 0.5.
 #' @param Beta_hm_1 Per bite transmission probability from humans to mosquitoes. Default = 0.7.
 #' @param Beta_mh_1 Per bite transmission probability from mosquitoes to humans. Default = 0.7.
-#' @param Delta_season Scaling factor (between 0 and 1) for effect of seasonality on adult mosquitoes mortality. 1 = maximum effect of seasonality. 0 = no effect of seasonality. Default = 1.
-#' @param Kc_season Scaling factor (between 0 and 1) for effect of seasonality on mosquito larvae carrying capacity. Default = 1.
-#' @param eip_season Scaling factor (between 0 and 1) for effect of seasonality on Extrinsic Incubation Period. Default = 1.
+#' @param season logical for controlling the effect of seasonality on on adult mosquitoes mortality, mosquito larvae carrying capacity and Extrinsic Incubation Period
 #' @param propMwtControl Proportion of adult wild type mosquitoes which are killed by control. Default = 0.
 #' @param TimeMwtControlOn Year of start of control of adult wild type mosquitoes. Default = 4.
 #' @param TimeMwtControlOff Year of end of control of adult wild type mosquitoes. Default = 5.

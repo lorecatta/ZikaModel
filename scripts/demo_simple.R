@@ -29,3 +29,8 @@ save_plot(model_run$plot,
           "compartments_human",
           wdt = 17,
           hgt = 12)
+
+
+# Scaling factor (between 0 and 1) for effect of seasonality on adult mosquitoes mortality. 1 = maximum effect of seasonality. 0 = no effect of seasonality. Default = 1.
+# Kc_season Scaling factor (between 0 and 1) for effect of seasonality on mosquito larvae carrying capacity. Default = 1.
+#  eip_season Scaling factor (between 0 and 1) for effect of seasonality on Extrinsic Incubation Period. Default = 1.
