@@ -60,6 +60,8 @@ model_param_list_create(YL = 364, DT = 1, NP = 21, age_per = 52,
 
 \item{Beta_mh_1}{Per bite transmission probability from mosquitoes to humans. Default = 0.7.}
 
+\item{season}{logical for controlling the effect of seasonality on on adult mosquitoes mortality, mosquito larvae carrying capacity and Extrinsic Incubation Period}
+
 \item{propMwtControl}{Proportion of adult wild type mosquitoes which are killed by control. Default = 0.}
 
 \item{TimeMwtControlOn}{Year of start of control of adult wild type mosquitoes. Default = 4.}
@@ -121,12 +123,6 @@ model_param_list_create(YL = 364, DT = 1, NP = 21, age_per = 52,
 \item{AGE_REC}{Default = 2.}
 
 \item{PropDiseaseReported}{Reporting rate of symptomatic cases. Default = 0.1.}
-
-\item{Delta_season}{Scaling factor (between 0 and 1) for effect of seasonality on adult mosquitoes mortality. 1 = maximum effect of seasonality. 0 = no effect of seasonality. Default = 1.}
-
-\item{Kc_season}{Scaling factor (between 0 and 1) for effect of seasonality on mosquito larvae carrying capacity. Default = 1.}
-
-\item{eip_season}{Scaling factor (between 0 and 1) for effect of seasonality on Extrinsic Incubation Period. Default = 1.}
 }
 \description{
 \code{model_param_list_create} creates a list of user-defined
