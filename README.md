@@ -9,42 +9,39 @@ which is the article where the model is published.
 ## Running the model
 To run the model you can do the following:
 ```
-  # load the package (or have it built and reloaded as described above)
-  library(stochZika)
+# load the package (or have it built and reloaded as described above)
+library(stochZika)
 
-  # create a vector of age groups 
-  age_init <- c(1, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10)
+# create a vector of age groups 
+age_init <- c(1, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10)
   
-  # create a vector of mortality rates 
-  deathrt <- c(1e-10, 
-               1e-10, 1e-10, 
-               0.00277068683332695, 
-               0.0210680857689784,
-               0.026724997685722,
-               0.0525354529367476,
-               0.0668013582441452,
-               0.119271483740379,
-               0.279105747097929,
-               0.390197266957464)
+# create a vector of mortality rates 
+deathrt <- c(1e-10, 
+             1e-10, 
+             1e-10, 
+             0.00277068683332695, 
+             0.0210680857689784,
+             0.026724997685722,
+             0.0525354529367476,
+             0.0668013582441452,
+             0.119271483740379,
+             0.279105747097929,
+             0.390197266957464)
+             
+# provide the length of time (in days) that you want to run the model for
+time_period <- 364 * 50
   
-  # provide the length of time (in days) that you want to run the model for
-  time_period <- 364 * 50
-  
-  # run the model
-  model_run <- run_model(age = age_init,
-                         death = deathrt,
-                         nn_links,
-                         time = time_period)
-  
+# run the model
+model_run <- run_model(age = age_init,
+                       death = deathrt,
+                       nn_links,
+                       time = time_period)
+
 ```
   
 You can save a plot of the human compartments
 ```
 
-  save_plot(model_run$plot,
-            "figures",
-            "compartments_human",
-            wdt = 17,
-            hgt = 12)
+save_plot(model_run$plot, "figures", "compartments_human", wdt = 17, hgt = 12)
 
 ```
