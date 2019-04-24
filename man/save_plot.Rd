@@ -4,10 +4,10 @@
 \alias{save_plot}
 \title{save_plot}
 \usage{
-save_plot(ret, out_pth, out_fl_nm, wdt, hgt)
+save_plot(plot_obj, out_pth, out_fl_nm, wdt, hgt)
 }
 \arguments{
-\item{ret}{The plot object}
+\item{plot_obj}{The plot object}
 
 \item{out_pth}{The path where to save the plot}
 
