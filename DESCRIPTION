@@ -1,6 +1,6 @@
 Package: stochZika
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Stochastic Zika odin model
 Version: 0.1.0
 Author: person(given = "Lorenzo", 
                family = "Cattarino", 
@@ -9,7 +9,7 @@ Author: person(given = "Lorenzo",
 Maintainer: L Cattarino <l.cattarino@imperial.ac.uk>
 Description: Stochastic implementation of the Zika model 
     (Ferguson et al. 2016, Science) using the package odin.
-License: What license is it under?
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 
