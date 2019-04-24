@@ -70,7 +70,7 @@ In the model, seasonality affects:
 
 At the moment the effect of seasonality is implemented as "all or nothing" 
 (e.g. it can either be switched completely on or off). 
-Intermediate effects are possible but they require a (simple) change in the code.
+Intermediate effects are possible but they require a (simple) change to the code.
 
 A model which includes the effect of seasonality can be implemnted as:
 
