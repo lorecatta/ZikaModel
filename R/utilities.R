@@ -11,7 +11,7 @@
 #'
 #' \code{save_plot} save a png file of a plot
 #'
-#' @param ret The plot object
+#' @param plot_obj The plot object
 #' @param out_pth The path where to save the plot
 #' @param out_fl_nm The output file name
 #' @param wdt The plot width
@@ -20,7 +20,7 @@
 #' @export
 
 
-save_plot <- function(ret, out_pth, out_fl_nm, wdt, hgt){
+save_plot <- function(plot_obj, out_pth, out_fl_nm, wdt, hgt){
 
   dir.create(out_pth, FALSE, TRUE)
   png(file.path(out_pth, paste0(out_fl_nm, ".png")),
@@ -29,7 +29,7 @@ save_plot <- function(ret, out_pth, out_fl_nm, wdt, hgt){
       units = "cm",
       pointsize = 12,
       res = 300)
-  print(ret)
+  print(plot_obj)
   dev.off()
 
 }
