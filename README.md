@@ -26,9 +26,6 @@ To run the base version of the model, without seasonality and interventions,
 you can do the following:
 
 ```
-# load the package
-library(stochZika)
-
 # create a vector of human age groups 
 age_init <- c(1, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10)
   
