@@ -13,7 +13,7 @@ For details of the original transmission model please see the
 which is the article where the model is published.
 
 ## Installation
-You need to first install the [odin] package (https://github.com/mrc-ide/odin). 
+You need to first install the [odin](https://github.com/mrc-ide/odin) R package. 
 The odin package allows you to write differential equations using a language 
 similar to R, compile this into C code and find an approximate solution to the 
 differential equations using a numerical method. 
