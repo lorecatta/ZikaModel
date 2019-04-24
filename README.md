@@ -1,13 +1,19 @@
 # stochastic-zika-model
-This repository contains the R package for running the Zika transmission model developed at Imperial College London using R odin.
+This repository contains the R package for running the Zika transmission model 
+developed at Imperial College London using R odin.
 
-The transmission model is a stochastic metapopulation model which includes the dynamics of the _Aedes_ mosquito vector and the human host populations. The model simulates also the impact of control strategies such as the release of Wolbachia-infected mosquitoes and child vaccination.
+The transmission model is a stochastic metapopulation model which includes the 
+dynamics of the _Aedes_ mosquito vector and the human host populations. 
+The model simulates also the impact of seasonality and control strategies such 
+as the release of Wolbachia-infected mosquitoes and child vaccination.
 
-For details of the original transmission model please see the [Ferguson et al. 2016 paper](https://science.sciencemag.org/content/353/6297/353) 
+For details of the original transmission model please see the 
+[Ferguson et al. 2016 paper](https://science.sciencemag.org/content/353/6297/353) 
 which is the article where the model is published.
 
 ## Running the base model
-To run the model you can do the following:
+To run the base version of the model, without seasonality and interventions, 
+you can do the following:
 
 ```
 # load the package (or have it built and reloaded as described above)
