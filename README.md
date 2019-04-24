@@ -6,7 +6,7 @@ The transmission model is a stochastic metapopulation model which includes the d
 For details of the original transmission model please see the [Ferguson et al. 2016 paper](https://science.sciencemag.org/content/353/6297/353) 
 which is the article where the model is published.
 
-## Running the model
+## Running the base model
 To run the model you can do the following:
 
 ```
@@ -45,6 +45,7 @@ You can save a plot of the human compartments
 save_plot(model_run$plot, "figures", "compartments_human", wdt = 17, hgt = 12)
 ```
 
+## Seasonality 
 The model allows to account for the effect of seasonal variations in climatic 
 variables (e.g. temperature and precipitation) on Zika transmission dynamics. 
 In the model, seasonality affects: 
