@@ -3,7 +3,7 @@ This repository contains the R package for running the Zika transmission model
 developed at Imperial College London using R odin.
 
 The transmission model is a stochastic metapopulation model which includes the 
-dynamics of the _Aedes_ mosquito vector and the human host populations. 
+dynamics of the _Aedes_ mosquito vector and the age-stratified human host populations. 
 The model simulates also the impact of seasonality and control strategies such 
 as the release of Wolbachia-infected mosquitoes and child vaccination.
 
@@ -16,13 +16,13 @@ To run the base version of the model, without seasonality and interventions,
 you can do the following:
 
 ```
-# load the package (or have it built and reloaded as described above)
+# load the package
 library(stochZika)
 
-# create a vector of age groups 
+# create a vector of human age groups 
 age_init <- c(1, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10)
   
-# create a vector of mortality rates 
+# create a vector of human mortality rates 
 deathrt <- c(1e-10, 
              1e-10, 
              1e-10, 
@@ -45,10 +45,11 @@ model_run <- run_model(age = age_init,
                        time = time_frame)
 ```
   
-You can save a plot of the human compartments
+You can use `save_plot` to save a png figure of the plot of human compartments 
+against time from the model run.
 
 ```
-save_plot(model_run$plot, "figures", "compartments_human", wdt = 17, hgt = 12)
+save_plot(plot_obj = model_run$plot, out_pth = "figures", out_fl_nm = "compartments_human", wdt = 17, hgt = 12)
 ```
 
 ## Seasonality 
@@ -60,7 +61,7 @@ In the model, seasonality affects:
 2. mosquito larvae carrying capacity;
 3. Extrinsic Incubation Period.
 
-At the moment the effect of seasonality is implemnted as "all or nothing" 
+At the moment the effect of seasonality is implemented as "all or nothing" 
 (e.g. it can either be switched completely on or off). 
 Intermediate effects are possible but they require a (simple) change in the code.
 
