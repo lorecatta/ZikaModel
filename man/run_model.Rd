@@ -16,7 +16,7 @@ run_model(age, death, nn_links, time = 18200, season = FALSE)
 \item{time}{time in days.
 Default=18200}
 
-\item{season}{Logical for controlling the effect of seasonality on on adult mosquitoes mortality, mosquito larvae carrying capacity and Extrinsic Incubation Period}
+\item{season}{Logical for controlling the effect of seasonality.}
 }
 \description{
 \code{run_model} runs model using declared agec, death and nn_links
