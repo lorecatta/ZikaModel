@@ -47,14 +47,15 @@ save_plot(model_run$plot, "figures", "compartments_human", wdt = 17, hgt = 12)
 
 The model allows to account for the effect of seasonal variations in climatic 
 variables (e.g. temperature and precipitation) on Zika transmission dynamics. 
-Seasonlaity in the model affects: 
+In the model, seasonality affects: 
 
 1. adult mosquitoes mortality;
 2. mosquito larvae carrying capacity;
 3. Extrinsic Incubation Period.
 
-At the moment the effect of seasonality is all or nothing (e.g. it can either be switched completely on or off).  
-Intermediate effects requires a simple change in the code.
+At the moment the effect of seasonality is implemnted as "all or nothing" 
+(e.g. it can either be switched completely on or off). 
+Intermediate effects are possible but they require a (simple) change in the code.
 
 A model which includes the effect of seasonality can be implemnted as:
 
