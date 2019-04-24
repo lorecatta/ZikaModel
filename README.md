@@ -37,14 +37,12 @@ model_run <- run_model(age = age_init,
                        death = deathrt,
                        nn_links,
                        time = time_frame)
-
 ```
   
 You can save a plot of the human compartments
 
 ```
 save_plot(model_run$plot, "figures", "compartments_human", wdt = 17, hgt = 12)
-
 ```
 
 The model allows to account for the effect of seasonal variations in climatic 
@@ -66,5 +64,4 @@ seasonal_model_run <- run_model(age = age_init,
                                 nn_links,
                                 time = time_period,
                                 season = TRUE)
-
 ```
