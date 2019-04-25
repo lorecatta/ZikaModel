@@ -81,6 +81,6 @@ A model which includes the effect of seasonality can be implemnted as:
 seasonal_model_run <- run_model(age = age_init,
                                 death = deathrt,
                                 nn_links,
-                                time = time_period,
+                                time = time_frame,
                                 season = TRUE)
 ```
