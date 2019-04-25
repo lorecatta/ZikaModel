@@ -20,9 +20,9 @@ differential equations using a numerical method.
 Once odin is installed, you can install the `Zika_model` package with the 
 following steps:  
 
-1. Clone this repository to your local machine, 
-2. Open the `Zika_model.Rproj` file,
-3. load the `Zika_model` package using `devtools::load_all()`.
+1. clone this repository to your local machine 
+2. open the `Zika_model.Rproj` file
+3. load the `Zika_model` package using `devtools::load_all()`
 
 ## Running the base model
 To run the base version of the model, without seasonality and interventions, 
