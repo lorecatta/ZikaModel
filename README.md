@@ -1,4 +1,4 @@
-# stochastic-zika-model
+# zika-transmission-model
 This repository contains the R package for running the Zika transmission model 
 developed at Imperial College London using R odin.
 
