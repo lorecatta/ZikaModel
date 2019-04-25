@@ -1,4 +1,4 @@
-Package: stochZika
+Package: ZikaModel
 Type: Package
 Title: Stochastic Zika odin model
 Version: 0.1.0
