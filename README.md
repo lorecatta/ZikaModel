@@ -17,9 +17,9 @@ You need to first install the [odin](https://github.com/mrc-ide/odin) R package.
 The odin package allows you to write differential equations using a language 
 similar to R, compile this into C code and find an approximate solution to the 
 differential equations using a numerical method. 
-Once odin is installed, you can install the `stochZika` package by cloning this 
-repository to your local machine, opening the `stochZika.Rproj` file and load 
-the `stochZika` package using `devtools::load_all()`.
+Once odin is installed, you can install the `Zika_model` package by cloning this 
+repository to your local machine, opening the `Zika_model.Rproj` file and load 
+the `Zika_model` package using `devtools::load_all()`.
 
 ## Running the base model
 To run the base version of the model, without seasonality and interventions, 
