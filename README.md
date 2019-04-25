@@ -20,9 +20,9 @@ differential equations using a numerical method.
 Once odin is installed, you can install the `Zika_model` package with the 
 following steps:  
 
-A. Clone this repository to your local machine, 
-B. Open the `Zika_model.Rproj` file,
-C. load the `Zika_model` package using `devtools::load_all()`.
+1. Clone this repository to your local machine, 
+2. Open the `Zika_model.Rproj` file,
+3. load the `Zika_model` package using `devtools::load_all()`.
 
 ## Running the base model
 To run the base version of the model, without seasonality and interventions, 
@@ -67,9 +67,9 @@ The model allows to account for the effect of seasonal variations in climatic
 variables (e.g. temperature and precipitation) on Zika transmission dynamics. 
 In the model, seasonality affects: 
 
-1. adult mosquitoes mortality;
-2. mosquito larvae carrying capacity;
-3. Extrinsic Incubation Period.
+* adult mosquitoes mortality;
+* mosquito larvae carrying capacity;
+* Extrinsic Incubation Period.
 
 At the moment the effect of seasonality is implemented as "all or nothing" 
 (e.g. it can either be switched completely on or off). 
