@@ -4,7 +4,7 @@
 #' \code{equilibrium_init_create} creates an equilibrium initialisation
 #' state to be used within later model runs.
 #'
-#' @param age Vector of age group widths.
+#' @param agec Vector of age group widths.
 #' @param death Numeric of mortality rates.
 #' @param nn_links 8 nearest-neigbors to each patch.
 #' @param model_parameter_list list of user-defined model parameters.
