@@ -30,6 +30,6 @@ save_plot <- function(plot_obj, out_pth, out_fl_nm, wdt, hgt){
       pointsize = 12,
       res = 300)
   print(plot_obj)
-  dev.off()
+  on.exit(dev.off())
 
 }
