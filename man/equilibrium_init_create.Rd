@@ -7,13 +7,13 @@
 equilibrium_init_create(agec, death, nn_links, model_parameter_list)
 }
 \arguments{
+\item{agec}{Vector of age group widths.}
+
 \item{death}{Numeric of mortality rates.}
 
 \item{nn_links}{8 nearest-neigbors to each patch.}
 
 \item{model_parameter_list}{list of user-defined model parameters.}
-
-\item{age}{Vector of age group widths.}
 }
 \description{
 \code{equilibrium_init_create} creates an equilibrium initialisation

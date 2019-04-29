@@ -4,10 +4,10 @@
 \alias{run_model}
 \title{run_model}
 \usage{
-run_model(age, death, nn_links, time = 18200, season = FALSE)
+run_model(agec, death, nn_links, time = 18200, season = FALSE)
 }
 \arguments{
-\item{age}{Vector of age group widths.}
+\item{agec}{Vector of age group widths.}
 
 \item{death}{Numeric of mortality rates.}
 
