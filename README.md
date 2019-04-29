@@ -78,7 +78,7 @@ Intermediate effects are possible but they require a (simple) change to the code
 A model which includes the effect of seasonality can be implemnted as:
 
 ```
-seasonal_model_run <- run_model(age = age_init,
+seasonal_model_run <- run_model(agec = age_init,
                                 death = deathrt,
                                 nn_links,
                                 time = time_frame,
