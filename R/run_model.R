@@ -30,7 +30,7 @@ run_model <- function(age,
                                         model_parameter_list = mpl)
 
   # create odin generator
-  odin_model_path <- system.file("extdata/odin_model_stoch.R", package = "stochZika")
+  odin_model_path <- system.file("extdata/odin_model_stoch.R", package = "ZikaModel")
   gen <- odin::odin(odin_model_path,verbose = FALSE)
 
   # There are many parameters used that should not be passed through
