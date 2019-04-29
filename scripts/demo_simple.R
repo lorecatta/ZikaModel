@@ -19,7 +19,7 @@ time <- 18200 # 50 years
 
 set.seed(1)
 
-model_run <- run_model(age,
+model_run <- run_model(agec,
                        death,
                        nn_links,
                        time = time)
@@ -29,10 +29,3 @@ save_plot(model_run$plot,
           "compartments_human",
           wdt = 17,
           hgt = 12)
-
-# now with seasonality
-model_run <- run_model(age,
-                       death,
-                       nn_links,
-                       time = time,
-                       season = TRUE)
