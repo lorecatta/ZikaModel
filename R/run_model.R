@@ -15,7 +15,7 @@
 #' @export
 
 
-run_model <- function(age,
+run_model <- function(agec,
                       death,
                       nn_links,
                       time = 18200,
