@@ -49,7 +49,7 @@ deathrt <- c(1e-10,
 time_frame <- 364 * 50
   
 # run the model
-model_run <- run_model(age = age_init,
+model_run <- run_model(agec = age_init,
                        death = deathrt,
                        nn_links,
                        time = time_frame)
