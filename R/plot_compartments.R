@@ -16,12 +16,14 @@
 
 plot_compartments <- function(df, compart_names, ttl){
 
-  brks <- seq(from = 0, to = time, by = 364*5)
+  time <- max(df$time)
+
+  # 50 year horizon
+  brks <- seq(from = 0, to = time, by = 364 * 5)
 
   ret <- ggplot(df,
                 aes(x = time, y = .data$value, col = .data$compartment)) +
     geom_line(size = 0.7) +
-    # facet_wrap(~ .data$vaccine, nrow = 2, labeller = xstrips_labs) +
     scale_colour_manual(
       values = c("#3333FF", "#FFA500", "#CC0000", "#339900"),
       name = NULL,
