@@ -59,7 +59,11 @@ You can use `save_plot` to save a png figure of the plot of human compartments
 against time from the model run.
 
 ```
-save_plot(plot_obj = model_run$plot, out_pth = "figures", out_fl_nm = "compartments_human", wdt = 17, hgt = 12)
+save_plot(plot_obj = model_run$plot, 
+          out_pth = "figures", 
+          out_fl_nm = "compartments_human", 
+          wdt = 17, 
+          hgt = 12)
 ```
 
 ## Seasonality 
@@ -84,5 +88,9 @@ seasonal_model_run <- run_model(agec = age_init,
                                 time = time_frame,
                                 season = TRUE)
 
-save_plot(plot_obj = seasonal_model_run$plot, out_pth = "figures\seasonality", out_fl_nm = "compartments_human", wdt = 17, hgt = 12)
+save_plot(plot_obj = seasonal_model_run$plot, 
+          out_pth = "figures\seasonality", 
+          out_fl_nm = "compartments_human", 
+          wdt = 17, 
+          hgt = 12)
 ```
