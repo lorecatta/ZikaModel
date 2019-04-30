@@ -102,5 +102,5 @@ save_plot(plot_obj = seasonal_model_run$plot,
           wdt = 17, 
           hgt = 12)
 
-post_processing(model_run$dat, "figures/seasonality")
+post_processing(seasonal_model_run$dat, "figures/seasonality")
 ```
