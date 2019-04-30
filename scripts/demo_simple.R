@@ -29,3 +29,9 @@ save_plot(model_run$plot,
           "compartments_human",
           wdt = 17,
           hgt = 12)
+
+seasonal_model_run <- run_model(agec,
+                                death,
+                                nn_links,
+                                time = time,
+                                season = TRUE)
