@@ -4,10 +4,12 @@
 \alias{post_processing}
 \title{post_processing}
 \usage{
-post_processing(dat, out_fig_path)
+post_processing(dat, out_pth)
 }
 \arguments{
 \item{dat}{The dataframe with all the data output from the model run.}
+
+\item{out_pth}{The path where to save the plot}
 }
 \description{
 \code{post_processing} post processes model outputs and saves plots of diagnostics.
