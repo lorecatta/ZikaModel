@@ -89,7 +89,7 @@ seasonal_model_run <- run_model(agec = age_init,
                                 season = TRUE)
 
 save_plot(plot_obj = seasonal_model_run$plot, 
-          out_pth = "figures\seasonality", 
+          out_pth = "figures/seasonality", 
           out_fl_nm = "compartments_human", 
           wdt = 17, 
           hgt = 12)
