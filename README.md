@@ -67,8 +67,8 @@ save_plot(plot_obj = model_run$plot,
 ```
 
 At this point it might be useful to inspect some diagnostics to check that the 
-model is actually doing what we want. The function `post_processing` reshape the
-model outputs in a more convenient format and save plots of selected diagnostics.   
+model is actually doing what we want. The function `post_processing` reshapes the
+model outputs in a more convenient format and saves plots of selected diagnostics.   
 
 ```
 post_processing(model_run$dat, "figures")
