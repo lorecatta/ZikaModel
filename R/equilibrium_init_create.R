@@ -64,7 +64,7 @@ equilibrium_init_create <- function(agec, death, nn_links, model_parameter_list)
 
   }
 
-  # browser()
+  av_age_s <- agec * mean_surv
 
   lifespan <- sum(lifeexpec)
 
@@ -177,6 +177,8 @@ equilibrium_init_create <- function(agec, death, nn_links, model_parameter_list)
   other_prop_immune <- mpl$other_prop_immune
   other_foi <- mpl$other_foi
 
+  # initial compartment states
+
   aa <- bb <- c()
 
   for (i in 2:(na+1)){
@@ -187,11 +189,15 @@ equilibrium_init_create <- function(agec, death, nn_links, model_parameter_list)
 
   }
 
-  init_S_nv <- trunc(aa %o% Nb) # outer product
-  # init_S_nv <- matrix(1, nrow = na, ncol = NP)
+  init_S <- array(0, c(na, 2, NP))
 
-  # init_R1_nv <- trunc(bb %o% Nb)
-  init_R1_nv <- matrix(0, nrow = na, ncol = NP)
+  init_S[1:na, 1, 1:NP] <- trunc(aa %o% Nb) # outer product
+
+  init_I1 <- array(0, c(na, 2, NP))
+
+  init_R1 <- array(0, c(na, 2, NP))
+
+  # init_R1[1:na, 1, 1:NP] <- trunc(bb %o% Nb)
 
   res <- list(nn = nn,
               na = na,
@@ -200,6 +206,7 @@ equilibrium_init_create <- function(agec, death, nn_links, model_parameter_list)
               surv = surv,
               mean_surv = mean_surv,
               mean_age = mean_age,
+              av_age_s = av_age_s,
               deathrt = deathrt,
               lifeexpec = lifeexpec,
               lifespan = lifespan,
@@ -214,8 +221,9 @@ equilibrium_init_create <- function(agec, death, nn_links, model_parameter_list)
               dis1 = dis1,
               rho1 = rho1,
               phi1 = phi1,
-              init_S_nv = init_S_nv,
-              init_R1_nv = init_R1_nv,
+              init_S = init_S,
+              init_I1 = init_I1,
+              init_R1 = init_R1,
               pi = pi)
 
   append(res, mpl)
