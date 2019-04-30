@@ -30,8 +30,4 @@ save_plot(model_run$plot,
           wdt = 17,
           hgt = 12)
 
-seasonal_model_run <- run_model(agec,
-                                death,
-                                nn_links,
-                                time = time,
-                                season = TRUE)
+post_processing(model_run$dat, "figures")
