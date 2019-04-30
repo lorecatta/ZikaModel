@@ -18,7 +18,7 @@
 
 plot_diagnostics <- function(df, out_pth, out_fl_nm, diagno_nms, no_pages){
 
-  # browser()
+  time <- max(df$time)
 
   brks <- seq(from = 0, to = time, by = 364*10)
 
