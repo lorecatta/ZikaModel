@@ -66,6 +66,14 @@ save_plot(plot_obj = model_run$plot,
           hgt = 12)
 ```
 
+At this point it might be useful to inspect some diagnostics to check that the 
+model is actually doing what we want. The function `post_processing` reshape the
+model outputs in a more convenient format and save plots of selected diagnostics.   
+
+```
+post_processing(model_run$dat, "figures")
+```
+
 ## Seasonality 
 The model allows to account for the effect of seasonal variations in climatic 
 variables (e.g. temperature and precipitation) on Zika transmission dynamics. 
@@ -93,4 +101,6 @@ save_plot(plot_obj = seasonal_model_run$plot,
           out_fl_nm = "compartments_human", 
           wdt = 17, 
           hgt = 12)
+
+post_processing(model_run$dat, "figures/seasonality")
 ```
