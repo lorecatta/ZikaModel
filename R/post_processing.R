@@ -110,7 +110,7 @@ post_processing <- function(dat, out_pth){
                                         "SEIR Zika model - wild type mosquitoes")
 
   save_plot(wt_mos_comp_plot,
-            "figures",
+            out_pth,
             "compartments_mosquitoes_wt",
             wdt = 17,
             hgt = 12)
@@ -138,7 +138,7 @@ post_processing <- function(dat, out_pth){
                                         "SEIR Zika model - wolbachia mosquitoes")
 
   save_plot(wb_mos_comp_plot,
-            "figures",
+            out_pth,
             "compartments_mosquitoes_wb",
             wdt = 17,
             hgt = 12)
