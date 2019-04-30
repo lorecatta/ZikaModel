@@ -48,6 +48,8 @@ deathrt <- c(1e-10,
 # provide the length of time (in days) that you want to run the model for
 time_frame <- 364 * 50
   
+set.seed(1)
+
 # run the model
 model_run <- run_model(agec = age_init,
                        death = deathrt,
@@ -90,6 +92,8 @@ Intermediate effects are possible but they require a (simple) change to the code
 A model which includes the effect of seasonality can be implemented as:
 
 ```
+set.seed(10)
+
 seasonal_model_run <- run_model(agec = age_init,
                                 death = deathrt,
                                 nn_links,
