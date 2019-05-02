@@ -188,8 +188,7 @@ post_processing <- function(dat, out_pth){
   plot_diagnostics(df_diagnostics_melt,
                    out_pth,
                    "diagnostics_humans",
-                   names(c(diagno_hum, diagno_hum_summary, extra_diagno_hum)),
-                   no_pages = 2)
+                   names(c(diagno_hum, diagno_hum_summary, extra_diagno_hum)))
 
 
   # plot mosquito diagnostics ---------------------------------------------------
@@ -208,7 +207,6 @@ post_processing <- function(dat, out_pth){
   plot_diagnostics(df_diagnostics_mos_melt,
                    out_pth,
                    "diagnostics_mosquitoes",
-                   names(c(diagno_mos, diagno_mos_summary)),
-                   no_pages = 2)
+                   names(c(diagno_mos, diagno_mos_summary)))
 
 }
