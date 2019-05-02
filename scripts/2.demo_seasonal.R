@@ -17,7 +17,7 @@ death <- c(1e-10,
 
 time <- 18200 # 50 years
 
-set.seed(1)
+set.seed(10)
 
 seasonal_model_run <- run_model(agec,
                                 death,
@@ -31,4 +31,4 @@ save_plot(seasonal_model_run$plot,
           wdt = 17,
           hgt = 12)
 
-post_processing(model_run$dat, "figures/seasonality")
+post_processing(seasonal_model_run$dat, "figures/seasonality")
