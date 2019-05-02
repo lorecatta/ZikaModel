@@ -18,7 +18,7 @@ model_param_list_create(YL = 364, DT = 1, NP = 21, age_per = 52,
   vacc_child_stoptime = 30, dis_pri = 0.2, rho_prim = 1,
   phi_prim = 1, vacceff_prim = 0.3, other_foi = 0.05,
   other_prop_immune = 0.5, propTransGlobal = 5e-04,
-  propTransNN = 0.005, BG_FOI = 1e-06, AGE_REC = 2,
+  propTransNN = 0.005, BG_FOI = 0, AGE_REC = 2,
   PropDiseaseReported = 0.1)
 }
 \arguments{
