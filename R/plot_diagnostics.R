@@ -5,7 +5,6 @@
 #'
 #' @param df The dataframe with the data to plot.
 #' @param diagno_nms A character string of descriptive names of the diagnostics. This will be used for the facet y labels.
-#' @param no_pages The number of pages over which to arrange the diagnostics.
 #'
 #' @inheritParams save_plot
 #'
@@ -16,7 +15,15 @@
 #' @export
 
 
-plot_diagnostics <- function(df, out_pth, out_fl_nm, diagno_nms, no_pages){
+plot_diagnostics <- function(df, out_pth, out_fl_nm, diagno_nms){
+
+  number_of_plots_per_page <- 4
+
+  total_no_plots <- length(diagno_nms)
+
+  no_pages <- ceiling(total_no_plots / number_of_plots_per_page)
+
+  plots_on_one_row <- sqrt(number_of_plots_per_page)
 
   time <- max(df$time)
 
@@ -33,8 +40,8 @@ plot_diagnostics <- function(df, out_pth, out_fl_nm, diagno_nms, no_pages){
     ret <- ggplot(df, aes(x = time, y = .data$value)) +
       geom_line(size = 0.4, colour = "#63B8FF") +
       ggforce::facet_wrap_paginate(~ .data$diagnostics,
-                                   ncol = 3,
-                                   nrow = 3,
+                                   ncol = plots_on_one_row,
+                                   nrow = plots_on_one_row,
                                    scales = "free_y",
                                    labeller = xstrips_labs,
                                    page = i) +
