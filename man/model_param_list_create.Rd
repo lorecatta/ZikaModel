@@ -18,7 +18,7 @@ model_param_list_create(YL = 364, DT = 1, NP = 21, age_per = 52,
   vacc_child_stoptime = 30, dis_pri = 0.2, rho_prim = 1,
   phi_prim = 1, vacceff_prim = 0.3, other_foi = 0.05,
   other_prop_immune = 0.5, propTransGlobal = 5e-04,
-  propTransNN = 0.005, BG_FOI = 0, AGE_REC = 2,
+  propTransNN = 0.005, BG_FOI = 1e-07, AGE_REC = 2,
   PropDiseaseReported = 0.1)
 }
 \arguments{
@@ -118,7 +118,7 @@ model_param_list_create(YL = 364, DT = 1, NP = 21, age_per = 52,
 
 \item{propTransNN}{Proportion of transmssion with nearest-neighbor patches. Default = 0.005.}
 
-\item{BG_FOI}{Background FOI. Default = 1e-6.}
+\item{BG_FOI}{Background FOI. Default = 10e-8.}
 
 \item{AGE_REC}{Default = 2.}
 
