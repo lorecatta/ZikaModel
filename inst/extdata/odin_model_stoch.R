@@ -87,7 +87,7 @@ Kc[NP] <- MwtCont * Mwt_mean * Kc_mean *
 eip[] <- eip_mean *
   (1 - season_amp[i] * eip_season * cos(2 * pi * (step + season_phase[i]) / YL))
 
-Deltaav <- (sum(Delta[])-Delta[NP])/(NP-1)
+Deltaav <- (sum(Delta[]) - Delta[NP]) / (NP - 1)
 
 
 # -----------------------------------------------------------------------------
@@ -943,6 +943,9 @@ output(vacc_noncov[,]) <- TRUE
 output(Deltaav) <- TRUE
 output(DeltaMean) <- TRUE
 output(infectious1[]) <- TRUE
+output(FOI1[]) <- TRUE
+output(FOI1p[]) <- TRUE
+output(FOI1nn[]) <- TRUE
 # output(beta1) <- R0_1 / inf_per
 # output(N_eq[]) <- TRUE
 # output(eq_FOI1) <- R0_1 / lifespan # in time units of years
