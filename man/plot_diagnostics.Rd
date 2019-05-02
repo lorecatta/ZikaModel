@@ -4,7 +4,7 @@
 \alias{plot_diagnostics}
 \title{plot_diagnostics}
 \usage{
-plot_diagnostics(df, out_pth, out_fl_nm, diagno_nms, no_pages)
+plot_diagnostics(df, out_pth, out_fl_nm, diagno_nms)
 }
 \arguments{
 \item{df}{The dataframe with the data to plot.}
@@ -14,8 +14,6 @@ plot_diagnostics(df, out_pth, out_fl_nm, diagno_nms, no_pages)
 \item{out_fl_nm}{The output file name}
 
 \item{diagno_nms}{A character string of descriptive names of the diagnostics. This will be used for the facet y labels.}
-
-\item{no_pages}{The number of pages over which to arrange the diagnostics.}
 }
 \description{
 \code{plot_diagnostics} makes a faceted plot of the model diagnostics.
