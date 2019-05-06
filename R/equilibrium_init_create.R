@@ -93,8 +93,8 @@ equilibrium_init_create <- function(agec, death, nn_links, model_parameter_list)
   Mwt_cv <- mpl$Mwt_cv
   Mwt_mean <- mpl$Mwt_mean
 
-  ln_sd <- sqrt(log(1+Mwt_cv*Mwt_cv))
-  ln_mean <- log(Mwt_mean)-(ln_sd*ln_sd)/2
+  ln_sd <- sqrt(log(1 + Mwt_cv * Mwt_cv))
+  ln_mean <- log(Mwt_mean) - (ln_sd * ln_sd) / 2
 
   init_Mwt_base <- exp(rnorm(NP, ln_mean, ln_sd))
   # init Mwt_base[1..NP]=exp(normal(ln_mean,ln_sd,seed+i))
@@ -125,15 +125,15 @@ equilibrium_init_create <- function(agec, death, nn_links, model_parameter_list)
 
   season_amp <- season_phase <- corr_season <- Wb_introtime <- c()
 
-  season_amp[1:8] <- 0.15
-  season_amp[9:12] <- 0.05
-  season_amp[13:20] <- 0.15
-  season_amp[21] <- 0.33
+  season_phase[1:8] <- 0.5 * YL
+  season_phase[9:12] <- 0.25 * YL
+  season_phase[13:20] <- 0
+  season_phase[21] <- 0.25 * YL
 
-  season_phase[1:8] <- 0
-  season_phase[9:12] <- 0.35
-  season_phase[13:20] <- 0.5
-  season_phase[21] <- 0.25
+  season_amp[1:8] <- 1
+  season_amp[13:20] <- 1
+  season_amp[9:12] <- 0.33
+  season_amp[21] <- 0.33
 
   corr_season[1:8] <- 1 # 1.22
   corr_season[13:20] <- 1 # 1.22
@@ -197,7 +197,7 @@ equilibrium_init_create <- function(agec, death, nn_links, model_parameter_list)
 
   init_R1 <- array(0, c(na, 2, NP))
 
-  # init_R1[1:na, 1, 1:NP] <- trunc(bb %o% Nb)
+  init_R1[1:na, 1, 1:NP] <- trunc(bb %o% Nb)
 
   res <- list(nn = nn,
               na = na,
