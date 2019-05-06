@@ -7,8 +7,9 @@
 model_param_list_create(YL = 364, DT = 1, NP = 21, age_per = 52,
   N_human = 3e+07, Omega = 1, DeltaBase = 0.2, Sigma = 0.025,
   Epsilon = 1/19, Rm = 2.69, Mwt_mean = 1.5, Mwt_cv = 0.15,
-  eip_mean = 8.4, incub = 5, inf_per = 5, nu = 1/21, Kappa = 0.5,
-  Beta_hm_1 = 0.7, Beta_mh_1 = 0.7, season, propMwtControl = 0,
+  eip_mean = 8.4, incub = 5.5, inf_per = 6, nu = 1/21,
+  Kappa = 0.5, Beta_hm_1 = 0.7, Beta_mh_mean = 0.7,
+  Beta_mh_season = 0.25, season, propMwtControl = 0,
   TimeMwtControlOn = 4, TimeMwtControlOff = 5, Wb_cyto = 1,
   Wb_mat = 1, Wb_fM = 0.95, Wb_fF = 0.95, Wb_relsusc1 = 0.9,
   Wb_relinf1 = 0.75, Wb_starttime = 140, Wb_introlevel = 0.5,
@@ -16,8 +17,8 @@ model_param_list_create(YL = 364, DT = 1, NP = 21, age_per = 52,
   vacc_cu_coverage = 0.7, vacc_cu_time = 100, vacc_child_age = 3,
   vacc_child_coverage = 0.75, vacc_child_starttime = 30,
   vacc_child_stoptime = 30, dis_pri = 0.2, rho_prim = 1,
-  phi_prim = 1, vacceff_prim = 0.3, other_foi = 0.05,
-  other_prop_immune = 0.5, propTransGlobal = 5e-04,
+  phi_prim = 1, vacceff_prim = 0.3, other_foi = 0.025,
+  other_prop_immune = 0, propTransGlobal = 5e-04,
   propTransNN = 0.005, BG_FOI = 1e-07, AGE_REC = 2,
   PropDiseaseReported = 0.1)
 }
@@ -48,9 +49,9 @@ model_param_list_create(YL = 364, DT = 1, NP = 21, age_per = 52,
 
 \item{eip_mean}{Mean Extrinsic Incubation Period (days). Default = 8.4.}
 
-\item{incub}{Intrinsic Incubation Period (days). Default = 5.}
+\item{incub}{Intrinsic Incubation Period (days). Default = 5.5.}
 
-\item{inf_per}{Total duration of human infectiousness (days). Default = 5.}
+\item{inf_per}{Total duration of human infectiousness (days). Default = 6.}
 
 \item{nu}{Inverse of virus generation time (1 / days). Virus generation time = serial interval. Default = 1 / 21.}
 
@@ -58,7 +59,9 @@ model_param_list_create(YL = 364, DT = 1, NP = 21, age_per = 52,
 
 \item{Beta_hm_1}{Per bite transmission probability from humans to mosquitoes. Default = 0.7.}
 
-\item{Beta_mh_1}{Per bite transmission probability from mosquitoes to humans. Default = 0.7.}
+\item{Beta_mh_mean}{Per bite transmission probability from mosquitoes to humans. Default = 0.7.}
+
+\item{Beta_mh_season}{Default = 0.25.}
 
 \item{season}{Logical for controlling the effect of seasonality.}
 
@@ -110,9 +113,9 @@ model_param_list_create(YL = 364, DT = 1, NP = 21, age_per = 52,
 
 \item{vacceff_prim}{Efficacy of vaccination in reducing infection. Default = 0.3.}
 
-\item{other_foi}{Default = 0.05.}
+\item{other_foi}{Default = 0.025.}
 
-\item{other_prop_immune}{Default = 0.5.}
+\item{other_prop_immune}{Default = 0.}
 
 \item{propTransGlobal}{Proportion of transmission between all patches. Default = 0.0005.}
 
