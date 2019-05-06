@@ -50,8 +50,13 @@ Kc_mean <- DeltaMean *
 eip_mean <- user()
 
 # calculate R0 at equilibrium ?
-Beta_mh_1 <- user()
-R0_1 <- Kappa * Kappa * Mwt_mean * Beta_hm_1 * inf_per * Beta_mh_1 /
+Beta_mh_mean <- user()
+Beta_mh_season <- user()
+
+dim(Beta_mh) <- NP
+Beta_mh[] <- Beta_mh_mean * (1 + season_amp[i] * Beta_mh_season * cos(2 * pi * (step + season_phase[i]) / YL))
+
+R0_1 <- Kappa * Kappa * Mwt_mean * Beta_hm_1 * inf_per * Beta_mh_mean /
   (1 + DeltaMean * eip_mean) / DeltaMean
 
 
@@ -413,7 +418,7 @@ Wb_relinf1 <- user()
 
 R0t_1[] <- Kappa * Kappa *
   (Mwt_tot[i] + Wb_relsusc1 * Wb_relinf1 * Mwb_tot[i]) * Beta_hm_1 * inf_per *
-  Beta_mh_1 / (1 + Delta[i] * eip[i]) / Delta[i] / NTp[i]
+  Beta_mh[i] / (1 + Delta[i] * eip[i]) / Delta[i] / NTp[i]
 
 R0t_1av <- (sum(R0t_1[]) - R0t_1[NP]) / (NP - 1)
 
@@ -613,7 +618,7 @@ infectious1[] <- infectiousA[i] + infectiousB[i]
 
 
 dim(FOI1p) <- NP
-FOI1p[] <- DT * Beta_mh_1 * Kappa * (Mwt_I1[i] + Mwb_I1[i] * Wb_relinf1) / NTp[i]
+FOI1p[] <- DT * Beta_mh[i] * Kappa * (Mwt_I1[i] + Mwb_I1[i] * Wb_relinf1) / NTp[i]
 dim(FOI1Y) <- NP
 FOI1Y[] <- YL * FOI1p[i] / DT
 
@@ -633,8 +638,8 @@ propTransNN <- user()
 BG_FOI <- user()
 FOI1[1:(NP-1)] <- propTransNN * FOI1nn[i] + propTransGlobal * FOI1av +
   (1 - propTransGlobal - propTransNN) * FOI1p[i] + DT * BG_FOI / YL
-# FOI1[NP]=propTransGlobal_bigpatch*FOI1av+(1-propTransGlobal_bigpatch)*FOI1p[i]
-FOI1[NP] <- 0
+FOI1[NP] <- propTransGlobal_bigpatch * FOI1av + (1 - propTransGlobal_bigpatch) * FOI1p[i]
+# FOI1[NP] <- 0
 
 
 
@@ -946,6 +951,7 @@ output(infectious1[]) <- TRUE
 output(FOI1[]) <- TRUE
 output(FOI1p[]) <- TRUE
 output(FOI1nn[]) <- TRUE
+output(prop_Sp[]) <- TRUE
 # output(beta1) <- R0_1 / inf_per
 # output(N_eq[]) <- TRUE
 # output(eq_FOI1) <- R0_1 / lifespan # in time units of years
@@ -959,7 +965,6 @@ output(FOI1nn[]) <- TRUE
 # output(mean_age[]) <- TRUE
 # output(mean_age_inf1_nv[]) <- TRUE
 # output(overall_mean_age_inf1) <- TRUE
-# output(prop_Sp[]) <- TRUE
 # output(disease_patch[]) <- TRUE
 # output(p_age_dist1[]) <- TRUE
 
