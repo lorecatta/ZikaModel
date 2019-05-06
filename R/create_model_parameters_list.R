@@ -17,12 +17,13 @@
 #' @param Mwt_mean Mean of the lognorm distribution of the at-equilibrium number of adult female mosquitos per person, per patch, without seasonality. Default = 1.5.
 #' @param Mwt_cv Standard deviation of the lognorm distribution of the at-equilibrium number of adult female mosquitos per person, per patch, without seasonality. Default = 0.15
 #' @param eip_mean Mean Extrinsic Incubation Period (days). Default = 8.4.
-#' @param incub Intrinsic Incubation Period (days). Default = 5.
-#' @param inf_per Total duration of human infectiousness (days). Default = 5.
+#' @param incub Intrinsic Incubation Period (days). Default = 5.5.
+#' @param inf_per Total duration of human infectiousness (days). Default = 6.
 #' @param nu Inverse of virus generation time (1 / days). Virus generation time = serial interval. Default = 1 / 21.
 #' @param Kappa Mosquito biting rate. Default = 0.5.
 #' @param Beta_hm_1 Per bite transmission probability from humans to mosquitoes. Default = 0.7.
-#' @param Beta_mh_1 Per bite transmission probability from mosquitoes to humans. Default = 0.7.
+#' @param Beta_mh_mean Per bite transmission probability from mosquitoes to humans. Default = 0.7.
+#' @param Beta_mh_season Default = 0.25.
 #' @param season Logical for controlling the effect of seasonality.
 #' @param propMwtControl Proportion of adult wild type mosquitoes which are killed by control. Default = 0.
 #' @param TimeMwtControlOn Year of start of control of adult wild type mosquitoes. Default = 4.
@@ -48,8 +49,8 @@
 #' @param rho_prim Default = 1.
 #' @param phi_prim Default = 1.
 #' @param vacceff_prim Efficacy of vaccination in reducing infection. Default = 0.3.
-#' @param other_foi Default = 0.05.
-#' @param other_prop_immune Default = 0.5.
+#' @param other_foi Default = 0.025.
+#' @param other_prop_immune Default = 0.
 #' @param propTransGlobal Proportion of transmission between all patches. Default = 0.0005.
 #' @param propTransNN Proportion of transmssion with nearest-neighbor patches. Default = 0.005.
 #' @param BG_FOI Background FOI. Default = 10e-8.
@@ -74,15 +75,16 @@ model_param_list_create <- function(
   Mwt_mean = 1.5,
   Mwt_cv = 0.15,
   eip_mean = 8.4,
-  incub = 5,
-  inf_per = 5,
+  incub = 5.5,
+  inf_per = 6,
   nu = 1/21,
   Kappa = 0.5,
   Beta_hm_1 = 0.7,
-  Beta_mh_1 = 0.7,
+  Beta_mh_mean = 0.7,
+  Beta_mh_season = 0.25,
   season,
 
-  propMwtControl = 0,        # (0.33)
+  propMwtControl = 0,
   TimeMwtControlOn = 4,
   TimeMwtControlOff = 5,
 
@@ -109,8 +111,8 @@ model_param_list_create <- function(
   rho_prim = 1,
   phi_prim = 1,
   vacceff_prim = 0.3,
-  other_foi = 0.05,
-  other_prop_immune = 0.5,
+  other_foi = 0.025,
+  other_prop_immune = 0,
   propTransGlobal = 0.0005,
   propTransNN = 0.005,
   BG_FOI = 10e-8,
@@ -125,9 +127,9 @@ model_param_list_create <- function(
 
   if(season) {
 
-    Delta_season <- 1
-    Kc_season <- 1
-    eip_season <- 1
+    Delta_season <- 0.25
+    Kc_season <- 0.25
+    eip_season <- 0.25
 
   } else {
 
@@ -161,7 +163,8 @@ model_param_list_create <- function(
   mp_list$nu <- nu
   mp_list$Kappa <- Kappa
   mp_list$Beta_hm_1 <- Beta_hm_1
-  mp_list$Beta_mh_1 <- Beta_mh_1
+  mp_list$Beta_mh_mean <- Beta_mh_mean
+  mp_list$Beta_mh_season <- Beta_mh_season
   mp_list$Delta_season <- Delta_season
   mp_list$Kc_season <- Kc_season
   mp_list$eip_season <- eip_season
