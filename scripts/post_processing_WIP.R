@@ -2,7 +2,7 @@
 # define parameters -----------------------------------------------------------
 
 
-out_fig_path <- file.path("figures")
+out_fig_path <- file.path("figures/seasonality")
 
 diagno_hum <- c("Susceptibles" = "S",
                 "Infectious" = "I1",
@@ -204,6 +204,29 @@ plot_diagnostics(df_diagnostics_mos_melt,
                  "diagnostics_mosquitoes",
                  names(c(diagno_mos, diagno_mos_summary)),
                  no_pages = 2)
+
+
+# plot by patch ---------------------------------------------------------------
+
+## Proportion of Susceptibles
+
+prop_Sp_df <- as.data.frame(out$prop_Sp)
+colnames(prop_Sp_df) <- seq_len(21)
+prop_Sp_df$time <- tt
+prop_Sp_df_melt <- melt(prop_Sp_df,
+                        id.vars = "time",
+                        variable.name = "Patch")
+brks <- seq(from = 1, to = max(tt), by = 364 * 10)
+prop_Sp_plot <- ggplot(prop_Sp_df_melt, aes(x = time, y = value, colour = Patch)) +
+  geom_line(size = 0.4) +
+  scale_y_continuous(name = "Proportion of Susceptibles per patch") +
+  scale_x_continuous(name = "Years", breaks = brks, labels = round(brks / 364))
+
+save_plot(prop_Sp_plot,
+          out_fig_path,
+          "propSp",
+          wdt = 17,
+          hgt = 9)
 
 
 # plot diagnostics by age groups ----------------------------------------------
