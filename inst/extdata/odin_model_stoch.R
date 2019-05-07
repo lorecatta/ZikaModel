@@ -938,9 +938,12 @@ output(FOI1[]) <- TRUE
 output(FOI1p[]) <- TRUE
 output(FOI1nn[]) <- TRUE
 output(prop_Sp[]) <- TRUE
+output(R0t_1[]) <- TRUE
+output(eq_FOI1) <- R0_1 / lifespan # in time units of years
+output(FOI1Y[]) <- TRUE
 # output(beta1) <- R0_1 / inf_per
 # output(N_eq[]) <- TRUE
-# output(eq_FOI1) <- R0_1 / lifespan # in time units of years
+
 # output(NTnv) <- TRUE
 # output(NTv) <- TRUE
 # output(NTp[]) <- TRUE
