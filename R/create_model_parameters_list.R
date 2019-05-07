@@ -63,9 +63,9 @@
 model_param_list_create <- function(
 
   YL = 364,
-  DT = 1,
+  DT = 0.5,
   NP = 21,
-  age_per = 52,
+  age_per = 1,
   N_human = 30000000,
   Omega = 1,
   DeltaBase = 0.2,
@@ -81,19 +81,18 @@ model_param_list_create <- function(
   Kappa = 0.5,
   Beta_hm_1 = 0.7,
   Beta_mh_mean = 0.7,
-  Beta_mh_season = 0.25,
   season,
 
   propMwtControl = 0,
-  TimeMwtControlOn = 4,
-  TimeMwtControlOff = 5,
+  TimeMwtControlOn = 1.5,
+  TimeMwtControlOff = 2.5,
 
   Wb_cyto = 1,
   Wb_mat = 1,
   Wb_fM = 0.95,
   Wb_fF = 0.95,
   Wb_relsusc1 = 0.9,
-  Wb_relinf1 = 0.75,
+  Wb_relinf1 = 0.5,
   Wb_starttime = 140,
   Wb_introlevel = 0.5,
   Wb_introduration = 60,
@@ -101,23 +100,23 @@ model_param_list_create <- function(
   vacc_cu_minage = 2,
   vacc_cu_maxage = 15,
   vacc_cu_coverage = 0.7,
-  vacc_cu_time = 100,
-  vacc_child_age = 3,
-  vacc_child_coverage = 0.75,
-  vacc_child_starttime = 30,
-  vacc_child_stoptime = 30,
+  vacc_cu_time = 150,
+  vacc_child_age = 1,
+  vacc_child_coverage = 0.56,
+  vacc_child_starttime = 150,
+  vacc_child_stoptime = 150,
 
   dis_pri = 0.2,
   rho_prim = 1,
   phi_prim = 1,
-  vacceff_prim = 0.3,
+  vacceff_prim = 1,
   other_foi = 0.025,
   other_prop_immune = 0,
   propTransGlobal = 0.0005,
   propTransNN = 0.005,
-  BG_FOI = 10e-8,
+  BG_FOI = 1e-8,
   AGE_REC = 2,
-  PropDiseaseReported = 0.1
+  PropDiseaseReported = 1
 
 ){
 
@@ -127,15 +126,17 @@ model_param_list_create <- function(
 
   if(season) {
 
-    Delta_season <- 0.25
     Kc_season <- 0.25
     eip_season <- 0.25
+    Delta_season <- 0.25
+    Beta_mh_season <- 0
 
   } else {
 
     Delta_season <- 0
     Kc_season <- 0
     eip_season <- 0
+    Beta_mh_season = 0
 
   }
 
