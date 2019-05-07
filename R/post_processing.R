@@ -17,7 +17,6 @@ post_processing <- function(dat, out_pth){
                   "Recovered" = "R1",
                   "Total population" = "Ntotal",
                   "Births" = "births",
-                  "Deaths" = "deaths",
                   "Incidence of infections" = "inf_1",
                   "Cumulative infections" = "sinf1",
                   "Fraction of infected h per patch" = "Y1T",
