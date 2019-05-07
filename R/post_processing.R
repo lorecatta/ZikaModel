@@ -19,7 +19,7 @@ post_processing <- function(dat, out_pth){
                   "Births" = "births",
                   "Incidence of infections" = "inf_1",
                   "Cumulative infections" = "sinf1",
-                  "Fraction of infected h per patch" = "Y1T",
+                  "Fraction of infected per patch" = "Y1T",
                   "Fraction of infectious h per patch" = "infectious1",
                   "Incidence of cases" = "disease1",
                   "Cumulative cases" = "disease1inc")
