@@ -636,8 +636,8 @@ propTransNN <- user()
 BG_FOI <- user()
 FOI1[1:(NP-1)] <- propTransNN * FOI1nn[i] + propTransGlobal * FOI1av +
   (1 - propTransGlobal - propTransNN) * FOI1p[i] + DT * BG_FOI / YL
-FOI1[NP] <- propTransGlobal_bigpatch * FOI1av + (1 - propTransGlobal_bigpatch) * FOI1p[i]
-# FOI1[NP] <- 0
+# FOI1[NP] <- propTransGlobal_bigpatch * FOI1av + (1 - propTransGlobal_bigpatch) * FOI1p[i]
+FOI1[NP] <- 0
 
 
 
