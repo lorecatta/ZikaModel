@@ -133,9 +133,9 @@ model_param_list_create <- function(
 
   } else {
 
-    Delta_season <- 0
     Kc_season <- 0
     eip_season <- 0
+    Delta_season <- 0
     Beta_mh_season <- 0
 
   }
