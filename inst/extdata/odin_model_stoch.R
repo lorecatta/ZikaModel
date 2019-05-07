@@ -51,10 +51,6 @@ eip_mean <- user()
 
 # calculate R0 at equilibrium ?
 Beta_mh_mean <- user()
-Beta_mh_season <- user()
-
-dim(Beta_mh) <- NP
-Beta_mh[] <- Beta_mh_mean * (1 + season_amp[i] * Beta_mh_season * cos(2 * pi * (step + season_phase[i]) / YL))
 
 R0_1 <- Kappa * Kappa * Mwt_mean * Beta_hm_1 * inf_per * Beta_mh_mean /
   (1 + DeltaMean * eip_mean) / DeltaMean
@@ -74,9 +70,11 @@ pi <- user()
 Delta_season <- user()
 Kc_season <- user()
 eip_season <- user()
+Beta_mh_season <- user()
 dim(Delta) <- NP
 dim(Kc) <- NP
 dim(eip) <- NP
+dim(Beta_mh) <- NP
 
 Delta[1:(NP-1)] <- DeltaMean /
   (1 + season_amp[i] * Delta_season * cos(2 * pi * (step + season_phase[i]) / YL))
@@ -89,6 +87,9 @@ Kc[NP] <- MwtCont * Mwt_mean * Kc_mean *
 
 eip[] <- eip_mean *
   (1 - season_amp[i] * eip_season * cos(2 * pi * (step + season_phase[i]) / YL))
+
+Beta_mh[] <- Beta_mh_mean *
+  (1 + season_amp[i] * Beta_mh_season * cos(2 * pi * (step + season_phase[i]) / YL))
 
 Deltaav <- (sum(Delta[]) - Delta[NP]) / (NP - 1)
 
