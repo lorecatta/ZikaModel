@@ -17,7 +17,7 @@ death <- c(1e-10,
 
 time <- 21840 # 18200 # 50 years
 
-set.seed(389239)
+set.seed(889239)
 
 seasonal_model_run <- run_model(agec,
                                 death,
