@@ -820,9 +820,6 @@ update(S[2:na,2,1:NP]) <- trunc(0.5 +
                                   (1-vacc_noncov[i,3-j]) * age_S[i-1,3-j,k] +
                                   S[i,j,k] - O_S[i,j,k])
 
-dim(death_S) <- c(na, 2, NP)
-death_S[,,] <- O_S[i,j,k] - inf_1[i,j,k] - age_S[i,j,k]
-
 dim(O_I1) <- c(na, 2, NP)
 nu <- user()
 dim(O_I1_prob) <- na
@@ -850,9 +847,6 @@ update(I1[,,]) <- trunc(0.5 +
                           (1-vacc_noncov[i,3-j]) * age_I1[i,3-j,k] +
                           inf_1[i,j,k] + I1[i,j,k] - O_I1[i,j,k])
 
-dim(death_I1) <- c(na, 2, NP)
-death_I1[,,] <- O_I1[i,j,k] - recov1[i,j,k] - age_I1[i+1,j,k]
-
 dim(O_R1) <- c(na, 2, NP)
 dim(O_R1_prob) <- na
 O_R1_prob[] <- max(min(agert[i] + deathrt[i], 1), 0)
@@ -870,12 +864,6 @@ update(R1[,,]) <- trunc(0.5 +
                           vacc_noncov[i,j] * age_R1[i,j,k] +
                           (1-vacc_noncov[i,3-j]) * age_R1[i,3-j,k] +
                           recov1[i,j,k] + R1[i,j,k] - O_R1[i,j,k])
-
-dim(death_R1) <- c(na, 2, NP)
-death_R1[,,] <- O_R1[i,j,k] - age_R1[i+1,j,k]
-
-dim(deaths) <- c(na, 2, NP)
-deaths[,,] <- death_S[i,j,k] + death_I1[i,j,k] + death_R1[i,j,k]
 
 dim(sinf1) <- c(na, 2, NP)
 initial(sinf1[,,]) <- 0
@@ -928,7 +916,6 @@ p_age_dist1[] <- p_age_inf1[i] / (1e-20 + sum(p_age_inf1[]))
 output(agert[]) <- TRUE
 output(deathrt[]) <- TRUE
 output(births[]) <- TRUE
-output(deaths[,,]) <- TRUE
 output(Ntotal[,,]) <- TRUE
 output(FOI1av) <- TRUE
 output(R0t_1av) <- TRUE
