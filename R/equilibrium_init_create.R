@@ -123,7 +123,7 @@ equilibrium_init_create <- function(agec, death, nn_links, model_parameter_list)
   # Kc - carrying capacity
   # eip - extrinsic incubation period
 
-  season_amp <- season_phase <- corr_season <- Wb_introtime <- c()
+  season_amp <- season_phase <- Wb_introtime <- c()
 
   season_phase[1:8] <- 0.5 * YL
   season_phase[9:12] <- 0.25 * YL
@@ -134,11 +134,6 @@ equilibrium_init_create <- function(agec, death, nn_links, model_parameter_list)
   season_amp[13:20] <- 1
   season_amp[9:12] <- 0.33
   season_amp[21] <- 0.33
-
-  corr_season[1:8] <- 1 # 1.22
-  corr_season[13:20] <- 1 # 1.22
-  corr_season[9:12] <- 1
-  corr_season[21] <- 1
 
   Wb_starttime <- mpl$Wb_starttime
 
@@ -215,7 +210,6 @@ equilibrium_init_create <- function(agec, death, nn_links, model_parameter_list)
               init_Mwt_base = init_Mwt_base,
               season_phase = season_phase,
               season_amp = season_amp,
-              corr_season = corr_season,
               Wb_introtime = Wb_introtime,
               vacc_cu_rndtime = vacc_cu_rndtime,
               dis1 = dis1,
