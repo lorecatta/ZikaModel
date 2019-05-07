@@ -67,10 +67,8 @@ R0_1 <- Kappa * Kappa * Mwt_mean * Beta_hm_1 * inf_per * Beta_mh_mean /
 
 season_phase[] <- user()
 season_amp[] <- user()
-corr_season[] <- user()
 dim(season_phase) <- NP
 dim(season_amp) <- NP
-dim(corr_season) <- NP
 Mwt_mean <- user()
 pi <- user()
 Delta_season <- user()
