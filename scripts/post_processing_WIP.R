@@ -228,6 +228,86 @@ save_plot(prop_Sp_plot,
           wdt = 17,
           hgt = 9)
 
+## Proportion of Infected
+
+prop_Sp_df <- as.data.frame(out$Y1T)
+colnames(prop_Sp_df) <- seq_len(21)
+prop_Sp_df$time <- tt
+prop_Sp_df_melt <- melt(prop_Sp_df,
+                        id.vars = "time",
+                        variable.name = "Patch")
+brks <- seq(from = 1, to = max(tt), by = 364 * 10)
+prop_Sp_plot <- ggplot(prop_Sp_df_melt, aes(x = time, y = value, colour = Patch)) +
+  geom_line(size = 0.4) +
+  scale_y_continuous(name = "Proportion of Infected per patch") +
+  scale_x_continuous(name = "Years", breaks = brks, labels = round(brks / 364))
+
+save_plot(prop_Sp_plot,
+          out_fig_path,
+          "propInfected",
+          wdt = 17,
+          hgt = 9)
+
+## R0t_1
+
+prop_Sp_df <- as.data.frame(out$R0t_1)
+colnames(prop_Sp_df) <- seq_len(21)
+prop_Sp_df$time <- tt
+prop_Sp_df_melt <- melt(prop_Sp_df,
+                        id.vars = "time",
+                        variable.name = "Patch")
+brks <- seq(from = 1, to = max(tt), by = 364 * 10)
+prop_Sp_plot <- ggplot(prop_Sp_df_melt, aes(x = time, y = value, colour = Patch)) +
+  geom_line(size = 0.4) +
+  scale_y_continuous(name = "R0t_1") +
+  scale_x_continuous(name = "Years", breaks = brks, labels = round(brks / 364))
+
+save_plot(prop_Sp_plot,
+          out_fig_path,
+          "R0t_1",
+          wdt = 17,
+          hgt = 9)
+
+## Mwt_tot
+
+prop_Sp_df <- as.data.frame(out$Mwt_tot)
+colnames(prop_Sp_df) <- seq_len(21)
+prop_Sp_df$time <- tt
+prop_Sp_df_melt <- melt(prop_Sp_df,
+                        id.vars = "time",
+                        variable.name = "Patch")
+brks <- seq(from = 1, to = max(tt), by = 364 * 10)
+prop_Sp_plot <- ggplot(prop_Sp_df_melt, aes(x = time, y = value, colour = Patch)) +
+  geom_line(size = 0.4) +
+  scale_y_continuous(name = "Mwt_tot") +
+  scale_x_continuous(name = "Years", breaks = brks, labels = round(brks / 364))
+
+save_plot(prop_Sp_plot,
+          out_fig_path,
+          "Mwt_tot",
+          wdt = 17,
+          hgt = 9)
+
+
+## M_tot
+
+prop_Sp_df <- as.data.frame(out$M_tot)
+colnames(prop_Sp_df) <- seq_len(21)
+prop_Sp_df$time <- tt
+prop_Sp_df_melt <- melt(prop_Sp_df,
+                        id.vars = "time",
+                        variable.name = "Patch")
+brks <- seq(from = 1, to = max(tt), by = 364 * 10)
+prop_Sp_plot <- ggplot(prop_Sp_df_melt, aes(x = time, y = value, colour = Patch)) +
+  geom_line(size = 0.4) +
+  scale_y_continuous(name = "M_tot") +
+  scale_x_continuous(name = "Years", breaks = brks, labels = round(brks / 364))
+
+save_plot(prop_Sp_plot,
+          out_fig_path,
+          "M_tot",
+          wdt = 17,
+          hgt = 9)
 
 # plot diagnostics by age groups ----------------------------------------------
 
