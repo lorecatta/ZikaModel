@@ -116,9 +116,7 @@ model_param_list_create <- function(
   propTransNN = 0.005,
   BG_FOI = 1e-8,
   AGE_REC = 2,
-  PropDiseaseReported = 1
-
-){
+  PropDiseaseReported = 1){
 
   # Scaling factors (between 0 and 1) for effect of seasonality.
   # 1 = maximum effect of seasonality.
