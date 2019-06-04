@@ -4,3 +4,4 @@
 .Ruserdata
 *.rds
 *.png
+/figures
