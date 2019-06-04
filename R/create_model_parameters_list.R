@@ -22,8 +22,7 @@
 #' @param nu Inverse of virus generation time (1 / days). Virus generation time = serial interval. Default = 1 / 21.
 #' @param Kappa Mosquito biting rate. Default = 0.5.
 #' @param Beta_hm_1 Per bite transmission probability from humans to mosquitoes. Default = 0.7.
-#' @param Beta_mh_mean Per bite transmission probability from mosquitoes to humans. Default = 0.7.
-#' @param Beta_mh_season Default = 0.25.
+#' @param Beta_mh_1 Per bite transmission probability from mosquitoes to humans. Default = 0.7.
 #' @param season Logical for controlling the effect of seasonality.
 #' @param propMwtControl Proportion of adult wild type mosquitoes which are killed by control. Default = 0.
 #' @param TimeMwtControlOn Year of start of control of adult wild type mosquitoes. Default = 4.
@@ -80,7 +79,7 @@ model_param_list_create <- function(
   nu = 1/21,
   Kappa = 0.5,
   Beta_hm_1 = 0.7,
-  Beta_mh_mean = 0.7,
+  Beta_mh_1 = 0.7,
   season,
 
   propMwtControl = 0,
@@ -126,15 +125,13 @@ model_param_list_create <- function(
 
     Kc_season <- 0.25
     eip_season <- 0.25
-    Delta_season <- 0
-    Beta_mh_season <- 0.25
+    Delta_season <- 0.25
 
   } else {
 
     Kc_season <- 0
     eip_season <- 0
     Delta_season <- 0
-    Beta_mh_season <- 0
 
   }
 
@@ -162,8 +159,7 @@ model_param_list_create <- function(
   mp_list$nu <- nu
   mp_list$Kappa <- Kappa
   mp_list$Beta_hm_1 <- Beta_hm_1
-  mp_list$Beta_mh_mean <- Beta_mh_mean
-  mp_list$Beta_mh_season <- Beta_mh_season
+  mp_list$Beta_mh_1 <- Beta_mh_1
   mp_list$Delta_season <- Delta_season
   mp_list$Kc_season <- Kc_season
   mp_list$eip_season <- eip_season
