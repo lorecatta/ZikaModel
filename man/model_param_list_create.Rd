@@ -8,7 +8,7 @@ model_param_list_create(YL = 364, DT = 0.5, NP = 21, age_per = 1,
   N_human = 3e+07, Omega = 1, DeltaBase = 0.2, Sigma = 0.025,
   Epsilon = 1/19, Rm = 2.69, Mwt_mean = 1.5, Mwt_cv = 0.15,
   eip_mean = 8.4, incub = 5.5, inf_per = 6, nu = 1/21,
-  Kappa = 0.5, Beta_hm_1 = 0.7, Beta_mh_mean = 0.7, season,
+  Kappa = 0.5, Beta_hm_1 = 0.7, Beta_mh_1 = 0.7, season,
   propMwtControl = 0, TimeMwtControlOn = 1.5,
   TimeMwtControlOff = 2.5, Wb_cyto = 1, Wb_mat = 1, Wb_fM = 0.95,
   Wb_fF = 0.95, Wb_relsusc1 = 0.9, Wb_relinf1 = 0.5,
@@ -58,7 +58,7 @@ model_param_list_create(YL = 364, DT = 0.5, NP = 21, age_per = 1,
 
 \item{Beta_hm_1}{Per bite transmission probability from humans to mosquitoes. Default = 0.7.}
 
-\item{Beta_mh_mean}{Per bite transmission probability from mosquitoes to humans. Default = 0.7.}
+\item{Beta_mh_1}{Per bite transmission probability from mosquitoes to humans. Default = 0.7.}
 
 \item{season}{Logical for controlling the effect of seasonality.}
 
@@ -123,8 +123,6 @@ model_param_list_create(YL = 364, DT = 0.5, NP = 21, age_per = 1,
 \item{AGE_REC}{Default = 2.}
 
 \item{PropDiseaseReported}{Reporting rate of symptomatic cases. Default = 0.1.}
-
-\item{Beta_mh_season}{Default = 0.25.}
 }
 \description{
 \code{model_param_list_create} creates a list of user-defined
