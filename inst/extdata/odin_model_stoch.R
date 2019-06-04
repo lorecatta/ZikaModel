@@ -50,9 +50,10 @@ Kc_mean <- DeltaMean *
 eip_mean <- user()
 
 # calculate R0 at equilibrium ?
-Beta_mh_mean <- user()
+Beta_mh_1 <- user()
+Beta_hm_1 <- user()
 
-R0_1 <- Kappa * Kappa * Mwt_mean * Beta_hm_1 * inf_per * Beta_mh_mean /
+R0_1 <- Kappa * Kappa * Mwt_mean * Beta_hm_1 * inf_per * Beta_mh_1 /
   (1 + DeltaMean * eip_mean) / DeltaMean
 
 
@@ -70,11 +71,9 @@ pi <- user()
 Delta_season <- user()
 Kc_season <- user()
 eip_season <- user()
-Beta_mh_season <- user()
 dim(Delta) <- NP
 dim(Kc) <- NP
 dim(eip) <- NP
-dim(Beta_mh) <- NP
 
 Delta[1:(NP-1)] <- DeltaMean /
   (1 + season_amp[i] * Delta_season * cos(2 * pi * (step + season_phase[i]) / YL))
@@ -87,9 +86,6 @@ Kc[NP] <- MwtCont * Mwt_mean * Kc_mean *
 
 eip[] <- eip_mean *
   (1 - season_amp[i] * eip_season * cos(2 * pi * (step + season_phase[i]) / YL))
-
-Beta_mh[] <- Beta_mh_mean *
-  (1 + season_amp[i] * Beta_mh_season * cos(2 * pi * (step + season_phase[i]) / YL))
 
 Deltaav <- (sum(Delta[]) - Delta[NP]) / (NP - 1)
 
@@ -104,7 +100,6 @@ Wb_introlevel <- user()
 Wb_introduration <- user()
 Wb_fM <- user()
 Kappa <- user()
-Beta_hm_1 <- user()
 inf_per <- user()
 lifespan <- user()
 
@@ -417,7 +412,7 @@ Wb_relinf1 <- user()
 
 R0t_1[] <- Kappa * Kappa *
   (Mwt_tot[i] + Wb_relsusc1 * Wb_relinf1 * Mwb_tot[i]) * Beta_hm_1 * inf_per *
-  Beta_mh[i] / (1 + Delta[i] * eip[i]) / Delta[i] / NTp[i]
+  Beta_mh_1 / (1 + Delta[i] * eip[i]) / Delta[i] / NTp[i]
 
 R0t_1av <- (sum(R0t_1[]) - R0t_1[NP]) / (NP - 1)
 
@@ -617,7 +612,7 @@ infectious1[] <- infectiousA[i] + infectiousB[i]
 
 
 dim(FOI1p) <- NP
-FOI1p[] <- DT * Beta_mh[i] * Kappa * (Mwt_I1[i] + Mwb_I1[i] * Wb_relinf1) / NTp[i]
+FOI1p[] <- DT * Beta_mh_1 * Kappa * (Mwt_I1[i] + Mwb_I1[i] * Wb_relinf1) / NTp[i]
 dim(FOI1Y) <- NP
 FOI1Y[] <- YL * FOI1p[i] / DT
 
