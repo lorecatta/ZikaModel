@@ -1,6 +1,8 @@
 
 devtools::load_all()
 
+out_dir <- file.path("figures", "seasonality")
+
 agec <- c(1, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10)
 
 death <- c(1e-10,
@@ -26,9 +28,9 @@ seasonal_model_run <- run_model(agec,
                                 season = TRUE)
 
 save_plot(seasonal_model_run$plot,
-          "figures/seasonality",
+          out_dir,
           "compartments_human",
           wdt = 17,
           hgt = 12)
 
-post_processing(seasonal_model_run$dat, "figures/seasonality")
+post_processing(seasonal_model_run$dat, out_dir)
