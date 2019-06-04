@@ -15,7 +15,8 @@ LazyData: true
 Imports: 
     reshape2,
     ggplot2,
-    ggforce
-Remotes:
-    richfitz/odin,
+    ggforce,
+    odin
+Remotes: 
+    mrc-ide/dde
 RoxygenNote: 6.1.1
