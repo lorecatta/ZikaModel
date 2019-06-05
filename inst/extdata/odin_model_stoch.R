@@ -143,6 +143,7 @@ vacc_noncov[1:vnc_row, 1] <- (if ((step >= YL*vacc_child_starttime) &&
 vacc_noncov[1:vnc_row, 2] <- 1
 
 
+
 # -----------------------------------------------------------------------------
 #
 # States of wild type mosquitoes
@@ -194,7 +195,6 @@ Lwt_birth_lambda[] <- DT *
   (Gamma * Mwt_tot[i] * (Mwt_tot[i] + (1 - Wb_cyto) * Mwb_tot[i]) /
      (Mwt_tot[i] + Mwb_tot[i]) + Wb_fF * (1 - Wb_mat) * Mwb_tot[i])
 Lwt_birth[] <- rpois(Lwt_birth_lambda[i])
-# Lwt_birth[1..NP]=poisson(DT*(Gamma*Mwt_tot[i]*(Mwt_tot[i]+(1-Wb_cyto)*Mwb_tot[i])/(Mwt_tot[i]+Mwb_tot[i])+Wb_fF*(1-Wb_mat)*Mwb_tot[i]),seed+i)
 
 dim(L_deathrt) <- NP
 L_deathrt[] <- DT * Sigma * ((1 + ((Lwt[i] + Lwb[i]) / (Kc[i] * NTp[i])) ^ Omega))
@@ -206,13 +206,11 @@ dim(O_Lwt) <- NP
 dim(O_Lwt_prob) <- NP
 O_Lwt_prob[] <- max(min(DT * Epsilon + L_dr[i], 1), 0)
 O_Lwt[] <- rbinom(Lwt[i], O_Lwt_prob[i])
-# O_Lwt[1..NP]=binomial(DT*Epsilon+L_dr[i],Lwt[i],seed+i)
 
 dim(Lwt_mature) <- NP
 dim(Lwt_mature_prob) <- NP
 Lwt_mature_prob[] <- max(min(DT * Epsilon / (DT * Epsilon + L_dr[i]), 1), 0)
 Lwt_mature[] <- rbinom(O_Lwt[i], Lwt_mature_prob[i])
-# Lwt_mature[1..NP]=binomial(DT*Epsilon/(DT*Epsilon+L_dr[i]),O_Lwt[i],seed+i)
 
 update(Lwt[]) <- Lwt_birth[i] + Lwt[i] - O_Lwt[i]
 
@@ -230,13 +228,11 @@ dim(O_Mwt_S) <- NP
 dim(O_Mwt_S_prob) <- NP
 O_Mwt_S_prob[] <- max(min(DT * Delta[i] + Mwt_FOI1[i], 1), 0)
 O_Mwt_S[] <- rbinom(Mwt_S[i], O_Mwt_S_prob[i])
-# O_Mwt_S[1..NP]=binomial(DT*Delta[i]+Mwt_FOI1[i],Mwt_S[i],seed+i)
 
 dim(Mwt_inf1) <- NP
 dim(Mwt_inf1_prob) <- NP
 Mwt_inf1_prob[] <- max(min(Mwt_FOI1[i] / (DT * Delta[i] + Mwt_FOI1[i]), 1), 0)
 Mwt_inf1[] <- rbinom(O_Mwt_S[i], Mwt_inf1_prob[i])
-# Mwt_inf1[1..NP]=binomial(Mwt_FOI1[i]/(DT*Delta[i]+Mwt_FOI1[i]),O_Mwt_S[i],seed+i)
 
 update(Mwt_S[]) <- Lwt_mature[i] + Mwt_S[i] - O_Mwt_S[i]
 
@@ -244,13 +240,11 @@ dim(O_Mwt_E1) <- NP
 dim(O_Mwt_E1_prob) <- NP
 O_Mwt_E1_prob[] <- max(min(DT * (Delta[i] + 2 / eip[i]), 1), 0)
 O_Mwt_E1[] <- rbinom(Mwt_E1[i], O_Mwt_E1_prob[i])
-# O_Mwt_E1[1..NP]=binomial(DT*(Delta[i]+2/eip[i]),Mwt_E1[i],seed+i)
 
 dim(Mwt_E1_incub) <- NP
 dim(Mwt_E1_incub_prob) <- NP
 Mwt_E1_incub_prob[] <- max(min(1 / (Delta[i] * eip[i] / 2 + 1), 1), 0)
 Mwt_E1_incub[] <- rbinom(O_Mwt_E1[i], Mwt_E1_incub_prob[i])
-# Mwt_E1_incub[1..NP]=binomial(1/(Delta[i]*eip[i]/2+1),O_Mwt_E1[i],seed+i)
 
 update(Mwt_E1[]) <- Mwt_inf1[i] + Mwt_E1[i] - O_Mwt_E1[i]
 
@@ -258,13 +252,11 @@ dim(O_Mwt_E2) <- NP
 dim(O_Mwt_E2_prob) <- NP
 O_Mwt_E2_prob[] <- max(min(DT * (Delta[i] + 2 / eip[i]), 1), 0)
 O_Mwt_E2[] <- rbinom(Mwt_E2[i], O_Mwt_E2_prob[i])
-# O_Mwt_E2[1..NP]=binomial(DT*(Delta[i]+2/eip[i]),Mwt_E2[i],seed+i)
 
 dim(Mwt_E2_incub) <- NP
 dim(Mwt_E2_incub_prob) <- NP
 Mwt_E2_incub_prob[] <- max(min(1 / (Delta[i] * eip[i] / 2 + 1), 1), 0)
 Mwt_E2_incub[] <- rbinom(O_Mwt_E2[i], Mwt_E2_incub_prob[i])
-# Mwt_E2_incub[1..NP]=binomial(1/(Delta[i]*eip[i]/2+1),O_Mwt_E2[i],seed+i)
 
 update(Mwt_E2[]) <- Mwt_E1_incub[i] + Mwt_E2[i] - O_Mwt_E2[i]
 
@@ -274,7 +266,6 @@ O_Mwt_I1_prob[] <- max(min(DT * Delta[i], 1), 0)
 O_Mwt_I1[] <- rbinom(Mwt_I1[i], O_Mwt_I1_prob[i])
 
 update(Mwt_I1[]) <- Mwt_E2_incub[i] + Mwt_I1[i] - O_Mwt_I1[i]
-# next Mwt_I1[1..NP]=Mwt_E2_incub[i]+Mwt_I1[i]-binomial(DT*Delta[i],Mwt_I1[i],seed+i)
 
 dim(Mwt_propinf) <- NP
 Mwt_propinf[] <- (Mwt_E1[i] + Mwt_E2[i] + Mwt_I1[i]) / (Mwt_tot[i] + 1e-10)
@@ -314,19 +305,16 @@ dim(Lwb_birth) <- NP
 dim(Lwb_birth_lambda) <- NP
 Lwb_birth_lambda[] <- DT * Gamma * Wb_fF * Wb_mat * Mwb_tot[i]
 Lwb_birth[] <- rpois(Lwb_birth_lambda[i])
-# Lwb_birth[1..NP]=poisson(DT*Gamma*Wb_fF*Wb_mat*Mwb_tot[i],seed+i)
 
 dim(O_Lwb) <- NP
 dim(O_Lwb_prob) <- NP
 O_Lwb_prob[] <- max(min(DT * Epsilon + L_dr[i], 1), 0)
 O_Lwb[] <- rbinom(Lwb[i], O_Lwb_prob[i])
-# O_Lwb[1..NP]=binomial(DT*Epsilon+L_dr[i],Lwb[i],seed+i)
 
 dim(Lwb_mature) <- NP
 dim(Lwb_mature_prob) <- NP
 Lwb_mature_prob[] <- max(min(DT * Epsilon / (DT * Epsilon + L_dr[i]), 1), 0)
 Lwb_mature[] <- rbinom(O_Lwb[i], Lwb_mature_prob[i])
-# Lwb_mature[1..NP]=binomial(DT*Epsilon/(DT*Epsilon+L_dr[i]),O_Lwb[i],seed+i)
 
 update(Lwb[]) <- Lwb_birth[i] + Lwb[i] - O_Lwb[i]
 
@@ -338,19 +326,16 @@ dim(O_Mwb_S) <- NP
 dim(O_Mwb_S_prob) <- NP
 O_Mwb_S_prob[] <- max(min(DT * Delta_wb[i] + Mwb_FOI1[i], 1), 0)
 O_Mwb_S[] <- rbinom(Mwb_S[i], O_Mwb_S_prob[i])
-# O_Mwb_S[1..NP]=binomial(DT*Delta_wb[i]+Mwb_FOI1[i],Mwb_S[i],seed+i)
 
 dim(Mwb_inf1) <- NP
 dim(Mwb_inf1_prob) <- NP
 Mwb_inf1_prob[] <- max(min(Mwb_FOI1[i] / (DT * Delta_wb[i] + Mwb_FOI1[i]), 1), 0)
 Mwb_inf1[] <- rbinom(O_Mwb_S[i], Mwb_inf1_prob[i])
-# Mwb_inf1[1..NP]=binomial(Mwb_FOI1[i]/(DT*Delta_wb[i]+Mwb_FOI1[i]),O_Mwb_S[i],seed+i)
 
 dim(Mwb_intro) <- NP
 Mwb_intro[] <- if ((step >= Wb_introtime[i] * YL) &&
                    (step < Wb_introtime[i] * YL + Wb_introduration))
   rpois(Wb_introrate[i]) else 0
-# Mwb_intro[1..NP]=if((TIME>=Wb_introtime[i]*YL) and(TIME<Wb_introtime[i]*YL+Wb_introduration)) then poisson(Wb_introrate[i]) else 0
 
 update(Mwb_S[]) <- Lwb_mature[i] + Mwb_intro[i] + Mwb_S[i] - O_Mwb_S[i]
 
@@ -358,13 +343,11 @@ dim(O_Mwb_E1) <- NP
 dim(O_Mwb_E1_prob) <- NP
 O_Mwb_E1_prob[] <- max(min(DT * (Delta_wb[i] + 1 / eip[i]), 1), 0)
 O_Mwb_E1[] <- rbinom(Mwb_E1[i], O_Mwb_E1_prob[i])
-# O_Mwb_E1[1..NP]=binomial(DT*(Delta_wb[i]+1/eip[i]),Mwb_E1[i],seed+i)
 
 dim(Mwb_E1_incub) <- NP
 dim(Mwb_E1_incub_prob) <- NP
 Mwb_E1_incub_prob[] <- max(min(1 / (Delta_wb[i] * eip[i] + 1), 1), 0)
 Mwb_E1_incub[] <- rbinom(O_Mwb_E1[i], Mwb_E1_incub_prob[i])
-# Mwb_E1_incub[1..NP]=binomial(1/(Delta_wb[i]*eip[i]+1),O_Mwb_E1[i],seed+i)
 
 update(Mwb_E1[]) <- Mwb_inf1[i] + Mwb_E1[i] - O_Mwb_E1[i]
 
@@ -372,13 +355,11 @@ dim(O_Mwb_E2) <- NP
 dim(O_Mwb_E2_prob) <- NP
 O_Mwb_E2_prob[] <- max(min(DT * (Delta_wb[i] + 2 / eip[i]), 1), 0)
 O_Mwb_E2[] <- rbinom(Mwb_E2[i], O_Mwb_E2_prob[i])
-# O_Mwb_E2[1..NP]=binomial(DT*(Delta_wb[i]+2/eip[i]),Mwb_E2[i],seed+i)
 
 dim(Mwb_E2_incub) <- NP
 dim(Mwb_E2_incub_prob) <- NP
 Mwb_E2_incub_prob[] <- max(min(1 / (Delta_wb[i] * eip[i] / 2 + 1), 1), 0)
 Mwb_E2_incub[] <- rbinom(O_Mwb_E2[i], Mwb_E2_incub_prob[i])
-# Mwb_E2_incub[1..NP]=binomial(1/(Delta_wb[i]*eip[i]/2+1),O_Mwb_E2[i],seed+i)
 
 update(Mwb_E2[]) <- Mwb_E1_incub[i] + Mwb_E2[i] - O_Mwb_E2[i]
 
@@ -388,7 +369,6 @@ O_Mwb_I1_prob[] <- max(min(DT * Delta_wb[i], 1), 0)
 O_Mwb_I1[] <- rbinom(Mwb_I1[i], O_Mwb_I1_prob[i])
 
 update(Mwb_I1[]) <- Mwb_E2_incub[i] + Mwb_I1[i] - O_Mwb_I1[i]
-# next Mwb_I1[1..NP]=Mwb_E2_incub[i]+Mwb_I1[i]-binomial(DT*Delta_wb[i],Mwb_I1[i],seed+i)
 
 dim(Mwb_propinf) <- NP
 Mwb_propinf[] <- (Mwb_E1[i] + Mwb_E2[i] + Mwb_I1[i]) / (Mwb_tot[i] + 1e-10)
@@ -557,6 +537,7 @@ Y1T_sum[2:na,1:NP] <- Y1T_sum[i-1,j] + Y1[i,1,j] + Y1[i,2,j]
 
 dim(Y1T) <- NP
 Y1T[] <- Y1T_sum[na,i] / NTp[i]
+
 
 
 # -----------------------------------------------------------------------------
@@ -776,8 +757,8 @@ agert[] <- agerts / agec[i] # ageing rate per age group
 Nb[] <- user()
 dim(Nb) <- NP
 dim(births) <- NP
-births[] <- rpois(DT * Nb[i] / YL)
-# births[1..NP]=poisson(DT*Nb[i]/YL,seed+i)
+births_lambda[] <- DT * Nb[i] / YL
+births[] <- rpois(births_lambda)
 
 dim(O_S) <- c(na, 2, NP)
 deathrt[] <- user()
@@ -787,14 +768,12 @@ dim(rho1) <- 2
 dim(O_S_prob) <- c(na, 2, NP)
 O_S_prob[,,] <- max(min(rho1[j] * FOI1[k] + agert[i] + deathrt[i], 1), 0)
 O_S[,,] <- rbinom(S[i,j,k], O_S_prob[i,j,k])
-# O_S[1..NA,1..2,1..NP]=binomial(rho1[j]*FOI1[k]+agert[i]+deathrt[i],S[i,j,k],seed+(i*2+j-1)*NP+k)
 
 dim(inf_1) <- c(na, 2, NP)
 dim(inf_1_prob) <- c(na, 2, NP)
 inf_1_prob[,,] <- max(min(rho1[j] * FOI1[k] / (rho1[j] * FOI1[k] +
                                                  agert[i] + deathrt[i]), 1), 0)
 inf_1[,,] <- rbinom(O_S[i,j,k], inf_1_prob[i,j,k])
-# inf_1[1..NA,1..2,1..NP]=binomial(rho1[j]*FOI1[k]/(rho1[j]*FOI1[k]+agert[i]+deathrt[i]),O_S[i,j,k],seed+(i*2+j-1)*NP+k)
 
 dim(age_S) <- c(na, 2, NP)
 dim(age_S_trials) <- c(na, 2, NP)
@@ -802,7 +781,6 @@ dim(age_S_prob) <- na
 age_S_trials[,,] <- O_S[i,j,k] - inf_1[i,j,k]
 age_S_prob[] <- max(min(agert[i] / (agert[i] + deathrt[i]), 1), 0)
 age_S[,,] <- rbinom(age_S_trials[i,j,k], age_S_prob[i])
-# age_S[1..NA,1..2,1..NP]=binomial(agert[i]/(agert[i]+deathrt[i]),O_S[i,j,k]-inf_1[i,j,k],seed+(i*2+j-1)*NP+k)
 
 update(S[1,1,1:NP]) <- trunc(0.5 + births[k] + S[i,j,k] - O_S[i,j,k])
 update(S[2:na,1,1:NP]) <- trunc(0.5 +
@@ -821,13 +799,11 @@ nu <- user()
 dim(O_I1_prob) <- na
 O_I1_prob[] <- max(min(nu + agert[i] + deathrt[i], 1), 0)
 O_I1[,,] <- rbinom(I1[i,j,k], O_I1_prob[i])
-# O_I1[1..NA,1..2,1..NP]=binomial(nu+agert[i]+deathrt[i],I1[i,j,k],seed+(i*2+j-1)*NP+k)
 
 dim(recov1) <- c(na, 2, NP)
 dim(recov1_prob) <- na
 recov1_prob[] <- max(min(nu / (nu + agert[i] + deathrt[i]), 1), 0)
 recov1[,,] <- rbinom(O_I1[i,j,k], recov1_prob[i])
-# recov1[1..NA,1..2,1..NP]=binomial(nu/(nu+agert[i]+deathrt[i]),O_I1[i,j,k],seed+(i*2+j-1)*NP+k)
 
 dim(age_I1) <- c(vnc_row, 2, NP)
 dim(age_I1_prob) <- na
@@ -835,31 +811,28 @@ dim(age_I1_trials) <- c(na, 2, NP)
 age_I1_trials[,,] <- O_I1[i,j,k] - recov1[i,j,k]
 age_I1_prob[] <- max(min(agert[i] / (agert[i] + deathrt[i]), 1), 0)
 age_I1[2:vnc_row,1:2,1:NP] <- rbinom(age_I1_trials[i,j,k], age_I1_prob[i])
-# age_I1[1..NA,1..2,1..NP]=binomial(agert[i]/(agert[i]+deathrt[i]),O_I1[i,j,k]-recov1[i,j,k],seed+(i*2+j-1)*NP+k)
 age_I1[1,1:2,1:NP] <- 0
 
-update(I1[,,]) <- trunc(0.5 +
-                          vacc_noncov[i,j] * age_I1[i,j,k] +
-                          (1-vacc_noncov[i,3-j]) * age_I1[i,3-j,k] +
-                          inf_1[i,j,k] + I1[i,j,k] - O_I1[i,j,k])
+update(I1[1:na,1:2,1:NP]) <- trunc(0.5 +
+                                     vacc_noncov[i,j] * age_I1[i,j,k] +
+                                     (1-vacc_noncov[i,3-j]) * age_I1[i,3-j,k] +
+                                     inf_1[i,j,k] + I1[i,j,k] - O_I1[i,j,k])
 
 dim(O_R1) <- c(na, 2, NP)
 dim(O_R1_prob) <- na
 O_R1_prob[] <- max(min(agert[i] + deathrt[i], 1), 0)
 O_R1[,,] <- rbinom(R1[i,j,k], O_R1_prob[i])
-# O_R1[1..NA,1..2,1..NP]=binomial(agert[i]+deathrt[i],R1[i,j,k],seed+(i*2+j-1)*NP+k)
 
 dim(age_R1) <- c(vnc_row, 2, NP)
 dim(age_R1_prob) <- na
 age_R1_prob[] <- max(min(agert[i] / (agert[i] + deathrt[i]), 1), 0)
-age_R1[2:vnc_row,,] <- rbinom(O_R1[i,j,k], age_R1_prob[i])
-# age_R1[1..NA,1..2,1..NP]=binomial(agert[i]/(agert[i]+deathrt[i]),O_R1[i,j,k],seed+(i*2+j-1)*NP+k)
+age_R1[2:vnc_row,1:2,1:NP] <- rbinom(O_R1[i,j,k], age_R1_prob[i])
 age_R1[1,1:2,1:NP] <- 0
 
-update(R1[,,]) <- trunc(0.5 +
-                          vacc_noncov[i,j] * age_R1[i,j,k] +
-                          (1-vacc_noncov[i,3-j]) * age_R1[i,3-j,k] +
-                          recov1[i,j,k] + R1[i,j,k] - O_R1[i,j,k])
+update(R1[1:na,1:2,1:NP]) <- trunc(0.5 +
+                                     vacc_noncov[i,j] * age_R1[i,j,k] +
+                                     (1-vacc_noncov[i,3-j]) * age_R1[i,3-j,k] +
+                                     recov1[i,j,k] + R1[i,j,k] - O_R1[i,j,k])
 
 dim(sinf1) <- c(na, 2, NP)
 initial(sinf1[,,]) <- 0
@@ -938,6 +911,7 @@ output(eq_FOI1) <- R0_1 / lifespan # in time units of years
 output(FOI1Y[]) <- TRUE
 # output(beta1) <- R0_1 / inf_per
 # output(N_eq[]) <- TRUE
+output(O_S_prob[,,]) <- TRUE
 
 # output(NTnv) <- TRUE
 # output(NTv) <- TRUE
