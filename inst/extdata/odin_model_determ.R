@@ -757,8 +757,9 @@ agert[] <- agerts / agec[i] # ageing rate per age group
 Nb[] <- user()
 dim(Nb) <- NP
 dim(births) <- NP
+dim(births_lambda) <- NP
 births_lambda[] <- DT * Nb[i] / YL
-births[] <- births_lambda
+births[] <- births_lambda[i]
 
 dim(O_S) <- c(na, 2, NP)
 deathrt[] <- user()
