@@ -1,6 +1,8 @@
 
 devtools::load_all()
 
+out_dir <- file.path("figures", "deterministic")
+
 agec <- c(1, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10)
 
 death <- c(1e-10,
@@ -17,17 +19,15 @@ death <- c(1e-10,
 
 time <- 21840 # 18200 # 50 years
 
-set.seed(1)
-
 model_run <- run_model(agec,
                        death,
                        nn_links,
                        time = time)
 
 save_plot(model_run$plot,
-          "figures",
+          out_dir,
           "compartments_human",
           wdt = 17,
           hgt = 12)
 
-post_processing(model_run$dat, "figures")
+post_processing(model_run$dat, out_dir)
