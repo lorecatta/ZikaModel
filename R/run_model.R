@@ -7,7 +7,6 @@
 #' @inheritParams model_param_list_create
 #'
 #' @param time time in days.
-#'   Default=18200
 #'
 #' @importFrom reshape2 melt
 #' @importFrom odin odin
@@ -18,7 +17,7 @@
 run_model <- function(agec,
                       death,
                       nn_links,
-                      time = 18200,
+                      time,
                       season = FALSE){
 
   mpl <- model_param_list_create(season = season)
