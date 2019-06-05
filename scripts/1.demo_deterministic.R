@@ -22,7 +22,8 @@ time <- 21840 # 18200 # 50 years
 model_run <- run_model(agec,
                        death,
                        nn_links,
-                       time = time)
+                       time = time,
+                       season = TRUE)
 
 save_plot(model_run$plot,
           out_dir,
