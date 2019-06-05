@@ -1,7 +1,7 @@
 
 devtools::load_all()
 
-out_dir <- file.path("figures", "deterministic")
+out_dir <- file.path("figures", "stochastic")
 
 agec <- c(1, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10)
 
@@ -19,7 +19,7 @@ death <- c(1e-10,
 
 time <- 21840 # 18200 # 50 years
 
-odin_model_path <- system.file("extdata/odin_model_determ.R", package = "ZikaModel")
+odin_model_path <- system.file("extdata/odin_model_stoch.R", package = "ZikaModel")
 
 wh <- create_r_model(odin_model_path = odin_model_path,
                      agec = agec,
@@ -32,8 +32,6 @@ mod <- wh$generator(user = wh$state)
 tt <- seq(0, time, 1)
 
 mod_run <- mod$run(tt)
-
-out <- mod$transform_variables(mod_run)
 
 # shape output
 out <- mod$transform_variables(mod_run)
