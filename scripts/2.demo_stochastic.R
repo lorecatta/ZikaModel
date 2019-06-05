@@ -19,6 +19,8 @@ death <- c(1e-10,
 
 time <- 21840 # 18200 # 50 years
 
+set.seed(889239)
+
 odin_model_path <- system.file("extdata/odin_model_stoch.R", package = "ZikaModel")
 
 wh <- create_r_model(odin_model_path = odin_model_path,
