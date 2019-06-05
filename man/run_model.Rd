@@ -4,7 +4,7 @@
 \alias{run_model}
 \title{run_model}
 \usage{
-run_model(agec, death, nn_links, time = 18200, season = FALSE)
+run_model(agec, death, nn_links, time, season = FALSE)
 }
 \arguments{
 \item{agec}{Vector of age group widths.}
@@ -13,8 +13,7 @@ run_model(agec, death, nn_links, time = 18200, season = FALSE)
 
 \item{nn_links}{8 nearest-neigbors to each patch.}
 
-\item{time}{time in days.
-Default=18200}
+\item{time}{time in days.}
 
 \item{season}{Logical for controlling the effect of seasonality.}
 }
