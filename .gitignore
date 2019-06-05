@@ -5,4 +5,5 @@
 *.rds
 *.png
 /figures
+*.jpg
 /BM
