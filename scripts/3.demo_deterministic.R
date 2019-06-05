@@ -19,16 +19,19 @@ death <- c(1e-10,
 
 time <- 21840 # 18200 # 50 years
 
-wh <- create_r_model(odin_model_path = system.file("extdata/odin_model_determ.R",
-                                                   package = "ZikaModel"),
+odin_model_path <- system.file("extdata/odin_model_determ.R", package = "ZikaModel")
+
+wh <- create_r_model(odin_model_path = odin_model_path,
                      agec = agec,
                      death = death,
                      nn_links = nn_links,
                      season = TRUE)
 
-mod <- wh$generator(user = wh$state, use_dde = TRUE)
+mod <- wh$generator(user = wh$state)
 
-mod_run <- mod$run(t = seq(0, time, 1))
+tt <- seq(0, time, 1)
+
+mod_run <- mod$run(tt)
 
 out <- mod$transform_variables(mod_run)
 
