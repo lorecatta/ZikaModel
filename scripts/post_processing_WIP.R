@@ -2,7 +2,7 @@
 # define parameters -----------------------------------------------------------
 
 
-out_fig_path <- file.path("figures/seasonality")
+out_dir <- file.path("figures", "deterministic")
 
 diagno_hum <- c("Susceptibles" = "S",
                 "Infectious" = "I1",
@@ -180,7 +180,7 @@ df_diagnostics_melt <- melt(df_diagnostics,
                             variable.name = "diagnostics")
 
 plot_diagnostics(df_diagnostics_melt,
-                 out_fig_path,
+                 out_dir,
                  "diagnostics_humans",
                  names(c(diagno_hum, diagno_hum_summary, extra_diagno_hum)),
                  no_pages = 2)
@@ -200,7 +200,7 @@ df_diagnostics_mos_melt <- melt(df_diagnostics_mos,
                                 variable.name = "diagnostics")
 
 plot_diagnostics(df_diagnostics_mos_melt,
-                 out_fig_path,
+                 out_dir,
                  "diagnostics_mosquitoes",
                  names(c(diagno_mos, diagno_mos_summary)),
                  no_pages = 2)
@@ -223,7 +223,7 @@ prop_Sp_plot <- ggplot(prop_Sp_df_melt, aes(x = time, y = value, colour = Patch)
   scale_x_continuous(name = "Years", breaks = brks, labels = round(brks / 364))
 
 save_plot(prop_Sp_plot,
-          out_fig_path,
+          out_dir,
           "propSp",
           wdt = 17,
           hgt = 9)
@@ -243,7 +243,7 @@ prop_Sp_plot <- ggplot(prop_Sp_df_melt, aes(x = time, y = value, colour = Patch)
   scale_x_continuous(name = "Years", breaks = brks, labels = round(brks / 364))
 
 save_plot(prop_Sp_plot,
-          out_fig_path,
+          out_dir,
           "propInfected",
           wdt = 17,
           hgt = 9)
@@ -263,7 +263,7 @@ prop_Sp_plot <- ggplot(prop_Sp_df_melt, aes(x = time, y = value, colour = Patch)
   scale_x_continuous(name = "Years", breaks = brks, labels = round(brks / 364))
 
 save_plot(prop_Sp_plot,
-          out_fig_path,
+          out_dir,
           "R0t_1",
           wdt = 17,
           hgt = 9)
@@ -283,7 +283,7 @@ prop_Sp_plot <- ggplot(prop_Sp_df_melt, aes(x = time, y = value, colour = Patch)
   scale_x_continuous(name = "Years", breaks = brks, labels = round(brks / 364))
 
 save_plot(prop_Sp_plot,
-          out_fig_path,
+          out_dir,
           "Mwt_tot",
           wdt = 17,
           hgt = 9)
@@ -304,7 +304,7 @@ prop_Sp_plot <- ggplot(prop_Sp_df_melt, aes(x = time, y = value, colour = Patch)
   scale_x_continuous(name = "Years", breaks = brks, labels = round(brks / 364))
 
 save_plot(prop_Sp_plot,
-          out_fig_path,
+          out_dir,
           "M_tot",
           wdt = 17,
           hgt = 9)
@@ -335,7 +335,7 @@ save_plot(prop_Sp_plot,
 #                                             levels = c("mortality rate", "ageing rate"))
 #
 # plot_diagnostics_by_age(df_diagnostics_by_age,
-#                         out_fig_path,
+#                         out_dir,
 #                         "diagnostics_human_by_age",
 #                         c("mortality rate", "ageing rate"))
 #
@@ -382,5 +382,5 @@ save_plot(prop_Sp_plot,
 #                   id.vars = c("time", "vaccine"),
 #                   variable.name = "compartment")
 #
-# plot_compartments(df_melt_2, out_fig_path, out_fig_name)
+# plot_compartments(df_melt_2, out_dir, out_fig_name)
 #
