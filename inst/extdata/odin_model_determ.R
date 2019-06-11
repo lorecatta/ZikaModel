@@ -170,9 +170,9 @@ update(Lwt[]) <- Lwt_birth[i] + Lwt[i] - O_Lwt[i]
 
 eip_delay <- 0
 
-#Mwt_FOI1[] <- DT * Beta_hm_1 * Kappa * infectious1[i]
+# Mwt_FOI1[] <- DT * Beta_hm_1 * Kappa * infectious1[i]
 Mwt_FOI1[] <- DT * Beta_hm_1 * Kappa * infectious1_del[i]
-infectious1_del[] <- delay(infectious1[i],eip_delay)
+infectious1_del[] <- delay(infectious1[i], eip_delay)
 
 Mwt_FOI1av <- (sum(Mwt_FOI1[]) - Mwt_FOI1[NP]) / (NP - 1)
 
@@ -383,8 +383,8 @@ incub <- user()
 initial(infectious1[]) <- 0
 update(infectious1[]) <- Y1T_del_inc[i] + infectious1[i] - Y1T_del_inc_ip[i]
 Y1T_del_inc[] <- delay(Y1T[i], incub)
-del_amount <- incub + inf_per
-Y1T_del_inc_ip[] <- delay(Y1T[i], del_amount)
+Y1T_lag <- incub + inf_per
+Y1T_del_inc_ip[] <- delay(Y1T[i], Y1T_lag)
 
 
 
@@ -584,9 +584,9 @@ update(R1[1:na,1:2,1:NP]) <- trunc(0.5 +
                                      recov1[i,j,k] + R1[i,j,k] - O_R1[i,j,k])
 
 initial(sinf1[,,]) <- 0
-update(sinf1[,,]) <- sinf1[i,j,k] + inf_1[i,j,k] - inf_1_del[i,j,k]
-inf_1_lag <- 3 * YL
-inf_1_del[,,] <- delay(inf_1[i,j,k], inf_1_lag)
+update(sinf1[,,]) <- sinf1[i,j,k] + inf_1[i,j,k] #- inf_1_del[i,j,k]
+#inf_1_lag <- 3 * YL
+#inf_1_del[,,] <- delay(inf_1[i,j,k], inf_1_lag)
 
 mean_age[] <- user()
 age_inf1[,,] <- sinf1[i,j,k] * mean_age[i]
@@ -826,7 +826,7 @@ dim(O_R1_prob) <- na
 dim(age_R1) <- c(vnc_row, 2, NP)
 dim(age_R1_prob) <- na
 dim(sinf1) <- c(na, 2, NP)
-dim(inf_1_del) <- c(na, 2, NP)
+#dim(inf_1_del) <- c(na, 2, NP)
 dim(mean_age) <- na
 dim(age_inf1) <- c(na, 2, NP)
 dim(sum_inf1) <- c(na, 2, NP)
