@@ -88,7 +88,7 @@ equilibrium_init_create <- function(agec, death, nn_links, model_parameter_list)
   N_eq[1:(NP-1)] <- N_human
   N_eq[NP] <- N_human / 10
 
-  Nb <- N_eq / lifespan # birth rate?
+  Nb <- N_eq / lifespan # number of births
 
   Mwt_cv <- mpl$Mwt_cv
   Mwt_mean <- mpl$Mwt_mean
