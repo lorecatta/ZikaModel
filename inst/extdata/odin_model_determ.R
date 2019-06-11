@@ -381,10 +381,10 @@ Y1T[] <- Y1T_sum[na,i] / NTp[i]
 incub <- user()
 
 initial(infectious1[]) <- 0
-update(infectious1[]) <- Y1T_del_inc[i]+infectious1[i]-Y1T_del_inc_ip[i]
-Y1T_del_inc[] <- delay(Y1T[i],incub)
-del_amount <- incub+inf_per
-Y1T_del_inc_ip[] <- delay(Y1T[i],del_amount)
+update(infectious1[]) <- Y1T_del_inc[i] + infectious1[i] - Y1T_del_inc_ip[i]
+Y1T_del_inc[] <- delay(Y1T[i], incub)
+del_amount <- incub + inf_per
+Y1T_del_inc_ip[] <- delay(Y1T[i], del_amount)
 
 
 
