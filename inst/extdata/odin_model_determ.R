@@ -120,6 +120,8 @@ vacc_cu_minage <- user()
 vacc_cu_maxage <- user()
 vacc_cu_coverage <- user()
 
+vnc_row <- na + 1 # position 1 is like position 0 in BM
+
 vacc_noncov[1:vnc_row, 1] <- (if ((step >= YL*vacc_child_starttime) &&
                                   (step < YL*vacc_child_stoptime) &&
                                   ((i == vacc_child_age + 1)))
@@ -694,7 +696,6 @@ dim(Wb_introtime) <- NP
 dim(Wb_introrate) <- NP
 dim(N_eq) <- NP
 dim(Delta_wb) <- NP
-vnc_row <- na + 1 # position 1 is like position 0 in BM
 dim(vacc_noncov) <- c(vnc_row, 2)
 dim(Lwt) <- NP
 dim(Mwt_S) <- NP
