@@ -20,14 +20,13 @@ post_processing <- function(dat, out_pth){
                   "Incidence of infections" = "inf_1",
                   "Cumulative infections" = "sinf1",
                   "Fraction of infected per patch" = "Y1T",
-                  "Fraction of infectious h per patch" = "infectious1",
-                  "Incidence of cases" = "disease1",
-                  "Cumulative cases" = "disease1inc")
+                  "Fraction of infectious h per patch" = "infectious1")
 
-  diagno_hum_summary <- c("R0" = "R0t_1av",
-                          "FOI on humans" = "FOI1av",
-                          "Averaged mortality rate per patch" = "Deltaav",
-                          "Mean daily mortality rate" = "DeltaMean")
+  diagno_hum_summary <- c("Average R0t_1 across patches" = "R0t_1av",
+                          "FOI on humans (average across p)" = "FOI1av",
+                          "Average mortality rate across patches" = "Deltaav",
+                          "Average carrying capacity across patches" = "Kcav",
+                          "Average eip across patches" = "eipav")
 
   extra_diagno_hum <- c("Weekly infections/1000" = "w_Ir_infections")
 
@@ -46,7 +45,7 @@ post_processing <- function(dat, out_pth){
                   "Larvae wb birth" = "Lwb_birth",
                   "Larvae wb" = "Lwb")
 
-  diagno_mos_summary <- c("FOI on wt mos" = "Mwt_FOI1av")
+  diagno_mos_summary <- c("FOI on wt mos (average across p)" = "Mwt_FOI1av")
 
   mos_comparts <- c("Mwt_S",
                     "Mwt_E1",
