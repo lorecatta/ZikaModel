@@ -152,25 +152,6 @@ vacc_noncov[1:vnc_row, 2] <- 1
 
 
 
-## Terminology
-
-# Lwt - number of larval stage mosquitoes
-# Mwt_S - number of uninfected adult mosquitoes
-# Mwt_E1 - number of infected adult mosquitoes in incubation stage 1
-# Mwt_E2 - number of infected adult mosquitoes in incubation stage 2
-# Mwt_I1 - number of infectious adult mosquitoes
-# Lwt_birth - number of larvae produced
-# L_deathrt - larval death rate (per capita probability that a larval stage mosquito dies)
-# O_Lwt - number of Lwt which leave the compartment (Lwt = number of trials in rbinom)
-# Lwt_mature - number of Lwt which become adult
-# Mwt_FOI1 - force of infection on mosquitoes
-# O_Mwt_S - number of Mwt_S which leave the compartment
-# Mwt_inf1 - number of Mwt_S which are infected with the virus
-# O_Mwt_E1 - number of Mwt_E1 which leave the compartment
-# Mwt_E1_incub - number of Mwt_E1 which progress towards second stage of incubation
-# O_Mwt_E2 - number of Mwt_E2 which leave the compartment
-# Mwt_E2_incub - number of Mwt_E2 which progress towards being infectious
-
 dim(Lwt) <- NP
 dim(Mwt_S) <- NP
 dim(Mwt_E1) <- NP
@@ -404,80 +385,6 @@ R0t_1av <- (sum(R0t_1[]) - R0t_1[NP]) / (NP - 1)
 #
 # -----------------------------------------------------------------------------
 
-
-
-# Compartments: (indexed by age, vaccine status and patch)
-
-# S - Susceptible
-# I1 - Infectious
-# R1 - Recovered
-
-# Vaccine status:
-
-# 1 (i.e. for j index value 1) = not vaccinated (nv)
-# 2 (i.e. for j index value 2) = vaccinated (v)
-
-# births - number of individuals born
-# O_S - number of S which leave the compartment
-# inf_1 - number of O_S which become infected (not infectious)
-# age_S - number of O_s - Inf_1 which get older
-
-# O_I1 - number of I1 which leave the compartment
-# recov1 - number of O_I1 which recover from infection
-# age_I1 - number of O_I1 - reco1 which get older
-
-# O_R1 - number of R1 which leave the compartment
-# age_R1 - number of R1 which get older
-
-# sinf1 - cumulative incidence of infections (per age group, vaccine status, patch)
-
-# Ntotal - total number of individual (S + R1 + I1) by age, vaccine status and patch
-# NT - total number of individuals
-# Ntotal_np - cumulative sum across patches of total number of individuals
-# Ntotal_sum - cumulative sum across age groups of total number of individuals with vaccine status 1
-# and total number of individuals with vaccine status 2
-# NTp - total number of all individuals per patch
-# Ntotal_nv - total number across patches of individuals with vaccine status 1, by age group
-# Ntotal_v - total number across patches of individuals with vaccine status 2, by age group
-# NTnv - total number of individuals with vaccine status 1
-# NTv - total number of individuals with vaccine status 2
-# Snv - proportion of susceptible individuals with vaccine status 1
-# R1nv - proportion of immune individuals with vaccine status 1
-# sum_S - cumulative sum across ages of individuals with vaccine status 1, by patch
-# prop_Sp - fraction of all individuals in a patch who are susceptible, by patch
-
-# Y1 - incidence of infected individuals (per patch)
-# Y1T_sum - total (sum acros vaccine statuses) incidence of infection in individuals up to different ages, by patch
-# Y1T - fraction of all individuals in a patch who are infected, by patch
-# incubA - fraction of all infected individuals in a patch who are in incubation period A (per patch)
-# incubB - fraction of all infected individuals in a patch who are in incubation period B (per patch)
-# infectiousA - fraction of all infected individuals in a patch who are infectious after incubation period A (per patch)
-# infectiousB - fraction of all infected individuals in a patch who are infectious after incubation period B (per patch)
-# infectious1 - fraction of total number of infectious infected individuals (per patch)
-
-# FOI1p - daily force of infection on humans
-# FOI1Y - annual force of infection on humans
-# FOI1av - annual force of infection on humans averaged by patch
-# FOI1nn - force of infection on humans with nearest-neighbor patch
-# FOI1 - total force of infection on humans (including between-patch transmission)
-
-# disease1 - number of symptomatic cases (by age, vaccine status and patch)
-# disease1nv - number of non vaccinated cases (by age and patch)
-# disease1v - number of vaccinated cases (by age and patch)
-
-# primary_inf_6m_a1_now
-# primary_inf_6m_a1
-# primary_inf_6m_a1_cum
-# primary_inf_6m_a1_Scum
-
-# disease_age_inc - incidence of cases (by age, vaccine status and patch). Same as disease1.
-
-# disease_patch_cum - cumulative sum across ages of total disease incidence (vaccinated + non vaccinated), by patch
-# disease_patch - total disease incidence per patch
-
-# disease1inc - cumulative incidence of cases (by age, vaccine status and patch)
-# disease1nvinc - total incidence of non vaccinated case (sum across ages and patches)
-# disease1vinc - total incidence of vaccinated cases (sum across ages and patches)
 
 
 init_S[,,] <- user()
