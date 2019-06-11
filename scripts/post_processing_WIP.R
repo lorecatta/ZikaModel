@@ -228,6 +228,26 @@ save_plot(prop_Sp_plot,
           wdt = 17,
           hgt = 9)
 
+## FOI1p
+
+prop_Sp_df <- as.data.frame(out$FOI1p)
+colnames(prop_Sp_df) <- seq_len(21)
+prop_Sp_df$time <- tt
+prop_Sp_df_melt <- melt(prop_Sp_df,
+                        id.vars = "time",
+                        variable.name = "Patch")
+brks <- seq(from = 1, to = max(tt), by = 364 * 10)
+prop_Sp_plot <- ggplot(prop_Sp_df_melt, aes(x = time, y = value, colour = Patch)) +
+  geom_line(size = 0.4) +
+  scale_y_continuous(name = "FOI1p") +
+  scale_x_continuous(name = "Years", breaks = brks, labels = round(brks / 364))
+
+save_plot(prop_Sp_plot,
+          out_dir,
+          "FOI1p",
+          wdt = 17,
+          hgt = 9)
+
 ## Proportion of Infected
 
 prop_Sp_df <- as.data.frame(out$Y1T)
