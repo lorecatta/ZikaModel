@@ -4,7 +4,8 @@ ZikaModel
 =========
 
 <!-- badges: start -->
-<!-- badges: end -->
+[![Travis build status](https://travis-ci.org/mrc-ide/zika-transmission-model.svg?branch=master)](https://travis-ci.org/mrc-ide/zika-transmission-model) <!-- badges: end -->
+
 `ZikaModel` is an R package for running the Zika transmission model developed at Imperial College London using R odin.
 
 The transmission model is a metapopulation model which includes the dynamics of the *Aedes* mosquito vector and the age-stratified human host populations. The model which has a stochastic and a deterministic version, simulates also the impact of seasonality and control strategies, such as the release of Wolbachia-infected mosquitoes and child vaccinationon, on virus dynamics .
