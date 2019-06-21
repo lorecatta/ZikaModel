@@ -29,7 +29,7 @@ library(devtools)
 -   Then, in a fresh R session, install the `ZikaModel` package
 
 ``` r
-devtools::install_github("mrc-ide/zika-transmission-model")
+devtools::install_github("mrc-ide/ZikaModel")
 ```
 
 -   Load and attach it
@@ -120,22 +120,6 @@ model_run <- ZikaModel::run_model(agec = age_init,
 #>  sum_inf1[2:na,1:2,1:NP] <- sinf1[i,j,k] + sum_inf1[i-1,j,k] # (line 597)
 ```
 
-You can use `save_plot` to save a png figure of the plot of human compartments against time from the model run.
-
-``` r
-ZikaModel::save_plot(plot_obj = model_run$plot, 
-                     out_pth = "figures", 
-                     out_fl_nm = "compartments_human", 
-                     wdt = 17, 
-                     hgt = 12)
-```
-
-At this point it might be useful to inspect some diagnostics to check that the model is actually doing what we want. The function `post_processing` reshapes the model outputs in a more convenient format and saves plots of selected diagnostics.
-
-``` r
-ZikaModel::post_processing(model_run$dat, "figures")
-```
-
 Seasonality
 -----------
 
@@ -205,12 +189,4 @@ seasonal_model_run <- ZikaModel::run_model(agec = age_init,
 #>  sum_age_inf1[2:na,1:2,1:NP] <- age_inf1[i,j,k] + sum_age_inf1[i-1,j,k] # (line 600)
 #>  sum_inf1[1,1:2,1:NP] <- sinf1[i,j,k] # (line 596)
 #>  sum_inf1[2:na,1:2,1:NP] <- sinf1[i,j,k] + sum_inf1[i-1,j,k] # (line 597)
-
-ZikaModel::save_plot(plot_obj = seasonal_model_run$plot, 
-                     out_pth = "figures/seasonality", 
-                     out_fl_nm = "compartments_human", 
-                     wdt = 17, 
-                     hgt = 12)
-
-ZikaModel::post_processing(seasonal_model_run$dat, "figures/seasonality")
 ```
