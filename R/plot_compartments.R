@@ -26,7 +26,7 @@ plot_compartments <- function(df, compart_names, ttl){
   brks <- seq(from = 0, to = time, by = 364 * 5)
 
   ret <- ggplot(df,
-                aes(x = time, y = .data$value, col = .data$compartment)) +
+                aes(x = time, y = value, col = compartment)) +
     geom_line(size = 0.7) +
     scale_colour_manual(
       values = c("#3333FF", "#FFA500", "#CC0000", "#339900"),
