@@ -38,19 +38,19 @@ You need to first install the [odin](https://github.com/mrc-ide/odin) R package.
 Once odin is installed, you can install the `ZikaModel` package with the 
 following steps:  
 
-1. First install `devtools`, if you don't already have it.
+- First install `devtools`, if you don't already have it
 
 ```{r include = TRUE, eval = FALSE}
 install.packages("devtools")
 library(devtools)
 ```
-2. Then, in a fresh R session, install the `ZikaModel` package.
+- Then, in a fresh R session, install the `ZikaModel` package
 
-```{r}
+```{r include = TRUE, eval = FALSE}
 devtools::install_github("mrc-ide/zika-transmission-model")
 ```
 
-3. Load and attach it 
+- Load and attach it 
 ```{r}
 library(ZikaModel)
 ```
