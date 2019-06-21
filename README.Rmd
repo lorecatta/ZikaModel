@@ -1,0 +1,140 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+# ZikaModel
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+`ZikaModel` is an R package for running the Zika transmission model 
+developed at Imperial College London using R odin.
+
+The transmission model is a metapopulation model which includes the 
+dynamics of the _Aedes_ mosquito vector and the age-stratified human host 
+populations. The model which has a stochastic and a deterministic version,
+simulates also the impact of seasonality and control strategies, 
+such as the release of Wolbachia-infected mosquitoes and child vaccinationon, 
+on virus dynamics .
+
+For details of the original transmission model please see the 
+[Ferguson et al. 2016 paper](https://science.sciencemag.org/content/353/6297/353) 
+which is the article where the model is published.
+
+## Installation
+You need to first install the [odin](https://github.com/mrc-ide/odin) R package. 
+
+Once odin is installed, you can install the `ZikaModel` package with the 
+following steps:  
+
+1. First install `devtools`, if you don't already have it.
+
+```{r include = TRUE, eval = FALSE}
+install.packages("devtools")
+library(devtools)
+```
+2. Then, in a fresh R session, install the `ZikaModel` package.
+
+```{r}
+devtools::install_github("mrc-ide/zika-transmission-model")
+```
+
+3. Load and attach it 
+```{r}
+library(ZikaModel)
+```
+
+## Running the base model
+To run the base version of the model, without seasonality and interventions, 
+you can do the following:
+
+```{r}
+# create a vector of human age groups 
+age_init <- c(1, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10)
+  
+# create a vector of human mortality rates 
+deathrt <- c(1e-10, 
+             1e-10, 
+             1e-10, 
+             0.00277068683332695, 
+             0.0210680857689784,
+             0.026724997685722,
+             0.0525354529367476,
+             0.0668013582441452,
+             0.119271483740379,
+             0.279105747097929,
+             0.390197266957464)
+             
+# provide the length of time (in days) that you want to run the model for
+time_frame <- 364 * 50
+  
+set.seed(1)
+
+# run the model
+model_run <- ZikaModel::run_model(agec = age_init,
+                                  death = deathrt,
+                                  nn_links,
+                                  time = time_frame)
+```
+
+You can use `save_plot` to save a png figure of the plot of human compartments 
+against time from the model run.
+
+```{r}
+ZikaModel::save_plot(plot_obj = model_run$plot, 
+                     out_pth = "figures", 
+                     out_fl_nm = "compartments_human", 
+                     wdt = 17, 
+                     hgt = 12)
+```
+
+At this point it might be useful to inspect some diagnostics to check that the 
+model is actually doing what we want. The function `post_processing` reshapes the
+model outputs in a more convenient format and saves plots of selected diagnostics.   
+
+```{r}
+ZikaModel::post_processing(model_run$dat, "figures")
+```
+
+## Seasonality 
+The model allows to account for the effect of seasonal variations in climatic 
+variables (e.g. temperature and precipitation) on Zika transmission dynamics. 
+In the model, seasonality affects: 
+
+* adult mosquitoes mortality;
+* mosquito larvae carrying capacity;
+* Extrinsic Incubation Period.
+
+At the moment the effect of seasonality is implemented as "all or nothing" 
+(e.g. it can either be switched completely on or off). 
+Intermediate effects are possible but they require a (simple) change to the code.
+
+A model which includes the effect of seasonality can be implemented as:
+
+```{r}
+set.seed(10)
+
+seasonal_model_run <- ZikaModel::run_model(agec = age_init,
+                                           death = deathrt,
+                                           nn_links,
+                                           time = time_frame,
+                                           season = TRUE)
+
+ZikaModel::save_plot(plot_obj = seasonal_model_run$plot, 
+                     out_pth = "figures/seasonality", 
+                     out_fl_nm = "compartments_human", 
+                     wdt = 17, 
+                     hgt = 12)
+
+ZikaModel::post_processing(seasonal_model_run$dat, "figures/seasonality")
+```
