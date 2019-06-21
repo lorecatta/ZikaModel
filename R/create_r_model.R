@@ -1,9 +1,13 @@
-#' Create generator for model creation
-#'
+
+# -----------------------------------------------------------------------------
+
+# Create generator for model creation
+
 #' \code{create_r_model} returns list with generator function automatically created given the odin model
 #' specified.
 #'
 #' @inheritParams equilibrium_init_create
+#'
 #' @inheritParams model_param_list_create
 #'
 #' @param odin_model_path Character path to odin model

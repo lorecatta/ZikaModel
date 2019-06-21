@@ -2,7 +2,8 @@
 % Please edit documentation in R/equilibrium_init_create.R
 \name{equilibrium_init_create}
 \alias{equilibrium_init_create}
-\title{equilibrium_init_create}
+\title{\code{equilibrium_init_create} creates an equilibrium initialisation
+state to be used within later model runs.}
 \usage{
 equilibrium_init_create(agec, death, nn_links, model_parameter_list)
 }

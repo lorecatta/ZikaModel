@@ -2,7 +2,8 @@
 % Please edit documentation in R/create_r_model.R
 \name{create_r_model}
 \alias{create_r_model}
-\title{Create generator for model creation}
+\title{\code{create_r_model} returns list with generator function automatically created given the odin model
+specified.}
 \usage{
 create_r_model(odin_model_path, agec, death, nn_links, season)
 }

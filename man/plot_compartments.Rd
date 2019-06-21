@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_compartments.R
 \name{plot_compartments}
 \alias{plot_compartments}
-\title{plot_compartments}
+\title{\code{plot_compartments} makes a plot of the model compartments.}
 \usage{
 plot_compartments(df, compart_names, ttl)
 }

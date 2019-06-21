@@ -1,10 +1,14 @@
-#------------------------------------------------
-#' plot_compartments
-#'
+
+#------------------------------------------------------------------------------
+
+# plot_compartments
+
 #' \code{plot_compartments} makes a plot of the model compartments.
 #'
 #' @param df The dataframe with the data to plot.
+#'
 #' @param compart_names The full name of the model compartments.
+#'
 #' @param ttl The plot title.
 #'
 #' @importFrom ggplot2 aes scale_colour_manual scale_x_continuous

@@ -2,7 +2,8 @@
 % Please edit documentation in R/create_model_parameters_list.R
 \name{model_param_list_create}
 \alias{model_param_list_create}
-\title{model_param_list_create}
+\title{\code{model_param_list_create} creates a list of user-defined
+parameters.}
 \usage{
 model_param_list_create(YL = 364, DT = 0.5, NP = 21, age_per = 1,
   N_human = 3e+07, Omega = 1, DeltaBase = 0.2, Sigma = 0.025,

@@ -2,7 +2,7 @@
 % Please edit documentation in R/run_model.R
 \name{run_model}
 \alias{run_model}
-\title{run_model}
+\title{\code{run_model} runs model using declared agec, death and nn_links}
 \usage{
 run_model(agec, death, nn_links, time, season = FALSE)
 }

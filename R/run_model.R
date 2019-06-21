@@ -1,14 +1,18 @@
-#------------------------------------------------
-#' run_model
-#'
+
+#------------------------------------------------------------------------------
+
+# run_model
+
 #' \code{run_model} runs model using declared agec, death and nn_links
 #'
 #' @inheritParams equilibrium_init_create
+#'
 #' @inheritParams model_param_list_create
 #'
 #' @param time time in days.
 #'
 #' @importFrom reshape2 melt
+#'
 #' @importFrom odin odin
 #'
 #' @export
