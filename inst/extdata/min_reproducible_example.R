@@ -28,7 +28,9 @@ initial(infectious1[]) <- 0
 
 update(infectious1[]) <- Y1T_del_inc + infectious1[i] - Y1T_del_inc_ip
 
-Y1T_del_inc <- delay(ST, 0)
+eip_delay <- 0
+
+Y1T_del_inc <- delay(ST, eip_delay)
 #dim(Y1T_del_inc) <- NP
 del_amount <- inf_per + incub
 Y1T_del_inc_ip <- delay(ST, del_amount)
