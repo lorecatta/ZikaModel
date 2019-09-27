@@ -115,7 +115,7 @@ model_param_list_create <- function(
   other_prop_immune = 0,
   propTransGlobal = 0.0005,
   propTransNN = 0.005,
-  BG_FOI = 1e-8,
+  BG_FOI = 0, #1e-8,
   AGE_REC = 2,
   PropDiseaseReported = 1){
 
