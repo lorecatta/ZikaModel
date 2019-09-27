@@ -201,6 +201,10 @@ equilibrium_init_create <- function(agec, death, nn_links, model_parameter_list)
 
   init_R1[1:na, 1, 1:NP] <- trunc(bb %o% Nb)
 
+  pTG <- mpl$propTransGlobal
+
+  pTG_bigpatch <- pTG / 10
+
   res <- list(nn = nn,
               na = na,
               agec = agec,
@@ -214,7 +218,7 @@ equilibrium_init_create <- function(agec, death, nn_links, model_parameter_list)
               lifespan = lifespan,
               N_eq = N_eq,
               Nb = Nb,
-              init_Mwt_base = init_Mwt_base,
+              Mwt = init_Mwt_base,
               season_phase = season_phase,
               season_amp = season_amp,
               Wb_introtime = Wb_introtime,
@@ -225,6 +229,7 @@ equilibrium_init_create <- function(agec, death, nn_links, model_parameter_list)
               init_S = init_S,
               init_I1 = init_I1,
               init_R1 = init_R1,
+              pTG_bigpatch = pTG_bigpatch,
               pi = pi)
 
   append(res, mpl)
