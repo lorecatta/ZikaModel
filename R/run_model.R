@@ -34,10 +34,9 @@ run_model <- function(agec,
 
   # create odin generator
   odin_model_path <- system.file("extdata/odin_model_determ.R", package = "ZikaModel")
+
   gen <- odin::odin(odin_model_path,verbose = FALSE)
 
-  # There are many parameters used that should not be passed through
-  # to the model.
   state_use <- state_init[names(state_init) %in% names(formals(gen))]
 
   # create model with initial values
@@ -49,20 +48,54 @@ run_model <- function(agec,
 
   # shape output
   out <- mod$transform_variables(mod_run)
-  hum <- list("S" = out$S, "I" = out$I1, "R" = out$R1, "Nt" = out$Ntotal)
-  humsum <- lapply(hum, function(x){apply(x, sum, MARGIN = 1)})
-  mat_H <- do.call("cbind", humsum[c("S", "I", "R")])
-  mat_H <- mat_H / humsum$Nt
-  mat_H[is.na(mat_H)] <- 0
+
+  tt <- out$TIME
+  time <- max(tt)
+
+  diagno_hum <- c("S", "I1", "R1", "births", "inf_1")
+
+  dia_hum <- setNames(out[diagno_hum], diagno_hum)
+
+  # cum sum over the first dimension - specify the dims you want to keep
+  # no need for aperm reshaping here
+  inf_1_cum <- apply(dia_hum$inf_1, c(2, 3, 4), cumsum)
+
+  Nt <- dia_hum$S + dia_hum$I1 + dia_hum$R1
+
+  dia_hum <- c(dia_hum,
+               list(Nt = Nt),
+               list(inf_1_cum = inf_1_cum))
+
+  humsum <- lapply(dia_hum, function(x){apply(x, 1, sum)})
+
+  mat_H <- do.call("cbind", humsum)
+
+  prop <- mat_H[, c("S", "I1", "R1")] / mat_H[, "Nt"]
+
+  colnames(prop) <- c("Sp", "I1p", "R1p")
+
+  mat_H <- cbind(mat_H, prop)
+
   df_H <- as.data.frame(mat_H)
+
+  # rate of total weekly infections
+  df_H$wIR_inf <- lag_diff(df_H$inf_1_cum, 14)
+
+  df_H$wIR_inf <- df_H$wIR_inf / df_H$Nt * 1000
+
   df_H$time <- tt
   df_H_melt <- melt(df_H,
                     id.vars = "time",
-                    variable.name = "compartment")
+                    variable.name = "diagnostic")
 
-  ret <- plot_compartments(df_H_melt,
-                           c("Susceptibles", "Infectious", "Recovered"),
-                           "SEIR Zika model - human states")
+  diagno_levs <- c("S", "I1", "R1", "Nt", "Sp", "I1p", "R1p", "births", "inf_1", "inf_1_cum", "wIR_inf")
+
+  df_H_melt$diagnostic <- factor(df_H_melt$diagnostic, levels = diagno_levs, labels = diagno_levs)
+
+  ret <- plot_diagnostics(df_H_melt,
+                          out_dir,
+                          "human_diagnostics",
+                          diagno_levs)
 
   list("plot" = ret, "dat" = out)
 
