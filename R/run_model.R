@@ -110,8 +110,7 @@ run_model <- function(agec,
                           diagno_levs)
 
   ret2 <- plot_compartments(df_prop,
-                           c("Susceptibles", "Infectious", "Recovered"),
-                           "SEIR Zika model - human states")
+                           c("Susceptibles", "Infectious", "Recovered"))
 
   list("diagnostics" = ret, "proportions" = ret2, "dat" = out)
 
