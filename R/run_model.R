@@ -99,18 +99,18 @@ run_model <- function(agec,
   df_prop$time <- tt
   df_prop_melt <- melt(df_prop,
                        id.vars = "time",
-                       variable.name = "diagnostic")
+                       variable.name = "compartment")
 
   diagno_levs_2 <- c("Sp", "I1p", "R1p")
 
-  df_prop$diagnostic <- factor(df_prop$diagnostic, levels = diagno_levs_2, labels = diagno_levs_2)
+  df_prop_melt$compartment <- factor(df_prop_melt$compartment, levels = diagno_levs_2, labels = diagno_levs_2)
 
   ret <- plot_diagnostics(df_H_melt,
                           "human_diagnostics",
                           diagno_levs)
 
-  ret2 <- plot_compartments(df_prop,
-                           c("Susceptibles", "Infectious", "Recovered"))
+  ret2 <- plot_compartments(df_prop_melt,
+                            c("Susceptibles", "Infectious", "Recovered"))
 
   list("diagnostics" = ret, "proportions" = ret2, "dat" = out)
 
