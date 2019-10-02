@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r, echo=FALSE}
+```{r, echo = FALSE}
 library(ZikaModel)
 ```
 
@@ -40,13 +40,25 @@ deathrt <- c(1e-10,
              0.390197266957464)
              
 # provide the length of time (in days) that you want to run the model for
-time_frame <- 364 * 50
+time_frame <- 364 * 100
 
 # run the model
 model_run <- ZikaModel::run_model(agec = age_init,
                                   death = deathrt,
                                   nn_links,
                                   time = time_frame)
+```
 
-model_run$plot
+The model results can be visually inspected with
+
+```{r, fig.height = 5, fig.width = 5}
+model_run$proportions
+```
+
+```{r, fig.height = 6, fig.width = 8}
+model_run$diagnostics[[1]]
+```
+
+```{r, fig.height = 6, fig.width = 8}
+model_run$diagnostics[[2]]
 ```

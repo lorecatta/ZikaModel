@@ -31,10 +31,42 @@ A deterministic model which includes the effect of seasonality can be implemente
 with the following:
 
 ```{r}
-seasonal_model_run <- ZikaModel::run_model(agec = age_init,
-                                           death = deathrt,
-                                           nn_links,
-                                           time = time_frame,
-                                           season = TRUE)
-seasonal_model_run$plot
+# create a vector of human age groups 
+age_init <- c(1, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10)
+  
+# create a vector of human mortality rates 
+deathrt <- c(1e-10, 
+             1e-10, 
+             1e-10, 
+             0.00277068683332695, 
+             0.0210680857689784,
+             0.026724997685722,
+             0.0525354529367476,
+             0.0668013582441452,
+             0.119271483740379,
+             0.279105747097929,
+             0.390197266957464)
+             
+# provide the length of time (in days) that you want to run the model for
+time_frame <- 364 * 100
+
+model_run <- ZikaModel::run_model(agec = age_init,
+                                  death = deathrt,
+                                  nn_links,
+                                  time = time_frame,
+                                  season = TRUE)
+```
+
+The model results can be visually inspected with
+
+```{r, fig.height = 5, fig.width = 5}
+model_run$proportions
+```
+
+```{r, fig.height = 6, fig.width = 8}
+model_run$diagnostics[[1]]
+```
+
+```{r, fig.height = 6, fig.width = 8}
+model_run$diagnostics[[2]]
 ```
