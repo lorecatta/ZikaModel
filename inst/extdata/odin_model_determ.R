@@ -1,6 +1,7 @@
 
 DT <- user()
 YL <- user()
+TIME <- step * DT
 
 NP <- user()
 
@@ -20,8 +21,8 @@ propMwtControl <- user()
 
 Mwt[] <- user()
 
-MwtCont <- if ((step >= TimeMwtControlOn * YL) &&
-               (step < TimeMwtControlOff * YL)) (1 - propMwtControl) else 1
+MwtCont <- if ((TIME >= TimeMwtControlOn * YL) &&
+               (TIME < TimeMwtControlOff * YL)) (1 - propMwtControl) else 1
 
 Rm <- user() # mosquito reproduction number
 Epsilon <- user() # larvae development rate
@@ -71,16 +72,16 @@ Kc_season <- user()
 eip_season <- user()
 
 Delta[1:(NP-1)] <- DeltaMean /
-  (1 + season_amp[i] * Delta_season * cos(2 * pi * (step + season_phase[i]) / YL))
+  (1 + season_amp[i] * Delta_season * cos(2 * pi * (TIME + season_phase[i]) / YL))
 Delta[NP] <- DeltaMean
 
 Kc[1:(NP-1)] <- Mwt[i] * Kc_mean *
-  (1 + season_amp[i] * Kc_season * cos(2 * pi * (step + season_phase[i]) / YL))
+  (1 + season_amp[i] * Kc_season * cos(2 * pi * (TIME + season_phase[i]) / YL))
 Kc[NP] <- MwtCont * Mwt_mean * Kc_mean *
-  (1 + season_amp[i] * Kc_season * cos(2 * pi * (step + season_phase[i]) / YL))
+  (1 + season_amp[i] * Kc_season * cos(2 * pi * (TIME + season_phase[i]) / YL))
 
 eip[] <- eip_mean *
-  (1 - season_amp[i] * eip_season * cos(2 * pi * (step + season_phase[i]) / YL))
+  (1 - season_amp[i] * eip_season * cos(2 * pi * (TIME + season_phase[i]) / YL))
 
 Deltaav <- (sum(Delta[]) - Delta[NP]) / (NP - 1)
 Kcav <- (sum(Kc[]) - Kc[NP]) / (NP - 1)
@@ -229,8 +230,10 @@ incub <- user()
 
 # initial(infectious1[]) <- 0
 # update(infectious1[]) <- Y1T_del_inc[i] + infectious1[i] - Y1T_del_inc_ip[i]
-# Y1T_del_inc[] <- delay(Y1T[i], incub)
-# Y1T_lag <- incub + inf_per
+# incub_2 <- incub / DT
+# Y1T_del_inc[] <- delay(Y1T[i], incub_2)
+# inf_per_2 <- inf_per / DT
+# Y1T_lag <- incub_2 + inf_per_2
 # Y1T_del_inc_ip[] <- delay(Y1T[i], Y1T_lag)
 
 
@@ -272,7 +275,7 @@ FOI1[NP] <- 0
 
 
 
-agerts <- if (trunc(step / age_per) == step / age_per) age_per / YL else 0
+agerts <- if (trunc(TIME / age_per) == TIME / age_per) age_per / YL else 0
 # agerts=DT/YL
 agert[] <- agerts / agec[i] # ageing rate per age group
 
@@ -284,16 +287,6 @@ rho1[] <- user()
 O_S_prob[,,] <- max(min(rho1[j] * FOI1[k] + agert[i] + deathrt[i], 1), 0)
 O_S[,,] <- S[i,j,k] * O_S_prob[i,j,k]
 
-dim(D_S) <- c(na, 2, NP)
-dim(deathrt_bound) <- na
-deathrt_bound[] <- deathrt[i]
-D_S[,,] <- S[i,j,k] * deathrt_bound[i]
-
-dim(A_S) <- c(na, 2, NP)
-dim(agert_bound) <- na
-agert_bound[] <- agert[i]
-A_S[,,] <- S[i,j,k] * agert_bound[i]
-
 inf_1_prob[,,] <- max(min(rho1[j] * FOI1[k] / (rho1[j] * FOI1[k] +
                                                  agert[i] + deathrt[i]), 1), 0)
 inf_1[,,] <- O_S[i,j,k] * inf_1_prob[i,j,k]
@@ -302,11 +295,11 @@ age_S_trials[,,] <- O_S[i,j,k] - inf_1[i,j,k]
 age_S_prob[] <- max(min(agert[i] / (agert[i] + deathrt[i]), 1), 0)
 age_S[,,] <- age_S_trials[i,j,k] * age_S_prob[i]
 
-update(S[1,1,1:NP]) <- births[k] + S[i,j,k] - O_S[i,j,k]
-update(S[2:na,1,1:NP]) <- age_S[i-1,j,k] + S[i,j,k] - O_S[i,j,k]
+update(S[1,1,1:NP]) <- trunc(0.5 + births[k] + S[i,j,k] - O_S[i,j,k])
+update(S[2:na,1,1:NP]) <- trunc(0.5 + age_S[i-1,j,k] + S[i,j,k] - O_S[i,j,k])
 
-update(S[1,2,1:NP]) <- S[i,j,k] - O_S[i,j,k]
-update(S[2:na,2,1:NP]) <- age_S[i-1,j,k] + S[i,j,k] - O_S[i,j,k]
+update(S[1,2,1:NP]) <- trunc(0.5 + S[i,j,k] - O_S[i,j,k])
+update(S[2:na,2,1:NP]) <- trunc(0.5 + age_S[i-1,j,k] + S[i,j,k] - O_S[i,j,k])
 
 nu <- user()
 
@@ -321,7 +314,7 @@ age_I1_prob[] <- max(min(agert[i] / (agert[i] + deathrt[i]), 1), 0)
 age_I1[2:vnc_row,1:2,1:NP] <- age_I1_trials[i-1,j,k] * age_I1_prob[i-1]
 age_I1[1,1:2,1:NP] <- 0
 
-update(I1[1:na,1:2,1:NP]) <- age_I1[i,j,k] + inf_1[i,j,k] + I1[i,j,k] - O_I1[i,j,k]
+update(I1[1:na,1:2,1:NP]) <- trunc(0.5 + age_I1[i,j,k] + inf_1[i,j,k] + I1[i,j,k] - O_I1[i,j,k])
 
 O_R1_prob[] <- max(min(agert[i] + deathrt[i], 1), 0)
 O_R1[,,] <- R1[i,j,k] * O_R1_prob[i]
@@ -330,7 +323,7 @@ age_R1_prob[] <- max(min(agert[i] / (agert[i] + deathrt[i]), 1), 0)
 age_R1[2:vnc_row,1:2,1:NP] <- O_R1[i-1,j,k] * age_R1_prob[i-1]
 age_R1[1,1:2,1:NP] <- 0
 
-update(R1[1:na,1:2,1:NP]) <- age_R1[i,j,k] + recov1[i,j,k] + R1[i,j,k] - O_R1[i,j,k]
+update(R1[1:na,1:2,1:NP]) <- trunc(0.5 + age_R1[i,j,k] + recov1[i,j,k] + R1[i,j,k] - O_R1[i,j,k])
 
 
 
@@ -371,11 +364,9 @@ output(eip[]) <- TRUE
 output(Delta[]) <- TRUE
 output(NTp[]) <- TRUE
 output(Mwt_FOI1[]) <- TRUE
-output(infectious1[]) <- TRUE
 output(O_S_prob[,,]) <- TRUE
 output(rho1[]) <- TRUE
-output(D_S[,,]) <- TRUE
-output(A_S[,,]) <- TRUE
+output(infectious1[]) <- TRUE
 
 # diagnostics for mosquitoes
 output(Mwt_tot[]) <- TRUE
@@ -387,6 +378,7 @@ output(O_Mwt_E1[]) <- TRUE
 output(O_Mwt_S[]) <- TRUE
 output(Lwt_mature[]) <- TRUE
 
+output(TIME) <- TRUE
 
 
 # -----------------------------------------------------------------------------
@@ -450,8 +442,6 @@ dim(phi1) <- 2
 dim(Y1T_sum) <- c(na,NP)
 dim(Y1T) <- NP
 dim(infectious1) <- NP
-#dim(Y1T_del_inc) <- NP
-#dim(Y1T_del_inc_ip) <- NP
 dim(FOI1p) <- NP
 dim(FOI1Y) <- NP
 dim(FOI1nn) <- NP
@@ -481,6 +471,8 @@ dim(O_R1) <- c(na, 2, NP)
 dim(O_R1_prob) <- na
 dim(age_R1) <- c(vnc_row, 2, NP)
 dim(age_R1_prob) <- na
+# dim(Y1T_del_inc) <- NP
+# dim(Y1T_del_inc_ip) <- NP
 dim(incubA) <- NP
 dim(incubB) <- NP
 dim(infectiousA) <- NP
