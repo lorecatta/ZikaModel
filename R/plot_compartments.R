@@ -9,8 +9,6 @@
 #'
 #' @param compart_names The full name of the model compartments.
 #'
-#' @param ttl The plot title.
-#'
 #' @importFrom ggplot2 aes scale_colour_manual scale_x_continuous
 #'   scale_y_continuous xlab ylab geom_line ggplot theme_bw
 #'   theme element_text margin unit ggtitle
@@ -18,7 +16,7 @@
 #' @export
 
 
-plot_compartments <- function(df, compart_names, ttl){
+plot_compartments <- function(df, compart_names){
 
   time <- max(df$time)
 
@@ -40,9 +38,7 @@ plot_compartments <- function(df, compart_names, ttl){
           strip.text.x = element_text(size = 12),
           legend.title = element_text(size = 12),
           legend.text = element_text(size = 12),
-          plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"),
-          plot.title = element_text(margin = margin(0,0,0.5,0,"cm"))) +
-    ggtitle(ttl)
+          plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"))
 
   ret
 
