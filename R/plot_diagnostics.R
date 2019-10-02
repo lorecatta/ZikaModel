@@ -27,8 +27,6 @@ plot_diagnostics <- function(df, out_fl_nm, diagno_nms){
 
   # xstrips_labs <- as_labeller(setNames(diagno_nms, levels(df$diagnostics)))
 
-  dir.create(out_pth, FALSE, TRUE)
-
   plot_ttl <- gsub(".*_", "", out_fl_nm)
 
   for (i in seq_len(no_pages)){
