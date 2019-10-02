@@ -47,8 +47,7 @@ plot_diagnostics <- function(df, out_fl_nm, diagno_nms){
       theme(axis.text.x = element_text(size = 8),
             axis.text.y = element_text(size = 8),
             strip.text.x = element_text(size = 8),
-            plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"),
-            plot.title = element_text(margin = margin(0,0,0.5,0,"cm")))
+            plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"))
 
     out[[i]] <- ret
 
