@@ -29,6 +29,8 @@ plot_diagnostics <- function(df, out_fl_nm, diagno_nms){
 
   plot_ttl <- gsub(".*_", "", out_fl_nm)
 
+  out <- list()
+
   for (i in seq_len(no_pages)){
 
     ret <- ggplot(df, aes(x = time, y = value)) +
@@ -49,6 +51,8 @@ plot_diagnostics <- function(df, out_fl_nm, diagno_nms){
             plot.title = element_text(margin = margin(0,0,0.5,0,"cm"))) +
       ggtitle(paste0("SEIR Zika model - ", plot_ttl))
 
+    out[[i]] <- ret
+
     # save_plot(ret,
     #           out_pth,
     #           out_fl_nm = sprintf("%s_%s%s", out_fl_nm, i, ".png"),
@@ -56,5 +60,7 @@ plot_diagnostics <- function(df, out_fl_nm, diagno_nms){
     #           hgt = 10)
 
   }
+
+  out
 
 }
