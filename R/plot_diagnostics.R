@@ -6,8 +6,6 @@
 #' @param df The dataframe with the data to plot.
 #' @param diagno_nms A character string of descriptive names of the diagnostics. This will be used for the facet y labels.
 #'
-#' @inheritParams save_plot
-#'
 #' @importFrom ggplot2 aes scale_colour_manual scale_x_continuous
 #'   scale_y_continuous xlab ylab geom_line ggplot theme_bw
 #'   theme element_text margin unit ggtitle as_labeller
@@ -15,7 +13,7 @@
 #' @export
 
 
-plot_diagnostics <- function(df, out_pth, out_fl_nm, diagno_nms){
+plot_diagnostics <- function(df, out_fl_nm, diagno_nms){
 
   number_of_plots_per_page <- 4
 
@@ -53,11 +51,11 @@ plot_diagnostics <- function(df, out_pth, out_fl_nm, diagno_nms){
             plot.title = element_text(margin = margin(0,0,0.5,0,"cm"))) +
       ggtitle(paste0("SEIR Zika model - ", plot_ttl))
 
-    save_plot(ret,
-              out_pth,
-              out_fl_nm = sprintf("%s_%s%s", out_fl_nm, i, ".png"),
-              wdt = 18,
-              hgt = 10)
+    # save_plot(ret,
+    #           out_pth,
+    #           out_fl_nm = sprintf("%s_%s%s", out_fl_nm, i, ".png"),
+    #           wdt = 18,
+    #           hgt = 10)
 
   }
 
