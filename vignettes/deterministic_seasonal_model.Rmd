@@ -1,0 +1,40 @@
+---
+title: "Run a seasonal model"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Run a seasonal model}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r, echo=FALSE}
+library(ZikaModel)
+```
+
+## Seasonality 
+The model allows to account for the effect of seasonal variations in climatic 
+variables (e.g. temperature and precipitation) on Zika transmission dynamics. 
+In the model, seasonality affects: 
+
+* adult mosquitoes mortality;
+* mosquito larvae carrying capacity;
+* Extrinsic Incubation Period.
+
+A deterministic model which includes the effect of seasonality can be implemented
+with the following:
+
+```{r}
+seasonal_model_run <- ZikaModel::run_model(agec = age_init,
+                                           death = deathrt,
+                                           nn_links,
+                                           time = time_frame,
+                                           season = TRUE)
+seasonal_model_run$plot
+```

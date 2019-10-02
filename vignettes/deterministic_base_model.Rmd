@@ -1,0 +1,52 @@
+---
+title: "Run a base model"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Run a base model}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r, echo=FALSE}
+library(ZikaModel)
+```
+
+## Running the base model
+To run the deterministic version of the model, without seasonality and interventions, 
+you can do the following:
+
+```{r}
+# create a vector of human age groups 
+age_init <- c(1, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10)
+  
+# create a vector of human mortality rates 
+deathrt <- c(1e-10, 
+             1e-10, 
+             1e-10, 
+             0.00277068683332695, 
+             0.0210680857689784,
+             0.026724997685722,
+             0.0525354529367476,
+             0.0668013582441452,
+             0.119271483740379,
+             0.279105747097929,
+             0.390197266957464)
+             
+# provide the length of time (in days) that you want to run the model for
+time_frame <- 364 * 50
+
+# run the model
+model_run <- ZikaModel::run_model(agec = age_init,
+                                  death = deathrt,
+                                  nn_links,
+                                  time = time_frame)
+
+model_run$plot
+```
