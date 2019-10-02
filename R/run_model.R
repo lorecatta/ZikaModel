@@ -74,8 +74,6 @@ run_model <- function(agec,
 
   colnames(prop) <- c("Sp", "I1p", "R1p")
 
-  mat_H <- cbind(mat_H, prop)
-
   df_H <- as.data.frame(mat_H)
 
   # rate of total weekly infections
@@ -88,7 +86,7 @@ run_model <- function(agec,
                     id.vars = "time",
                     variable.name = "diagnostic")
 
-  diagno_levs <- c("S", "I1", "R1", "Nt", "Sp", "I1p", "R1p", "births", "inf_1", "inf_1_cum", "wIR_inf")
+  diagno_levs <- c("S", "I1", "R1", "Nt", "births", "inf_1", "inf_1_cum", "wIR_inf")
 
   df_H_melt$diagnostic <- factor(df_H_melt$diagnostic, levels = diagno_levs, labels = diagno_levs)
 
@@ -96,6 +94,25 @@ run_model <- function(agec,
                           "human_diagnostics",
                           diagno_levs)
 
-  list("plot" = ret, "dat" = out)
+  df_prop <- as.data.frame(prop)
+
+  df_prop$time <- tt
+  df_prop_melt <- melt(df_prop,
+                       id.vars = "time",
+                       variable.name = "diagnostic")
+
+  diagno_levs_2 <- c("Sp", "I1p", "R1p")
+
+  df_prop$diagnostic <- factor(df_prop$diagnostic, levels = diagno_levs_2, labels = diagno_levs_2)
+
+  ret <- plot_diagnostics(df_H_melt,
+                          "human_diagnostics",
+                          diagno_levs)
+
+  ret2 <- plot_compartments(df_prop,
+                           c("Susceptibles", "Infectious", "Recovered"),
+                           "SEIR Zika model - human states")
+
+  list("diagnostics" = ret, "proportions" = ret2, "dat" = out)
 
 }
