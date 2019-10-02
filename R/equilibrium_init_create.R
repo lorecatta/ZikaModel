@@ -195,6 +195,8 @@ equilibrium_init_create <- function(agec, death, nn_links, model_parameter_list)
 
   init_S[1:na, 1, 1:NP] <- trunc(aa %o% Nb) # outer product
 
+  init_S_sign <- signif(init_S, 6)
+
   init_I1 <- array(0, c(na, 2, NP))
 
   init_R1 <- array(0, c(na, 2, NP))
@@ -226,7 +228,7 @@ equilibrium_init_create <- function(agec, death, nn_links, model_parameter_list)
               dis1 = dis1,
               rho1 = rho1,
               phi1 = phi1,
-              init_S = init_S,
+              init_S = init_S_sign,
               init_I1 = init_I1,
               init_R1 = init_R1,
               pTG_bigpatch = pTG_bigpatch,
