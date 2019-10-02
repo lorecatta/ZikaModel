@@ -44,7 +44,7 @@ plot_diagnostics <- function(df, out_pth, out_fl_nm, diagno_nms){
                                    # labeller = xstrips_labs,
                                    page = i) +
       scale_x_continuous(name = "Years", breaks = brks, labels = brks / 364) +
-      scale_y_continuous(name = "") +
+      scale_y_continuous(name = "", labels = scales::comma) +
       theme_bw() +
       theme(axis.text.x = element_text(size = 8),
             axis.text.y = element_text(size = 8),
