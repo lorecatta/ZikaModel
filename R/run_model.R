@@ -93,7 +93,6 @@ run_model <- function(agec,
   df_H_melt$diagnostic <- factor(df_H_melt$diagnostic, levels = diagno_levs, labels = diagno_levs)
 
   ret <- plot_diagnostics(df_H_melt,
-                          out_dir,
                           "human_diagnostics",
                           diagno_levs)
 
