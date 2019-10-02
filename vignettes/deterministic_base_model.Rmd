@@ -51,7 +51,7 @@ model_run <- ZikaModel::run_model(agec = age_init,
 
 The model results can be visually inspected with
 
-```{r, fig.height = 5, fig.width = 5}
+```{r, fig.height = 5, fig.width = 7}
 model_run$proportions
 ```
 
