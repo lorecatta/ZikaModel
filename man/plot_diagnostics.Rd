@@ -4,14 +4,10 @@
 \alias{plot_diagnostics}
 \title{plot_diagnostics}
 \usage{
-plot_diagnostics(df, out_pth, out_fl_nm, diagno_nms)
+plot_diagnostics(df, out_fl_nm, diagno_nms)
 }
 \arguments{
 \item{df}{The dataframe with the data to plot.}
-
-\item{out_pth}{The path where to save the plot}
-
-\item{out_fl_nm}{The output file name}
 
 \item{diagno_nms}{A character string of descriptive names of the diagnostics. This will be used for the facet y labels.}
 }
