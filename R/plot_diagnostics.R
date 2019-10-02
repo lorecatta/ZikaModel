@@ -25,7 +25,7 @@ plot_diagnostics <- function(df, out_pth, out_fl_nm, diagno_nms){
 
   time <- max(df$time)
 
-  brks <- seq(from = 0, to = time, by = 364*10)
+  brks <- seq(from = 0, to = time, by = 364 * 5)
 
   # xstrips_labs <- as_labeller(setNames(diagno_nms, levels(df$diagnostics)))
 
