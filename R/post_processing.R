@@ -1,11 +1,28 @@
-function () {
 
-  tt <- out$TIME
+#------------------------------------------------
+
+#' post_processing
+
+#'
+#' \code{post_processing} post processes model outputs and saves plots of diagnostics.
+#'
+#' @param dat list of model outputs from the model run.
+#'
+#' @inheritParams save_plot
+#'
+#' @export
+
+
+post_processing <- function(dat) {
+
+  weekly_lag_time <- 14
+
+  tt <- dat$TIME
   time <- max(tt)
 
   diagno_hum <- c("S", "I1", "R1", "births", "inf_1")
 
-  dia_hum <- setNames(out[diagno_hum], diagno_hum)
+  dia_hum <- setNames(dat[diagno_hum], diagno_hum)
 
   # cum sum over the first dimension - specify the dims you want to keep
   # no need for aperm reshaping here
@@ -25,10 +42,10 @@ function () {
 
   colnames(prop) <- c("Sp", "I1p", "R1p")
 
-  df_H <- as.data.frame(mat_H)
+  df_H <- as.data.frame(cbind(mat_H, prop))
 
   # rate of total weekly infections
-  df_H$wIR_inf <- lag_diff(df_H$inf_1_cum, 14)
+  df_H$wIR_inf <- lag_diff(df_H$inf_1_cum, weekly_lag_time)
 
   df_H$wIR_inf <- df_H$wIR_inf / df_H$Nt * 1000
 
@@ -37,32 +54,14 @@ function () {
                     id.vars = "time",
                     variable.name = "diagnostic")
 
-  diagno_levs <- c("S", "I1", "R1", "Nt", "births", "inf_1", "inf_1_cum", "wIR_inf")
+  diagno_levs <- c("S", "I1", "R1", "Nt", "births", "inf_1", "inf_1_cum", "wIR_inf", "Sp", "I1p", "R1p")
 
   df_H_melt$diagnostic <- factor(df_H_melt$diagnostic, levels = diagno_levs, labels = diagno_levs)
 
-  ret <- plot_diagnostics(df_H_melt,
-                          "human_diagnostics",
-                          diagno_levs)
+  diagno_1 <- subset(df_H_melt, diagnostic %in% c("Sp", "I1p", "R1p"))
 
-  df_prop <- as.data.frame(prop)
+  diagno_2 <- subset(df_H_melt, diagnostic %in% c("S", "I1", "R1", "Nt", "births", "inf_1", "inf_1_cum", "wIR_inf"))
 
-  df_prop$time <- tt
-  df_prop_melt <- melt(df_prop,
-                       id.vars = "time",
-                       variable.name = "compartment")
-
-  diagno_levs_2 <- c("Sp", "I1p", "R1p")
-
-  df_prop_melt$compartment <- factor(df_prop_melt$compartment, levels = diagno_levs_2, labels = diagno_levs_2)
-
-  ret <- plot_diagnostics(df_H_melt,
-                          "human_diagnostics",
-                          diagno_levs)
-
-  ret2 <- plot_compartments(df_prop_melt,
-                            c("Susceptibles", "Infectious", "Recovered"))
-
-  list("diagnostics" = ret, "proportions" = ret2, "dat" = out)
+  list("compartments" = diagno_1, "demographics" = diagno_2)
 
 }
