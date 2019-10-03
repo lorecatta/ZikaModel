@@ -1,14 +1,11 @@
 Package: ZikaModel
 Type: Package
-Title: Stochastic Zika odin model
+Title: Zika odin model
 Version: 0.1.0
-Author: person(given = "Lorenzo", 
-               family = "Cattarino", 
-               role = c("aut"), 
-               email =  "l.cattarino@imperial.ac.uk")
-Maintainer: L Cattarino <l.cattarino@imperial.ac.uk>
-Description: Stochastic implementation of the Zika model 
-    (Ferguson et al. 2016, Science) using the package odin.
+Authors@R: person("Lorenzo", "Cattarino", role = c("aut", "cre"),
+                  email = "l.cattarino@imperial.ac.uk")
+Description: The package implements the deterministic and stochastic versions of
+    the Zika transmission model (Ferguson et al. 2016, Science) using the package odin.
 License: MIT + file LICENSE
 Depends:
     R (>= 2.10)
