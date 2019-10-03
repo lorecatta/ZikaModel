@@ -1,7 +1,7 @@
 
 #------------------------------------------------
 
-#' plot_demographics
+# plot_demographics
 
 #' \code{plot_demographics} makes a faceted plot of the model diagnostics
 #'

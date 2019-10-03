@@ -2,8 +2,7 @@
 % Please edit documentation in R/plot_demographics.R
 \name{plot_demographics}
 \alias{plot_demographics}
-\title{plot_demographics
-\code{plot_demographics} makes a faceted plot of the model diagnostics}
+\title{\code{plot_demographics} makes a faceted plot of the model diagnostics}
 \usage{
 plot_demographics(df)
 }
@@ -11,6 +10,5 @@ plot_demographics(df)
 \item{df}{The dataframe with the data to plot.}
 }
 \description{
-plot_demographics
 \code{plot_demographics} makes a faceted plot of the model diagnostics
 }
