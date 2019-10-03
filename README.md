@@ -4,7 +4,7 @@ ZikaModel
 =========
 
 <!-- badges: start -->
-[![Travis build status](https://travis-ci.org/mrc-ide/zika-transmission-model.svg?branch=master)](https://travis-ci.org/mrc-ide/zika-transmission-model) <!-- badges: end -->
+[![Travis build status](https://travis-ci.org/mrc-ide/ZikaModel.svg?branch=master)](https://travis-ci.org/mrc-ide/ZikaModel.svg?branch=master) <!-- badges: end -->
 
 `ZikaModel` is an R package for running the Zika transmission model developed at Imperial College London using R odin.
 
