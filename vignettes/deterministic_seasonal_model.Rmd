@@ -1,5 +1,7 @@
 ---
 title: "Run a seasonal model"
+author: "Lorenzo Cattarino"
+date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Run a seasonal model}
