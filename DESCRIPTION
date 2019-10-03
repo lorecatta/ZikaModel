@@ -16,7 +16,8 @@ Imports:
     ggplot2,
     ggforce,
     odin,
-    scales
+    scales,
+    dde
 Remotes: 
     mrc-ide/dde
 RoxygenNote: 6.1.1
