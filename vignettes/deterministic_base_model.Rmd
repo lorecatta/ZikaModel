@@ -45,22 +45,26 @@ deathrt <- c(1e-10,
 time_frame <- 364 * 100
 
 # run the model
-model_run <- ZikaModel::run_model(agec = age_init,
-                                  death = deathrt,
-                                  nn_links,
-                                  time = time_frame)
+model_outputs <- ZikaModel::run_model(agec = age_init,
+                                      death = deathrt,
+                                      nn_links,
+                                      time = time_frame)
 ```
 
-The model results can be visually inspected with
+We can calculate the proportions of the total human population in each compartment 
+and few other useful demographics using the `post_processing` function
+
+```{r}
+diagnostics <- post_processing(model_outputs)
+```
+
+Now we plot them
 
 ```{r, fig.height = 4, fig.width = 6}
-model_run$proportions
+plot_compartments(diagnostics$compartments,
+                  c("Susceptibles", "Infectious", "Recovered"))
 ```
 
 ```{r, fig.height = 6, fig.width = 8}
-model_run$diagnostics[[1]]
-```
-
-```{r, fig.height = 6, fig.width = 8}
-model_run$diagnostics[[2]]
+plot_demographics(diagnostics$demographics)
 ```
