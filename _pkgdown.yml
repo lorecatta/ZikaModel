@@ -14,6 +14,8 @@ navbar:
         href: articles/deterministic_base_model.html
       - text: "Run a seasonal model"
         href: articles/deterministic_seasonal_model.html
+      - text: "Run a stochastic model"
+        href: articles/stochastic_model.html
     - text: "News"
       href: news/index.html
   right:
