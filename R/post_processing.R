@@ -10,6 +10,8 @@
 #'
 #' @inheritParams save_plot
 #'
+#' @importFrom stats setNames
+#'
 #' @export
 
 
