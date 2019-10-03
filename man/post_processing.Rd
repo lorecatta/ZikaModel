@@ -10,5 +10,5 @@ post_processing(dat)
 \item{dat}{list of model outputs from the model run.}
 }
 \description{
-\code{post_processing} post processes model outputs and saves plots of diagnostics.
+\code{post_processing} post processes model outputs and saves plots of diagnostics
 }
