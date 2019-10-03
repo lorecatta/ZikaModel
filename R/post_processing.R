@@ -54,11 +54,11 @@ post_processing <- function(dat) {
                               id.vars = "time",
                               variable.name = "diagnostic")
 
-  # diagno_levs <- c("S", "I1", "R1", "births", "inf_1", "Nt", "inf_1_cum", "Sp", "I1p", "R1p", "wIR_inf")
+  current_levs <- c("S", "I1", "R1", "births", "inf_1", "Nt", "inf_1_cum", "Sp", "I1p", "R1p", "wIR_inf")
 
-  diagno_levs <- c("Susceptibles", "Infectious", "Recovered", "Births", "Incidence of infections", "Total population", "Cumulative incidence", "Sp", "I1p", "R1p", "Weekly infections/1000")
+  new_levs <- c("Susceptibles", "Infectious", "Recovered", "Births", "Incidence of infections", "Total population", "Cumulative incidence", "Sp", "I1p", "R1p", "Weekly infections/1000")
 
-  df_H_melt$diagnostic <- factor(df_H_melt$diagnostic, levels = diagno_levs, labels = diagno_levs)
+  df_H_melt$diagnostic <- factor(df_H_melt$diagnostic, levels = current_levs, labels = new_levs)
 
   diagno_1 <- subset(df_H_melt, diagnostic %in% c("Sp", "I1p", "R1p"))
 
