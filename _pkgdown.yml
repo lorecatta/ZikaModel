@@ -1,1 +1,22 @@
-destination: docs
+url: https://mrc-ide.github.io/ZikaModel/
+
+navbar:
+  title: "ZikaModel"
+  type: inverse
+  left:
+    - href: index.html
+      icon: fa-home fa-lg
+    - text: "Functions"
+      href: reference/index.html
+    - text: "Articles"
+      menu:
+      - text: "Run a base model"
+        href: articles/deterministic_base_model.html
+      - text: "Run a seasonal model"
+        href: articles/deterministic_seasonal_model.html
+    - text: "News"
+      href: news/index.html
+  right:
+    - icon: fa-github fa-lg
+      href: https://github.com/mrc-ide/ZikaModel
+
