@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r, echo=FALSE}
+```{r}
 library(ZikaModel)
 ```
 
@@ -33,10 +33,8 @@ A deterministic model which includes the effect of seasonality can be implemente
 with the following:
 
 ```{r}
-# create a vector of human age groups 
 age_init <- c(1, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10)
   
-# create a vector of human mortality rates 
 deathrt <- c(1e-10, 
              1e-10, 
              1e-10, 
@@ -48,27 +46,26 @@ deathrt <- c(1e-10,
              0.119271483740379,
              0.279105747097929,
              0.390197266957464)
-             
-# provide the length of time (in days) that you want to run the model for
+
 time_frame <- 364 * 100
 
-model_run <- ZikaModel::run_model(agec = age_init,
-                                  death = deathrt,
-                                  nn_links,
-                                  time = time_frame,
-                                  season = TRUE)
+model_outputs <- run_model(agec = age_init,
+                           death = deathrt,
+                           nn_links,
+                           time = time_frame,
+                           season = TRUE)
 ```
 
-The model results can be visually inspected with
+Now postprocessing and plotting with 
 
 ```{r, fig.height = 4, fig.width = 6}
-model_run$proportions
+diagnostics <- post_processing(model_outputs)
+
+plot_compartments(diagnostics$compartments)
 ```
 
-```{r, fig.height = 6, fig.width = 8}
-model_run$diagnostics[[1]]
-```
+The dynamics look more jagged compared to the baseline model due to the effect of seasonality on transmission which makes them jumping more up and down. 
 
 ```{r, fig.height = 6, fig.width = 8}
-model_run$diagnostics[[2]]
+plot_demographics(diagnostics$demographics)
 ```

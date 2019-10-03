@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r, echo = FALSE}
+```{r}
 library(ZikaModel)
 ```
 
@@ -40,15 +40,15 @@ deathrt <- c(1e-10,
              0.119271483740379,
              0.279105747097929,
              0.390197266957464)
-             
+
 # provide the length of time (in days) that you want to run the model for
 time_frame <- 364 * 100
 
 # run the model
-model_outputs <- ZikaModel::run_model(agec = age_init,
-                                      death = deathrt,
-                                      nn_links,
-                                      time = time_frame)
+model_outputs <- run_model(agec = age_init,
+                           death = deathrt,
+                           nn_links,
+                           time = time_frame)
 ```
 
 We can calculate the proportions of the total human population in each compartment 
@@ -61,8 +61,7 @@ diagnostics <- post_processing(model_outputs)
 Now we plot them
 
 ```{r, fig.height = 4, fig.width = 6}
-plot_compartments(diagnostics$compartments,
-                  c("Susceptibles", "Infectious", "Recovered"))
+plot_compartments(diagnostics$compartments)
 ```
 
 ```{r, fig.height = 6, fig.width = 8}
