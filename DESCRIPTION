@@ -15,7 +15,8 @@ Imports:
     reshape2,
     ggplot2,
     ggforce,
-    odin
+    odin,
+    scales
 Remotes: 
     mrc-ide/dde
 RoxygenNote: 6.1.1
