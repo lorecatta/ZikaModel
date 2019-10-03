@@ -1,210 +1,68 @@
-#------------------------------------------------
-#' post_processing
-#'
-#' \code{post_processing} post processes model outputs and saves plots of diagnostics.
-#'
-#' @param dat The dataframe with all the data output from the model run.
-#'
-#' @inheritParams save_plot
-#'
-#' @export
+function () {
 
+  tt <- out$TIME
+  time <- max(tt)
 
-post_processing <- function(dat, out_pth){
+  diagno_hum <- c("S", "I1", "R1", "births", "inf_1")
 
-  diagno_hum <- c("Susceptibles" = "S",
-                  "Infectious" = "I1",
-                  "Recovered" = "R1",
-                  "Total population" = "Ntotal",
-                  "Births" = "births",
-                  "Incidence of infections" = "inf_1",
-                  "Cumulative infections" = "sinf1",
-                  "Fraction of infected per patch" = "Y1T",
-                  "Fraction of infectious h per patch" = "infectious1")
+  dia_hum <- setNames(out[diagno_hum], diagno_hum)
 
-  diagno_hum_summary <- c("Average R0t_1 across patches" = "R0t_1av",
-                          "FOI on humans (average across p)" = "FOI1av",
-                          "Average mortality rate across patches" = "Deltaav",
-                          "Average carrying capacity across patches" = "Kcav",
-                          "Average eip across patches" = "eipav")
+  # cum sum over the first dimension - specify the dims you want to keep
+  # no need for aperm reshaping here
+  inf_1_cum <- apply(dia_hum$inf_1, c(2, 3, 4), cumsum)
 
-  extra_diagno_hum <- c("Weekly infections/1000" = "w_Ir_infections")
+  Nt <- dia_hum$S + dia_hum$I1 + dia_hum$R1
 
-  diagno_mos <- c("Susceptibles wt" = "Mwt_S",
-                  "Infected 1 wt" = "Mwt_E1",
-                  "Infected 2 wt" = "Mwt_E2",
-                  "Infectious wt" = "Mwt_I1",
-                  "Total wt" = "Mwt_tot",
-                  "Larvae wt birth" = "Lwt_birth",
-                  "Larvae wt" = "Lwt",
-                  "Susceptibles wb" = "Mwb_S",
-                  "Infected 1 wb" = "Mwb_E1",
-                  "Infected 2 wb" = "Mwb_E2",
-                  "Infectious wb" = "Mwb_I1",
-                  "Total wb" = "Mwb_tot",
-                  "Larvae wb birth" = "Lwb_birth",
-                  "Larvae wb" = "Lwb")
+  dia_hum <- c(dia_hum,
+               list(Nt = Nt),
+               list(inf_1_cum = inf_1_cum))
 
-  diagno_mos_summary <- c("FOI on wt mos (average across p)" = "Mwt_FOI1av")
+  humsum <- lapply(dia_hum, function(x){apply(x, 1, sum)})
 
-  mos_comparts <- c("Mwt_S",
-                    "Mwt_E1",
-                    "Mwt_E2",
-                    "Mwt_I1",
-                    "Mwt_tot",
-                    "Mwb_S",
-                    "Mwb_E1",
-                    "Mwb_E2",
-                    "Mwb_I1",
-                    "Mwb_tot")
+  mat_H <- do.call("cbind", humsum)
 
+  prop <- mat_H[, c("S", "I1", "R1")] / mat_H[, "Nt"]
 
-  # post processing -------------------------------------------------------------
+  colnames(prop) <- c("Sp", "I1p", "R1p")
 
+  df_H <- as.data.frame(mat_H)
 
-  tt <- seq(1, dim(dat$S)[1], 1)
+  # rate of total weekly infections
+  df_H$wIR_inf <- lag_diff(df_H$inf_1_cum, 14)
 
-  mos <- setNames(dat[diagno_mos[diagno_mos %in% mos_comparts]], diagno_mos[diagno_mos %in% mos_comparts])
+  df_H$wIR_inf <- df_H$wIR_inf / df_H$Nt * 1000
 
-  dia_hum <- setNames(dat[c(diagno_hum, diagno_hum_summary)],
-                      c(diagno_hum, diagno_hum_summary))
+  df_H$time <- tt
+  df_H_melt <- melt(df_H,
+                    id.vars = "time",
+                    variable.name = "diagnostic")
 
-  dia_mos <- setNames(dat[c(diagno_mos, diagno_mos_summary)],
-                      c(diagno_mos, diagno_mos_summary))
+  diagno_levs <- c("S", "I1", "R1", "Nt", "births", "inf_1", "inf_1_cum", "wIR_inf")
 
-  # sum across patches
-  mossum <- lapply(mos, function(x){apply(x, sum, MARGIN = 1)})
+  df_H_melt$diagnostic <- factor(df_H_melt$diagnostic, levels = diagno_levs, labels = diagno_levs)
 
-  dia_humsum <- lapply(dia_hum[diagno_hum],
-                       function(x){apply(x, sum, MARGIN = 1)})
+  ret <- plot_diagnostics(df_H_melt,
+                          "human_diagnostics",
+                          diagno_levs)
 
-  dia_humsum <- c(dia_humsum, dia_hum[diagno_hum_summary])
+  df_prop <- as.data.frame(prop)
 
-  dia_mossum <- lapply(dia_mos[diagno_mos],
-                       function(x) {apply(x, sum, MARGIN = 1)})
+  df_prop$time <- tt
+  df_prop_melt <- melt(df_prop,
+                       id.vars = "time",
+                       variable.name = "compartment")
 
-  dia_mossum <- c(dia_mossum, dia_mos[diagno_mos_summary])
+  diagno_levs_2 <- c("Sp", "I1p", "R1p")
 
+  df_prop_melt$compartment <- factor(df_prop_melt$compartment, levels = diagno_levs_2, labels = diagno_levs_2)
 
-  # plot wild type mosquitoes compartments --------------------------------------
+  ret <- plot_diagnostics(df_H_melt,
+                          "human_diagnostics",
+                          diagno_levs)
 
+  ret2 <- plot_compartments(df_prop_melt,
+                            c("Susceptibles", "Infectious", "Recovered"))
 
-  mat_Mwt <- do.call("cbind", mossum[mos_comparts[1:4]])
-
-  mat_Mwt <- mat_Mwt / mossum$Mwt_tot
-
-  mat_Mwt[is.na(mat_Mwt)] <- 0
-
-  df_Mwt <- as.data.frame(mat_Mwt)
-
-  df_Mwt$time <- tt
-
-  df_Mwt_melt <- melt(df_Mwt,
-                      id.vars = "time",
-                      variable.name = "compartment")
-
-  wt_mos_comp_plot <- plot_compartments(df_Mwt_melt,
-                                        names(diagno_mos[1:4]),
-                                        "SEIR Zika model - wild type mosquitoes")
-
-  save_plot(wt_mos_comp_plot,
-            out_pth,
-            "compartments_mosquitoes_wt",
-            wdt = 17,
-            hgt = 12)
-
-
-  # plot wolbachia mosquitoes compartments --------------------------------------
-
-
-  mat_Mwb <- do.call("cbind", mossum[mos_comparts[6:9]])
-
-  mat_Mwb <- mat_Mwb / mossum$Mwb_tot
-
-  mat_Mwb[is.na(mat_Mwb)] <- 0
-
-  df_Mwb <- as.data.frame(mat_Mwb)
-
-  df_Mwb$time <- tt
-
-  df_Mwb_melt <- melt(df_Mwb,
-                      id.vars = "time",
-                      variable.name = "compartment")
-
-  wb_mos_comp_plot <- plot_compartments(df_Mwb_melt,
-                                        names(diagno_mos[8:11]),
-                                        "SEIR Zika model - wolbachia mosquitoes")
-
-  save_plot(wb_mos_comp_plot,
-            out_pth,
-            "compartments_mosquitoes_wb",
-            wdt = 17,
-            hgt = 12)
-
-
-  # plot human diagnostics ------------------------------------------------------
-
-
-  mat_diagnostics <- do.call("cbind", dia_humsum)
-
-  df_diagnostics <- as.data.frame(mat_diagnostics)
-
-  df_diagnostics$time <- tt
-
-  df_diagnostics$w_Ir_infections <- c(rep(0, 7),
-                                      diff(df_diagnostics$sinf1,
-                                           lag = 7,
-                                           differences = 1))
-
-  df_diagnostics$w_Ir_infections <- df_diagnostics$w_Ir_infections / df_diagnostics$Ntotal * 1000
-
-  # new_array <- array(0, dim = dim(dat$sinf1))
-  #
-  # for (i in seq_len(11)){
-  #
-  #   for (j in seq_len(2)){
-  #
-  #     for (k in seq_len(21)){
-  #
-  #       new_array[,i,j,k] <- c(rep(0, 7),
-  #                              diff(dat$sinf1[,i,j,k], lag = 7, differences = 1))
-  #
-  #     }
-  #   }
-  # }
-  #
-  # new_array_2 <- array(0, dim = dim(dat$sinf1))
-  #
-  # new_array_2[dat$Ntotal != 0] <- (new_array[dat$Ntotal != 0] / dat$Ntotal[dat$Ntotal != 0]) * 1000
-  #
-  # df_diagnostics$w_Ir_infections <- apply(new_array_2, sum, MARGIN = 1)
-
-  df_diagnostics_melt <- melt(df_diagnostics,
-                              id.vars = "time",
-                              variable.name = "diagnostics")
-
-  plot_diagnostics(df_diagnostics_melt,
-                   out_pth,
-                   "diagnostics_humans",
-                   names(c(diagno_hum, diagno_hum_summary, extra_diagno_hum)))
-
-
-  # plot mosquito diagnostics ---------------------------------------------------
-
-
-  mat_diagnostics_mos <- do.call("cbind", dia_mossum)
-
-  df_diagnostics_mos <- as.data.frame(mat_diagnostics_mos)
-
-  df_diagnostics_mos$time <- tt
-
-  df_diagnostics_mos_melt <- melt(df_diagnostics_mos,
-                                  id.vars = "time",
-                                  variable.name = "diagnostics")
-
-  plot_diagnostics(df_diagnostics_mos_melt,
-                   out_pth,
-                   "diagnostics_mosquitoes",
-                   names(c(diagno_mos, diagno_mos_summary)))
+  list("diagnostics" = ret, "proportions" = ret2, "dat" = out)
 
 }
