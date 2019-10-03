@@ -56,5 +56,5 @@ library(ZikaModel)
 ```
 
 ## Running the base model
-Check this vignette on how to run the [deterministic]() base version of the model. 
-
+Check this vignette on how to run the [deterministic](https://mrc-ide.github.io/ZikaModel/articles/deterministic_base_model.html) 
+base version of the model. 
