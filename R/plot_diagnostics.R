@@ -1,10 +1,9 @@
 #------------------------------------------------
-#' plot_diagnostics
+#' plot_demographics
 #'
-#' \code{plot_diagnostics} makes a faceted plot of the model diagnostics.
+#' \code{plot_demographics} makes a faceted plot of the model diagnostics.
 #'
 #' @param df The dataframe with the data to plot.
-#' @param diagno_nms A character string of descriptive names of the diagnostics. This will be used for the facet y labels.
 #'
 #' @importFrom ggplot2 aes scale_colour_manual scale_x_continuous
 #'   scale_y_continuous xlab ylab geom_line ggplot theme_bw
@@ -13,9 +12,11 @@
 #' @export
 
 
-plot_diagnostics <- function(df, out_fl_nm, diagno_nms){
+plot_demographics <- function(df){
 
   number_of_plots_per_page <- 4
+
+  diagno_nms <- levels(df$diagnostic)
 
   total_no_plots <- length(diagno_nms)
 
@@ -26,8 +27,6 @@ plot_diagnostics <- function(df, out_fl_nm, diagno_nms){
   brks <- seq(from = 0, to = time, by = 364 * 5)
 
   # xstrips_labs <- as_labeller(setNames(diagno_nms, levels(df$diagnostics)))
-
-  plot_ttl <- gsub(".*_", "", out_fl_nm)
 
   out <- list()
 
@@ -50,12 +49,6 @@ plot_diagnostics <- function(df, out_fl_nm, diagno_nms){
             plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"))
 
     out[[i]] <- ret
-
-    # save_plot(ret,
-    #           out_pth,
-    #           out_fl_nm = sprintf("%s_%s%s", out_fl_nm, i, ".png"),
-    #           wdt = 18,
-    #           hgt = 10)
 
   }
 
