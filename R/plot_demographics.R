@@ -9,7 +9,7 @@
 #'
 #' @importFrom ggplot2 aes scale_colour_manual scale_x_continuous
 #'   scale_y_continuous xlab ylab geom_line ggplot theme_bw
-#'   theme element_text margin unit ggtitle as_labeller
+#'   theme element_text margin unit ggtitle .data as_labeller
 #'
 #' @export
 
@@ -34,7 +34,7 @@ plot_demographics <- function(df){
 
   for (i in seq_len(no_pages)){
 
-    ret <- ggplot(df, aes(x = time, y = value)) +
+    ret <- ggplot(df, aes(x = time, y = .data$value)) +
       geom_line(size = 0.5, colour = "#63B8FF") +
       ggforce::facet_wrap_paginate(~ diagnostic,
                                    ncol = 2,

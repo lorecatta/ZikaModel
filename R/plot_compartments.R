@@ -9,7 +9,7 @@
 #'
 #' @importFrom ggplot2 aes scale_colour_manual scale_x_continuous
 #'   scale_y_continuous xlab ylab geom_line ggplot theme_bw
-#'   theme element_text margin unit ggtitle
+#'   theme element_text margin unit ggtitle .data
 #'
 #' @export
 
@@ -24,7 +24,7 @@ plot_compartments <- function(df){
   brks <- seq(from = 0, to = time, by = 364 * 5)
 
   ret <- ggplot(df,
-                aes(x = time, y = value, col = diagnostic)) +
+                aes(x = time, y = .data$value, col = .data$diagnostic)) +
     geom_line(size = 0.7) +
     scale_colour_manual(
       values = c("#3333FF", "#FFA500", "#CC0000", "#339900"),
