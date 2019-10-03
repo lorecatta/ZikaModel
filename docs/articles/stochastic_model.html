@@ -5,11 +5,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Run a base model • ZikaModel</title>
+<title>Run a stochastic model • ZikaModel</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Run a base model">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Run a stochastic model">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -86,27 +86,26 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Run a base model</h1>
+      <h1>Run a stochastic model</h1>
                         <h4 class="author">Lorenzo Cattarino</h4>
             
             <h4 class="date">2019-10-03</h4>
       
       
-      <div class="hidden name"><code>deterministic_base_model.Rmd</code></div>
+      <div class="hidden name"><code>stochastic_model.Rmd</code></div>
 
     </div>
 
     
     
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ZikaModel)</code></pre></div>
-<div id="running-the-base-model" class="section level2">
+<div id="stochasticity" class="section level2">
 <h2 class="hasAnchor">
-<a href="#running-the-base-model" class="anchor"></a>Running the base model</h2>
-<p>To run the deterministic version of the model, without seasonality and interventions, you can do the following:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create a vector of human age groups </span>
-age_init &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>)
+<a href="#stochasticity" class="anchor"></a>Stochasticity</h2>
+<p>The <code>ZIkaModel</code> package implements also a stochastic version of the Zika tranmsission model. To avoid confusion, the stochastic version of the model is written as a different odin source file. To run the stochastic model, we need to create a <code>model generator</code>, which is a function that will generate an instance of the stochastic model, using the specified path to the odin source file.</p>
+<p>The following code will do this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">age_init &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>)
   
-<span class="co"># create a vector of human mortality rates </span>
 deathrt &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">1e-10</span>, 
              <span class="fl">1e-10</span>, 
              <span class="fl">1e-10</span>, 
@@ -119,25 +118,35 @@ deathrt &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdoc
              <span class="fl">0.279105747097929</span>,
              <span class="fl">0.390197266957464</span>)
 
-<span class="co"># provide the length of time (in days) that you want to run the model for</span>
-time_frame &lt;-<span class="st"> </span><span class="dv">364</span> <span class="op">*</span><span class="st"> </span><span class="dv">100</span>
+<span class="co"># path to odin source file</span>
+odin_model_path &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"extdata/odin_model_stoch.R"</span>, <span class="dt">package =</span> <span class="st">"ZikaModel"</span>)
 
-<span class="co"># run the model</span>
-model_outputs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/run_model.html">run_model</a></span>(<span class="dt">agec =</span> age_init,
-                           <span class="dt">death =</span> deathrt,
-                           nn_links,
-                           <span class="dt">time =</span> time_frame)</code></pre></div>
-<p>We can calculate the proportions of the total human population in each compartment and few other useful demographics using the <code>post_processing</code> function</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">diagnostics &lt;-<span class="st"> </span><span class="kw"><a href="../reference/post_processing.html">post_processing</a></span>(model_outputs)</code></pre></div>
-<p>Now we plot them</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/plot_compartments.html">plot_compartments</a></span>(diagnostics<span class="op">$</span>compartments)</code></pre></div>
-<p><img src="deterministic_base_model_files/figure-html/unnamed-chunk-5-1.png" width="576"></p>
+create_generator &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_r_model.html">create_r_model</a></span>(odin_model_path,
+                                   <span class="dt">agec =</span> age_init,
+                                   <span class="dt">death =</span> deathrt,
+                                   nn_links,
+                                   <span class="dt">season =</span> <span class="ot">TRUE</span>)
+
+<span class="co"># model generator </span>
+gen &lt;-<span class="st"> </span>create_generator<span class="op">$</span><span class="kw">generator</span>(<span class="dt">user =</span> create_generator<span class="op">$</span>state)</code></pre></div>
+<p>Now run the model.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">time_frame &lt;-<span class="st"> </span><span class="dv">364</span> <span class="op">*</span><span class="st"> </span><span class="dv">100</span>
+
+<span class="co"># runs the model</span>
+model_run &lt;-<span class="st"> </span>gen<span class="op">$</span><span class="kw">run</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq</a></span>(<span class="dv">0</span>, time_frame, <span class="dv">1</span>))</code></pre></div>
+<p>We reshape the model outputs with the following command</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stoch_out &lt;-<span class="st"> </span>gen<span class="op">$</span><span class="kw">transform_variables</span>(model_run)</code></pre></div>
+<p>And finally postprocessing and plotting with</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">diagnostics &lt;-<span class="st"> </span><span class="kw"><a href="../reference/post_processing.html">post_processing</a></span>(stoch_out)
+
+<span class="kw"><a href="../reference/plot_compartments.html">plot_compartments</a></span>(diagnostics<span class="op">$</span>compartments)</code></pre></div>
+<p><img src="stochastic_model_files/figure-html/unnamed-chunk-6-1.png" width="576"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/plot_demographics.html">plot_demographics</a></span>(diagnostics<span class="op">$</span>demographics)
 <span class="co">#&gt; [[1]]</span></code></pre></div>
-<p><img src="deterministic_base_model_files/figure-html/unnamed-chunk-6-1.png" width="768"></p>
+<p><img src="stochastic_model_files/figure-html/unnamed-chunk-7-1.png" width="768"></p>
 <pre><code>#&gt; 
 #&gt; [[2]]</code></pre>
-<p><img src="deterministic_base_model_files/figure-html/unnamed-chunk-6-2.png" width="768"></p>
+<p><img src="stochastic_model_files/figure-html/unnamed-chunk-7-2.png" width="768"></p>
 </div>
   </div>
 
@@ -146,7 +155,7 @@ model_outputs &lt;-<span class="st"> </span><span class="kw"><a href="../referen
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#running-the-base-model">Running the base model</a></li>
+<li><a href="#stochasticity">Stochasticity</a></li>
       </ul>
 </div>
       </div>

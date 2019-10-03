@@ -19,7 +19,7 @@
 </head>
 <body>
     <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
@@ -43,7 +43,7 @@
   </a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../reference/index.html">Functions</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -58,10 +58,23 @@
     <li>
       <a href="../articles/deterministic_seasonal_model.html">Run a seasonal model</a>
     </li>
+    <li>
+      <a href="../articles/stochastic_model.html">Run a stochastic model</a>
+    </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/mrc-ide/ZikaModel">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -74,7 +87,9 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Run a seasonal model</h1>
+                        <h4 class="author">Lorenzo Cattarino</h4>
             
+            <h4 class="date">2019-10-03</h4>
       
       
       <div class="hidden name"><code>deterministic_seasonal_model.Rmd</code></div>
@@ -83,6 +98,7 @@
 
     
     
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ZikaModel)</code></pre></div>
 <div id="seasonality" class="section level2">
 <h2 class="hasAnchor">
 <a href="#seasonality" class="anchor"></a>Seasonality</h2>
@@ -93,10 +109,8 @@
 <li>Extrinsic Incubation Period.</li>
 </ul>
 <p>A deterministic model which includes the effect of seasonality can be implemented with the following:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create a vector of human age groups </span>
-age_init &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">age_init &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>)
   
-<span class="co"># create a vector of human mortality rates </span>
 deathrt &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">1e-10</span>, 
              <span class="fl">1e-10</span>, 
              <span class="fl">1e-10</span>, 
@@ -108,22 +122,26 @@ deathrt &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdoc
              <span class="fl">0.119271483740379</span>,
              <span class="fl">0.279105747097929</span>,
              <span class="fl">0.390197266957464</span>)
-             
-<span class="co"># provide the length of time (in days) that you want to run the model for</span>
+
 time_frame &lt;-<span class="st"> </span><span class="dv">364</span> <span class="op">*</span><span class="st"> </span><span class="dv">100</span>
 
-model_run &lt;-<span class="st"> </span>ZikaModel<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/ZikaModel/topics/run_model">run_model</a></span>(<span class="dt">agec =</span> age_init,
-                                  <span class="dt">death =</span> deathrt,
-                                  nn_links,
-                                  <span class="dt">time =</span> time_frame,
-                                  <span class="dt">season =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p>The model results can be visually inspected with</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model_run<span class="op">$</span>proportions</code></pre></div>
+model_outputs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/run_model.html">run_model</a></span>(<span class="dt">agec =</span> age_init,
+                           <span class="dt">death =</span> deathrt,
+                           nn_links,
+                           <span class="dt">time =</span> time_frame,
+                           <span class="dt">season =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p>Now postprocessing and plotting with</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">diagnostics &lt;-<span class="st"> </span><span class="kw"><a href="../reference/post_processing.html">post_processing</a></span>(model_outputs)
+
+<span class="kw"><a href="../reference/plot_compartments.html">plot_compartments</a></span>(diagnostics<span class="op">$</span>compartments)</code></pre></div>
 <p><img src="deterministic_seasonal_model_files/figure-html/unnamed-chunk-4-1.png" width="576"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model_run<span class="op">$</span>diagnostics[[<span class="dv">1</span>]]</code></pre></div>
+<p>The dynamics look more jagged compared to the baseline model due to the effect of seasonality on transmission which makes them jumping more up and down.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/plot_demographics.html">plot_demographics</a></span>(diagnostics<span class="op">$</span>demographics)
+<span class="co">#&gt; [[1]]</span></code></pre></div>
 <p><img src="deterministic_seasonal_model_files/figure-html/unnamed-chunk-5-1.png" width="768"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model_run<span class="op">$</span>diagnostics[[<span class="dv">2</span>]]</code></pre></div>
-<p><img src="deterministic_seasonal_model_files/figure-html/unnamed-chunk-6-1.png" width="768"></p>
+<pre><code>#&gt; 
+#&gt; [[2]]</code></pre>
+<p><img src="deterministic_seasonal_model_files/figure-html/unnamed-chunk-5-2.png" width="768"></p>
 </div>
   </div>
 
@@ -141,7 +159,7 @@ model_run &lt;-<span class="st"> </span>ZikaModel<span class="op">::</span><span
 
 
       <footer><div class="copyright">
-  <p>Developed by L Cattarino.</p>
+  <p>Developed by Lorenzo Cattarino.</p>
 </div>
 
 <div class="pkgdown">
