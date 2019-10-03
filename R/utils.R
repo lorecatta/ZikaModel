@@ -1,5 +1,15 @@
-#' @export
+# -----------------------------------------------------------------------------
+
+# Calculates lagged differences using \code{diff}
+
+#' \code{lag_diff} returns a vector of lagged difference values with initial padding.
 #'
+#' @param x vector of numeric values
+#'
+#' @param lag the lag value (numeric)
+#'
+#' @export
+
 
 lag_diff <- function(x, lag) {
 
