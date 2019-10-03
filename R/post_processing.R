@@ -12,8 +12,6 @@
 #'
 #' @importFrom stats setNames
 #'
-#' @importFrom rlang .data
-#'
 #' @export
 
 
