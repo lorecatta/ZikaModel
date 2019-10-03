@@ -22,7 +22,7 @@ library(ZikaModel)
 
 ## Stochasticity 
 The `ZikaModel` package implements also a stochastic version of the Zika 
-tranmsission model. To avoid confusion, the stochastic version of the model is 
+transmission model. To avoid confusion, the stochastic version of the model is 
 written as a different odin source file. To run the stochastic model, we need 
 to create a `model generator`, which is a function that will generate an 
 instance of the stochastic model, using the specified path to the odin source file.
