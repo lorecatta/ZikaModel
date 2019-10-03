@@ -60,7 +60,7 @@ post_processing <- function(dat) {
 
   df_H_melt$diagnostic <- factor(df_H_melt$diagnostic, levels = current_levs, labels = new_levs)
 
-  levels(df_H_melt) <- c("Susceptibles", "Infectious", "Recovered", "Total population", "Births", "Incidence of infections", "Cumulative incidence", "Weekly infections/1000", "Sp", "I1p", "R1p")
+  levels(df_H_melt$diagnostic) <- c("Susceptibles", "Infectious", "Recovered", "Total population", "Births", "Incidence of infections", "Cumulative incidence", "Weekly infections/1000", "Sp", "I1p", "R1p")
 
   diagno_1 <- subset(df_H_melt, diagnostic %in% c("Sp", "I1p", "R1p"))
 
