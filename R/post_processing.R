@@ -50,9 +50,9 @@ post_processing <- function(dat) {
   df_H$wIR_inf <- df_H$wIR_inf / df_H$Nt * 1000
 
   df_H$time <- tt
-  df_H_melt <- melt(df_H,
-                    id.vars = "time",
-                    variable.name = "diagnostic")
+  df_H_melt <- reshape2::melt(df_H,
+                              id.vars = "time",
+                              variable.name = "diagnostic")
 
   diagno_levs <- c("S", "I1", "R1", "Nt", "births", "inf_1", "inf_1_cum", "wIR_inf", "Sp", "I1p", "R1p")
 
@@ -62,6 +62,6 @@ post_processing <- function(dat) {
 
   diagno_2 <- subset(df_H_melt, diagnostic %in% c("S", "I1", "R1", "Nt", "births", "inf_1", "inf_1_cum", "wIR_inf"))
 
-  list("compartments" = diagno_1, "demographics" = diagno_2)
+  list("compartments" = droplevels(diagno_1), "demographics" = droplevels(diagno_2))
 
 }
