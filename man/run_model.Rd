@@ -17,6 +17,9 @@ run_model(agec, death, nn_links, time, season = FALSE)
 
 \item{season}{Logical for controlling the effect of seasonality.}
 }
+\value{
+list of model outputs
+}
 \description{
 \code{run_model} runs model using declared agec, death and nn_links
 }

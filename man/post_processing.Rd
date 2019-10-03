@@ -7,7 +7,7 @@
 post_processing(dat, out_pth)
 }
 \arguments{
-\item{dat}{The dataframe with all the data output from the model run.}
+\item{dat}{list of model outputs from the model run.}
 
 \item{out_pth}{The path where to save the plot}
 }
