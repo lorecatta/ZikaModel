@@ -18,8 +18,9 @@ Imports:
     odin,
     scales
 Remotes: 
-    richfitz/dde
+    mrc-ide/dde
 RoxygenNote: 6.1.1
+Additional_repositories: https://mrc-ide.github.io/drat
 Suggests: 
     knitr,
     rmarkdown
