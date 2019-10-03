@@ -13,7 +13,7 @@
 #' @param nn_links 8 nearest-neigbors to each patch.
 #'
 #' @param model_parameter_list list of user-defined model parameters.
-
+#'
 #' @importFrom stats rnorm
 #'
 #' @export
