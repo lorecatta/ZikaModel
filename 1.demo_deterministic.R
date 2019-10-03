@@ -1,7 +1,7 @@
 
 devtools::load_all()
 
-out_dir <- file.path("figures", "deterministic")
+out_dir <- file.path("figures", "deterministic_no_seasonality")
 
 agec <- c(1, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10)
 
@@ -17,9 +17,9 @@ death <- c(1e-10,
            0.279105747097929,
            0.390197266957464)
 
-time <- 364 * 150
+integer_time_steps <- 364 * 100
 
-mpl <- model_param_list_create(season = TRUE)
+mpl <- model_param_list_create(season = FALSE)
 
 # generate initial state variables from equilibrium solution
 state_init <- equilibrium_init_create(agec = agec,
@@ -34,14 +34,18 @@ gen <- odin::odin(odin_model_path,verbose = FALSE)
 state_use <- state_init[names(state_init) %in% names(formals(gen))]
 
 mod <- gen(user = state_use)
-tt <- seq(0, time, 1)
 
-mod_run <- mod$run(tt)
+its <- seq(0, integer_time_steps, 1)
+
+mod_run <- mod$run(its)
 
 # shape output
 out <- mod$transform_variables(mod_run)
 
-diagno_hum <- c("S", "I1", "R1", "births", "inf_1", "Y1T", "infectious1", "O_S", "D_S", "A_S")
+tt <- out$TIME
+time <- max(tt)
+
+diagno_hum <- c("S", "I1", "R1", "births", "inf_1", "Y1T", "infectious1", "O_S")
 
 dia_hum <- setNames(out[diagno_hum], diagno_hum)
 
@@ -68,7 +72,7 @@ mat_H <- cbind(mat_H, prop)
 df_H <- as.data.frame(mat_H)
 
 # rate of total weekly infections
-df_H$wIR_inf <- lag_diff(df_H$inf_1_cum, 7)
+df_H$wIR_inf <- lag_diff(df_H$inf_1_cum, 14)
 
 df_H$wIR_inf <- df_H$wIR_inf / df_H$Nt * 1000
 
@@ -77,7 +81,7 @@ df_H_melt <- melt(df_H,
                   id.vars = "time",
                   variable.name = "diagnostic")
 
-diagno_levs <- c("S", "I1", "R1", "Nt", "births", "inf_1", "Y1T", "infectious1", "O_S", "D_S", "A_S", "inf_1_cum", "Sp", "I1p", "R1p", "wIR_inf")
+diagno_levs <- c("S", "I1", "R1", "Nt", "births", "inf_1", "Y1T", "infectious1", "O_S", "inf_1_cum", "Sp", "I1p", "R1p", "wIR_inf")
 
 df_H_melt$diagnostic <- factor(df_H_melt$diagnostic, levels = diagno_levs, labels = diagno_levs)
 
@@ -95,6 +99,7 @@ plot_diagnostics(df_H_melt,
 
 
 out_dir_1 <- file.path(out_dir, "patch")
+brks <- seq(from = 0, to = time, by = 364 * 5)
 
 # sum across ages and vaccine status (dims 2 and 3)
 births_patch_df <- as.data.frame(dia_hum$births)
@@ -104,7 +109,6 @@ births_patch_df_melt <- melt(births_patch_df,
                              id.vars = "time",
                              variable.name = "patch")
 
-brks <- seq(from = 0, to = time, by = 364*10)
 p <- ggplot(births_patch_df_melt) +
   geom_line(aes(x = time, y = value), colour = "#63B8FF") +
   ggplot2::facet_wrap(~ patch, ncol = 4) +
@@ -129,7 +133,6 @@ inf_1_patch_df_melt <- melt(inf_1_patch_df,
                          id.vars = "time",
                          variable.name = "patch")
 
-brks <- seq(from = 0, to = time, by = 364*10)
 p <- ggplot(inf_1_patch_df_melt) +
   geom_line(aes(x = time, y = value), colour = "#63B8FF") +
   ggplot2::facet_wrap(~ patch, ncol = 4) +
@@ -154,7 +157,6 @@ S_patch_df_melt <- melt(S_patch_df,
                         id.vars = "time",
                         variable.name = "patch")
 
-brks <- seq(from = 0, to = time, by = 364*10)
 p <- ggplot(S_patch_df_melt) +
   geom_line(aes(x = time, y = value), colour = "#63B8FF") +
   ggplot2::facet_wrap(~ patch, ncol = 4) +
@@ -178,7 +180,6 @@ I1_patch_df_melt <- melt(I1_patch_df,
                         id.vars = "time",
                         variable.name = "patch")
 
-brks <- seq(from = 0, to = time, by = 364*10)
 p <- ggplot(I1_patch_df_melt) +
   geom_line(aes(x = time, y = value), colour = "#63B8FF") +
   ggplot2::facet_wrap(~ patch, ncol = 4) +
@@ -202,7 +203,6 @@ R1_patch_df_melt <- melt(R1_patch_df,
                          id.vars = "time",
                          variable.name = "patch")
 
-brks <- seq(from = 0, to = time, by = 364*10)
 p <- ggplot(R1_patch_df_melt) +
   geom_line(aes(x = time, y = value), colour = "#63B8FF") +
   ggplot2::facet_wrap(~ patch, ncol = 4) +
@@ -225,7 +225,6 @@ FOI1p_patch_df_melt <- melt(FOI1p_patch_df,
                          id.vars = "time",
                          variable.name = "patch")
 
-brks <- seq(from = 0, to = time, by = 364*10)
 p <- ggplot(FOI1p_patch_df_melt) +
   geom_line(aes(x = time, y = value), colour = "#63B8FF") +
   ggplot2::facet_wrap(~ patch, ncol = 4) +
@@ -241,53 +240,6 @@ save_plot(p,
           wdt = 15,
           hgt = 15)
 
-deaths_patch <- apply(dia_hum$D_S, c(1, 4), sum)
-deaths_patch_df <- as.data.frame(deaths_patch)
-names(deaths_patch_df) <- seq_len(21)
-deaths_patch_df$time <- tt
-deaths_patch_df_melt <- melt(deaths_patch_df,
-                             id.vars = "time",
-                             variable.name = "patch")
-
-brks <- seq(from = 0, to = time, by = 364*10)
-p <- ggplot(deaths_patch_df_melt) +
-  geom_line(aes(x = time, y = value), colour = "#63B8FF") +
-  ggplot2::facet_wrap(~ patch, ncol = 4) +
-  scale_y_continuous(name = "deaths (S)") +
-  scale_x_continuous(name = "Years", breaks = brks, labels = brks / 364) +
-  theme_bw() +
-  theme(axis.text.x = element_text(size = 8),
-        axis.text.y = element_text(size = 8),
-        strip.text.x = element_text(size = 8))
-save_plot(p,
-          out_dir_1,
-          out_fl_nm = "deaths_S_by_patch.png",
-          wdt = 15,
-          hgt = 15)
-
-aged_patch <- apply(dia_hum$A_S, c(1, 4), sum)
-aged_patch_df <- as.data.frame(aged_patch)
-names(aged_patch_df) <- seq_len(21)
-aged_patch_df$time <- tt
-aged_patch_df_melt <- melt(aged_patch_df,
-                             id.vars = "time",
-                             variable.name = "patch")
-
-brks <- seq(from = 0, to = time, by = 364*10)
-p <- ggplot(aged_patch_df_melt) +
-  geom_line(aes(x = time, y = value), colour = "#63B8FF") +
-  ggplot2::facet_wrap(~ patch, ncol = 4) +
-  scale_y_continuous(name = "aged (S)") +
-  scale_x_continuous(name = "Years", breaks = brks, labels = brks / 364) +
-  theme_bw() +
-  theme(axis.text.x = element_text(size = 8),
-        axis.text.y = element_text(size = 8),
-        strip.text.x = element_text(size = 8))
-save_plot(p,
-          out_dir_1,
-          out_fl_nm = "aged_S_by_patch.png",
-          wdt = 15,
-          hgt = 15)
 
 # -----------------------------------------------------------------------------
 #
@@ -305,7 +257,6 @@ deathrt_age_df_melt <- melt(deathrt_age_df,
                              id.vars = "time",
                              variable.name = "age")
 
-brks <- seq(from = 0, to = time, by = 364*10)
 p <- ggplot(deathrt_age_df_melt) +
   geom_line(aes(x = time, y = value), colour = "#63B8FF") +
   ggplot2::facet_wrap(~ age, ncol = 4#,
@@ -331,7 +282,6 @@ agert_age_df_melt <- melt(agert_age_df,
                             id.vars = "time",
                             variable.name = "age")
 
-brks <- seq(from = 0, to = time, by = 364*10)
 p <- ggplot(agert_age_df_melt) +
   geom_line(aes(x = time, y = value), colour = "#63B8FF") +
   ggplot2::facet_wrap(~ age, ncol = 4, scales = "free_y") +
@@ -361,13 +311,18 @@ library(viridis)
 
 O_S_prob_full_melt <- melt(out$O_S_prob)
 names(O_S_prob_full_melt) <- c("time", "age", "vaccine", "patch", "value")
+no_age <- length(unique(O_S_prob_full_melt$age))
+no_vaccine <- length(unique(O_S_prob_full_melt$vaccine))
+no_patch <- length(unique(O_S_prob_full_melt$patch))
+combs <- no_age * no_vaccine * no_patch
+tt_long <- rep(tt, combs)
+O_S_prob_full_melt$time <- tt_long
 O_S_prob_full_melt$age <- factor(O_S_prob_full_melt$age,
                                  levels = unique(O_S_prob_full_melt$age),
                                  labels = unique(O_S_prob_full_melt$age))
 
 O_S_prob_melt <- subset(O_S_prob_full_melt, vaccine == 1 & patch == 1)
 
-brks <- seq(from = 0, to = time, by = 364*10)
 p <- ggplot(O_S_prob_melt) +
   geom_line(aes(x = time, y = value, colour = age)) +
   scale_fill_viridis() +
@@ -386,17 +341,17 @@ save_plot(p,
 
 S_full_melt <- melt(out$S)
 names(S_full_melt) <- c("time", "age", "vaccine", "patch", "value")
+S_full_melt$time <- tt_long
 S_full_melt$age <- factor(S_full_melt$age,
                           levels = unique(S_full_melt$age),
                           labels = unique(S_full_melt$age))
 
 S_melt <- subset(S_full_melt, vaccine == 1 & patch == 1)
 
-brks <- seq(from = 0, to = time, by = 364*10)
 p <- ggplot(S_melt) +
   geom_line(aes(x = time, y = value, colour = age)) +
   scale_fill_viridis() +
-  scale_y_continuous(name = "S") +
+  scale_y_continuous(name = "S", breaks = seq(0,6e+6,1e+6), labels = seq(0,6e+6,1e+6), limits = c(0,6e+6)) +
   scale_x_continuous(name = "Years", breaks = brks, labels = brks / 364) +
   theme_bw() +
   theme(axis.text.x = element_text(size = 8),
@@ -408,19 +363,19 @@ save_plot(p,
           wdt = 10,
           hgt = 8)
 
-D_S_full_melt <- melt(out$D_S)
-names(D_S_full_melt) <- c("time", "age", "vaccine", "patch", "value")
-D_S_full_melt$age <- factor(D_S_full_melt$age,
-                            levels = unique(D_S_full_melt$age),
-                            labels = unique(D_S_full_melt$age))
+I1_full_melt <- melt(out$I1)
+names(I1_full_melt) <- c("time", "age", "vaccine", "patch", "value")
+I1_full_melt$time <- tt_long
+I1_full_melt$age <- factor(I1_full_melt$age,
+                           levels = unique(I1_full_melt$age),
+                           labels = unique(I1_full_melt$age))
 
-D_S_melt <- subset(D_S_full_melt, vaccine == 1 & patch == 1)
+I1_melt <- subset(I1_full_melt, vaccine == 1 & patch == 1)
 
-brks <- seq(from = 0, to = time, by = 364*10)
-p <- ggplot(D_S_melt) +
+p <- ggplot(I1_melt) +
   geom_line(aes(x = time, y = value, colour = age)) +
   scale_fill_viridis() +
-  scale_y_continuous(name = "D_S") +
+  scale_y_continuous(name = "I1", breaks = seq(0,1.4e+6,2e+5), labels = seq(0,1.4e+6,2e+5), limits = c(0,1.4e+6)) +
   scale_x_continuous(name = "Years", breaks = brks, labels = brks / 364) +
   theme_bw() +
   theme(axis.text.x = element_text(size = 8),
@@ -428,23 +383,23 @@ p <- ggplot(D_S_melt) +
         strip.text.x = element_text(size = 8))
 save_plot(p,
           out_dir,
-          out_fl_nm = sprintf("D_S_vaccine_%s_patch_%s.png", 1, 1),
+          out_fl_nm = sprintf("I1_vaccine_%s_patch_%s.png", 1, 1),
           wdt = 10,
           hgt = 8)
 
-A_S_full_melt <- melt(out$A_S)
-names(A_S_full_melt) <- c("time", "age", "vaccine", "patch", "value")
-A_S_full_melt$age <- factor(A_S_full_melt$age,
-                            levels = unique(A_S_full_melt$age),
-                            labels = unique(A_S_full_melt$age))
+O_S_full_melt <- melt(out$O_S)
+names(O_S_full_melt) <- c("time", "age", "vaccine", "patch", "value")
+O_S_full_melt$time <- tt_long
+O_S_full_melt$age <- factor(O_S_full_melt$age,
+                           levels = unique(O_S_full_melt$age),
+                           labels = unique(O_S_full_melt$age))
 
-A_S_melt <- subset(A_S_full_melt, vaccine == 1 & patch == 2)
+O_S_melt <- subset(O_S_full_melt, vaccine == 1 & patch == 1)
 
-brks <- seq(from = 0, to = time, by = 364*10)
-p <- ggplot(A_S_melt) +
+p <- ggplot(O_S_melt) +
   geom_line(aes(x = time, y = value, colour = age)) +
   scale_fill_viridis() +
-  scale_y_continuous(name = "A_S") +
+  scale_y_continuous(name = "O_S") +
   scale_x_continuous(name = "Years", breaks = brks, labels = brks / 364) +
   theme_bw() +
   theme(axis.text.x = element_text(size = 8),
@@ -452,16 +407,39 @@ p <- ggplot(A_S_melt) +
         strip.text.x = element_text(size = 8))
 save_plot(p,
           out_dir,
-          out_fl_nm = sprintf("A_S_vaccine_%s_patch_%s.png", 1, 2),
+          out_fl_nm = sprintf("O_S_vaccine_%s_patch_%s.png", 1, 1),
           wdt = 10,
           hgt = 8)
 
+inf_1_full_melt <- melt(out$inf_1)
+names(inf_1_full_melt) <- c("time", "age", "vaccine", "patch", "value")
+inf_1_full_melt$time <- tt_long
+inf_1_full_melt$age <- factor(inf_1_full_melt$age,
+                            levels = unique(inf_1_full_melt$age),
+                            labels = unique(inf_1_full_melt$age))
 
-# model_run <- run_model(agec,
-#                        death,
-#                        nn_links,
-#                        time = time,
-#                        season = TRUE)
+inf_1_melt <- subset(inf_1_full_melt, vaccine == 1 & patch == 3)
+
+p <- ggplot(inf_1_melt) +
+  geom_line(aes(x = time, y = value, colour = age)) +
+  scale_fill_viridis() +
+  scale_y_continuous(name = "inf_1", breaks = seq(0,7.5e+4,1.5e+4), labels = seq(0,7.5e+4,1.5e+4), limits = c(0,7.5e+4)) +
+  scale_x_continuous(name = "Years", breaks = brks, labels = brks / 364) +
+  theme_bw() +
+  theme(axis.text.x = element_text(size = 8),
+        axis.text.y = element_text(size = 8),
+        strip.text.x = element_text(size = 8))
+save_plot(p,
+          out_dir,
+          out_fl_nm = sprintf("inf_1_vaccine_%s_patch_%s.png", 1, 3),
+          wdt = 10,
+          hgt = 8)
+
+model_run <- ZikaModel::run_model(agec,
+                                  death,
+                                  nn_links,
+                                  time = time,
+                                  season = TRUE)
 #
 # save_plot(model_run$plot,
 #           out_dir,
