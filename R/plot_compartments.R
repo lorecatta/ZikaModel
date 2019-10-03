@@ -7,8 +7,6 @@
 #'
 #' @param df The dataframe with the data to plot.
 #'
-#' @param compart_names The full name of the model compartments.
-#'
 #' @importFrom ggplot2 aes scale_colour_manual scale_x_continuous
 #'   scale_y_continuous xlab ylab geom_line ggplot theme_bw
 #'   theme element_text margin unit ggtitle
@@ -16,7 +14,9 @@
 #' @export
 
 
-plot_compartments <- function(df, compart_names){
+plot_compartments <- function(df){
+
+  compart_names <- c("Susceptibles", "Infectious", "Recovered")
 
   time <- max(df$time)
 
