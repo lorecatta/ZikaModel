@@ -4,7 +4,7 @@
 #' post_processing
 
 #'
-#' \code{post_processing} post processes model outputs and saves plots of diagnostics.
+#' \code{post_processing} post processes model outputs and saves plots of diagnostics
 #'
 #' @param dat list of model outputs from the model run.
 #'

@@ -1,7 +1,9 @@
+
 #------------------------------------------------
+
 #' plot_demographics
-#'
-#' \code{plot_demographics} makes a faceted plot of the model diagnostics.
+
+#' \code{plot_demographics} makes a faceted plot of the model diagnostics
 #'
 #' @param df The dataframe with the data to plot.
 #'
