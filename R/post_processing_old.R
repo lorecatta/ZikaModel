@@ -1,15 +1,3 @@
-#------------------------------------------------
-#' post_processing
-#'
-#' \code{post_processing} post processes model outputs and saves plots of diagnostics.
-#'
-#' @param dat The dataframe with all the data output from the model run.
-#'
-#' @inheritParams save_plot
-#'
-#' @export
-
-
 post_processing <- function(dat, out_pth){
 
   diagno_hum <- c("Susceptibles" = "S",
