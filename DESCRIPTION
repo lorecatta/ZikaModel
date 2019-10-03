@@ -18,7 +18,7 @@ Imports:
     odin,
     scales
 Remotes: 
-    mrc-ide/dde
+    richfitz/dde
 RoxygenNote: 6.1.1
 Suggests: 
     knitr,
