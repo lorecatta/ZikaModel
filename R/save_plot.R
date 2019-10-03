@@ -10,6 +10,8 @@
 #' @param wdt The plot width
 #' @param hgt The plot height
 #'
+#' @importFrom grDevices dev.off png
+#'
 #' @export
 
 
