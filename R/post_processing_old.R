@@ -1,4 +1,4 @@
-post_processing <- function(dat, out_pth){
+post_processing_old <- function(dat, out_pth){
 
   diagno_hum <- c("Susceptibles" = "S",
                   "Infectious" = "I1",
