@@ -11,4 +11,5 @@ after_success:
 
 env:
   global:
-    - R_BUILD_ARGS="--no-build-vignettes"
+    - R_BUILD_ARGS="--no-build-vignettes --no-manual"
+    - R_CHECK_ARGS="--no-build-vignettes --no-manual --as-cran"
