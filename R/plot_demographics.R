@@ -45,7 +45,7 @@ plot_demographics <- function(df){
       scale_x_continuous(name = "Years", breaks = brks, labels = brks / 364) +
       scale_y_continuous(name = "", labels = scales::comma) +
       theme_bw() +
-      theme(axis.text.x = element_text(size = 8),
+      theme(axis.text.x = element_text(size = 10),
             axis.text.y = element_text(size = 8),
             strip.text.x = element_text(size = 8),
             plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"))
