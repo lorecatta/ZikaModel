@@ -28,3 +28,5 @@ Suggests:
     covr,
     testthat
 VignetteBuilder: knitr
+URL: https://github.com/mrc-ide/ZikaModel
+BugReports: https://github.com/mrc-ide/ZikaModel/issues
