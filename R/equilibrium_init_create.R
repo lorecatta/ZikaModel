@@ -104,7 +104,11 @@ equilibrium_init_create <- function(agec, death, nn_links, model_parameter_list)
   ln_mean <- log(Mwt_mean) - (ln_sd * ln_sd) / 2
 
   init_Mwt_base <- exp(rnorm(NP, ln_mean, ln_sd))
-  # init Mwt_base[1..NP]=exp(normal(ln_mean,ln_sd,seed+i))
+
+  Wb_introlevel <- mpl$Wb_introlevel
+  Wb_introduration <- mpl$Wb_introduration
+
+  Wb_introrate <- Wb_introlevel * init_Mwt_base * N_eq * DT/Wb_introduration
 
 
 
@@ -224,6 +228,7 @@ equilibrium_init_create <- function(agec, death, nn_links, model_parameter_list)
               season_phase = season_phase,
               season_amp = season_amp,
               Wb_introtime = Wb_introtime,
+              Wb_introrate = Wb_introrate,
               vacc_cu_rndtime = vacc_cu_rndtime,
               dis1 = dis1,
               rho1 = rho1,
