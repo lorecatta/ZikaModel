@@ -16,6 +16,8 @@ test_that("dt is used to calculate time steps", {
 
   time_frame <- 364 * 10
 
+  tt <- seq(0, time_frame, 1)
+
   mpl <- model_param_list_create(season = FALSE)
 
   dt <- mpl$DT
@@ -25,6 +27,6 @@ test_that("dt is used to calculate time steps", {
                              nn_links,
                              time = time_frame)
 
-  expect_identical(time_frame / dt, model_outputs$TIME)
+  expect_identical(tt / dt, model_outputs$TIME)
 
 })
