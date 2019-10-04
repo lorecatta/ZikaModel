@@ -64,9 +64,9 @@ post_processing <- function(dat) {
 
   df_H_melt$diagnostic <- factor(df_H_melt$diagnostic, levels = c("Susceptibles", "Infectious", "Recovered", "Total population", "Births", "Incidence of infections", "Cumulative incidence", "Weekly infections/1000", "Sp", "I1p", "R1p"))
 
-  diagno_1 <- subset(df_H_melt, diagnostic %in% c("Sp", "I1p", "R1p"))
+  diagno_1 <- subset(df_H_melt, df_H_melt$diagnostic %in% c("Sp", "I1p", "R1p"))
 
-  diagno_2 <- subset(df_H_melt, diagnostic %in% c("Susceptibles", "Infectious", "Recovered", "Births", "Incidence of infections", "Total population", "Cumulative incidence", "Weekly infections/1000"))
+  diagno_2 <- subset(df_H_melt, df_H_melt$diagnostic %in% c("Susceptibles", "Infectious", "Recovered", "Births", "Incidence of infections", "Total population", "Cumulative incidence", "Weekly infections/1000"))
 
   list("compartments" = droplevels(diagno_1), "demographics" = droplevels(diagno_2))
 
