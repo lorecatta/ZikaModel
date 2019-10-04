@@ -8,3 +8,6 @@ r_github_packages:
 
 after_success:
   - Rscript -e 'covr::codecov()'
+
+before_script:
+  - R CMD build --no-build-vignettes .
