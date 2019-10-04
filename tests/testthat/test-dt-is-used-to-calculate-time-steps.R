@@ -16,7 +16,7 @@ test_that("dt is used to calculate time steps", {
 
   time_frame <- 364 * 10
 
-  mpl <- model_param_list_create()
+  mpl <- model_param_list_create(season = FALSE)
 
   dt <- mpl$DT
 
