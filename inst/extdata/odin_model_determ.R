@@ -88,6 +88,40 @@ Kcav <- (sum(Kc[]) - Kc[NP]) / (NP - 1)
 eipav <- (sum(eip[]) - eip[NP]) / (NP - 1)
 
 
+# -----------------------------------------------------------------------------
+# Parameters for interventions
+
+
+# Wb_cyto <- user()
+# Wb_mat <- user()
+# Wb_fM <- user()
+# Wb_fF <- user()
+# Wb_relsusc1 <- user()
+# Wb_relinf1 <- user()
+#
+# Wb_starttime <- user()
+# Wb_introtime <- user()
+# dim(Wb_introtime) <- NP
+# Wb_introlevel <- user()
+# Wb_introduration <- user()
+# Wb_introrate <- user()
+# dim(Wb_introrate) <- NP
+#
+# Delta_wb[] <- Delta[i] / Wb_fM
+# dim(Delta_wb) <- NP
+#
+# vacc_cu_minage <- user()
+# vacc_cu_maxage <- user()
+# vacc_cu_coverage <- user()
+# vacc_cu_time <- user()
+# vacc_cu_rndtime <- user()
+#
+# vacc_child_age <- user()
+# vacc_child_coverage <- user()
+# vacc_child_starttime <- user()
+# vacc_child_stoptime <- user()
+
+
 
 # -----------------------------------------------------------------------------
 #
