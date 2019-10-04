@@ -1,10 +1,9 @@
 
 #------------------------------------------------
 
-#' post_processing
+# Processes model outputs to calculate metrics of interest
 
-#'
-#' \code{post_processing} post processes model outputs and saves plots of diagnostics
+#' \code{post_processing} processes model outputs to calculate metrics of interest
 #'
 #' @param dat list of model outputs from the model run.
 #'
