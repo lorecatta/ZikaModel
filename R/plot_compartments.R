@@ -33,7 +33,9 @@ plot_compartments <- function(df){
     scale_x_continuous(name = "Years", breaks = brks, labels = brks / 364) +
     scale_y_continuous(name ="Proportion of population") +
     theme_bw() +
-    theme(axis.text.x = element_text(size = 12),
+    theme(axis.title.x = element_text(size = 12),
+          axis.title.y = element_text(size = 12),
+          axis.text.x = element_text(size = 12),
           axis.text.y = element_text(size = 12),
           legend.title = element_text(size = 12),
           legend.text = element_text(size = 12),
