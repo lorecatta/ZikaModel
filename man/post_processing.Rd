@@ -2,7 +2,7 @@
 % Please edit documentation in R/post_processing.R
 \name{post_processing}
 \alias{post_processing}
-\title{post_processing}
+\title{\code{post_processing} processes model outputs to calculate metrics of interest}
 \usage{
 post_processing(dat)
 }
@@ -10,5 +10,5 @@ post_processing(dat)
 \item{dat}{list of model outputs from the model run.}
 }
 \description{
-\code{post_processing} post processes model outputs and saves plots of diagnostics
+\code{post_processing} processes model outputs to calculate metrics of interest
 }
