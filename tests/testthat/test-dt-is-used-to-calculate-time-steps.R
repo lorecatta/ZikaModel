@@ -27,6 +27,6 @@ test_that("dt is used to calculate time steps", {
                              nn_links,
                              time = time_frame)
 
-  expect_identical(tt / dt, model_outputs$TIME)
+  expect_identical(tt * dt, model_outputs$TIME)
 
 })
