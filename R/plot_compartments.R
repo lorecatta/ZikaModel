@@ -35,7 +35,6 @@ plot_compartments <- function(df){
     theme_bw() +
     theme(axis.text.x = element_text(size = 12),
           axis.text.y = element_text(size = 12),
-          strip.text.x = element_text(size = 12),
           legend.title = element_text(size = 12),
           legend.text = element_text(size = 12),
           plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"))
