@@ -1,13 +1,11 @@
 
 #------------------------------------------------
 
-# Processes model outputs to calculate metrics of interest
+# post_processing
 
 #' \code{post_processing} processes model outputs to calculate metrics of interest
 #'
 #' @param dat list of model outputs from the model run.
-#'
-#' @inheritParams save_plot
 #'
 #' @importFrom stats setNames
 #'

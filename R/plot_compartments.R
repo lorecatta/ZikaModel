@@ -3,7 +3,7 @@
 
 # plot_compartments
 
-#' \code{plot_compartments} makes a plot of the model compartments.
+#' \code{plot_compartments} makes a plot of the model human compartments.
 #'
 #' @param df The dataframe with the data to plot.
 #'
