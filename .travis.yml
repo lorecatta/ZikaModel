@@ -12,3 +12,5 @@ r_check_args: --no-build-vignettes --no-manual
 
 after_success:
   - Rscript -e 'covr::codecov()'
+
+warnings_are_errors: false
