@@ -1,0 +1,11 @@
+pandoc: 1.19.2.1
+pkgdown: 1.3.0
+pkgdown_sha: ~
+articles:
+  deterministic_base_model: deterministic_base_model.html
+  deterministic_seasonal_model: deterministic_seasonal_model.html
+  stochastic_model: stochastic_model.html
+urls:
+  reference: https://mrc-ide.github.io/ZikaModel//reference
+  article: https://mrc-ide.github.io/ZikaModel//articles
+
