@@ -92,24 +92,21 @@ eipav <- (sum(eip[]) - eip[NP]) / (NP - 1)
 # Parameters for interventions
 
 
-# Wb_cyto <- user()
-# Wb_mat <- user()
-# Wb_fM <- user()
-# Wb_fF <- user()
-# Wb_relsusc1 <- user()
-# Wb_relinf1 <- user()
-#
-# Wb_starttime <- user()
-# Wb_introtime <- user()
-# dim(Wb_introtime) <- NP
-# Wb_introlevel <- user()
-# Wb_introduration <- user()
-# Wb_introrate <- user()
-# dim(Wb_introrate) <- NP
-#
-# Delta_wb[] <- Delta[i] / Wb_fM
-# dim(Delta_wb) <- NP
-#
+Wb_cyto <- user()
+Wb_mat <- user()
+Wb_fM <- user()
+Wb_fF <- user()
+Wb_relsusc1 <- user()
+Wb_relinf1 <- user()
+
+Wb_starttime <- user()
+Wb_introtime <- user()
+Wb_introlevel <- user()
+Wb_introduration <- user()
+Wb_introrate <- user()
+
+Delta_wb[] <- Delta[i] / Wb_fM
+
 # vacc_cu_minage <- user()
 # vacc_cu_maxage <- user()
 # vacc_cu_coverage <- user()
@@ -143,11 +140,11 @@ Wb_cyto <- user()
 Wb_fF <- user()
 Wb_mat <- user()
 Lwt_birth_lambda[] <- DT *
-  (Gamma * Mwt_tot[i] * (Mwt_tot[i] + (1 - Wb_cyto) * 0) /
-     (Mwt_tot[i] + 0) + Wb_fF * (1 - Wb_mat) * 0)
+  (Gamma * Mwt_tot[i] * (Mwt_tot[i] + (1 - Wb_cyto) * Mwb_tot[i]) /
+     (Mwt_tot[i] + Mwb_tot[i]) + Wb_fF * (1 - Wb_mat) * Mwb_tot[i])
 Lwt_birth[] <- Lwt_birth_lambda[i]
 
-L_deathrt[] <- DT * Sigma * ((1 + ((Lwt[i] + 0) / (Kc[i] * NTp[i])) ^ Omega))
+L_deathrt[] <- DT * Sigma * ((1 + ((Lwt[i] + Lwb[i]) / (Kc[i] * NTp[i])) ^ Omega))
 
 L_dr[] <- if (L_deathrt[i] >= 1) 0.999 else L_deathrt[i]
 
@@ -191,6 +188,82 @@ O_Mwt_I1_prob[] <- max(min(DT * Delta[i], 1), 0)
 O_Mwt_I1[] <- Mwt_I1[i] * O_Mwt_I1_prob[i]
 
 update(Mwt_I1[]) <- Mwt_E2_incub[i] + Mwt_I1[i] - O_Mwt_I1[i]
+
+
+
+# -----------------------------------------------------------------------------
+#
+# States of wolbachia type mosquitoes
+#
+# -----------------------------------------------------------------------------
+
+
+
+initial(Lwb[]) <- 0
+initial(Mwb_S[]) <- 0
+initial(Mwb_E1[]) <- 0
+initial(Mwb_E2[]) <- 0
+initial(Mwb_I1[]) <- 0
+
+Mwb_tot[] <- Mwb_S[i] + Mwb_E1[i] + Mwb_E2[i] + Mwb_I1[i]
+
+dim(M_tot) <- NP
+dim(prop_wb) <- NP
+M_tot[] <- Mwt_tot[i] + Mwb_tot[i]
+prop_wb[] <- Mwb_tot[i] / (M_tot[i] + 1e-10)
+
+dim(R0t_1)<- NP
+R0t_1[] <- kappa * kappa * (Mwt_tot[i] + Wb_relsusc1 * Wb_relinf1 * Mwb_tot[i]) *
+  Beta_hm_1 * inf_per * Beta_mh[i] / (1 + delta * eip[i]) / delta / NTp[i]
+
+Lwb_birth_lambda[] <- DT *(Gamma * Wb_fF * Wb_mat * Mwb_tot[i])
+Lwb_birth[] <- Lwb_birth_lambda[i]
+
+O_Lwb_prob[] <- max(min(DT * Epsilon + L_dr[i], 1), 0)
+O_Lwb[] <- Lwb[i] * O_Lwb_prob[i]
+
+Lwb_mature_prob[] <- max(min(DT * Epsilon / (DT * Epsilon + L_dr[i]), 1), 0)
+Lwb_mature[] <- O_Lwb[i] * Lwb_mature_prob[i]
+
+update(Lwb[]) <- Lwb_birth[i] + Lwb[i] - O_Lwb[i]
+
+Mwb_FOI1[] <- Wb_relsusc1 * Mwt_FOI1[i]
+
+O_Mwb_S_prob[] <- max(min(DT * Delta_wb[i] + Mwb_FOI1[i], 1), 0)
+O_Mwb_S[] <- Mwb_S[i] * O_Mwb_S_prob[i]
+
+Mwb_inf1_prob[] <- max(min(Mwb_FOI1[i] / (DT * Delta_wb[i] + Mwb_FOI1[i]), 1), 0)
+Mwb_inf1[] <- O_Mwb_S[i] * Mwb_inf1_prob[i]
+
+Mwb_intro[] <- if((TIME >= Wb_introtime[i] * YL) &&
+                  (TIME < Wb_introtime[i] * YL + Wb_introduration)) rpois(Wb_introrate[i]) else 0
+
+update(Mwb_S[]) <- Lwb_mature[i] + Mwb_intro[i] + Mwb_S[i] - O_Mwb_S[i]
+
+O_Mwb_E1_prob[] <- max(min(DT * (Delta_wb[i] + 1 / eip[i]), 1), 0)
+O_Mwb_E1[] <- Mwb_E1[i] * O_Mwb_E1_prob[i]
+
+Mwb_E1_incub_prob[] <- max(min(1 / (Delta[i] * eip[i] + 1), 1), 0)
+Mwb_E1_incub[] <- O_Mwb_E1[i] * Mwb_E1_incub_prob[i]
+
+update(Mwb_E1[]) <- Mwb_inf1[i] + Mwb_E1[i] - O_Mwb_E1[i]
+
+O_Mwb_E2_prob[] <- max(min(DT * (Delta[i] + 2 / eip[i]), 1), 0)
+O_Mwb_E2[] <- Mwb_E2[i] * O_Mwb_E2_prob[i]
+
+Mwb_E2_incub_prob[] <- max(min(1 / (Delta[i] * eip[i] / 2 + 1), 1), 0)
+Mwb_E2_incub[] <- O_Mwb_E2[i] * Mwb_E2_incub_prob[i]
+
+update(Mwb_E2[]) <- Mwb_E1_incub[i] + Mwb_E2[i] - O_Mwb_E2[i]
+
+O_Mwb_I1_prob[] <- max(min(DT * Delta_wb[i], 1), 0)
+O_Mwb_I1[] <- Mwb_I1[i] * O_Mwb_I1_prob[i]
+
+update(Mwb_I1[]) <- Mwb_E2_incub[i] + Mwb_I1[i] - O_Mwb_I1[i]
+
+Mwt_propinf <- (Mwt_E1[i] + Mwt_E2[i] + Mwt_I1[i]) / (Mwt_tot[i] + 1e-10)
+Mwb_propinf <- (Mwb_E1[i] + Mwb_E2[i] + Mwb_I1[i]) / (Mwb_tot[i] + 1e-10)
+M_propinf <- ((Mwt_tot[i] + 1e-10) * Mwt_propinf[i] + (Mwb_tot[i] + 1e-10) * Mwb_propinf[i]) / (M_tot[i]+1e-10)
 
 
 
@@ -282,7 +355,7 @@ incub <- user()
 
 Wb_relinf1 <- user()
 
-FOI1p[] <- DT * Beta_mh_1 * Kappa * (Mwt_I1[i] + 0 * Wb_relinf1) / NTp[i]
+FOI1p[] <- DT * Beta_mh_1 * Kappa * (Mwt_I1[i] + Mwb_I1[i] * Wb_relinf1) / NTp[i]
 FOI1Y[] <- YL * FOI1p[i] / DT
 
 FOI1av <- (sum(FOI1p[]) - FOI1p[NP]) / (NP - 1)
@@ -511,3 +584,38 @@ dim(incubA) <- NP
 dim(incubB) <- NP
 dim(infectiousA) <- NP
 dim(infectiousB) <- NP
+
+dim(Delta_wb) <- NP
+dim(Lwb) <- NP
+dim(Mwb_S) <- NP
+dim(Mwb_E1) <- NP
+dim(Mwb_E2) <- NP
+dim(Mwb_I1) <- NP
+dim(Mwb_tot) <- NP
+dim(Lwb_birth) <- NP
+dim(Lwb_birth_lambda) <- NP
+dim(O_Lwb) <- NP
+dim(O_Lwb_prob) <- NP
+dim(Lwb_mature) <- NP
+dim(Lwb_mature_prob) <- NP
+dim(Mwb_FOI1) <- NP
+dim(O_Mwb_S) <- NP
+dim(O_Mwb_S_prob) <- NP
+dim(Mwb_inf1) <- NP
+dim(Mwb_inf1_prob) <- NP
+dim(Mwb_intro) <- NP
+dim(Wb_introtime) <- NP
+dim(Wb_introrate) <- NP
+dim(O_Mwb_E1) <- NP
+dim(O_Mwb_E1_prob) <- NP
+dim(Mwb_E1_incub) <- NP
+dim(Mwb_E1_incub_prob) <- NP
+dim(O_Mwb_E2) <- NP
+dim(O_Mwb_E2_prob) <- NP
+dim(Mwb_E2_incub) <- NP
+dim(Mwb_E2_incub_prob) <- NP
+dim(O_Mwb_I1) <- NP
+dim(O_Mwb_I1_prob) <- NP
+dim(Mwt_propinf) <- NP
+dim(Mwb_propinf) <- NP
+dim(M_propinf) <- NP
