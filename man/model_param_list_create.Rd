@@ -5,7 +5,7 @@
 \title{\code{model_param_list_create} creates a list of user-defined
 parameters.}
 \usage{
-model_param_list_create(YL = 364, DT = 0.5, NP = 21, age_per = 1,
+model_param_list_create(YL = 364, DT = 1, NP = 21, age_per = 1,
   N_human = 3e+07, Omega = 1, DeltaBase = 0.2, Sigma = 0.025,
   Epsilon = 1/19, Rm = 2.69, Mwt_mean = 1.5, Mwt_cv = 0.15,
   eip_mean = 8.4, incub = 5.5, inf_per = 6, nu = 1/21,

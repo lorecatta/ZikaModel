@@ -5,7 +5,7 @@
 \title{\code{create_r_model} returns list with generator function automatically created given the odin model
 specified.}
 \usage{
-create_r_model(odin_model_path, agec, death, nn_links, season)
+create_r_model(odin_model_path, agec, death, nn_links, ...)
 }
 \arguments{
 \item{odin_model_path}{Character path to odin model}
@@ -15,8 +15,6 @@ create_r_model(odin_model_path, agec, death, nn_links, season)
 \item{death}{Numeric of mortality rates.}
 
 \item{nn_links}{8 nearest-neigbors to each patch.}
-
-\item{season}{Logical for controlling the effect of seasonality.}
 }
 \value{
 list of generator function, initial state, model parameters and generator
