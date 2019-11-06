@@ -19,8 +19,6 @@ TimeMwtControlOn <- user()
 TimeMwtControlOff <- user()
 propMwtControl <- user()
 
-Mwt[] <- user()
-
 MwtCont <- if ((TIME >= TimeMwtControlOn * YL) &&
                (TIME < TimeMwtControlOff * YL)) (1 - propMwtControl) else 1
 
@@ -35,6 +33,17 @@ Gamma <- Rm * DeltaMean * (Epsilon + Sigma) / Epsilon
 N_eq[] <- user()
 Kappa <- user()
 inf_per <- user()
+
+Mwt_cv <- user()
+Mwt_mean <- user()
+
+ln_sd <- sqrt(log(1 + Mwt_cv * Mwt_cv))
+ln_mean <- log(Mwt_mean) - (ln_sd * ln_sd) / 2
+
+dim(ln_pick) <- NP
+ln_pick[] <- ln_mean
+
+Mwt[] <- exp(ln_pick[i])
 
 
 # -----------------------------------------------------------------------------
@@ -65,7 +74,6 @@ Beta_hm_1 <- user()
 
 season_phase[] <- user()
 season_amp[] <- user()
-Mwt_mean <- user()
 pi <- user()
 Delta_season <- user()
 Kc_season <- user()
@@ -92,18 +100,13 @@ eipav <- (sum(eip[]) - eip[NP]) / (NP - 1)
 # Parameters for interventions
 
 
-Wb_cyto <- user()
-Wb_mat <- user()
-Wb_fM <- user()
-Wb_fF <- user()
-Wb_relsusc1 <- user()
-Wb_relinf1 <- user()
 
-Wb_starttime <- user()
-Wb_introtime <- user()
-Wb_introlevel <- user()
+Wb_fM <- user()
+Wb_relsusc1 <- user()
+
+Wb_introtime[] <- user()
 Wb_introduration <- user()
-Wb_introrate <- user()
+Wb_introlevel <- user()
 
 Delta_wb[] <- Delta[i] / Wb_fM
 
@@ -212,9 +215,8 @@ dim(prop_wb) <- NP
 M_tot[] <- Mwt_tot[i] + Mwb_tot[i]
 prop_wb[] <- Mwb_tot[i] / (M_tot[i] + 1e-10)
 
-dim(R0t_1)<- NP
-R0t_1[] <- kappa * kappa * (Mwt_tot[i] + Wb_relsusc1 * Wb_relinf1 * Mwb_tot[i]) *
-  Beta_hm_1 * inf_per * Beta_mh[i] / (1 + delta * eip[i]) / delta / NTp[i]
+R0t_1[] <- Kappa * Kappa * (Mwt_tot[i] + Wb_relsusc1 * Wb_relinf1 * Mwb_tot[i]) *
+  Beta_hm_1 * inf_per * Beta_mh_1 / (1 + Delta[i] * eip[i]) / Delta[i] / NTp[i]
 
 Lwb_birth_lambda[] <- DT *(Gamma * Wb_fF * Wb_mat * Mwb_tot[i])
 Lwb_birth[] <- Lwb_birth_lambda[i]
@@ -229,14 +231,18 @@ update(Lwb[]) <- Lwb_birth[i] + Lwb[i] - O_Lwb[i]
 
 Mwb_FOI1[] <- Wb_relsusc1 * Mwt_FOI1[i]
 
+Mwb_FOI1av <- (sum(Mwb_FOI1[]) - Mwb_FOI1[NP]) / (NP - 1)
+
 O_Mwb_S_prob[] <- max(min(DT * Delta_wb[i] + Mwb_FOI1[i], 1), 0)
 O_Mwb_S[] <- Mwb_S[i] * O_Mwb_S_prob[i]
 
 Mwb_inf1_prob[] <- max(min(Mwb_FOI1[i] / (DT * Delta_wb[i] + Mwb_FOI1[i]), 1), 0)
 Mwb_inf1[] <- O_Mwb_S[i] * Mwb_inf1_prob[i]
 
+Wb_introrate[] <- Wb_introlevel * Mwt[i] * N_eq[i] * DT / Wb_introduration
+
 Mwb_intro[] <- if((TIME >= Wb_introtime[i] * YL) &&
-                  (TIME < Wb_introtime[i] * YL + Wb_introduration)) rpois(Wb_introrate[i]) else 0
+                  (TIME < Wb_introtime[i] * YL + Wb_introduration)) Wb_introrate[i] else 0
 
 update(Mwb_S[]) <- Lwb_mature[i] + Mwb_intro[i] + Mwb_S[i] - O_Mwb_S[i]
 
@@ -261,9 +267,9 @@ O_Mwb_I1[] <- Mwb_I1[i] * O_Mwb_I1_prob[i]
 
 update(Mwb_I1[]) <- Mwb_E2_incub[i] + Mwb_I1[i] - O_Mwb_I1[i]
 
-Mwt_propinf <- (Mwt_E1[i] + Mwt_E2[i] + Mwt_I1[i]) / (Mwt_tot[i] + 1e-10)
-Mwb_propinf <- (Mwb_E1[i] + Mwb_E2[i] + Mwb_I1[i]) / (Mwb_tot[i] + 1e-10)
-M_propinf <- ((Mwt_tot[i] + 1e-10) * Mwt_propinf[i] + (Mwb_tot[i] + 1e-10) * Mwb_propinf[i]) / (M_tot[i]+1e-10)
+Mwt_propinf[] <- (Mwt_E1[i] + Mwt_E2[i] + Mwt_I1[i]) / (Mwt_tot[i] + 1e-10)
+Mwb_propinf[] <- (Mwb_E1[i] + Mwb_E2[i] + Mwb_I1[i]) / (Mwb_tot[i] + 1e-10)
+M_propinf[] <- ((Mwt_tot[i] + 1e-10) * Mwt_propinf[i] + (Mwb_tot[i] + 1e-10) * Mwb_propinf[i]) / (M_tot[i]+1e-10)
 
 
 
@@ -474,16 +480,30 @@ output(Mwt_FOI1[]) <- TRUE
 output(O_S_prob[,,]) <- TRUE
 output(rho1[]) <- TRUE
 output(infectious1[]) <- TRUE
+output(R0t_1[]) <- TRUE
 
 # diagnostics for mosquitoes
 output(Mwt_tot[]) <- TRUE
-output(MwtCont) <- TRUE
 output(Lwt_birth[]) <- TRUE
+output(Lwt_mature[]) <- TRUE
 output(Mwt_FOI1av) <- TRUE
 output(Mwt_inf1[]) <- TRUE
-output(O_Mwt_E1[]) <- TRUE
-output(O_Mwt_S[]) <- TRUE
-output(Lwt_mature[]) <- TRUE
+output(Mwt_propinf) <- TRUE
+
+output(MwtCont) <- TRUE
+
+output(Mwb_tot[]) <- TRUE
+output(Lwb_birth[]) <- TRUE
+output(Lwb_mature[]) <- TRUE
+output(Mwb_FOI1av) <- TRUE
+output(Mwb_inf1[]) <- TRUE
+output(Mwb_propinf) <- TRUE
+
+output(Wb_introrate[]) <- TRUE
+output(Mwb_intro[]) <- TRUE
+output(prop_wb[]) <- TRUE
+
+output(M_propinf) <- TRUE
 
 output(TIME) <- TRUE
 
@@ -592,6 +612,7 @@ dim(Mwb_E1) <- NP
 dim(Mwb_E2) <- NP
 dim(Mwb_I1) <- NP
 dim(Mwb_tot) <- NP
+dim(R0t_1) <- NP
 dim(Lwb_birth) <- NP
 dim(Lwb_birth_lambda) <- NP
 dim(O_Lwb) <- NP
@@ -603,9 +624,9 @@ dim(O_Mwb_S) <- NP
 dim(O_Mwb_S_prob) <- NP
 dim(Mwb_inf1) <- NP
 dim(Mwb_inf1_prob) <- NP
+dim(Wb_introrate) <- NP
 dim(Mwb_intro) <- NP
 dim(Wb_introtime) <- NP
-dim(Wb_introrate) <- NP
 dim(O_Mwb_E1) <- NP
 dim(O_Mwb_E1_prob) <- NP
 dim(Mwb_E1_incub) <- NP
