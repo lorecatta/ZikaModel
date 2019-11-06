@@ -97,19 +97,6 @@ equilibrium_init_create <- function(agec, death, nn_links, model_parameter_list)
 
   Nb <- N_eq / lifespan # number of births
 
-  Mwt_cv <- mpl$Mwt_cv
-  Mwt_mean <- mpl$Mwt_mean
-
-  ln_sd <- sqrt(log(1 + Mwt_cv * Mwt_cv))
-  ln_mean <- log(Mwt_mean) - (ln_sd * ln_sd) / 2
-
-  init_Mwt_base <- exp(rnorm(NP, ln_mean, ln_sd))
-
-  Wb_introlevel <- mpl$Wb_introlevel
-  Wb_introduration <- mpl$Wb_introduration
-
-  Wb_introrate <- Wb_introlevel * init_Mwt_base * N_eq * DT/Wb_introduration
-
 
 
   # -----------------------------------------------------------------------------
@@ -224,11 +211,9 @@ equilibrium_init_create <- function(agec, death, nn_links, model_parameter_list)
               lifespan = lifespan,
               N_eq = N_eq,
               Nb = Nb,
-              Mwt = init_Mwt_base,
               season_phase = season_phase,
               season_amp = season_amp,
               Wb_introtime = Wb_introtime,
-              Wb_introrate = Wb_introrate,
               vacc_cu_rndtime = vacc_cu_rndtime,
               dis1 = dis1,
               rho1 = rho1,
