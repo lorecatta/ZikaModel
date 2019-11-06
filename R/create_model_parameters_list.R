@@ -64,7 +64,7 @@
 model_param_list_create <- function(
 
   YL = 364,
-  DT = 0.5,
+  DT = 1,
   NP = 21,
   age_per = 1,
   N_human = 30000000,
