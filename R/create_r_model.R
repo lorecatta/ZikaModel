@@ -37,6 +37,6 @@ create_r_model <- function(odin_model_path,
   state <- state_init[names(state_init) %in% names(formals(gen))]
 
   # return mod
-  return(list("state" = state, "generator" = gen, "mpl" = mpl))
+  return(list("state" = state, "generator" = gen, "parameters" = mpl))
 
 }
