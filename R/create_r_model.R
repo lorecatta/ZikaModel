@@ -21,10 +21,10 @@ create_r_model <- function(odin_model_path,
                            agec,
                            death,
                            nn_links,
-                           season){
+                           ...){
 
   ## create model param list using necessary variables
-  mpl <- model_param_list_create(season = season)
+  mpl <- model_param_list_create(...)
 
   # generate initial state variables from equilibrium solution
   state_init <- equilibrium_init_create(agec = agec,
