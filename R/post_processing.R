@@ -55,10 +55,12 @@ post_processing <- function(dat) {
 
   current_levs <- c("S", "I1", "R1", "births", "inf_1", "Nt", "inf_1_cum", "Sp", "I1p", "R1p", "wIR_inf")
 
+  # rename
   new_levs <- c("Susceptibles", "Infectious", "Recovered", "Births", "Incidence of infections", "Total population", "Cumulative incidence", "Sp", "I1p", "R1p", "Weekly infections/1000")
 
   levels(df_H_melt$diagnostic) <- new_levs
 
+  # reorder
   df_H_melt$diagnostic <- factor(df_H_melt$diagnostic, levels = c("Susceptibles", "Infectious", "Recovered", "Total population", "Births", "Incidence of infections", "Cumulative incidence", "Weekly infections/1000", "Sp", "I1p", "R1p"))
 
   diagno_1 <- subset(df_H_melt, df_H_melt$diagnostic %in% c("Sp", "I1p", "R1p"))
