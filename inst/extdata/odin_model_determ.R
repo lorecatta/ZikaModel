@@ -448,64 +448,64 @@ update(R1[1:na,1:2,1:NP]) <- trunc(0.5 + age_R1[i,j,k] + recov1[i,j,k] + R1[i,j,
 
 
 
-# # diagnostics for humans
-# output(agert[]) <- TRUE
-# output(deathrt[]) <- TRUE
-# output(births[]) <- TRUE
-# output(Ntotal[,,]) <- TRUE
-# output(FOI1av) <- TRUE
-# output(O_S[,,]) <- TRUE
-# output(inf_1[,,]) <- TRUE
-# output(age_S[,,]) <- TRUE
-# output(O_I1[,,]) <- TRUE
-# output(recov1[,,]) <- TRUE
-# output(age_I1[,,]) <- TRUE
-# output(O_R1[,,]) <- TRUE
-# output(age_R1[,,]) <- TRUE
-# output(Y1T[]) <- TRUE
-# output(Deltaav) <- TRUE
-# output(Kcav) <- TRUE
-# output(eipav) <- TRUE
-# output(FOI1[]) <- TRUE
-# output(FOI1p[]) <- TRUE
-# output(FOI1nn[]) <- TRUE
-# output(prop_Sp[]) <- TRUE
-# output(FOI1Y[]) <- TRUE
-# output(inf_1_prob[,,]) <- TRUE
-# output(Kc[]) <- TRUE
-# output(eip[]) <- TRUE
-# output(Delta[]) <- TRUE
-# output(NTp[]) <- TRUE
-# output(Mwt_FOI1[]) <- TRUE
-# output(O_S_prob[,,]) <- TRUE
-# output(rho1[]) <- TRUE
-# output(infectious1[]) <- TRUE
-# output(R0t_1[]) <- TRUE
-#
-# # diagnostics for mosquitoes
-# output(Mwt_tot[]) <- TRUE
-# output(Lwt_birth[]) <- TRUE
-# output(Lwt_mature[]) <- TRUE
-# output(Mwt_FOI1av) <- TRUE
-# output(Mwt_inf1[]) <- TRUE
-# output(Mwt_propinf) <- TRUE
-#
-# output(MwtCont) <- TRUE
-#
-# output(Mwb_tot[]) <- TRUE
-# output(Lwb_birth[]) <- TRUE
-# output(Lwb_mature[]) <- TRUE
-# output(Mwb_FOI1av) <- TRUE
-# output(Mwb_inf1[]) <- TRUE
-# output(Mwb_propinf) <- TRUE
-#
-# output(Wb_introrate[]) <- TRUE
-# output(Mwb_intro[]) <- TRUE
+# diagnostics for humans
+output(agert[]) <- TRUE
+output(deathrt[]) <- TRUE
+output(births[]) <- TRUE
+output(Ntotal[,,]) <- TRUE
+output(FOI1av) <- TRUE
+output(O_S[,,]) <- TRUE
+output(inf_1[,,]) <- TRUE
+output(age_S[,,]) <- TRUE
+output(O_I1[,,]) <- TRUE
+output(recov1[,,]) <- TRUE
+output(age_I1[,,]) <- TRUE
+output(O_R1[,,]) <- TRUE
+output(age_R1[,,]) <- TRUE
+output(Y1T[]) <- TRUE
+output(Deltaav) <- TRUE
+output(Kcav) <- TRUE
+output(eipav) <- TRUE
+output(FOI1[]) <- TRUE
+output(FOI1p[]) <- TRUE
+output(FOI1nn[]) <- TRUE
+output(prop_Sp[]) <- TRUE
+output(FOI1Y[]) <- TRUE
+output(inf_1_prob[,,]) <- TRUE
+output(Kc[]) <- TRUE
+output(eip[]) <- TRUE
+output(Delta[]) <- TRUE
+output(NTp[]) <- TRUE
+output(Mwt_FOI1[]) <- TRUE
+output(O_S_prob[,,]) <- TRUE
+output(rho1[]) <- TRUE
+output(infectious1[]) <- TRUE
+output(R0t_1[]) <- TRUE
+
+# diagnostics for mosquitoes
+output(Mwt_tot[]) <- TRUE
+output(Lwt_birth[]) <- TRUE
+output(Lwt_mature[]) <- TRUE
+output(Mwt_FOI1av) <- TRUE
+output(Mwt_inf1[]) <- TRUE
+output(Mwt_propinf) <- TRUE
+
+output(MwtCont) <- TRUE
+
+output(Mwb_tot[]) <- TRUE
+output(Lwb_birth[]) <- TRUE
+output(Lwb_mature[]) <- TRUE
+output(Mwb_FOI1av) <- TRUE
+output(Mwb_inf1[]) <- TRUE
+output(Mwb_propinf) <- TRUE
+
+output(Wb_introrate[]) <- TRUE
+output(Mwb_intro[]) <- TRUE
 output(prop_wb[]) <- TRUE
 
-# output(M_propinf) <- TRUE
-#
-# output(TIME) <- TRUE
+output(M_propinf) <- TRUE
+
+output(TIME) <- TRUE
 
 
 
