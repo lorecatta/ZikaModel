@@ -143,7 +143,8 @@ Wb_cyto <- user()
 Wb_fF <- user()
 Wb_mat <- user()
 
-# fecundity with effect of cytoplasmic incompatibility
+# Fecundity (i.e., rate at which female mosquitoes lay egg)
+# with effect of cytoplasmic incompatibility
 Lwt_birth_lambda[] <- DT *
   (Gamma * Mwt_tot[i] * (Mwt_tot[i] + (1 - Wb_cyto) * Mwb_tot[i]) /
      (Mwt_tot[i] + Mwb_tot[i]) + Wb_fF * (1 - Wb_mat) * Mwb_tot[i])
