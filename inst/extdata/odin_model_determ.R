@@ -528,7 +528,7 @@ output(Mwb_E1[]) <- FALSE
 output(Mwb_E2[]) <- FALSE
 output(Mwb_I1[]) <- FALSE
 output(S[,,]) <- FALSE
-output(I[,,]) <- FALSE
+output(I1[,,]) <- FALSE
 output(R1[,,]) <- FALSE
 
 
