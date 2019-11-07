@@ -511,30 +511,6 @@ output(prop_wb[]) <- TRUE
 
 # -----------------------------------------------------------------------------
 #
-# The basic outputs you do not want
-#
-# -----------------------------------------------------------------------------
-
-
-
-output(Lwt[]) <- FALSE
-output(Mwt_S[]) <- FALSE
-output(Mwt_E1[]) <- FALSE
-output(Mwt_E2[]) <- FALSE
-output(Mwt_I1[]) <- FALSE
-output(Lwb[]) <- FALSE
-output(Mwb_S[]) <- FALSE
-output(Mwb_E1[]) <- FALSE
-output(Mwb_E2[]) <- FALSE
-output(Mwb_I1[]) <- FALSE
-output(S[,,]) <- FALSE
-output(I1[,,]) <- FALSE
-output(R1[,,]) <- FALSE
-
-
-
-# -----------------------------------------------------------------------------
-#
 # define array dimensions (odin requires it)
 #
 # -----------------------------------------------------------------------------
