@@ -27,7 +27,7 @@ Epsilon <- user() # larvae development rate
 Sigma <- user() # larvae mortality rate
 Omega <- user() # 1
 
-# rate at which adult female produce larvae. Rm is fixed.
+# Number of eggs produced per female mosquito per time step (baseline fecundity). Rm is fixed.
 Gamma <- Rm * DeltaMean * (Epsilon + Sigma) / Epsilon
 
 N_eq[] <- user()
@@ -142,6 +142,8 @@ Mwt_tot[] <- Mwt_S[i] + Mwt_E1[i] + Mwt_E2[i] + Mwt_I1[i]
 Wb_cyto <- user()
 Wb_fF <- user()
 Wb_mat <- user()
+
+# fecundity with effect of cytoplasmic incompatibility
 Lwt_birth_lambda[] <- DT *
   (Gamma * Mwt_tot[i] * (Mwt_tot[i] + (1 - Wb_cyto) * Mwb_tot[i]) /
      (Mwt_tot[i] + Mwb_tot[i]) + Wb_fF * (1 - Wb_mat) * Mwb_tot[i])

@@ -29,14 +29,16 @@
 #' @param propMwtControl Proportion of adult wild type mosquitoes which are killed by control. Default = 0.
 #' @param TimeMwtControlOn Year of start of control of adult wild type mosquitoes. Default = 4.
 #' @param TimeMwtControlOff Year of end of control of adult wild type mosquitoes. Default = 5.
-#' @param Wb_cyto Default = 1.
-#' @param Wb_mat Default = 1.
-#' @param Wb_fM Default = 0.95.
-#' @param Wb_fF Default = 0.95.
-#' @param Wb_relsusc1 Default = 0.9.
-#' @param Wb_relinf1 Default = 0.75.
-#' @param Wb_starttime Default = 140.
-#' @param Wb_introlevel Default = 0.5.
+#' @param Wb_cyto Degree of cytoplasmic incompatibility induced by Wolbachia. Default = 1.
+#' @param Wb_mat Degree of vertical transmission of Wolbachia. Default = 1.
+#' @param Wb_fM Increase in mortality induced by Wolbachia. Default = 0.95.
+#' @param Wb_fF Redution in fecundity induced by Wolbachia. Default = 0.95.
+#' @param Wb_relsusc1 Infectivity of a human host to Wolbachia infected mosquitoes
+#'   (time τ after host infection). Default = 0.9.
+#' @param Wb_relinf1 Infectiousness of Wolbachia-infected mosquitoes time τ after infection. Default = 0.75.
+#' @param Wb_starttime Default = 1.
+#' @param Wb_introlevel # Ratio of Wolbachia-infected to wild type mosquitoes at introduction.
+#'   (Not the proportion of Wolbachia AFTER introduction). Default = 0.
 #' @param Wb_introduration Default = 60.
 #' @param vacc_cu_minage Default = 2.
 #' @param vacc_cu_maxage Default = 15.
@@ -94,8 +96,8 @@ model_param_list_create <- function(
   Wb_fF = 0.95,
   Wb_relsusc1 = 0.9,
   Wb_relinf1 = 0.5,
-  Wb_starttime = 140,
-  Wb_introlevel = 0.5,
+  Wb_starttime = 1,
+  Wb_introlevel = 0,
   Wb_introduration = 60,
 
   vacc_cu_minage = 2,

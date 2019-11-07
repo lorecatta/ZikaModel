@@ -13,7 +13,7 @@ model_param_list_create(YL = 364, DT = 1, NP = 21, age_per = 1,
   propMwtControl = 0, TimeMwtControlOn = 1.5,
   TimeMwtControlOff = 2.5, Wb_cyto = 1, Wb_mat = 1, Wb_fM = 0.95,
   Wb_fF = 0.95, Wb_relsusc1 = 0.9, Wb_relinf1 = 0.5,
-  Wb_starttime = 140, Wb_introlevel = 0.5, Wb_introduration = 60,
+  Wb_starttime = 1, Wb_introlevel = 0, Wb_introduration = 60,
   vacc_cu_minage = 2, vacc_cu_maxage = 15, vacc_cu_coverage = 0.7,
   vacc_cu_time = 150, vacc_child_age = 1, vacc_child_coverage = 0.56,
   vacc_child_starttime = 150, vacc_child_stoptime = 150,
@@ -69,21 +69,23 @@ model_param_list_create(YL = 364, DT = 1, NP = 21, age_per = 1,
 
 \item{TimeMwtControlOff}{Year of end of control of adult wild type mosquitoes. Default = 5.}
 
-\item{Wb_cyto}{Default = 1.}
+\item{Wb_cyto}{Degree of cytoplasmic incompatibility induced by Wolbachia. Default = 1.}
 
-\item{Wb_mat}{Default = 1.}
+\item{Wb_mat}{Degree of vertical transmission of Wolbachia. Default = 1.}
 
-\item{Wb_fM}{Default = 0.95.}
+\item{Wb_fM}{Increase in mortality induced by Wolbachia. Default = 0.95.}
 
-\item{Wb_fF}{Default = 0.95.}
+\item{Wb_fF}{Redution in fecundity induced by Wolbachia. Default = 0.95.}
 
-\item{Wb_relsusc1}{Default = 0.9.}
+\item{Wb_relsusc1}{Infectivity of a human host to Wolbachia infected mosquitoes
+(time τ after host infection). Default = 0.9.}
 
-\item{Wb_relinf1}{Default = 0.75.}
+\item{Wb_relinf1}{Infectiousness of Wolbachia-infected mosquitoes time τ after infection. Default = 0.75.}
 
-\item{Wb_starttime}{Default = 140.}
+\item{Wb_starttime}{Default = 1.}
 
-\item{Wb_introlevel}{Default = 0.5.}
+\item{Wb_introlevel}{# Ratio of Wolbachia-infected to wild type mosquitoes at introduction.
+(Not the proportion of Wolbachia AFTER introduction). Default = 0.}
 
 \item{Wb_introduration}{Default = 60.}
 

@@ -137,7 +137,7 @@ equilibrium_init_create <- function(agec, death, nn_links, model_parameter_list)
 
   for (i in seq_len(NP - 1)){
 
-    Wb_introtime[i] <- Wb_starttime + trunc(6 * (i - 1) / NP) * 0.5
+    Wb_introtime[i] <- Wb_starttime # + trunc(6 * (i - 1) / NP) * 0.5
 
   }
 
