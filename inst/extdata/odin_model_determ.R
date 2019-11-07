@@ -442,7 +442,7 @@ update(R1[1:na,1:2,1:NP]) <- trunc(0.5 + age_R1[i,j,k] + recov1[i,j,k] + R1[i,j,
 
 # -----------------------------------------------------------------------------
 #
-# The outputs you want
+# The extra outputs you want
 #
 # -----------------------------------------------------------------------------
 
@@ -506,6 +506,31 @@ output(prop_wb[]) <- TRUE
 # output(M_propinf) <- TRUE
 #
 # output(TIME) <- TRUE
+
+
+
+# -----------------------------------------------------------------------------
+#
+# The basic outputs you do not want
+#
+# -----------------------------------------------------------------------------
+
+
+
+output(Lwt[]) <- FALSE
+output(Mwt_S[]) <- FALSE
+output(Mwt_E1[]) <- FALSE
+output(Mwt_E2[]) <- FALSE
+output(Mwt_I1[]) <- FALSE
+output(Lwb[]) <- FALSE
+output(Mwb_S[]) <- FALSE
+output(Mwb_E1[]) <- FALSE
+output(Mwb_E2[]) <- FALSE
+output(Mwb_I1[]) <- FALSE
+output(S[,,]) <- FALSE
+output(I[,,]) <- FALSE
+output(R1[,,]) <- FALSE
+
 
 
 # -----------------------------------------------------------------------------
