@@ -37,7 +37,7 @@
 #'   (time τ after host infection). Default = 0.9.
 #' @param Wb_relinf1 Infectiousness of Wolbachia-infected mosquitoes time τ after infection. Default = 0.75.
 #' @param Wb_starttime Default = 1.
-#' @param Wb_introlevel # Ratio of Wolbachia-infected to wild type mosquitoes at introduction.
+#' @param Wb_introlevel Ratio of Wolbachia-infected to wild type mosquitoes at introduction.
 #'   (Not the proportion of Wolbachia AFTER introduction). Default = 0.
 #' @param Wb_introduration Default = 60.
 #' @param vacc_cu_minage Default = 2.
