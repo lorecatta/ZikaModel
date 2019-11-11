@@ -4,7 +4,7 @@
 \alias{run_model}
 \title{\code{run_model} runs model using declared agec, death and nn_links}
 \usage{
-run_model(agec, death, nn_links, time, season = FALSE)
+run_model(agec, death, nn_links, amplitude_phases, time, season = FALSE)
 }
 \arguments{
 \item{agec}{Vector of age group widths.}
@@ -12,6 +12,8 @@ run_model(agec, death, nn_links, time, season = FALSE)
 \item{death}{Numeric of mortality rates.}
 
 \item{nn_links}{8 nearest-neigbors to each patch.}
+
+\item{amplitude_phases}{amplitude and phase of seasonal forcing for each patch.}
 
 \item{time}{time in days.}
 

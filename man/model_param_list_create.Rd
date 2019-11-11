@@ -29,11 +29,12 @@ model_param_list_create(YL = 364, DT = 1, NP = 21, age_per = 1,
 
 \item{NP}{Number of patches. Default = 21.}
 
-\item{age_per}{Time (weeks) between age updates. Default = 52 weeks.}
+\item{age_per}{Time (weeks) between age updates. Default = 1.}
 
 \item{N_human}{Human population in each patch. Default = 30000000.}
 
-\item{Omega}{Density dependent power. Default = 1.}
+\item{Omega}{Intensity of density dependence of mosquito larvae mortality rate.
+0 = no density dependence. Default = 1.}
 
 \item{DeltaBase}{Adult mosquito mortality rate. Default = 0.2.}
 
@@ -82,12 +83,12 @@ model_param_list_create(YL = 364, DT = 1, NP = 21, age_per = 1,
 
 \item{Wb_relinf1}{Infectiousness of Wolbachia-infected mosquitoes time τ after infection. Default = 0.75.}
 
-\item{Wb_starttime}{Default = 1.}
+\item{Wb_starttime}{Time of first release of Wolbachia-infected mosquiotes (years). Default = 1.}
 
-\item{Wb_introlevel}{# Ratio of Wolbachia-infected to wild type mosquitoes at introduction.
+\item{Wb_introlevel}{Ratio of Wolbachia-infected to wild type mosquitoes at introduction.
 (Not the proportion of Wolbachia AFTER introduction). Default = 0.}
 
-\item{Wb_introduration}{Default = 60.}
+\item{Wb_introduration}{Duration of Wolbachia release (days). Default = 60.}
 
 \item{vacc_cu_minage}{Default = 2.}
 
