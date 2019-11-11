@@ -12,7 +12,7 @@
 #'
 #' @param nn_links 8 nearest-neigbors to each patch.
 #'
-#' @param amplitude_phases amplitude and phase of seasonal forcing for each patch.
+#' @param amplitudes_phases amplitude and phase of seasonal forcing for each patch.
 #'
 #' @param model_parameter_list list of user-defined model parameters.
 #'
@@ -21,7 +21,7 @@
 #' @export
 
 
-equilibrium_init_create <- function(agec, death, nn_links, amplitude_phases, model_parameter_list){
+equilibrium_init_create <- function(agec, death, nn_links, amplitudes_phases, model_parameter_list){
 
   mpl <- model_parameter_list
   nn <- nn_links
