@@ -99,7 +99,7 @@ equilibrium_init_create <- function(agec, death, nn_links, amplitudes_phases, mo
 
   Nb <- N_eq / lifespan # number of births
 
-  amplitude_phases$phase <- amplitude_phases$phase * YL
+  amplitudes_phases$phase <- amplitudes_phases$phase * YL
 
   Wb_introtime <- c()
 
@@ -169,7 +169,7 @@ equilibrium_init_create <- function(agec, death, nn_links, amplitudes_phases, mo
   pTG_bigpatch <- pTG / 10
 
   res <- list(nn = nn,
-              amplitude_phases = amplitude_phases,
+              amplitudes_phases = amplitudes_phases,
               na = na,
               agec = agec,
               death = death,

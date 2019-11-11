@@ -7,7 +7,7 @@ NP <- user()
 
 nn[,] <- user()
 
-amplitude_phases[,] <- user
+amplitudes_phases[,] <- user
 
 age_per <- user()
 na <- user()
@@ -74,8 +74,8 @@ Beta_hm_1 <- user()
 # with the effect of seasonality
 
 
-season_amp[] <- amplitude_phases[, 2]
-season_phases[] <- amplitude_phases[, 3]
+season_amp[] <- amplitudes_phases[, 2]
+season_phases[] <- amplitudes_phases[, 3]
 pi <- user()
 Delta_season <- user()
 Kc_season <- user()
@@ -529,7 +529,7 @@ dim(Delta) <- NP
 dim(Kc) <- NP
 dim(eip) <- NP
 dim(nn) <- c(NP, 8)
-dim(amplitude_phases) <- c(NP, 3)
+dim(amplitudes_phases) <- c(NP, 3)
 dim(N_eq) <- NP
 dim(Lwt) <- NP
 dim(Mwt_S) <- NP
