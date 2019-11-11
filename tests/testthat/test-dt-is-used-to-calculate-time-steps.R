@@ -25,6 +25,7 @@ test_that("dt is used to calculate time steps", {
   model_outputs <- run_model(agec = age_init,
                              death = deathrt,
                              nn_links,
+                             amplitudes_phases,
                              time = time_frame)
 
   expect_identical(tt * dt, model_outputs$TIME)
