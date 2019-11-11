@@ -7,7 +7,7 @@ NP <- user()
 
 nn[,] <- user()
 
-amplitudes_phases[,] <- user
+amplitudes_phases[,] <- user()
 
 age_per <- user()
 na <- user()
