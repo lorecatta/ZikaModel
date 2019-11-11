@@ -9,9 +9,10 @@
 #' @param YL Duration of a calendar year. Default = 364.
 #' @param DT Time step size. Default = 1.
 #' @param NP Number of patches. Default = 21.
-#' @param age_per Time (weeks) between age updates. Default = 52 weeks.
+#' @param age_per Time (weeks) between age updates. Default = 1.
 #' @param N_human Human population in each patch. Default = 30000000.
-#' @param Omega Density dependent power. Default = 1.
+#' @param Omega Intensity of density dependence of mosquito larvae mortality rate.
+#'   0 = no density dependence. Default = 1.
 #' @param DeltaBase Adult mosquito mortality rate. Default = 0.2.
 #' @param Sigma Larval mosquito mortality rate. Default = 0.025
 #' @param Epsilon Larval mean development rate (1 / larvae mean development time in days). Default = 1/19.
@@ -36,10 +37,10 @@
 #' @param Wb_relsusc1 Infectivity of a human host to Wolbachia infected mosquitoes
 #'   (time τ after host infection). Default = 0.9.
 #' @param Wb_relinf1 Infectiousness of Wolbachia-infected mosquitoes time τ after infection. Default = 0.75.
-#' @param Wb_starttime Default = 1.
+#' @param Wb_starttime Time of first release of Wolbachia-infected mosquiotes (years). Default = 1.
 #' @param Wb_introlevel Ratio of Wolbachia-infected to wild type mosquitoes at introduction.
 #'   (Not the proportion of Wolbachia AFTER introduction). Default = 0.
-#' @param Wb_introduration Default = 60.
+#' @param Wb_introduration Duration of Wolbachia release (days). Default = 60.
 #' @param vacc_cu_minage Default = 2.
 #' @param vacc_cu_maxage Default = 15.
 #' @param vacc_cu_coverage Default = 0.7.
