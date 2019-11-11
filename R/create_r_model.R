@@ -1,10 +1,11 @@
 
 # -----------------------------------------------------------------------------
 
-# Create generator for model creation
-
-#' \code{create_r_model} returns list with generator function automatically created given the odin model
-#' specified.
+#' The function returns a list with initial value of parameters, odin generator
+#' function automatically created given the odin model specified, and list of
+#' user-defined parameters.
+#'
+#' @title Create an odin generator function
 #'
 #' @inheritParams equilibrium_init_create
 #'

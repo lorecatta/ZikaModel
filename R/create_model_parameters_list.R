@@ -1,10 +1,9 @@
 
-#------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
-# model_param_list_create
-
-#' \code{model_param_list_create} creates a list of user-defined
-#' parameters.
+#' The function creates a list of user-defined parameters.
+#'
+#' @title Create a list of parameters
 #'
 #' @param YL Duration of a calendar year. Default = 364.
 #' @param DT Time step size. Default = 1.

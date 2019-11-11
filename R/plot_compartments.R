@@ -1,9 +1,9 @@
 
-#------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
-# plot_compartments
-
-#' \code{plot_compartments} makes a plot of the model human compartments.
+#' The function makes a plot of the model human compartments.
+#'
+#' @title Plot human states
 #'
 #' @param df The dataframe with the data to plot.
 #'

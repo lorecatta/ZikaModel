@@ -1,9 +1,9 @@
 
-#------------------------------------------------
+# -----------------------------------------------------------------------------
 
-# post_processing
-
-#' \code{post_processing} processes model outputs to calculate metrics of interest
+#' The function processes model outputs to calculate metrics of interest.
+#'
+#' @title Post-processe model outputs
 #'
 #' @param dat list of model outputs from the model run.
 #'

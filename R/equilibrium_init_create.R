@@ -1,10 +1,10 @@
 
-#------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
-# equilibrium_init_create
-
-#' \code{equilibrium_init_create} creates an equilibrium initialisation
-#' state to be used within later model runs.
+#' The function creates an equilibrium initialisation state to be used within
+#' later model runs.
+#'
+#' @title Generate equilibrium state
 #'
 #' @param agec Vector of age group widths.
 #'

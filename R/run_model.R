@@ -1,9 +1,10 @@
 
 #------------------------------------------------------------------------------
 
-# run_model
-
-#' \code{run_model} runs model using declared agec, death and nn_links
+#' The function creates an odin generator function and runs an instance of the model
+#' using user-defined parameters and an equilibrium initialisation state.
+#'
+#' @title Runs and odin model
 #'
 #' @inheritParams equilibrium_init_create
 #'

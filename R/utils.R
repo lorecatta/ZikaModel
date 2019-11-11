@@ -1,8 +1,10 @@
+
 # -----------------------------------------------------------------------------
 
-# Calculates lagged differences using \code{diff}
-
-#' \code{lag_diff} returns a vector of lagged difference values with initial padding.
+#' The function returns a vector of lagged difference values using \code{diff}
+#' with initial padding
+#'
+#' @title Calculate lagged differences
 #'
 #' @param x vector of numeric values
 #'

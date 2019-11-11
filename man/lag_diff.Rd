@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{lag_diff}
 \alias{lag_diff}
-\title{\code{lag_diff} returns a vector of lagged difference values with initial padding.}
+\title{Calculate lagged differences}
 \usage{
 lag_diff(x, lag)
 }
@@ -12,5 +12,6 @@ lag_diff(x, lag)
 \item{lag}{the lag value (numeric)}
 }
 \description{
-\code{lag_diff} returns a vector of lagged difference values with initial padding.
+The function returns a vector of lagged difference values using \code{diff}
+with initial padding
 }

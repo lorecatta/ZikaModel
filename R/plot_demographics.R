@@ -1,9 +1,9 @@
 
-#------------------------------------------------
+# -----------------------------------------------------------------------------
 
-# plot_demographics
-
-#' \code{plot_demographics} makes a faceted plot of the model outputs
+#' The function makes a faceted plot of the model demographics outputs.
+#'
+#' @title Plot demographics
 #'
 #' @param df The dataframe with the data to plot.
 #'

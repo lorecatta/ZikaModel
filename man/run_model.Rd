@@ -2,7 +2,7 @@
 % Please edit documentation in R/run_model.R
 \name{run_model}
 \alias{run_model}
-\title{\code{run_model} runs model using declared agec, death and nn_links}
+\title{Runs and odin model}
 \usage{
 run_model(agec, death, nn_links, amplitudes_phases, time, season = FALSE)
 }
@@ -23,5 +23,6 @@ run_model(agec, death, nn_links, amplitudes_phases, time, season = FALSE)
 list of model outputs
 }
 \description{
-\code{run_model} runs model using declared agec, death and nn_links
+The function creates an odin generator function and runs an instance of the model
+using user-defined parameters and an equilibrium initialisation state.
 }

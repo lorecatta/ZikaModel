@@ -2,8 +2,7 @@
 % Please edit documentation in R/create_r_model.R
 \name{create_r_model}
 \alias{create_r_model}
-\title{\code{create_r_model} returns list with generator function automatically created given the odin model
-specified.}
+\title{Create an odin generator function}
 \usage{
 create_r_model(odin_model_path, agec, death, nn_links, amplitudes_phases,
   ...)
@@ -23,6 +22,7 @@ create_r_model(odin_model_path, agec, death, nn_links, amplitudes_phases,
 list of generator function, initial state, model parameters and generator
 }
 \description{
-\code{create_r_model} returns list with generator function automatically created given the odin model
-specified.
+The function returns a list with initial value of parameters, odin generator
+function automatically created given the odin model specified, and list of
+user-defined parameters.
 }

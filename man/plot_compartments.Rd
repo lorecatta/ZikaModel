@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_compartments.R
 \name{plot_compartments}
 \alias{plot_compartments}
-\title{\code{plot_compartments} makes a plot of the model human compartments.}
+\title{Plot human states}
 \usage{
 plot_compartments(df)
 }
@@ -10,5 +10,5 @@ plot_compartments(df)
 \item{df}{The dataframe with the data to plot.}
 }
 \description{
-\code{plot_compartments} makes a plot of the model human compartments.
+The function makes a plot of the model human compartments.
 }
