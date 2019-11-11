@@ -48,7 +48,7 @@ time_frame <- 364 * 100
 model_outputs <- run_model(agec = age_init,
                            death = deathrt,
                            nn_links,
-                           amplitude_phases,
+                           amplitudes_phases,
                            time = time_frame)
 ```
 

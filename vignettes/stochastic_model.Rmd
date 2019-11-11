@@ -51,7 +51,7 @@ create_generator <- create_r_model(odin_model_path,
                                    agec = age_init,
                                    death = deathrt,
                                    nn_links,
-                                   amplitude_phases,
+                                   amplitudes_phases,
                                    season = TRUE)
 
 # model generator 
