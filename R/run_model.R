@@ -23,7 +23,7 @@
 run_model <- function(agec,
                       death,
                       nn_links,
-                      amplitude_phases,
+                      amplitudes_phases,
                       time,
                       season = FALSE) {
 
@@ -33,7 +33,7 @@ run_model <- function(agec,
   state_init <- equilibrium_init_create(agec = agec,
                                         death = death,
                                         nn_links = nn_links,
-                                        amplitude_phases = amplitude_phases,
+                                        amplitudes_phases = amplitudes_phases,
                                         model_parameter_list = mpl)
 
   # create odin generator

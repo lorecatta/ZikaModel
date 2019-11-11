@@ -21,7 +21,7 @@ create_r_model <- function(odin_model_path,
                            agec,
                            death,
                            nn_links,
-                           amplitude_phases,
+                           amplitudes_phases,
                            ...){
 
   ## create model param list using necessary variables
@@ -31,7 +31,7 @@ create_r_model <- function(odin_model_path,
   state_init <- equilibrium_init_create(agec = agec,
                                         death = death,
                                         nn_links = nn_links,
-                                        amplitude_phases = amplitude_phases,
+                                        amplitudes_phases = amplitudes_phases,
                                         model_parameter_list = mpl)
 
   # create odin generator
