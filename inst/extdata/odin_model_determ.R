@@ -7,6 +7,8 @@ NP <- user()
 
 nn[,] <- user()
 
+amplitude_phases[,] <- user
+
 age_per <- user()
 na <- user()
 
@@ -72,24 +74,24 @@ Beta_hm_1 <- user()
 # with the effect of seasonality
 
 
-season_phase[] <- user()
-season_amp[] <- user()
+season_amp[] <- amplitude_phases[, 2]
+season_phases[] <- amplitude_phases[, 3]
 pi <- user()
 Delta_season <- user()
 Kc_season <- user()
 eip_season <- user()
 
 Delta[1:(NP-1)] <- DeltaMean /
-  (1 + season_amp[i] * Delta_season * cos(2 * pi * (TIME + season_phase[i]) / YL))
+  (1 + season_amp[i] * Delta_season * cos(2 * pi * (TIME + season_phases[i]) / YL))
 Delta[NP] <- DeltaMean
 
 Kc[1:(NP-1)] <- Mwt[i] * Kc_mean *
-  (1 + season_amp[i] * Kc_season * cos(2 * pi * (TIME + season_phase[i]) / YL))
+  (1 + season_amp[i] * Kc_season * cos(2 * pi * (TIME + season_phases[i]) / YL))
 Kc[NP] <- MwtCont * Mwt_mean * Kc_mean *
-  (1 + season_amp[i] * Kc_season * cos(2 * pi * (TIME + season_phase[i]) / YL))
+  (1 + season_amp[i] * Kc_season * cos(2 * pi * (TIME + season_phases[i]) / YL))
 
 eip[] <- eip_mean *
-  (1 - season_amp[i] * eip_season * cos(2 * pi * (TIME + season_phase[i]) / YL))
+  (1 - season_amp[i] * eip_season * cos(2 * pi * (TIME + season_phases[i]) / YL))
 
 Deltaav <- (sum(Delta[]) - Delta[NP]) / (NP - 1)
 Kcav <- (sum(Kc[]) - Kc[NP]) / (NP - 1)
@@ -521,12 +523,13 @@ output(TIME) <- TRUE
 
 
 dim(Mwt) <- NP
-dim(season_phase) <- NP
+dim(season_phases_YL) <- NP
 dim(season_amp) <- NP
 dim(Delta) <- NP
 dim(Kc) <- NP
 dim(eip) <- NP
 dim(nn) <- c(NP, 8)
+dim(amplitude_phases) <- c(NP, 3)
 dim(N_eq) <- NP
 dim(Lwt) <- NP
 dim(Mwt_S) <- NP
