@@ -523,7 +523,7 @@ output(TIME) <- TRUE
 
 
 dim(Mwt) <- NP
-dim(season_phases_YL) <- NP
+dim(season_phases) <- NP
 dim(season_amp) <- NP
 dim(Delta) <- NP
 dim(Kc) <- NP
