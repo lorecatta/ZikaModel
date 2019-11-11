@@ -12,6 +12,8 @@
 #'
 #' @param nn_links 8 nearest-neigbors to each patch.
 #'
+#' @param amplitude_phases amplitude and phase of seasonal forcing for each patch.
+#'
 #' @param model_parameter_list list of user-defined model parameters.
 #'
 #' @importFrom stats rnorm
@@ -19,7 +21,7 @@
 #' @export
 
 
-equilibrium_init_create <- function(agec, death, nn_links, model_parameter_list){
+equilibrium_init_create <- function(agec, death, nn_links, amplitude_phases, model_parameter_list){
 
   mpl <- model_parameter_list
   nn <- nn_links
@@ -97,41 +99,9 @@ equilibrium_init_create <- function(agec, death, nn_links, model_parameter_list)
 
   Nb <- N_eq / lifespan # number of births
 
+  amplitude_phases$phase <- amplitude_phases$phase * YL
 
-
-  # -----------------------------------------------------------------------------
-  #
-  # Climate seasonality
-  #
-  # -----------------------------------------------------------------------------
-
-
-
-  # Effect of spatial variation in seasonality on dengue transmission.
-
-  # Patches have different seasonality of dengue transmission, depending on
-  # where they are located with respect to the equator.
-
-  # In the model seasonal climate variation affects:
-  # 1 - Larval carrying capacity
-  # 2 - Vector mortality
-  # 3 - Extrinsic Incubation Period
-
-  # Delta - vector mortality
-  # Kc - carrying capacity
-  # eip - extrinsic incubation period
-
-  season_amp <- season_phase <- Wb_introtime <- c()
-
-  season_phase[1:8] <- 0.5 * YL
-  season_phase[9:12] <- 0.25 * YL
-  season_phase[13:20] <- 0
-  season_phase[21] <- 0.25 * YL
-
-  season_amp[1:8] <- 1
-  season_amp[13:20] <- 1
-  season_amp[9:12] <- 0.33
-  season_amp[21] <- 0.33
+  Wb_introtime <- c()
 
   Wb_starttime <- mpl$Wb_starttime
 
@@ -199,6 +169,7 @@ equilibrium_init_create <- function(agec, death, nn_links, model_parameter_list)
   pTG_bigpatch <- pTG / 10
 
   res <- list(nn = nn,
+              amplitude_phases = amplitude_phases,
               na = na,
               agec = agec,
               death = death,
@@ -211,8 +182,6 @@ equilibrium_init_create <- function(agec, death, nn_links, model_parameter_list)
               lifespan = lifespan,
               N_eq = N_eq,
               Nb = Nb,
-              season_phase = season_phase,
-              season_amp = season_amp,
               Wb_introtime = Wb_introtime,
               vacc_cu_rndtime = vacc_cu_rndtime,
               dis1 = dis1,
