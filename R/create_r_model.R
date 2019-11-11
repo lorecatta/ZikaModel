@@ -1,9 +1,9 @@
 
 # -----------------------------------------------------------------------------
 
-#' The function returns a list with initial value of parameters, odin generator
-#' function automatically created given the odin model specified, and list of
-#' user-defined parameters.
+#' The function returns a list with the equilibrium initialisation state,
+#' odin generator function automatically created given the odin model specified,
+#' and list of user-defined parameters.
 #'
 #' @title Create an odin generator function
 #'
