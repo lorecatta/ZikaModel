@@ -29,6 +29,9 @@ In the model, seasonality affects:
 * mosquito larvae carrying capacity;
 * Extrinsic Incubation Period.
 
+The magnitude and timing of seasonal variations in each patch are described by the amplitude 
+and phase parameters, which were chosen to mimic the seasonality of dengue transmission in Latin America. A 5 x 4 patch structure was assumed with 8 patches above the equators (strong seasonality and peak at the start of the year), 4 at the equator (weak seasonality) and 8 below the equator (strong seasonality and peak in the middle of each year). 
+
 A deterministic model which includes the effect of seasonality can be implemented
 with the following:
 
@@ -52,6 +55,7 @@ time_frame <- 364 * 100
 model_outputs <- run_model(agec = age_init,
                            death = deathrt,
                            nn_links,
+                           amplitude_phases,
                            time = time_frame,
                            season = TRUE)
 ```
