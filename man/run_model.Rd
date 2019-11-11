@@ -13,7 +13,7 @@ run_model(agec, death, nn_links, amplitudes_phases, time, season = FALSE)
 
 \item{nn_links}{8 nearest-neigbors to each patch.}
 
-\item{amplitudes_phases}{amplitude and phase of seasonal forcing for each patch.}
+\item{amplitudes_phases}{Amplitude and phase of seasonal forcing for each patch.}
 
 \item{time}{time in days.}
 

@@ -8,7 +8,7 @@ create_r_model(odin_model_path, agec, death, nn_links, amplitudes_phases,
   ...)
 }
 \arguments{
-\item{odin_model_path}{Character path to odin model}
+\item{odin_model_path}{Character path to odin model.}
 
 \item{agec}{Vector of age group widths.}
 
@@ -16,13 +16,13 @@ create_r_model(odin_model_path, agec, death, nn_links, amplitudes_phases,
 
 \item{nn_links}{8 nearest-neigbors to each patch.}
 
-\item{amplitudes_phases}{amplitude and phase of seasonal forcing for each patch.}
+\item{amplitudes_phases}{Amplitude and phase of seasonal forcing for each patch.}
 }
 \value{
 list of generator function, initial state, model parameters and generator
 }
 \description{
-The function returns a list with initial value of parameters, odin generator
-function automatically created given the odin model specified, and list of
-user-defined parameters.
+The function returns a list with the equilibrium initialisation state,
+odin generator function automatically created given the odin model specified,
+and list of user-defined parameters.
 }

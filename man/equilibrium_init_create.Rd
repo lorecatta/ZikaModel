@@ -14,9 +14,9 @@ equilibrium_init_create(agec, death, nn_links, amplitudes_phases,
 
 \item{nn_links}{8 nearest-neigbors to each patch.}
 
-\item{amplitudes_phases}{amplitude and phase of seasonal forcing for each patch.}
+\item{amplitudes_phases}{Amplitude and phase of seasonal forcing for each patch.}
 
-\item{model_parameter_list}{list of user-defined model parameters.}
+\item{model_parameter_list}{List of user-defined model parameters.}
 }
 \description{
 The function creates an equilibrium initialisation state to be used within
