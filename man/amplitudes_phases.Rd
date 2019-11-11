@@ -4,11 +4,11 @@
 \name{amplitudes_phases}
 \alias{amplitudes_phases}
 \title{Amplitude and phase of seasonal forcing}
-\format{A data frame with 21 rows and 3 columns:}
+\format{A matrix with 21 rows and 3 columns:}
 \usage{
 amplitudes_phases
 }
 \description{
-A dataset containing the amplitude and pahse values of seasonal forcing for each patch.
+A dataset containing the amplitude and phase values of seasonal forcing for each patch.
 }
 \keyword{datasets}
