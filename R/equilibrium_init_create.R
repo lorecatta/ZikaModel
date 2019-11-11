@@ -12,9 +12,9 @@
 #'
 #' @param nn_links 8 nearest-neigbors to each patch.
 #'
-#' @param amplitudes_phases amplitude and phase of seasonal forcing for each patch.
+#' @param amplitudes_phases Amplitude and phase of seasonal forcing for each patch.
 #'
-#' @param model_parameter_list list of user-defined model parameters.
+#' @param model_parameter_list List of user-defined model parameters.
 #'
 #' @importFrom stats rnorm
 #'

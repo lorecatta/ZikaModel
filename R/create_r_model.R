@@ -11,7 +11,7 @@
 #'
 #' @inheritParams model_param_list_create
 #'
-#' @param odin_model_path Character path to odin model
+#' @param odin_model_path Character path to odin model.
 #'
 #' @return list of generator function, initial state, model parameters and generator
 #'
