@@ -74,8 +74,8 @@ Beta_hm_1 <- user()
 # with the effect of seasonality
 
 
-season_amp[] <- amplitudes_phases[, 2]
-season_phases[] <- amplitudes_phases[, 3]
+season_amp[] <- amplitudes_phases[i, 2]
+season_phases[] <- amplitudes_phases[i, 3]
 pi <- user()
 Delta_season <- user()
 Kc_season <- user()
