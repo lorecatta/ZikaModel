@@ -10,7 +10,7 @@
 
 #' Amplitude and phase of seasonal forcing
 #'
-#' A dataset containing the amplitude and pahse values of seasonal forcing for each patch.
+#' A dataset containing the amplitude and phase values of seasonal forcing for each patch.
 #'
-#' @format A data frame with 21 rows and 3 columns:
+#' @format A matrix with 21 rows and 3 columns:
 "amplitudes_phases"
