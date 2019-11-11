@@ -9,7 +9,7 @@
 nn_links
 }
 \description{
-A matrix containing the id of the 8 nearest neighboring patches to each patch.
+A dataset containing the id of the 8 nearest neighboring patches to each patch.
  The variables are as follows:
 }
 \references{

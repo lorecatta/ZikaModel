@@ -5,7 +5,7 @@
 \title{\code{create_r_model} returns list with generator function automatically created given the odin model
 specified.}
 \usage{
-create_r_model(odin_model_path, agec, death, nn_links, amplitude_phases,
+create_r_model(odin_model_path, agec, death, nn_links, amplitudes_phases,
   ...)
 }
 \arguments{
@@ -16,8 +16,6 @@ create_r_model(odin_model_path, agec, death, nn_links, amplitude_phases,
 \item{death}{Numeric of mortality rates.}
 
 \item{nn_links}{8 nearest-neigbors to each patch.}
-
-\item{amplitude_phases}{amplitude and phase of seasonal forcing for each patch.}
 }
 \value{
 list of generator function, initial state, model parameters and generator
