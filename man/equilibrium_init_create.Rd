@@ -5,7 +5,7 @@
 \title{\code{equilibrium_init_create} creates an equilibrium initialisation
 state to be used within later model runs.}
 \usage{
-equilibrium_init_create(agec, death, nn_links, amplitude_phases,
+equilibrium_init_create(agec, death, nn_links, amplitudes_phases,
   model_parameter_list)
 }
 \arguments{
@@ -15,7 +15,7 @@ equilibrium_init_create(agec, death, nn_links, amplitude_phases,
 
 \item{nn_links}{8 nearest-neigbors to each patch.}
 
-\item{amplitude_phases}{amplitude and phase of seasonal forcing for each patch.}
+\item{amplitudes_phases}{amplitude and phase of seasonal forcing for each patch.}
 
 \item{model_parameter_list}{list of user-defined model parameters.}
 }
