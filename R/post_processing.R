@@ -7,14 +7,16 @@
 #'
 #' @param dat list of model outputs from the model run.
 #'
+#' @inheritParams model_param_list_create
+#'
 #' @importFrom stats setNames
 #'
 #' @export
 
 
-post_processing <- function(dat) {
+post_processing <- function(dat, DT) {
 
-  weekly_lag_time <- 14
+  weekly_lag_time <- 7 / DT
 
   tt <- dat$TIME
   time <- max(tt)
