@@ -17,6 +17,8 @@ create_r_model(odin_model_path, agec, death, nn_links, amplitudes_phases,
 \item{nn_links}{8 nearest-neigbors to each patch.}
 
 \item{amplitudes_phases}{Amplitude and phase of seasonal forcing for each patch.}
+
+\item{...}{Additional arguments passed on to \code{model_param_list_create}}
 }
 \value{
 list of generator function, initial state, model parameters and generator
