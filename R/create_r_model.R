@@ -13,6 +13,8 @@
 #'
 #' @param odin_model_path Character path to odin model.
 #'
+#' @param ... Additional arguments passed on to \code{model_param_list_create}
+#'
 #' @return list of generator function, initial state, model parameters and generator
 #'
 #' @export
@@ -22,8 +24,7 @@ create_r_model <- function(odin_model_path,
                            agec,
                            death,
                            nn_links,
-                           amplitudes_phases,
-                           ...){
+                           amplitudes_phases, ...){
 
   ## create model param list using necessary variables
   mpl <- model_param_list_create(...)
