@@ -127,9 +127,9 @@ model_param_list_create <- function(
 
   if(season) {
 
-    Kc_season <- 0.25
-    eip_season <- 0.25
-    Delta_season <- 0.25
+    Kc_season <- 1
+    eip_season <- 1
+    Delta_season <- 1
 
   } else {
 
