@@ -26,9 +26,10 @@
 #' @param Beta_hm_1 Per bite transmission probability from humans to mosquitoes. Default = 0.7.
 #' @param Beta_mh_1 Per bite transmission probability from mosquitoes to humans. Default = 0.7.
 #' @param season Logical for controlling the effect of seasonality.
-#' @param propMwtControl Proportion of adult wild type mosquitoes which are killed by control. Default = 0.
-#' @param TimeMwtControlOn Year of start of control of adult wild type mosquitoes. Default = 4.
-#' @param TimeMwtControlOff Year of end of control of adult wild type mosquitoes. Default = 5.
+#' @param propMwtControl Increase in mortality of adult wild type mosquitoes induced
+#'   by a \emph{general} type of intervention. Default = 0.
+#' @param TimeMwtControlOn Year of start of control of adult wild type mosquitoes. Default = 2.
+#' @param TimeMwtControlOff Year of end of control of adult wild type mosquitoes. Default = 3.
 #' @param Wb_cyto Degree of cytoplasmic incompatibility induced by Wolbachia. Default = 1.
 #' @param Wb_mat Degree of vertical transmission of Wolbachia. Default = 1.
 #' @param Wb_fM Increase in mortality induced by Wolbachia. Default = 0.95.
@@ -40,14 +41,14 @@
 #' @param Wb_introlevel Ratio of Wolbachia-infected to wild type mosquitoes at introduction.
 #'   (Not the proportion of Wolbachia AFTER introduction). Default = 0.
 #' @param Wb_introduration Duration of Wolbachia release (days). Default = 60.
-#' @param vacc_cu_minage Default = 2.
-#' @param vacc_cu_maxage Default = 15.
-#' @param vacc_cu_coverage Default = 0.7.
-#' @param vacc_cu_time Default = 100.
-#' @param vacc_child_age Deafult = 3.
-#' @param vacc_child_coverage Default = 0.75.
-#' @param vacc_child_starttime Default = 30.
-#' @param vacc_child_stoptime Default = 30.
+#' @param vacc_child_age Age at which children are vaccinated. Deafult = 3.
+#' @param vacc_child_coverage Proportion of children vaccinated. Default = 0.
+#' @param vacc_child_starttime Time when vaccination starts. Default = 30.
+#' @param vacc_child_stoptime Time when vaccination stops. Default = 30.
+#' @param vacc_cu_minage Minimum age at which children who missed vaccination can catch up. Default = 2.
+#' @param vacc_cu_maxage Maximum age at which children who missed vaccination can catch up. Default = 15.
+#' @param vacc_cu_coverage Proportion of children who undergo catch up vaccination. Default = 0.7.
+#' @param vacc_cu_time Time when catch up vaccination occurs. Default = 100.
 #' @param dis_pri Proportion of infections which are symptomatic. Default = 0.2.
 #' @param rho_prim Default = 1.
 #' @param phi_prim Default = 1.
@@ -100,14 +101,14 @@ model_param_list_create <- function(
   Wb_introlevel = 0,
   Wb_introduration = 60,
 
-  vacc_cu_minage = 2,
-  vacc_cu_maxage = 15,
-  vacc_cu_coverage = 0.7,
-  vacc_cu_time = 150,
   vacc_child_age = 1,
   vacc_child_coverage = 0.56,
   vacc_child_starttime = 150,
   vacc_child_stoptime = 150,
+  vacc_cu_minage = 2,
+  vacc_cu_maxage = 15,
+  vacc_cu_coverage = 0.7,
+  vacc_cu_time = 150,
 
   dis_pri = 0.2,
   rho_prim = 1,
@@ -179,14 +180,14 @@ model_param_list_create <- function(
   mp_list$Wb_starttime <- Wb_starttime
   mp_list$Wb_introlevel <- Wb_introlevel
   mp_list$Wb_introduration <- Wb_introduration
-  mp_list$vacc_cu_minage <- vacc_cu_minage
-  mp_list$vacc_cu_maxage <- vacc_cu_maxage
-  mp_list$vacc_cu_coverage <- vacc_cu_coverage
-  mp_list$vacc_cu_time <- vacc_cu_time
   mp_list$vacc_child_age <- vacc_child_age
   mp_list$vacc_child_coverage <- vacc_child_coverage
   mp_list$vacc_child_starttime <- vacc_child_starttime
   mp_list$vacc_child_stoptime <- vacc_child_stoptime
+  mp_list$vacc_cu_minage <- vacc_cu_minage
+  mp_list$vacc_cu_maxage <- vacc_cu_maxage
+  mp_list$vacc_cu_coverage <- vacc_cu_coverage
+  mp_list$vacc_cu_time <- vacc_cu_time
   mp_list$dis_pri <- dis_pri
   mp_list$phi_prim <- phi_prim
   mp_list$rho_prim <- rho_prim
