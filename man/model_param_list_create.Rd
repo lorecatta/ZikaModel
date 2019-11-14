@@ -13,13 +13,13 @@ model_param_list_create(YL = 364, DT = 1, NP = 21, age_per = 1,
   TimeMwtControlOff = 2.5, Wb_cyto = 1, Wb_mat = 1, Wb_fM = 0.95,
   Wb_fF = 0.95, Wb_relsusc1 = 0.9, Wb_relinf1 = 0.5,
   Wb_starttime = 1, Wb_introlevel = 0, Wb_introduration = 60,
-  vacc_cu_minage = 2, vacc_cu_maxage = 15, vacc_cu_coverage = 0.7,
-  vacc_cu_time = 150, vacc_child_age = 1, vacc_child_coverage = 0.56,
+  vacc_child_age = 1, vacc_child_coverage = 0.56,
   vacc_child_starttime = 150, vacc_child_stoptime = 150,
-  dis_pri = 0.2, rho_prim = 1, phi_prim = 1, vacceff_prim = 1,
-  other_foi = 0.025, other_prop_immune = 0, propTransGlobal = 5e-04,
-  propTransNN = 0.005, BG_FOI = 1e-08, AGE_REC = 2,
-  PropDiseaseReported = 1)
+  vacc_cu_minage = 2, vacc_cu_maxage = 15, vacc_cu_coverage = 0.7,
+  vacc_cu_time = 150, dis_pri = 0.2, rho_prim = 1, phi_prim = 1,
+  vacceff_prim = 1, other_foi = 0.025, other_prop_immune = 0,
+  propTransGlobal = 5e-04, propTransNN = 0.005, BG_FOI = 1e-08,
+  AGE_REC = 2, PropDiseaseReported = 1)
 }
 \arguments{
 \item{YL}{Duration of a calendar year. Default = 364.}
@@ -63,11 +63,12 @@ model_param_list_create(YL = 364, DT = 1, NP = 21, age_per = 1,
 
 \item{season}{Logical for controlling the effect of seasonality.}
 
-\item{propMwtControl}{Proportion of adult wild type mosquitoes which are killed by control. Default = 0.}
+\item{propMwtControl}{Increase in mortality of adult wild type mosquitoes induced
+by a \emph{general} type of intervention. Default = 0.}
 
-\item{TimeMwtControlOn}{Year of start of control of adult wild type mosquitoes. Default = 4.}
+\item{TimeMwtControlOn}{Year of start of control of adult wild type mosquitoes. Default = 2.}
 
-\item{TimeMwtControlOff}{Year of end of control of adult wild type mosquitoes. Default = 5.}
+\item{TimeMwtControlOff}{Year of end of control of adult wild type mosquitoes. Default = 3.}
 
 \item{Wb_cyto}{Degree of cytoplasmic incompatibility induced by Wolbachia. Default = 1.}
 
@@ -75,7 +76,7 @@ model_param_list_create(YL = 364, DT = 1, NP = 21, age_per = 1,
 
 \item{Wb_fM}{Increase in mortality induced by Wolbachia. Default = 0.95.}
 
-\item{Wb_fF}{Redution in fecundity induced by Wolbachia. Default = 0.95.}
+\item{Wb_fF}{Reduction in fecundity induced by Wolbachia. Default = 0.95.}
 
 \item{Wb_relsusc1}{Infectivity of a human host to Wolbachia infected mosquitoes
 (time τ after host infection). Default = 0.9.}
@@ -89,21 +90,21 @@ model_param_list_create(YL = 364, DT = 1, NP = 21, age_per = 1,
 
 \item{Wb_introduration}{Duration of Wolbachia release (days). Default = 60.}
 
-\item{vacc_cu_minage}{Default = 2.}
+\item{vacc_child_age}{Age at which children are vaccinated. Deafult = 3.}
 
-\item{vacc_cu_maxage}{Default = 15.}
+\item{vacc_child_coverage}{Proportion of children vaccinated. Default = 0.}
 
-\item{vacc_cu_coverage}{Default = 0.7.}
+\item{vacc_child_starttime}{Time when vaccination starts. Default = 30.}
 
-\item{vacc_cu_time}{Default = 100.}
+\item{vacc_child_stoptime}{Time when vaccination stops. Default = 30.}
 
-\item{vacc_child_age}{Deafult = 3.}
+\item{vacc_cu_minage}{Minimum age at which children who missed vaccination can catch up. Default = 2.}
 
-\item{vacc_child_coverage}{Default = 0.75.}
+\item{vacc_cu_maxage}{Maximum age at which children who missed vaccination can catch up. Default = 15.}
 
-\item{vacc_child_starttime}{Default = 30.}
+\item{vacc_cu_coverage}{Proportion of children who undergo catch up vaccination. Default = 0.7.}
 
-\item{vacc_child_stoptime}{Default = 30.}
+\item{vacc_cu_time}{Time when catch up vaccination occurs. Default = 100.}
 
 \item{dis_pri}{Proportion of infections which are symptomatic. Default = 0.2.}
 
