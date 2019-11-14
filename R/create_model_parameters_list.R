@@ -41,14 +41,14 @@
 #' @param Wb_introlevel Ratio of Wolbachia-infected to wild type mosquitoes at introduction.
 #'   (Not the proportion of Wolbachia AFTER introduction). Default = 0.
 #' @param Wb_introduration Duration of Wolbachia release (days). Default = 60.
-#' @param vacc_child_age Age at which children are vaccinated. Deafult = 3.
+#' @param vacc_child_age Age at which children are vaccinated. Deafult = 1.
 #' @param vacc_child_coverage Proportion of children vaccinated. Default = 0.
 #' @param vacc_child_starttime Time when vaccination starts. Default = 30.
 #' @param vacc_child_stoptime Time when vaccination stops. Default = 30.
 #' @param vacc_cu_minage Minimum age at which children who missed vaccination can catch up. Default = 2.
 #' @param vacc_cu_maxage Maximum age at which children who missed vaccination can catch up. Default = 15.
 #' @param vacc_cu_coverage Proportion of children who undergo catch up vaccination. Default = 0.7.
-#' @param vacc_cu_time Time when catch up vaccination occurs. Default = 100.
+#' @param vacc_cu_time Time when catch up vaccination occurs. Default = 30.
 #' @param dis_pri Proportion of infections which are symptomatic. Default = 0.2.
 #' @param rho_prim Default = 1.
 #' @param phi_prim Default = 1.
@@ -102,13 +102,13 @@ model_param_list_create <- function(
   Wb_introduration = 60,
 
   vacc_child_age = 1,
-  vacc_child_coverage = 0.56,
-  vacc_child_starttime = 150,
-  vacc_child_stoptime = 150,
+  vacc_child_coverage = 0,
+  vacc_child_starttime = 30,
+  vacc_child_stoptime = 30,
   vacc_cu_minage = 2,
   vacc_cu_maxage = 15,
   vacc_cu_coverage = 0.7,
-  vacc_cu_time = 150,
+  vacc_cu_time = 30,
 
   dis_pri = 0.2,
   rho_prim = 1,
