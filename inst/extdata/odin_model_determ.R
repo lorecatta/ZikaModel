@@ -112,16 +112,24 @@ Wb_introlevel <- user()
 
 Delta_wb[] <- Delta[i] / Wb_fM
 
-# vacc_cu_minage <- user()
-# vacc_cu_maxage <- user()
-# vacc_cu_coverage <- user()
-# vacc_cu_time <- user()
-# vacc_cu_rndtime <- user()
-#
-# vacc_child_age <- user()
-# vacc_child_coverage <- user()
-# vacc_child_starttime <- user()
-# vacc_child_stoptime <- user()
+vacc_child_starttime <- user()
+vacc_child_stoptime <- user()
+vacc_child_age <- user()
+vacc_child_coverage <- user()
+
+vacc_cu_rndtime <- user()
+vacc_cu_minage <- user()
+vacc_cu_maxage <- user()
+vacc_cu_coverage <- user()
+
+vacc_noncov[, 1] <- (if ((TIME >= YL * vacc_child_starttime) &&
+                             (TIME < YL * vacc_child_stoptime) &&
+                             (i = vacc_child_age)) (1 - vacc_child_coverage) else 1) *
+  (if ((TIME = vacc_cu_rndtime) &&
+       (i >= vacc_cu_minage) &&
+       (i <= vacc_cu_maxage)) (1 - vacc_cu_coverage) else 1)
+
+vacc_noncov[, 2] <- 1
 
 
 
@@ -414,10 +422,14 @@ age_S_prob[] <- max(min(agert[i] / (agert[i] + deathrt[i]), 1), 0)
 age_S[,,] <- age_S_trials[i,j,k] * age_S_prob[i]
 
 update(S[1,1,1:NP]) <- trunc(0.5 + births[k] + S[i,j,k] - O_S[i,j,k])
-update(S[2:na,1,1:NP]) <- trunc(0.5 + age_S[i-1,j,k] + S[i,j,k] - O_S[i,j,k])
+update(S[2:na,1,1:NP]) <- trunc(0.5 + vacc_noncov[i,j] * age_S[i-1,j,k] +
+                                  (1 - vacc_noncov[i,3-j]) * age_S[i-1,3-j,k] +
+                                  S[i,j,k] - O_S[i,j,k])
 
 update(S[1,2,1:NP]) <- trunc(0.5 + S[i,j,k] - O_S[i,j,k])
-update(S[2:na,2,1:NP]) <- trunc(0.5 + age_S[i-1,j,k] + S[i,j,k] - O_S[i,j,k])
+update(S[2:na,2,1:NP]) <- trunc(0.5 + vacc_noncov[i,j] * age_S[i-1,j,k] +
+                                  (1 - vacc_noncov[i,3-j]) * age_S[i-1,3-j,k] +
+                                  S[i,j,k] - O_S[i,j,k])
 
 nu <- user()
 
@@ -432,7 +444,9 @@ age_I1_prob[] <- max(min(agert[i] / (agert[i] + deathrt[i]), 1), 0)
 age_I1[2:vnc_row,1:2,1:NP] <- age_I1_trials[i-1,j,k] * age_I1_prob[i-1]
 age_I1[1,1:2,1:NP] <- 0
 
-update(I1[1:na,1:2,1:NP]) <- trunc(0.5 + age_I1[i,j,k] + inf_1[i,j,k] + I1[i,j,k] - O_I1[i,j,k])
+update(I1[1:na,1:2,1:NP]) <- trunc(0.5 + vacc_noncov[i,j] * age_I1[i,j,k] +
+                                     (1 - vacc_noncov[i,3-j]) * age_I1[i,3-j,k] +
+                                     inf_1[i,j,k] + I1[i,j,k] - O_I1[i,j,k])
 
 O_R1_prob[] <- max(min(agert[i] + deathrt[i], 1), 0)
 O_R1[,,] <- R1[i,j,k] * O_R1_prob[i]
@@ -441,7 +455,9 @@ age_R1_prob[] <- max(min(agert[i] / (agert[i] + deathrt[i]), 1), 0)
 age_R1[2:vnc_row,1:2,1:NP] <- O_R1[i-1,j,k] * age_R1_prob[i-1]
 age_R1[1,1:2,1:NP] <- 0
 
-update(R1[1:na,1:2,1:NP]) <- trunc(0.5 + age_R1[i,j,k] + recov1[i,j,k] + R1[i,j,k] - O_R1[i,j,k])
+update(R1[1:na,1:2,1:NP]) <- trunc(0.5 + vacc_noncov[i,j] * age_R1[i,j,k] +
+                                     (1 - vacc_noncov[i,3-j]) * age_R1[i,3-j,k] +
+                                     recov1[i,j,k] + R1[i,j,k] - O_R1[i,j,k])
 
 
 
@@ -512,6 +528,8 @@ output(M_propinf) <- TRUE
 
 output(TIME) <- TRUE
 
+# diagnostics for vaccine
+output(vacc_noncov) <- TRUE
 
 
 # -----------------------------------------------------------------------------
@@ -647,3 +665,4 @@ dim(O_Mwb_I1_prob) <- NP
 dim(Mwt_propinf) <- NP
 dim(Mwb_propinf) <- NP
 dim(M_propinf) <- NP
+dim(vacc_noncov) <- c(vnc_row, 2)
