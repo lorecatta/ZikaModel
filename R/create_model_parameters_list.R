@@ -32,7 +32,7 @@
 #' @param Wb_cyto Degree of cytoplasmic incompatibility induced by Wolbachia. Default = 1.
 #' @param Wb_mat Degree of vertical transmission of Wolbachia. Default = 1.
 #' @param Wb_fM Increase in mortality induced by Wolbachia. Default = 0.95.
-#' @param Wb_fF Redution in fecundity induced by Wolbachia. Default = 0.95.
+#' @param Wb_fF Reduction in fecundity induced by Wolbachia. Default = 0.95.
 #' @param Wb_relsusc1 Infectivity of a human host to Wolbachia infected mosquitoes
 #'   (time τ after host infection). Default = 0.9.
 #' @param Wb_relinf1 Infectiousness of Wolbachia-infected mosquitoes time τ after infection. Default = 0.75.
