@@ -30,7 +30,7 @@ Sigma <- user() # larvae mortality rate
 Omega <- user() # 1
 
 # Number of eggs produced per female mosquito per time step (baseline fecundity). Rm is fixed.
-Gamma <- (Rm * DeltaMean * (Epsilon + Sigma) / Epsilon) * MwtCont
+Gamma <- Rm * MwtCont * DeltaMean * (Epsilon + Sigma) / Epsilon
 
 N_eq[] <- user()
 Kappa <- user()
