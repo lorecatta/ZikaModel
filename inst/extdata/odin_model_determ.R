@@ -30,7 +30,7 @@ Sigma <- user() # larvae mortality rate
 Omega <- user() # 1
 
 # Number of eggs produced per female mosquito per time step (baseline fecundity). Rm is fixed.
-Gamma <- (Rm * DeltaMean * (Epsilon + Sigma) / Epsilon) * MwtCont
+Gamma <- Rm * DeltaBase * (Epsilon + Sigma) / Epsilon
 
 N_eq[] <- user()
 Kappa <- user()
@@ -59,8 +59,8 @@ DeltaBase <- user()
 DeltaMean <- DeltaBase / MwtCont
 
 # mean larval mosquito carrying capacity. DeltaMean is fixed.
-Kc_mean <- DeltaMean *
-  ((Epsilon * (Gamma - DeltaMean) / (DeltaMean * Sigma) - 1) ^ (-1 / (Omega*MwtCont))) / Epsilon
+Kc_mean <- DeltaBase *
+  ((Epsilon * (Gamma - DeltaBase) / (DeltaBase * Sigma) - 1) ^ (-1 / Omega)) / Epsilon
 
 eip_mean <- user()
 
@@ -85,7 +85,7 @@ Delta[1:(NP-1)] <- DeltaMean /
   (1 + season_amp[i] * Delta_season * cos(2 * pi * (TIME + season_phases[i]) / YL))
 Delta[NP] <- DeltaMean
 
-Kc[1:(NP-1)] <- MwtCont * Mwt[i] * Kc_mean *
+Kc[1:(NP-1)] <- Mwt[i] * Kc_mean *
   (1 + season_amp[i] * Kc_season * cos(2 * pi * (TIME + season_phases[i]) / YL))
 Kc[NP] <- MwtCont * Mwt_mean * Kc_mean *
   (1 + season_amp[i] * Kc_season * cos(2 * pi * (TIME + season_phases[i]) / YL))
@@ -160,7 +160,7 @@ Lwt_birth_lambda[] <- DT *
      (Mwt_tot[i] + Mwb_tot[i]) + Wb_fF * (1 - Wb_mat) * Mwb_tot[i])
 Lwt_birth[] <- Lwt_birth_lambda[i]
 
-L_deathrt[] <- DT * Sigma * ((1 + ((Lwt[i] + Lwb[i]) / (Kc[i] * NTp[i])) ^ (Omega*MwtCont)))
+L_deathrt[] <- DT * Sigma * ((1 + ((Lwt[i] + Lwb[i]) / (Kc[i] * NTp[i])) ^ Omega))
 
 L_dr[] <- if (L_deathrt[i] >= 1) 0.999 else L_deathrt[i]
 
