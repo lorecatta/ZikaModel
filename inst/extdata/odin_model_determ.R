@@ -60,7 +60,7 @@ DeltaMean <- DeltaBase / MwtCont
 
 # mean larval mosquito carrying capacity. DeltaMean is fixed.
 Kc_mean <- DeltaMean *
-  ((Epsilon * (Gamma - DeltaMean) / (DeltaMean * Sigma) - 1) ^ (-1 / Omega)) / Epsilon
+  ((Epsilon * (Gamma - DeltaMean) / (DeltaMean * Sigma) - 1) ^ (-1 / (Omega*MwtCont))) / Epsilon
 
 eip_mean <- user()
 
@@ -160,7 +160,7 @@ Lwt_birth_lambda[] <- DT *
      (Mwt_tot[i] + Mwb_tot[i]) + Wb_fF * (1 - Wb_mat) * Mwb_tot[i])
 Lwt_birth[] <- Lwt_birth_lambda[i]
 
-L_deathrt[] <- DT * Sigma * ((1 + ((Lwt[i] + Lwb[i]) / (Kc[i] * NTp[i])) ^ Omega))
+L_deathrt[] <- DT * Sigma * ((1 + ((Lwt[i] + Lwb[i]) / (Kc[i] * NTp[i])) ^ (Omega*MwtCont)))
 
 L_dr[] <- if (L_deathrt[i] >= 1) 0.999 else L_deathrt[i]
 
