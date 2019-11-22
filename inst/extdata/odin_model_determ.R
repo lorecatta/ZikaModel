@@ -58,7 +58,7 @@ DeltaBase <- user()
 # mean adult mosquito mortality rate, corrected by the effect of control
 DeltaMean <- DeltaBase / MwtCont
 
-# mean larval mosquito carrying capacity. DeltaMean is fixed.
+# mean larval mosquito carrying capacity. Mwt (in Kc equation below) is fixed.
 Kc_mean <- DeltaBase *
   ((Epsilon * (Gamma - DeltaBase) / (DeltaBase * Sigma) - 1) ^ (-1 / Omega)) / Epsilon
 
