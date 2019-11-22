@@ -85,7 +85,7 @@ Delta[1:(NP-1)] <- DeltaMean /
   (1 + season_amp[i] * Delta_season * cos(2 * pi * (TIME + season_phases[i]) / YL))
 Delta[NP] <- DeltaMean
 
-Kc[1:(NP-1)] <- Mwt[i] * Kc_mean *
+Kc[1:(NP-1)] <- MwtCont * Mwt[i] * Kc_mean *
   (1 + season_amp[i] * Kc_season * cos(2 * pi * (TIME + season_phases[i]) / YL))
 Kc[NP] <- MwtCont * Mwt_mean * Kc_mean *
   (1 + season_amp[i] * Kc_season * cos(2 * pi * (TIME + season_phases[i]) / YL))
