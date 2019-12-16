@@ -103,13 +103,14 @@
 <h2 class="hasAnchor">
 <a href="#customized-models" class="anchor"></a>Customized models</h2>
 <p><code>ZikaModel</code> allows the user to change the value of all the model parameters defined in <code><a href="../reference/model_param_list_create.html">model_param_list_create()</a></code>. This allows more flexibility in the range of scenarios considered (e.g. inteventions to control the disease). Also, by taking advantage of this feature it is also possible to simulate the transmission dynamics of other immunizing single-strain infections transmitted by <em>Aedes aegypti</em> mosquitoes, such as chikungunya.</p>
-<p>Here we will demonstrate how run a customized model which simulates vector control. different diseases and diseasesThis requires to use a different set of functions which will be demonstrated here. There are three parameters which simulate this type of intevention:</p>
+<p>Here we will demonstrate how run a customized model which simulates general vector control. There are three parameters which simulate general vector control:</p>
 <ul>
 <li>propMwtControl - the increase in mortality of adult wild type mosquitoes induced by the control</li>
 <li>TimeMwtControlOn - the time when the control starts</li>
 <li>TimeMwtControlOff - the time when the control ends</li>
 </ul>
 <p>Let’s assume that control increases mortality of adults mosquitoes by 20%. For now we will use the default values of <code>TimeMwtControlOn</code> and <code>TimeMwtControlOff</code>, which will simulate control for one year starting on the second year of the simulation. To keep it simple we will assume no effect of seasonality across patches. This is analogous to run the model with only one patch.</p>
+<p>Running a customized model requires to use a different set of functions which will be demonstrated here. We will use <code>create_generator()</code> to return a function that will generate an instance of the model and use that instance to run the model with user-defined parameters. The function <code>create_generator()</code> has an argument <code>...</code> which passes arguments to <code><a href="../reference/model_param_list_create.html">model_param_list_create()</a></code> thus overriding the defaults values of the model parameters.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">age_init &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>)
 
 deathrt &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">1e-10</span>,
