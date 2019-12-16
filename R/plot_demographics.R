@@ -75,6 +75,8 @@ plot_demographics <- function(df){
 #' @importFrom ggplot2 aes geom_line scale_x_continuous
 #'   scale_y_continuous ggplot theme_bw
 #'
+#' @importFrom gridExtra arrangeGrob
+#'
 #' @export
 
 
