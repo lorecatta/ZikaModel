@@ -2,7 +2,7 @@
 % Please edit documentation in R/post_processing.R
 \name{post_processing}
 \alias{post_processing}
-\title{Post-processe model outputs}
+\title{Post-process model outputs}
 \usage{
 post_processing(dat, DT)
 }
