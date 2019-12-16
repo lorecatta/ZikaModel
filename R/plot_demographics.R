@@ -59,3 +59,58 @@ plot_demographics <- function(df){
   out
 
 }
+
+
+
+# -----------------------------------------------------------------------------
+
+#' The function makes plots of the mosquito larvae carrying capacity, virus extrinsic
+#'  incubation period and adult mosquito mortality rate, and arrange them in a grid.
+#'  These variables are those directly affected by seasonality in the model.
+#'
+#' @title Plot seasonally-varying variables
+#'
+#' @param df The dataframe with the data to plot.
+#'
+#' @importFrom ggplot2 aes geom_line scale_x_continuous
+#'   scale_y_continuous ggplot theme_bw
+#'
+#' @export
+
+
+plot_Kc_eip_delta <- function(out) {
+
+  time <- max(out$TIME)
+
+  my_breaks <- seq(from = 0, to = time, by = 364 * 5)
+
+  Kc_r <- data.frame(x = out$TIME, y = out$Kcav)
+
+  Kc_p <- ggplot(data = Kc_r, aes(x = x, y = y)) +
+    geom_line(color = 'royalblue', size = 0.5) +
+    scale_x_continuous("Years", breaks = my_breaks, labels = my_breaks/364) +
+    scale_y_continuous("Mean patch Kc") +
+    ggtitle("Carrying capacity") +
+    theme_bw()
+
+  eip_r <- data.frame(x = out$TIME, y = out$eipav)
+
+  eip_p <- ggplot(data = eip_r, aes(x = x, y = y)) +
+    geom_line(color = 'royalblue', size = 0.5) +
+    scale_x_continuous("Years", breaks = my_breaks, labels = my_breaks/364) +
+    scale_y_continuous("Mean patch EIP") +
+    ggtitle("Extrinsic Incubation Period") +
+    theme_bw()
+
+  delta_r <- data.frame(x = out$TIME, y = out$Deltaav)
+
+  delta_p <- ggplot(data = delta_r, aes(x = x, y = y)) +
+    geom_line(color = 'royalblue', size = 0.5) +
+    scale_x_continuous("Years", breaks = my_breaks, labels = my_breaks/364) +
+    scale_y_continuous("Mean patch Delta") +
+    ggtitle("Adult mosquito daily mortality rate") +
+    theme_bw()
+
+  arrangeGrob(Kc_p, eip_p, delta_p, ncol = 2)
+
+}
