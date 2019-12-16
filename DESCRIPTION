@@ -20,7 +20,8 @@ Imports:
     ggforce,
     odin,
     scales,
-    dde
+    dde,
+    gridExtra
 RoxygenNote: 6.1.1
 Suggests: 
     knitr,
