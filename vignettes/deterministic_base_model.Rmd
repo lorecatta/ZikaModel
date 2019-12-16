@@ -41,8 +41,14 @@ deathrt <- c(1e-10,
              0.279105747097929,
              0.390197266957464)
 
-# provide the length of time (in days) that you want to run the model for
-time_frame <- 364 * 100
+# number of years to run the simulation for
+time_years <- 50 # years
+
+# time step
+my_dt <- 1
+
+# number of model time steps
+time_frame <- (364 * time_years) / my_dt
 
 # run the model
 model_outputs <- run_model(agec = age_init,
@@ -53,13 +59,19 @@ model_outputs <- run_model(agec = age_init,
 ```
 
 We can calculate the proportions of the total human population in each compartment 
-and few other useful demographics using the `post_processing` function
+and few other useful demographics of the human host population using the `post_processing` function
 
 ```{r}
-diagnostics <- post_processing(model_outputs)
+diagnostics <- post_processing(model_outputs, my_dt)
 ```
 
-Now we plot them
+The demographic diagnostics of the vector population can be calculated with the `post_processing_mos` function
+
+```{r}
+mosquito_diagnostics <- post_processing_mos(model_outputs)
+```
+
+Now we plot all the diagnostics
 
 ```{r, fig.height = 4, fig.width = 6}
 plot_compartments(diagnostics$compartments)
@@ -67,4 +79,15 @@ plot_compartments(diagnostics$compartments)
 
 ```{r, fig.height = 6, fig.width = 8}
 plot_demographics(diagnostics$demographics)
+```
+
+```{r, fig.height = 6, fig.width = 8}
+plot_demographics(mosquito_diagnostics)
+```
+
+Finally, we also plot the variables directly modified by seasonality, namely mosquito larve carrying capacity (Kc), extrinsic incubation period (eip) and adult mosquito mortality rate (delta):
+
+```{r, fig.height = 6, fig.width = 8}
+season_vars <- plot_Kc_eip_delta(model_outputs)
+grid::grid.draw(season_vars)
 ```
