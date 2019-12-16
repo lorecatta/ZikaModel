@@ -22,15 +22,15 @@ library(ZikaModel)
 
 ## Customized models
 
-`ZikaModel` allows the user to change the value of all the model parameters defined by `model_param_list_create()`. This allows more flexibility in the range of scenarios considered (e.g. inteventions to control the disease). Also, by taking advantage of this feature it is also possible to simulate the transmission dynamics of other immunizing single-strain infections transmitted by _Aedes aegypti_ mosquitoes, such as chikungunya. 
+`ZikaModel` allows the user to change the value of all the model parameters defined in `model_param_list_create()`. This allows more flexibility in the range of scenarios considered (e.g. inteventions to control the disease). Also, by taking advantage of this feature it is also possible to simulate the transmission dynamics of other immunizing single-strain infections transmitted by _Aedes aegypti_ mosquitoes, such as chikungunya. 
 
 Here we will demonstrate how run a customized model which simulates vector control. different diseases  and diseasesThis requires to use a different set of functions which will be demonstrated here. There are three parameters which simulate this type of intevention:
 
-* propMwtControl - Increase in mortality of adult wild type mosquitoes induced by the control
+* propMwtControl - the increase in mortality of adult wild type mosquitoes induced by the control
 * TimeMwtControlOn - the time when the control starts
 * TimeMwtControlOff - the time when the control ends
 
-Let's assume that control increases mortality of adults mosquitoes by 20%. For now we will use the default values of `TimeMwtControlOn` and `TimeMwtControlOff`, which simulates control for one year starting on the second year of the simulation. To keep it simple we will assume no effect of seasonality across patches. This is analogous to run the model with only one patch.
+Let's assume that control increases mortality of adults mosquitoes by 20%. For now we will use the default values of `TimeMwtControlOn` and `TimeMwtControlOff`, which will simulate control for one year starting on the second year of the simulation. To keep it simple we will assume no effect of seasonality across patches. This is analogous to run the model with only one patch.
 
 ```{r}
 age_init <- c(1, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10)
@@ -81,7 +81,7 @@ its <- seq(0, integer_time_steps, 1)
 mod_run <- gen$run(its)
 
 # post processing
-out <- gen$transform_variables(mod_run)
+model_outputs <- gen$transform_variables(mod_run)
 ```
 
 Now processing and plotting, as done before: 
