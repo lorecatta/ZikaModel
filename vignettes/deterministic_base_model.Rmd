@@ -84,10 +84,3 @@ plot_demographics(diagnostics$demographics)
 ```{r, fig.height = 6, fig.width = 8}
 plot_demographics(mosquito_diagnostics)
 ```
-
-Finally, we also plot the variables directly modified by seasonality, namely mosquito larve carrying capacity (Kc), extrinsic incubation period (eip) and adult mosquito mortality rate (delta):
-
-```{r, fig.height = 6, fig.width = 8}
-season_vars <- plot_Kc_eip_delta(model_outputs)
-grid::grid.draw(season_vars)
-```
