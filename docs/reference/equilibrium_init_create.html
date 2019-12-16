@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title><code>equilibrium_init_create</code> creates an equilibrium initialisation
-state to be used within later model runs. — equilibrium_init_create • ZikaModel</title>
+<title>Generate equilibrium state — equilibrium_init_create • ZikaModel</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -31,11 +30,10 @@ state to be used within later model runs. — equilibrium_init_create • ZikaMo
 
 
 
-<meta property="og:title" content="<code>equilibrium_init_create</code> creates an equilibrium initialisation
-state to be used within later model runs. — equilibrium_init_create" />
+<meta property="og:title" content="Generate equilibrium state — equilibrium_init_create" />
 
-<meta property="og:description" content="equilibrium_init_create creates an equilibrium initialisation
-state to be used within later model runs." />
+<meta property="og:description" content="The function creates an equilibrium initialisation state to be used within
+later model runs." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -123,20 +121,20 @@ state to be used within later model runs." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1><code>equilibrium_init_create</code> creates an equilibrium initialisation
-state to be used within later model runs.</h1>
+    <h1>Generate equilibrium state</h1>
     <small class="dont-index">Source: <a href='https://github.com/mrc-ide/ZikaModel/blob/master/R/equilibrium_init_create.R'><code>R/equilibrium_init_create.R</code></a></small>
     <div class="hidden name"><code>equilibrium_init_create.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>equilibrium_init_create</code> creates an equilibrium initialisation
-state to be used within later model runs.</p>
+    <p>The function creates an equilibrium initialisation state to be used within
+later model runs.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>equilibrium_init_create</span>(<span class='no'>agec</span>, <span class='no'>death</span>, <span class='no'>nn_links</span>, <span class='no'>model_parameter_list</span>)</pre>
+    <pre class="usage"><span class='fu'>equilibrium_init_create</span>(<span class='no'>agec</span>, <span class='no'>death</span>, <span class='no'>nn_links</span>, <span class='no'>amplitudes_phases</span>,
+  <span class='no'>model_parameter_list</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -154,8 +152,12 @@ state to be used within later model runs.</p>
       <td><p>8 nearest-neigbors to each patch.</p></td>
     </tr>
     <tr>
+      <th>amplitudes_phases</th>
+      <td><p>Amplitude and phase of seasonal forcing for each patch.</p></td>
+    </tr>
+    <tr>
       <th>model_parameter_list</th>
-      <td><p>list of user-defined model parameters.</p></td>
+      <td><p>List of user-defined model parameters.</p></td>
     </tr>
     </table>
     

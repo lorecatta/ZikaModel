@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title><code>run_model</code> runs model using declared agec, death and nn_links — run_model • ZikaModel</title>
+<title>Runs and odin model — run_model • ZikaModel</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,10 @@
 
 
 
-<meta property="og:title" content="<code>run_model</code> runs model using declared agec, death and nn_links — run_model" />
+<meta property="og:title" content="Runs and odin model — run_model" />
 
-<meta property="og:description" content="run_model runs model using declared agec, death and nn_links" />
+<meta property="og:description" content="The function creates an odin generator function and runs an instance of the model
+using user-defined parameters and an equilibrium initialisation state." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -120,18 +121,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1><code>run_model</code> runs model using declared agec, death and nn_links</h1>
+    <h1>Runs and odin model</h1>
     <small class="dont-index">Source: <a href='https://github.com/mrc-ide/ZikaModel/blob/master/R/run_model.R'><code>R/run_model.R</code></a></small>
     <div class="hidden name"><code>run_model.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>run_model</code> runs model using declared agec, death and nn_links</p>
+    <p>The function creates an odin generator function and runs an instance of the model
+using user-defined parameters and an equilibrium initialisation state.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>run_model</span>(<span class='no'>agec</span>, <span class='no'>death</span>, <span class='no'>nn_links</span>, <span class='no'>time</span>, <span class='kw'>season</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>run_model</span>(<span class='no'>agec</span>, <span class='no'>death</span>, <span class='no'>nn_links</span>, <span class='no'>amplitudes_phases</span>, <span class='no'>time</span>, <span class='kw'>season</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -147,6 +149,10 @@
     <tr>
       <th>nn_links</th>
       <td><p>8 nearest-neigbors to each patch.</p></td>
+    </tr>
+    <tr>
+      <th>amplitudes_phases</th>
+      <td><p>Amplitude and phase of seasonal forcing for each patch.</p></td>
     </tr>
     <tr>
       <th>time</th>

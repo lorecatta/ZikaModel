@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title><code>post_processing</code> processes model outputs to calculate metrics of interest — post_processing • ZikaModel</title>
+<title>Post-process model outputs — post_processing • ZikaModel</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="<code>post_processing</code> processes model outputs to calculate metrics of interest — post_processing" />
+<meta property="og:title" content="Post-process model outputs — post_processing" />
 
-<meta property="og:description" content="post_processing processes model outputs to calculate metrics of interest" />
+<meta property="og:description" content="The function processes model outputs to calculate metrics of interest." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -120,18 +120,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1><code>post_processing</code> processes model outputs to calculate metrics of interest</h1>
+    <h1>Post-process model outputs</h1>
     <small class="dont-index">Source: <a href='https://github.com/mrc-ide/ZikaModel/blob/master/R/post_processing.R'><code>R/post_processing.R</code></a></small>
     <div class="hidden name"><code>post_processing.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>post_processing</code> processes model outputs to calculate metrics of interest</p>
+    <p>The function processes model outputs to calculate metrics of interest.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>post_processing</span>(<span class='no'>dat</span>)</pre>
+    <pre class="usage"><span class='fu'>post_processing</span>(<span class='no'>dat</span>, <span class='no'>DT</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -139,6 +139,10 @@
     <tr>
       <th>dat</th>
       <td><p>list of model outputs from the model run.</p></td>
+    </tr>
+    <tr>
+      <th>DT</th>
+      <td><p>Time step size. Default = 1.</p></td>
     </tr>
     </table>
     

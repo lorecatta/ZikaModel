@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title><code>model_param_list_create</code> creates a list of user-defined
-parameters. — model_param_list_create • ZikaModel</title>
+<title>Create a list of parameters — model_param_list_create • ZikaModel</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -31,11 +30,9 @@ parameters. — model_param_list_create • ZikaModel</title>
 
 
 
-<meta property="og:title" content="<code>model_param_list_create</code> creates a list of user-defined
-parameters. — model_param_list_create" />
+<meta property="og:title" content="Create a list of parameters — model_param_list_create" />
 
-<meta property="og:description" content="model_param_list_create creates a list of user-defined
-parameters." />
+<meta property="og:description" content="The function creates a list of user-defined parameters." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -123,20 +120,18 @@ parameters." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1><code>model_param_list_create</code> creates a list of user-defined
-parameters.</h1>
+    <h1>Create a list of parameters</h1>
     <small class="dont-index">Source: <a href='https://github.com/mrc-ide/ZikaModel/blob/master/R/create_model_parameters_list.R'><code>R/create_model_parameters_list.R</code></a></small>
     <div class="hidden name"><code>model_param_list_create.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>model_param_list_create</code> creates a list of user-defined
-parameters.</p>
+    <p>The function creates a list of user-defined parameters.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>model_param_list_create</span>(<span class='kw'>YL</span> <span class='kw'>=</span> <span class='fl'>364</span>, <span class='kw'>DT</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>NP</span> <span class='kw'>=</span> <span class='fl'>21</span>, <span class='kw'>age_per</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+    <pre class="usage"><span class='fu'>model_param_list_create</span>(<span class='kw'>YL</span> <span class='kw'>=</span> <span class='fl'>364</span>, <span class='kw'>DT</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>NP</span> <span class='kw'>=</span> <span class='fl'>21</span>, <span class='kw'>age_per</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>N_human</span> <span class='kw'>=</span> <span class='fl'>3e+07</span>, <span class='kw'>Omega</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>DeltaBase</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='kw'>Sigma</span> <span class='kw'>=</span> <span class='fl'>0.025</span>,
   <span class='kw'>Epsilon</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>19</span>, <span class='kw'>Rm</span> <span class='kw'>=</span> <span class='fl'>2.69</span>, <span class='kw'>Mwt_mean</span> <span class='kw'>=</span> <span class='fl'>1.5</span>, <span class='kw'>Mwt_cv</span> <span class='kw'>=</span> <span class='fl'>0.15</span>,
   <span class='kw'>eip_mean</span> <span class='kw'>=</span> <span class='fl'>8.4</span>, <span class='kw'>incub</span> <span class='kw'>=</span> <span class='fl'>5.5</span>, <span class='kw'>inf_per</span> <span class='kw'>=</span> <span class='fl'>6</span>, <span class='kw'>nu</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>21</span>,
@@ -144,14 +139,14 @@ parameters.</p>
   <span class='kw'>propMwtControl</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>TimeMwtControlOn</span> <span class='kw'>=</span> <span class='fl'>1.5</span>,
   <span class='kw'>TimeMwtControlOff</span> <span class='kw'>=</span> <span class='fl'>2.5</span>, <span class='kw'>Wb_cyto</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>Wb_mat</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>Wb_fM</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
   <span class='kw'>Wb_fF</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>Wb_relsusc1</span> <span class='kw'>=</span> <span class='fl'>0.9</span>, <span class='kw'>Wb_relinf1</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>Wb_starttime</span> <span class='kw'>=</span> <span class='fl'>140</span>, <span class='kw'>Wb_introlevel</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>Wb_introduration</span> <span class='kw'>=</span> <span class='fl'>60</span>,
+  <span class='kw'>Wb_starttime</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>Wb_introlevel</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>Wb_introduration</span> <span class='kw'>=</span> <span class='fl'>60</span>,
+  <span class='kw'>vacc_child_age</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>vacc_child_coverage</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>vacc_child_starttime</span> <span class='kw'>=</span> <span class='fl'>30</span>, <span class='kw'>vacc_child_stoptime</span> <span class='kw'>=</span> <span class='fl'>30</span>,
   <span class='kw'>vacc_cu_minage</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>vacc_cu_maxage</span> <span class='kw'>=</span> <span class='fl'>15</span>, <span class='kw'>vacc_cu_coverage</span> <span class='kw'>=</span> <span class='fl'>0.7</span>,
-  <span class='kw'>vacc_cu_time</span> <span class='kw'>=</span> <span class='fl'>150</span>, <span class='kw'>vacc_child_age</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>vacc_child_coverage</span> <span class='kw'>=</span> <span class='fl'>0.56</span>,
-  <span class='kw'>vacc_child_starttime</span> <span class='kw'>=</span> <span class='fl'>150</span>, <span class='kw'>vacc_child_stoptime</span> <span class='kw'>=</span> <span class='fl'>150</span>,
-  <span class='kw'>dis_pri</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='kw'>rho_prim</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>phi_prim</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>vacceff_prim</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>other_foi</span> <span class='kw'>=</span> <span class='fl'>0.025</span>, <span class='kw'>other_prop_immune</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>propTransGlobal</span> <span class='kw'>=</span> <span class='fl'>5e-04</span>,
-  <span class='kw'>propTransNN</span> <span class='kw'>=</span> <span class='fl'>0.005</span>, <span class='kw'>BG_FOI</span> <span class='kw'>=</span> <span class='fl'>1e-08</span>, <span class='kw'>AGE_REC</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>PropDiseaseReported</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+  <span class='kw'>vacc_cu_time</span> <span class='kw'>=</span> <span class='fl'>30</span>, <span class='kw'>dis_pri</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='kw'>rho_prim</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>phi_prim</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>vacceff_prim</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>other_foi</span> <span class='kw'>=</span> <span class='fl'>0.025</span>, <span class='kw'>other_prop_immune</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>propTransGlobal</span> <span class='kw'>=</span> <span class='fl'>5e-04</span>, <span class='kw'>propTransNN</span> <span class='kw'>=</span> <span class='fl'>0.005</span>, <span class='kw'>BG_FOI</span> <span class='kw'>=</span> <span class='fl'>1e-08</span>,
+  <span class='kw'>AGE_REC</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>PropDiseaseReported</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -170,7 +165,7 @@ parameters.</p>
     </tr>
     <tr>
       <th>age_per</th>
-      <td><p>Time (weeks) between age updates. Default = 52 weeks.</p></td>
+      <td><p>Time (weeks) between age updates. Default = 1.</p></td>
     </tr>
     <tr>
       <th>N_human</th>
@@ -178,7 +173,8 @@ parameters.</p>
     </tr>
     <tr>
       <th>Omega</th>
-      <td><p>Density dependent power. Default = 1.</p></td>
+      <td><p>Intensity of density dependence of mosquito larvae mortality rate.
+0 = no density dependence. Default = 1.</p></td>
     </tr>
     <tr>
       <th>DeltaBase</th>
@@ -238,83 +234,86 @@ parameters.</p>
     </tr>
     <tr>
       <th>propMwtControl</th>
-      <td><p>Proportion of adult wild type mosquitoes which are killed by control. Default = 0.</p></td>
+      <td><p>Increase in mortality of adult wild type mosquitoes induced
+by a <em>general</em> type of intervention. Default = 0.</p></td>
     </tr>
     <tr>
       <th>TimeMwtControlOn</th>
-      <td><p>Year of start of control of adult wild type mosquitoes. Default = 4.</p></td>
+      <td><p>Year of start of control of adult wild type mosquitoes. Default = 2.</p></td>
     </tr>
     <tr>
       <th>TimeMwtControlOff</th>
-      <td><p>Year of end of control of adult wild type mosquitoes. Default = 5.</p></td>
+      <td><p>Year of end of control of adult wild type mosquitoes. Default = 3.</p></td>
     </tr>
     <tr>
       <th>Wb_cyto</th>
-      <td><p>Default = 1.</p></td>
+      <td><p>Degree of cytoplasmic incompatibility induced by Wolbachia. Default = 1.</p></td>
     </tr>
     <tr>
       <th>Wb_mat</th>
-      <td><p>Default = 1.</p></td>
+      <td><p>Degree of vertical transmission of Wolbachia. Default = 1.</p></td>
     </tr>
     <tr>
       <th>Wb_fM</th>
-      <td><p>Default = 0.95.</p></td>
+      <td><p>Increase in mortality induced by Wolbachia. Default = 0.95.</p></td>
     </tr>
     <tr>
       <th>Wb_fF</th>
-      <td><p>Default = 0.95.</p></td>
+      <td><p>Reduction in fecundity induced by Wolbachia. Default = 0.95.</p></td>
     </tr>
     <tr>
       <th>Wb_relsusc1</th>
-      <td><p>Default = 0.9.</p></td>
+      <td><p>Infectivity of a human host to Wolbachia infected mosquitoes
+(time τ after host infection). Default = 0.9.</p></td>
     </tr>
     <tr>
       <th>Wb_relinf1</th>
-      <td><p>Default = 0.75.</p></td>
+      <td><p>Infectiousness of Wolbachia-infected mosquitoes time τ after infection. Default = 0.75.</p></td>
     </tr>
     <tr>
       <th>Wb_starttime</th>
-      <td><p>Default = 140.</p></td>
+      <td><p>Time of first release of Wolbachia-infected mosquiotes (years). Default = 1.</p></td>
     </tr>
     <tr>
       <th>Wb_introlevel</th>
-      <td><p>Default = 0.5.</p></td>
+      <td><p>Ratio of Wolbachia-infected to wild type mosquitoes at introduction.
+(Not the proportion of Wolbachia AFTER introduction). Default = 0.</p></td>
     </tr>
     <tr>
       <th>Wb_introduration</th>
-      <td><p>Default = 60.</p></td>
-    </tr>
-    <tr>
-      <th>vacc_cu_minage</th>
-      <td><p>Default = 2.</p></td>
-    </tr>
-    <tr>
-      <th>vacc_cu_maxage</th>
-      <td><p>Default = 15.</p></td>
-    </tr>
-    <tr>
-      <th>vacc_cu_coverage</th>
-      <td><p>Default = 0.7.</p></td>
-    </tr>
-    <tr>
-      <th>vacc_cu_time</th>
-      <td><p>Default = 100.</p></td>
+      <td><p>Duration of Wolbachia release (days). Default = 60.</p></td>
     </tr>
     <tr>
       <th>vacc_child_age</th>
-      <td><p>Deafult = 3.</p></td>
+      <td><p>Age at which children are vaccinated. Deafult = 1.</p></td>
     </tr>
     <tr>
       <th>vacc_child_coverage</th>
-      <td><p>Default = 0.75.</p></td>
+      <td><p>Proportion of children vaccinated. Default = 0.</p></td>
     </tr>
     <tr>
       <th>vacc_child_starttime</th>
-      <td><p>Default = 30.</p></td>
+      <td><p>Time when vaccination starts. Default = 30.</p></td>
     </tr>
     <tr>
       <th>vacc_child_stoptime</th>
-      <td><p>Default = 30.</p></td>
+      <td><p>Time when vaccination stops. Default = 30.</p></td>
+    </tr>
+    <tr>
+      <th>vacc_cu_minage</th>
+      <td><p>Minimum age at which children who missed vaccination can catch up. Default = 2.</p></td>
+    </tr>
+    <tr>
+      <th>vacc_cu_maxage</th>
+      <td><p>Maximum age at which children who missed vaccination can catch up. Default = 15.</p></td>
+    </tr>
+    <tr>
+      <th>vacc_cu_coverage</th>
+      <td><p>Proportion of children who undergo catch up vaccination. Default = 0.7.</p></td>
+    </tr>
+    <tr>
+      <th>vacc_cu_time</th>
+      <td><p>Time when catch up vaccination occurs. Default = 30.</p></td>
     </tr>
     <tr>
       <th>dis_pri</th>

@@ -89,7 +89,7 @@
       <h1>Run a base model</h1>
                         <h4 class="author">Lorenzo Cattarino</h4>
             
-            <h4 class="date">2019-10-07</h4>
+            <h4 class="date">2019-12-16</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/mrc-ide/ZikaModel/blob/master/vignettes/deterministic_base_model.Rmd"><code>vignettes/deterministic_base_model.Rmd</code></a></small>
       <div class="hidden name"><code>deterministic_base_model.Rmd</code></div>
@@ -119,25 +119,61 @@ deathrt &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdoc
              <span class="fl">0.279105747097929</span>,
              <span class="fl">0.390197266957464</span>)
 
-<span class="co"># provide the length of time (in days) that you want to run the model for</span>
-time_frame &lt;-<span class="st"> </span><span class="dv">364</span> <span class="op">*</span><span class="st"> </span><span class="dv">100</span>
+<span class="co"># number of years to run the simulation for</span>
+time_years &lt;-<span class="st"> </span><span class="dv">50</span> <span class="co"># years</span>
+
+<span class="co"># time step</span>
+my_dt &lt;-<span class="st"> </span><span class="dv">1</span>
+
+<span class="co"># number of model time steps</span>
+time_frame &lt;-<span class="st"> </span>(<span class="dv">364</span> <span class="op">*</span><span class="st"> </span>time_years) <span class="op">/</span><span class="st"> </span>my_dt
 
 <span class="co"># run the model</span>
 model_outputs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/run_model.html">run_model</a></span>(<span class="dt">agec =</span> age_init,
                            <span class="dt">death =</span> deathrt,
                            nn_links,
-                           <span class="dt">time =</span> time_frame)</code></pre></div>
-<p>We can calculate the proportions of the total human population in each compartment and few other useful demographics using the <code>post_processing</code> function</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">diagnostics &lt;-<span class="st"> </span><span class="kw"><a href="../reference/post_processing.html">post_processing</a></span>(model_outputs)</code></pre></div>
-<p>Now we plot them</p>
+                           amplitudes_phases,
+                           <span class="dt">time =</span> time_frame)
+<span class="co">#&gt; Equations use index variables i on the rhs outside of an index.</span>
+<span class="co">#&gt; The behaviour of this has changed since odin 0.1.3 - see</span>
+<span class="co">#&gt; https://github.com/mrc-ide/odin/issues/136 for details.</span>
+<span class="co">#&gt; To silence this note, set option `odin.no_check_naked_index` to TRUE</span>
+<span class="co">#&gt; This note will disappear in a version after odin 1.0.0</span>
+<span class="co">#&gt;  vacc_noncov[, 1] &lt;- (if ((TIME &gt;= YL * vacc_child_starttime) &amp;&amp; # (line 125)</span>
+<span class="co">#&gt;                               (TIME &lt; YL * vacc_child_stoptime) &amp;&amp; # (line 126)</span>
+<span class="co">#&gt;                               (i == vacc_child_age)) (1 - vacc_child_coverage) else 1) * # (line 127)</span>
+<span class="co">#&gt;    (if ((TIME == vacc_cu_rndtime) &amp;&amp; # (line 128)</span>
+<span class="co">#&gt;         (i &gt;= vacc_cu_minage) &amp;&amp; # (line 129)</span>
+<span class="co">#&gt;         (i &lt;= vacc_cu_maxage)) (1 - vacc_cu_coverage) else 1) # (line 130)</span>
+<span class="co">#&gt;  vacc_noncov[, 2] &lt;- 1 # (line 132)</span></code></pre></div>
+<p>We can calculate the proportions of the total human population in each compartment and few other useful demographics of the human host population using the <code>post_processing</code> function</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">diagnostics &lt;-<span class="st"> </span><span class="kw"><a href="../reference/post_processing.html">post_processing</a></span>(model_outputs, my_dt)</code></pre></div>
+<p>The demographic diagnostics of the vector population can be calculated with the <code>post_processing_mos</code> function</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mosquito_diagnostics &lt;-<span class="st"> </span><span class="kw"><a href="../reference/post_processing_mos.html">post_processing_mos</a></span>(model_outputs)</code></pre></div>
+<p>Now we plot all the diagnostics</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/plot_compartments.html">plot_compartments</a></span>(diagnostics<span class="op">$</span>compartments)</code></pre></div>
-<p><img src="deterministic_base_model_files/figure-html/unnamed-chunk-5-1.png" width="576"></p>
+<p><img src="deterministic_base_model_files/figure-html/unnamed-chunk-6-1.png" width="576"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/plot_demographics.html">plot_demographics</a></span>(diagnostics<span class="op">$</span>demographics)
 <span class="co">#&gt; [[1]]</span></code></pre></div>
-<p><img src="deterministic_base_model_files/figure-html/unnamed-chunk-6-1.png" width="768"></p>
+<p><img src="deterministic_base_model_files/figure-html/unnamed-chunk-7-1.png" width="768"></p>
 <pre><code>#&gt; 
 #&gt; [[2]]</code></pre>
-<p><img src="deterministic_base_model_files/figure-html/unnamed-chunk-6-2.png" width="768"></p>
+<p><img src="deterministic_base_model_files/figure-html/unnamed-chunk-7-2.png" width="768"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/plot_demographics.html">plot_demographics</a></span>(mosquito_diagnostics)
+<span class="co">#&gt; [[1]]</span></code></pre></div>
+<p><img src="deterministic_base_model_files/figure-html/unnamed-chunk-8-1.png" width="768"></p>
+<pre><code>#&gt; 
+#&gt; [[2]]</code></pre>
+<p><img src="deterministic_base_model_files/figure-html/unnamed-chunk-8-2.png" width="768"></p>
+<pre><code>#&gt; 
+#&gt; [[3]]</code></pre>
+<p><img src="deterministic_base_model_files/figure-html/unnamed-chunk-8-3.png" width="768"></p>
+<pre><code>#&gt; 
+#&gt; [[4]]</code></pre>
+<p><img src="deterministic_base_model_files/figure-html/unnamed-chunk-8-4.png" width="768"></p>
+<pre><code>#&gt; 
+#&gt; [[5]]</code></pre>
+<p><img src="deterministic_base_model_files/figure-html/unnamed-chunk-8-5.png" width="768"></p>
 </div>
   </div>
 

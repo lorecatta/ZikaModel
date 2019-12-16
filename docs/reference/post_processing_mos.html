@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • ZikaModel</title>
+<title>Post-process model outputs for mosquitoes — post_processing_mos • ZikaModel</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,7 +30,11 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Post-process model outputs for mosquitoes — post_processing_mos" />
+
+<meta property="og:description" content="The function processes model outputs to calculate metrics of interest for the
+ vector population." />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -47,7 +51,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -115,108 +119,39 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Post-process model outputs for mosquitoes</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mrc-ide/ZikaModel/blob/master/R/post_processing.R'><code>R/post_processing.R</code></a></small>
+    <div class="hidden name"><code>post_processing_mos.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    
+    <p>The function processes model outputs to calculate metrics of interest for the
+ vector population.</p>
+    
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
-
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="amplitudes_phases.html">amplitudes_phases</a></code> </p>
-        </td>
-        <td><p>Amplitude and phase of seasonal forcing</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="create_r_model.html">create_r_model()</a></code> </p>
-        </td>
-        <td><p>Create an odin generator function</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="equilibrium_init_create.html">equilibrium_init_create()</a></code> </p>
-        </td>
-        <td><p>Generate equilibrium state</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="lag_diff.html">lag_diff()</a></code> </p>
-        </td>
-        <td><p>Calculate lagged differences</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="model_param_list_create.html">model_param_list_create()</a></code> </p>
-        </td>
-        <td><p>Create a list of parameters</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="nn_links.html">nn_links</a></code> </p>
-        </td>
-        <td><p>Patches' nearest neighbors</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_compartments.html">plot_compartments()</a></code> </p>
-        </td>
-        <td><p>Plot human states</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_demographics.html">plot_demographics()</a></code> </p>
-        </td>
-        <td><p>Plot demographics</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_Kc_eip_delta.html">plot_Kc_eip_delta()</a></code> </p>
-        </td>
-        <td><p>Plot seasonally-varying variables</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="post_processing.html">post_processing()</a></code> </p>
-        </td>
-        <td><p>Post-process model outputs</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="post_processing_mos.html">post_processing_mos()</a></code> </p>
-        </td>
-        <td><p>Post-process model outputs for mosquitoes</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="run_model.html">run_model()</a></code> </p>
-        </td>
-        <td><p>Runs and odin model</p></td>
-      </tr>
-    </tbody>
+    <pre class="usage"><span class='fu'>post_processing_mos</span>(<span class='no'>dat</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>dat</th>
+      <td><p>list of model outputs from the model run.</p></td>
+    </tr>
     </table>
-  </div>
+    
 
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
-    </ul>
+      <li><a href="#arguments">Arguments</a></li>
+                </ul>
+
   </div>
 </div>
 

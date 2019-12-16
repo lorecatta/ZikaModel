@@ -5,11 +5,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Run a seasonal model • ZikaModel</title>
+<title>Run a customized model • ZikaModel</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Run a seasonal model">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Run a customized model">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -86,41 +86,36 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Run a seasonal model</h1>
+      <h1>Run a customized model</h1>
                         <h4 class="author">Lorenzo Cattarino</h4>
             
             <h4 class="date">2019-12-16</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/mrc-ide/ZikaModel/blob/master/vignettes/deterministic_seasonal_model.Rmd"><code>vignettes/deterministic_seasonal_model.Rmd</code></a></small>
-      <div class="hidden name"><code>deterministic_seasonal_model.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/mrc-ide/ZikaModel/blob/master/vignettes/customized_model.Rmd"><code>vignettes/customized_model.Rmd</code></a></small>
+      <div class="hidden name"><code>customized_model.Rmd</code></div>
 
     </div>
 
     
     
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ZikaModel)</code></pre></div>
-<div id="seasonality" class="section level2">
+<div id="customized-models" class="section level2">
 <h2 class="hasAnchor">
-<a href="#seasonality" class="anchor"></a>Seasonality</h2>
-<p>The model allows to account for the effect of seasonal variations in climatic variables (e.g. temperature and precipitation) on Zika transmission dynamics. In the model, seasonality affects:</p>
+<a href="#customized-models" class="anchor"></a>Customized models</h2>
+<p><code>ZikaModel</code> allows the user to change the value of all the model parameters defined in <code><a href="../reference/model_param_list_create.html">model_param_list_create()</a></code>. This allows more flexibility in the range of scenarios considered (e.g. inteventions to control the disease). Also, by taking advantage of this feature it is also possible to simulate the transmission dynamics of other immunizing single-strain infections transmitted by <em>Aedes aegypti</em> mosquitoes, such as chikungunya.</p>
+<p>Here we will demonstrate how run a customized model which simulates vector control. different diseases and diseasesThis requires to use a different set of functions which will be demonstrated here. There are three parameters which simulate this type of intevention:</p>
 <ul>
-<li>adult mosquitoes mortality;</li>
-<li>mosquito larvae carrying capacity;</li>
-<li>Extrinsic Incubation Period.</li>
+<li>propMwtControl - the increase in mortality of adult wild type mosquitoes induced by the control</li>
+<li>TimeMwtControlOn - the time when the control starts</li>
+<li>TimeMwtControlOff - the time when the control ends</li>
 </ul>
-<p>The magnitude and timing of seasonal variations in each patch are described by the amplitude and phase parameters, which were chosen to mimic the seasonality of dengue transmission in Latin America. A 5 x 4 patch structure was assumed with 8 patches above the equators (strong seasonality and peak at the start of the year), 4 at the equator (weak seasonality) and 8 below the equator (strong seasonality and peak in the middle of each year) (Figure 1).</p>
-<div class="figure">
-<img src="patch_structure.png" alt="Figure 1. Schematic of the model patch structure in relation to seasonality." width="100%"><p class="caption">
-Figure 1. Schematic of the model patch structure in relation to seasonality.
-</p>
-</div>
-<p>A deterministic model which includes the effect of seasonality can be implemented with the following:</p>
+<p>Let’s assume that control increases mortality of adults mosquitoes by 20%. For now we will use the default values of <code>TimeMwtControlOn</code> and <code>TimeMwtControlOff</code>, which will simulate control for one year starting on the second year of the simulation. To keep it simple we will assume no effect of seasonality across patches. This is analogous to run the model with only one patch.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">age_init &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>)
-  
-deathrt &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">1e-10</span>, 
-             <span class="fl">1e-10</span>, 
-             <span class="fl">1e-10</span>, 
-             <span class="fl">0.00277068683332695</span>, 
+
+deathrt &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">1e-10</span>,
+             <span class="fl">1e-10</span>,
+             <span class="fl">1e-10</span>,
+             <span class="fl">0.00277068683332695</span>,
              <span class="fl">0.0210680857689784</span>,
              <span class="fl">0.026724997685722</span>,
              <span class="fl">0.0525354529367476</span>,
@@ -138,13 +133,19 @@ my_dt &lt;-<span class="st"> </span><span class="dv">1</span>
 <span class="co"># number of model time steps</span>
 time_frame &lt;-<span class="st"> </span>(<span class="dv">364</span> <span class="op">*</span><span class="st"> </span>time_years) <span class="op">/</span><span class="st"> </span>my_dt
 
-<span class="co"># run the model</span>
-model_outputs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/run_model.html">run_model</a></span>(<span class="dt">agec =</span> age_init,
-                           <span class="dt">death =</span> deathrt,
-                           nn_links,
-                           amplitudes_phases,
-                           <span class="dt">time =</span> time_frame,
-                           <span class="dt">season =</span> <span class="ot">TRUE</span>)
+odin_model_path &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"extdata/odin_model_determ.R"</span>, <span class="dt">package =</span> <span class="st">"ZikaModel"</span>)
+
+propMwtControl &lt;-<span class="st"> </span><span class="fl">0.2</span>
+
+<span class="co"># this returns a function that will generate an instance of the model</span>
+create_generator &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_r_model.html">create_r_model</a></span>(<span class="dt">odin_model_path =</span> odin_model_path,
+                                   <span class="dt">agec =</span> age_init,
+                                   <span class="dt">death =</span> deathrt,
+                                   <span class="dt">nn_links =</span> nn_links,
+                                   <span class="dt">amplitudes_phases =</span> amplitudes_phases,
+                                   <span class="dt">DT =</span> my_dt,
+                                   <span class="dt">season =</span> <span class="ot">FALSE</span>,
+                                   <span class="dt">propMwtControl =</span> propMwtControl)
 <span class="co">#&gt; Equations use index variables i on the rhs outside of an index.</span>
 <span class="co">#&gt; The behaviour of this has changed since odin 0.1.3 - see</span>
 <span class="co">#&gt; https://github.com/mrc-ide/odin/issues/136 for details.</span>
@@ -156,41 +157,52 @@ model_outputs &lt;-<span class="st"> </span><span class="kw"><a href="../referen
 <span class="co">#&gt;    (if ((TIME == vacc_cu_rndtime) &amp;&amp; # (line 128)</span>
 <span class="co">#&gt;         (i &gt;= vacc_cu_minage) &amp;&amp; # (line 129)</span>
 <span class="co">#&gt;         (i &lt;= vacc_cu_maxage)) (1 - vacc_cu_coverage) else 1) # (line 130)</span>
-<span class="co">#&gt;  vacc_noncov[, 2] &lt;- 1 # (line 132)</span></code></pre></div>
-<p>Now we do post processing and plot the compartments:</p>
+<span class="co">#&gt;  vacc_noncov[, 2] &lt;- 1 # (line 132)</span>
+
+<span class="co"># this generates an instance of the model using an initial equilibrium initialisation state </span>
+gen &lt;-<span class="st"> </span>create_generator<span class="op">$</span><span class="kw">generator</span>(<span class="dt">user =</span> create_generator<span class="op">$</span>state)
+
+integer_time_steps &lt;-<span class="st"> </span>(<span class="dv">364</span> <span class="op">*</span><span class="st"> </span>time_years) <span class="op">/</span><span class="st"> </span>my_dt
+
+its &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq</a></span>(<span class="dv">0</span>, integer_time_steps, <span class="dv">1</span>)
+
+<span class="co"># run the model</span>
+mod_run &lt;-<span class="st"> </span>gen<span class="op">$</span><span class="kw">run</span>(its)
+
+<span class="co"># post processing</span>
+model_outputs &lt;-<span class="st"> </span>gen<span class="op">$</span><span class="kw">transform_variables</span>(mod_run)</code></pre></div>
+<p>Now processing and plotting, as done before:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">diagnostics &lt;-<span class="st"> </span><span class="kw"><a href="../reference/post_processing.html">post_processing</a></span>(model_outputs, my_dt)
 
 <span class="kw"><a href="../reference/plot_compartments.html">plot_compartments</a></span>(diagnostics<span class="op">$</span>compartments)</code></pre></div>
-<p><img src="deterministic_seasonal_model_files/figure-html/unnamed-chunk-4-1.png" width="576"></p>
-<p>The dynamics look more jagged compared to the baseline model due to the effect of seasonality on transmission which makes them jumping more up and down. Let’s calculate and plot the rest of the diagnostics:</p>
+<p><img src="customized_model_files/figure-html/unnamed-chunk-3-1.png" width="576"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/plot_demographics.html">plot_demographics</a></span>(diagnostics<span class="op">$</span>demographics)
 <span class="co">#&gt; [[1]]</span></code></pre></div>
-<p><img src="deterministic_seasonal_model_files/figure-html/unnamed-chunk-5-1.png" width="768"></p>
+<p><img src="customized_model_files/figure-html/unnamed-chunk-4-1.png" width="768"></p>
 <pre><code>#&gt; 
 #&gt; [[2]]</code></pre>
-<p><img src="deterministic_seasonal_model_files/figure-html/unnamed-chunk-5-2.png" width="768"></p>
+<p><img src="customized_model_files/figure-html/unnamed-chunk-4-2.png" width="768"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 mosquito_diagnostics &lt;-<span class="st"> </span><span class="kw"><a href="../reference/post_processing_mos.html">post_processing_mos</a></span>(model_outputs)
 
 <span class="kw"><a href="../reference/plot_demographics.html">plot_demographics</a></span>(mosquito_diagnostics)
 <span class="co">#&gt; [[1]]</span></code></pre></div>
-<p><img src="deterministic_seasonal_model_files/figure-html/unnamed-chunk-5-3.png" width="768"></p>
+<p><img src="customized_model_files/figure-html/unnamed-chunk-4-3.png" width="768"></p>
 <pre><code>#&gt; 
 #&gt; [[2]]</code></pre>
-<p><img src="deterministic_seasonal_model_files/figure-html/unnamed-chunk-5-4.png" width="768"></p>
+<p><img src="customized_model_files/figure-html/unnamed-chunk-4-4.png" width="768"></p>
 <pre><code>#&gt; 
 #&gt; [[3]]</code></pre>
-<p><img src="deterministic_seasonal_model_files/figure-html/unnamed-chunk-5-5.png" width="768"></p>
+<p><img src="customized_model_files/figure-html/unnamed-chunk-4-5.png" width="768"></p>
 <pre><code>#&gt; 
 #&gt; [[4]]</code></pre>
-<p><img src="deterministic_seasonal_model_files/figure-html/unnamed-chunk-5-6.png" width="768"></p>
+<p><img src="customized_model_files/figure-html/unnamed-chunk-4-6.png" width="768"></p>
 <pre><code>#&gt; 
 #&gt; [[5]]</code></pre>
-<p><img src="deterministic_seasonal_model_files/figure-html/unnamed-chunk-5-7.png" width="768"></p>
-<p>Finally, we also plot the variables directly modified by seasonality, namely mosquito larve carrying capacity (Kc), extrinsic incubation period (eip) and adult mosquito mortality rate (delta). To simplify, we plot the average of each variable across all patches.</p>
+<p><img src="customized_model_files/figure-html/unnamed-chunk-4-7.png" width="768"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">season_vars &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plot_Kc_eip_delta.html">plot_Kc_eip_delta</a></span>(model_outputs)
 grid<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/grid/topics/grid.draw">grid.draw</a></span>(season_vars)</code></pre></div>
-<p><img src="deterministic_seasonal_model_files/figure-html/unnamed-chunk-6-1.png" width="768"></p>
+<p><img src="customized_model_files/figure-html/unnamed-chunk-5-1.png" width="768"></p>
 </div>
   </div>
 
@@ -199,7 +211,7 @@ grid<span class="op">::</span><span class="kw"><a href="https://www.rdocumentati
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#seasonality">Seasonality</a></li>
+<li><a href="#customized-models">Customized models</a></li>
       </ul>
 </div>
       </div>

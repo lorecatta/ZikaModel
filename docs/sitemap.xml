@@ -4,6 +4,9 @@
     <loc>https://mrc-ide.github.io/ZikaModel//index.html</loc>
   </url>
   <url>
+    <loc>https://mrc-ide.github.io/ZikaModel//reference/amplitudes_phases.html</loc>
+  </url>
+  <url>
     <loc>https://mrc-ide.github.io/ZikaModel//reference/create_r_model.html</loc>
   </url>
   <url>
@@ -25,21 +28,24 @@
     <loc>https://mrc-ide.github.io/ZikaModel//reference/plot_demographics.html</loc>
   </url>
   <url>
+    <loc>https://mrc-ide.github.io/ZikaModel//reference/plot_Kc_eip_delta.html</loc>
+  </url>
+  <url>
     <loc>https://mrc-ide.github.io/ZikaModel//reference/post_processing.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/ZikaModel//reference/post_processing_mos.html</loc>
   </url>
   <url>
     <loc>https://mrc-ide.github.io/ZikaModel//reference/run_model.html</loc>
   </url>
   <url>
-    <loc>https://mrc-ide.github.io/ZikaModel//reference/save_plot.html</loc>
+    <loc>https://mrc-ide.github.io/ZikaModel//articles/customized_model.html</loc>
   </url>
   <url>
     <loc>https://mrc-ide.github.io/ZikaModel//articles/deterministic_base_model.html</loc>
   </url>
   <url>
     <loc>https://mrc-ide.github.io/ZikaModel//articles/deterministic_seasonal_model.html</loc>
-  </url>
-  <url>
-    <loc>https://mrc-ide.github.io/ZikaModel//articles/stochastic_model.html</loc>
   </url>
 </urlset>

@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title><code>create_r_model</code> returns list with generator function automatically created given the odin model
-specified. — create_r_model • ZikaModel</title>
+<title>Create an odin generator function — create_r_model • ZikaModel</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -31,11 +30,11 @@ specified. — create_r_model • ZikaModel</title>
 
 
 
-<meta property="og:title" content="<code>create_r_model</code> returns list with generator function automatically created given the odin model
-specified. — create_r_model" />
+<meta property="og:title" content="Create an odin generator function — create_r_model" />
 
-<meta property="og:description" content="create_r_model returns list with generator function automatically created given the odin model
-specified." />
+<meta property="og:description" content="The function returns a list with the equilibrium initialisation state,
+odin generator function automatically created given the odin model specified,
+and list of user-defined parameters." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -123,27 +122,28 @@ specified." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1><code>create_r_model</code> returns list with generator function automatically created given the odin model
-specified.</h1>
+    <h1>Create an odin generator function</h1>
     <small class="dont-index">Source: <a href='https://github.com/mrc-ide/ZikaModel/blob/master/R/create_r_model.R'><code>R/create_r_model.R</code></a></small>
     <div class="hidden name"><code>create_r_model.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>create_r_model</code> returns list with generator function automatically created given the odin model
-specified.</p>
+    <p>The function returns a list with the equilibrium initialisation state,
+odin generator function automatically created given the odin model specified,
+and list of user-defined parameters.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>create_r_model</span>(<span class='no'>odin_model_path</span>, <span class='no'>agec</span>, <span class='no'>death</span>, <span class='no'>nn_links</span>, <span class='no'>season</span>)</pre>
+    <pre class="usage"><span class='fu'>create_r_model</span>(<span class='no'>odin_model_path</span>, <span class='no'>agec</span>, <span class='no'>death</span>, <span class='no'>nn_links</span>, <span class='no'>amplitudes_phases</span>,
+  <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>odin_model_path</th>
-      <td><p>Character path to odin model</p></td>
+      <td><p>Character path to odin model.</p></td>
     </tr>
     <tr>
       <th>agec</th>
@@ -158,8 +158,12 @@ specified.</p>
       <td><p>8 nearest-neigbors to each patch.</p></td>
     </tr>
     <tr>
-      <th>season</th>
-      <td><p>Logical for controlling the effect of seasonality.</p></td>
+      <th>amplitudes_phases</th>
+      <td><p>Amplitude and phase of seasonal forcing for each patch.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Additional arguments passed on to <code>model_param_list_create</code></p></td>
     </tr>
     </table>
     
