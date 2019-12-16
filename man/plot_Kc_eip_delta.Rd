@@ -7,7 +7,7 @@
 plot_Kc_eip_delta(out)
 }
 \arguments{
-\item{df}{The dataframe with the data to plot.}
+\item{out}{The dataframe with the data to plot.}
 }
 \description{
 The function makes plots of the mosquito larvae carrying capacity, virus extrinsic

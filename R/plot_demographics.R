@@ -70,7 +70,7 @@ plot_demographics <- function(df){
 #'
 #' @title Plot seasonally-varying variables
 #'
-#' @param df The dataframe with the data to plot.
+#' @param out The dataframe with the data to plot.
 #'
 #' @importFrom ggplot2 aes geom_line scale_x_continuous
 #'   scale_y_continuous ggplot theme_bw
@@ -88,7 +88,7 @@ plot_Kc_eip_delta <- function(out) {
 
   Kc_r <- data.frame(x = out$TIME, y = out$Kcav)
 
-  Kc_p <- ggplot(data = Kc_r, aes(x = x, y = y)) +
+  Kc_p <- ggplot(data = Kc_r, aes(x = Kc_r$x, y = Kc_r$y)) +
     geom_line(color = 'royalblue', size = 0.5) +
     scale_x_continuous("Years", breaks = my_breaks, labels = my_breaks/364) +
     scale_y_continuous("Mean patch Kc") +
@@ -97,7 +97,7 @@ plot_Kc_eip_delta <- function(out) {
 
   eip_r <- data.frame(x = out$TIME, y = out$eipav)
 
-  eip_p <- ggplot(data = eip_r, aes(x = x, y = y)) +
+  eip_p <- ggplot(data = eip_r, aes(x = eip_r$x, y = eip_r$y)) +
     geom_line(color = 'royalblue', size = 0.5) +
     scale_x_continuous("Years", breaks = my_breaks, labels = my_breaks/364) +
     scale_y_continuous("Mean patch EIP") +
@@ -106,7 +106,7 @@ plot_Kc_eip_delta <- function(out) {
 
   delta_r <- data.frame(x = out$TIME, y = out$Deltaav)
 
-  delta_p <- ggplot(data = delta_r, aes(x = x, y = y)) +
+  delta_p <- ggplot(data = delta_r, aes(x = delta_r$x, y = delta_r$y)) +
     geom_line(color = 'royalblue', size = 0.5) +
     scale_x_continuous("Years", breaks = my_breaks, labels = my_breaks/364) +
     scale_y_continuous("Mean patch Delta") +
