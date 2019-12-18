@@ -16,15 +16,13 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r}
-library(ZikaModel)
-```
-
 ## Running the base model
 To run the deterministic version of the model, without seasonality and interventions, 
 you can do the following:
 
 ```{r}
+library(ZikaModel)
+
 # create a vector of human age groups 
 age_init <- c(1, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10)
   

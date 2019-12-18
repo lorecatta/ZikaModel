@@ -16,10 +16,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-library(ZikaModel)
-```
-
 ## Customized models
 
 `ZikaModel` allows the user to change the value of all the model parameters defined in `model_param_list_create()`. This allows more flexibility in the range of scenarios considered (e.g. inteventions to control the disease). Also, by taking advantage of this feature it is also possible to simulate the transmission dynamics of other immunizing single-strain infections transmitted by _Aedes aegypti_ mosquitoes, such as chikungunya. 
@@ -32,9 +28,11 @@ Here we will demonstrate how run a customized model which simulates general vect
 
 Let's assume that control increases mortality of adults mosquitoes by 20%. For now we will use the default values of `TimeMwtControlOn` and `TimeMwtControlOff`, which will simulate control for one year starting on the second year of the simulation. To keep it simple we will assume no effect of seasonality across patches. This is analogous to run the model with only one patch.
 
-Running a customized model requires to use a different set of functions which will be demonstrated here. We will use `create_generator()` to return a function that will generate an instance of the model and use that instance to run the model with user-defined parameters. The function `create_generator()` has an argument `...` which passes arguments to `model_param_list_create()` thus overriding the defaults values of the model parameters. 
+Running a customized model requires to use a different set of functions which will be demonstrated here. We will use `create_r_model()` to return a function that will generate an instance of the model and use that instance to run the model with user-defined parameters. The function `create_r_model()` has an argument `...` which passes arguments to `model_param_list_create()` thus overriding the defaults values of the model parameters. 
 
 ```{r}
+library(ZikaModel)
+
 age_init <- c(1, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10)
 
 deathrt <- c(1e-10,
@@ -49,13 +47,10 @@ deathrt <- c(1e-10,
              0.279105747097929,
              0.390197266957464)
 
-# number of years to run the simulation for
-time_years <- 50 # years
+time_years <- 50
 
-# time step
 my_dt <- 1
 
-# number of model time steps
 time_frame <- (364 * time_years) / my_dt
 
 odin_model_path <- system.file("extdata/odin_model_determ.R", package = "ZikaModel")

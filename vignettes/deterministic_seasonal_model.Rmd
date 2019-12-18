@@ -16,10 +16,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r}
-library(ZikaModel)
-```
-
 ## Seasonality 
 The model allows to account for the effect of seasonal variations in climatic 
 variables (e.g. temperature and precipitation) on Zika transmission dynamics. 
@@ -30,17 +26,18 @@ In the model, seasonality affects:
 * Extrinsic Incubation Period.
 
 The magnitude and timing of seasonal variations in each patch are described by the amplitude 
-and phase parameters, which were chosen to mimic the seasonality of dengue transmission in Latin America. A 5 x 4 patch structure was assumed with 8 patches above the equators (strong seasonality and peak at the start of the year), 4 at the equator (weak seasonality) and 8 below the equator (strong seasonality and peak in the middle of each year) (Figure 1). 
+and phase parameters, which were chosen to mimic the seasonality of dengue transmission in Latin America. A 4 x 5 patch structure was assumed with 8 patches above the equators (strong seasonality and peak at the start of the year), 4 at the equator (weak seasonality) and 8 below the equator (strong seasonality and peak in the middle of each year) (Figure 1). 
 
-```{r Patch structure, echo = FALSE, fig.height = 4, fig.width = 6, dpi = 200, fig.cap = "Figure 1. Schematic of the model patch structure in relation to seasonality.", out.width = '100%'}
+```{r Patch structure, echo = FALSE, fig.align = "center", out.width = "100%", fig.asp = 0.50, dpi = 200, fig.cap = "Figure 1. Schematic of the model patch structure in relation to seasonality."}
 knitr::include_graphics("patch_structure.png")
 ```
-
-
+<br>
 A deterministic model which includes the effect of seasonality can be implemented
 with the following:
 
 ```{r}
+library(ZikaModel)
+
 age_init <- c(1, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10)
   
 deathrt <- c(1e-10, 
@@ -55,16 +52,12 @@ deathrt <- c(1e-10,
              0.279105747097929,
              0.390197266957464)
 
-# number of years to run the simulation for
 time_years <- 50 # years
 
-# time step
 my_dt <- 1
 
-# number of model time steps
 time_frame <- (364 * time_years) / my_dt
 
-# run the model
 model_outputs <- run_model(agec = age_init,
                            death = deathrt,
                            nn_links,
