@@ -89,7 +89,7 @@
       <h1>Run a customized model</h1>
                         <h4 class="author">Lorenzo Cattarino</h4>
             
-            <h4 class="date">2019-12-16</h4>
+            <h4 class="date">2019-12-18</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/mrc-ide/ZikaModel/blob/master/vignettes/customized_model.Rmd"><code>vignettes/customized_model.Rmd</code></a></small>
       <div class="hidden name"><code>customized_model.Rmd</code></div>
@@ -98,7 +98,6 @@
 
     
     
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ZikaModel)</code></pre></div>
 <div id="customized-models" class="section level2">
 <h2 class="hasAnchor">
 <a href="#customized-models" class="anchor"></a>Customized models</h2>
@@ -110,8 +109,10 @@
 <li>TimeMwtControlOff - the time when the control ends</li>
 </ul>
 <p>Let’s assume that control increases mortality of adults mosquitoes by 20%. For now we will use the default values of <code>TimeMwtControlOn</code> and <code>TimeMwtControlOff</code>, which will simulate control for one year starting on the second year of the simulation. To keep it simple we will assume no effect of seasonality across patches. This is analogous to run the model with only one patch.</p>
-<p>Running a customized model requires to use a different set of functions which will be demonstrated here. We will use <code>create_generator()</code> to return a function that will generate an instance of the model and use that instance to run the model with user-defined parameters. The function <code>create_generator()</code> has an argument <code>...</code> which passes arguments to <code><a href="../reference/model_param_list_create.html">model_param_list_create()</a></code> thus overriding the defaults values of the model parameters.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">age_init &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>)
+<p>Running a customized model requires to use a different set of functions which will be demonstrated here. We will use <code><a href="../reference/create_r_model.html">create_r_model()</a></code> to return a function that will generate an instance of the model and use that instance to run the model with user-defined parameters. The function <code><a href="../reference/create_r_model.html">create_r_model()</a></code> has an argument <code>...</code> which passes arguments to <code><a href="../reference/model_param_list_create.html">model_param_list_create()</a></code> thus overriding the defaults values of the model parameters.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ZikaModel)
+
+age_init &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>)
 
 deathrt &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">1e-10</span>,
              <span class="fl">1e-10</span>,
@@ -125,13 +126,10 @@ deathrt &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdoc
              <span class="fl">0.279105747097929</span>,
              <span class="fl">0.390197266957464</span>)
 
-<span class="co"># number of years to run the simulation for</span>
-time_years &lt;-<span class="st"> </span><span class="dv">50</span> <span class="co"># years</span>
+time_years &lt;-<span class="st"> </span><span class="dv">50</span>
 
-<span class="co"># time step</span>
 my_dt &lt;-<span class="st"> </span><span class="dv">1</span>
 
-<span class="co"># number of model time steps</span>
 time_frame &lt;-<span class="st"> </span>(<span class="dv">364</span> <span class="op">*</span><span class="st"> </span>time_years) <span class="op">/</span><span class="st"> </span>my_dt
 
 odin_model_path &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"extdata/odin_model_determ.R"</span>, <span class="dt">package =</span> <span class="st">"ZikaModel"</span>)

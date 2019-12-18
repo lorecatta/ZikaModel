@@ -89,7 +89,7 @@
       <h1>Run a base model</h1>
                         <h4 class="author">Lorenzo Cattarino</h4>
             
-            <h4 class="date">2019-12-16</h4>
+            <h4 class="date">2019-12-18</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/mrc-ide/ZikaModel/blob/master/vignettes/deterministic_base_model.Rmd"><code>vignettes/deterministic_base_model.Rmd</code></a></small>
       <div class="hidden name"><code>deterministic_base_model.Rmd</code></div>
@@ -98,12 +98,13 @@
 
     
     
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ZikaModel)</code></pre></div>
 <div id="running-the-base-model" class="section level2">
 <h2 class="hasAnchor">
 <a href="#running-the-base-model" class="anchor"></a>Running the base model</h2>
 <p>To run the deterministic version of the model, without seasonality and interventions, you can do the following:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create a vector of human age groups </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ZikaModel)
+
+<span class="co"># create a vector of human age groups </span>
 age_init &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>)
   
 <span class="co"># create a vector of human mortality rates </span>
@@ -152,28 +153,28 @@ model_outputs &lt;-<span class="st"> </span><span class="kw"><a href="../referen
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mosquito_diagnostics &lt;-<span class="st"> </span><span class="kw"><a href="../reference/post_processing_mos.html">post_processing_mos</a></span>(model_outputs)</code></pre></div>
 <p>Now we plot all the diagnostics</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/plot_compartments.html">plot_compartments</a></span>(diagnostics<span class="op">$</span>compartments)</code></pre></div>
-<p><img src="deterministic_base_model_files/figure-html/unnamed-chunk-6-1.png" width="576"></p>
+<p><img src="deterministic_base_model_files/figure-html/unnamed-chunk-5-1.png" width="576"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/plot_demographics.html">plot_demographics</a></span>(diagnostics<span class="op">$</span>demographics)
+<span class="co">#&gt; [[1]]</span></code></pre></div>
+<p><img src="deterministic_base_model_files/figure-html/unnamed-chunk-6-1.png" width="768"></p>
+<pre><code>#&gt; 
+#&gt; [[2]]</code></pre>
+<p><img src="deterministic_base_model_files/figure-html/unnamed-chunk-6-2.png" width="768"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/plot_demographics.html">plot_demographics</a></span>(mosquito_diagnostics)
 <span class="co">#&gt; [[1]]</span></code></pre></div>
 <p><img src="deterministic_base_model_files/figure-html/unnamed-chunk-7-1.png" width="768"></p>
 <pre><code>#&gt; 
 #&gt; [[2]]</code></pre>
 <p><img src="deterministic_base_model_files/figure-html/unnamed-chunk-7-2.png" width="768"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/plot_demographics.html">plot_demographics</a></span>(mosquito_diagnostics)
-<span class="co">#&gt; [[1]]</span></code></pre></div>
-<p><img src="deterministic_base_model_files/figure-html/unnamed-chunk-8-1.png" width="768"></p>
-<pre><code>#&gt; 
-#&gt; [[2]]</code></pre>
-<p><img src="deterministic_base_model_files/figure-html/unnamed-chunk-8-2.png" width="768"></p>
 <pre><code>#&gt; 
 #&gt; [[3]]</code></pre>
-<p><img src="deterministic_base_model_files/figure-html/unnamed-chunk-8-3.png" width="768"></p>
+<p><img src="deterministic_base_model_files/figure-html/unnamed-chunk-7-3.png" width="768"></p>
 <pre><code>#&gt; 
 #&gt; [[4]]</code></pre>
-<p><img src="deterministic_base_model_files/figure-html/unnamed-chunk-8-4.png" width="768"></p>
+<p><img src="deterministic_base_model_files/figure-html/unnamed-chunk-7-4.png" width="768"></p>
 <pre><code>#&gt; 
 #&gt; [[5]]</code></pre>
-<p><img src="deterministic_base_model_files/figure-html/unnamed-chunk-8-5.png" width="768"></p>
+<p><img src="deterministic_base_model_files/figure-html/unnamed-chunk-7-5.png" width="768"></p>
 </div>
   </div>
 
