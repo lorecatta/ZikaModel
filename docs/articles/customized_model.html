@@ -89,7 +89,7 @@
       <h1>Run a customized model</h1>
                         <h4 class="author">Lorenzo Cattarino</h4>
             
-            <h4 class="date">2019-12-18</h4>
+            <h4 class="date">2019-12-19</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/mrc-ide/ZikaModel/blob/master/vignettes/customized_model.Rmd"><code>vignettes/customized_model.Rmd</code></a></small>
       <div class="hidden name"><code>customized_model.Rmd</code></div>
@@ -102,14 +102,16 @@
 <h2 class="hasAnchor">
 <a href="#customized-models" class="anchor"></a>Customized models</h2>
 <p><code>ZikaModel</code> allows the user to change the value of all the model parameters defined in <code><a href="../reference/model_param_list_create.html">model_param_list_create()</a></code>. This allows more flexibility in the range of scenarios considered (e.g. inteventions to control the disease). Also, by taking advantage of this feature it is also possible to simulate the transmission dynamics of other immunizing single-strain infections transmitted by <em>Aedes aegypti</em> mosquitoes, such as chikungunya.</p>
-<p>Here we will demonstrate how run a customized model which simulates general vector control. There are three parameters which simulate general vector control:</p>
+<p>Here we will demonstrate how run a customized model which simulates general vector control. There are three parameters which simulate general vector control in the model:</p>
 <ul>
-<li>propMwtControl - the increase in mortality of adult wild type mosquitoes induced by the control</li>
-<li>TimeMwtControlOn - the time when the control starts</li>
-<li>TimeMwtControlOff - the time when the control ends</li>
+<li>
+<code>propMwtControl</code> - the increase in mortality of adult wild type mosquitoes induced by the control</li>
+<li>
+<code>TimeMwtControlOn</code> - the time when the control starts</li>
+<li>
+<code>TimeMwtControlOff</code> - the time when the control ends</li>
 </ul>
-<p>Let’s assume that control increases mortality of adults mosquitoes by 20%. For now we will use the default values of <code>TimeMwtControlOn</code> and <code>TimeMwtControlOff</code>, which will simulate control for one year starting on the second year of the simulation. To keep it simple we will assume no effect of seasonality across patches. This is analogous to run the model with only one patch.</p>
-<p>Running a customized model requires to use a different set of functions which will be demonstrated here. We will use <code><a href="../reference/create_r_model.html">create_r_model()</a></code> to return a function that will generate an instance of the model and use that instance to run the model with user-defined parameters. The function <code><a href="../reference/create_r_model.html">create_r_model()</a></code> has an argument <code>...</code> which passes arguments to <code><a href="../reference/model_param_list_create.html">model_param_list_create()</a></code> thus overriding the defaults values of the model parameters.</p>
+<p>Let’s assume that control increases mortality of adults mosquitoes by 20%. For now we will use the default values of <code>TimeMwtControlOn</code> and <code>TimeMwtControlOff</code>, which will simulate control for one year starting on the second year of the simulation.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ZikaModel)
 
 age_init &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>)
@@ -132,11 +134,10 @@ my_dt &lt;-<span class="st"> </span><span class="dv">1</span>
 
 time_frame &lt;-<span class="st"> </span>(<span class="dv">364</span> <span class="op">*</span><span class="st"> </span>time_years) <span class="op">/</span><span class="st"> </span>my_dt
 
-odin_model_path &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"extdata/odin_model_determ.R"</span>, <span class="dt">package =</span> <span class="st">"ZikaModel"</span>)
+propMwtControl &lt;-<span class="st"> </span><span class="fl">0.2</span></code></pre></div>
+<p>Running a customized model requires to use a the <code><a href="../reference/create_r_model.html">create_r_model()</a></code> function. When called it returns a function that generates an instance of the model and we can use that instance to run the model with user-defined parameters. The function <code><a href="../reference/create_r_model.html">create_r_model()</a></code> has an argument <code>...</code> which passes arguments to <code><a href="../reference/model_param_list_create.html">model_param_list_create()</a></code> thus overriding the defaults values of the model parameters. To keep it simple we will assume no effect of seasonality across patches. This is analogous to run the model with only one patch.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">odin_model_path &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"extdata/odin_model_determ.R"</span>, <span class="dt">package =</span> <span class="st">"ZikaModel"</span>)
 
-propMwtControl &lt;-<span class="st"> </span><span class="fl">0.2</span>
-
-<span class="co"># this returns a function that will generate an instance of the model</span>
 create_generator &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_r_model.html">create_r_model</a></span>(<span class="dt">odin_model_path =</span> odin_model_path,
                                    <span class="dt">agec =</span> age_init,
                                    <span class="dt">death =</span> deathrt,
@@ -174,34 +175,34 @@ model_outputs &lt;-<span class="st"> </span>gen<span class="op">$</span><span cl
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">diagnostics &lt;-<span class="st"> </span><span class="kw"><a href="../reference/post_processing.html">post_processing</a></span>(model_outputs, my_dt)
 
 <span class="kw"><a href="../reference/plot_compartments.html">plot_compartments</a></span>(diagnostics<span class="op">$</span>compartments)</code></pre></div>
-<p><img src="customized_model_files/figure-html/unnamed-chunk-3-1.png" width="576"></p>
+<p><img src="customized_model_files/figure-html/unnamed-chunk-4-1.png" width="576"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/plot_demographics.html">plot_demographics</a></span>(diagnostics<span class="op">$</span>demographics)
 <span class="co">#&gt; [[1]]</span></code></pre></div>
-<p><img src="customized_model_files/figure-html/unnamed-chunk-4-1.png" width="768"></p>
+<p><img src="customized_model_files/figure-html/unnamed-chunk-5-1.png" width="768"></p>
 <pre><code>#&gt; 
 #&gt; [[2]]</code></pre>
-<p><img src="customized_model_files/figure-html/unnamed-chunk-4-2.png" width="768"></p>
+<p><img src="customized_model_files/figure-html/unnamed-chunk-5-2.png" width="768"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 mosquito_diagnostics &lt;-<span class="st"> </span><span class="kw"><a href="../reference/post_processing_mos.html">post_processing_mos</a></span>(model_outputs)
 
 <span class="kw"><a href="../reference/plot_demographics.html">plot_demographics</a></span>(mosquito_diagnostics)
 <span class="co">#&gt; [[1]]</span></code></pre></div>
-<p><img src="customized_model_files/figure-html/unnamed-chunk-4-3.png" width="768"></p>
+<p><img src="customized_model_files/figure-html/unnamed-chunk-5-3.png" width="768"></p>
 <pre><code>#&gt; 
 #&gt; [[2]]</code></pre>
-<p><img src="customized_model_files/figure-html/unnamed-chunk-4-4.png" width="768"></p>
+<p><img src="customized_model_files/figure-html/unnamed-chunk-5-4.png" width="768"></p>
 <pre><code>#&gt; 
 #&gt; [[3]]</code></pre>
-<p><img src="customized_model_files/figure-html/unnamed-chunk-4-5.png" width="768"></p>
+<p><img src="customized_model_files/figure-html/unnamed-chunk-5-5.png" width="768"></p>
 <pre><code>#&gt; 
 #&gt; [[4]]</code></pre>
-<p><img src="customized_model_files/figure-html/unnamed-chunk-4-6.png" width="768"></p>
+<p><img src="customized_model_files/figure-html/unnamed-chunk-5-6.png" width="768"></p>
 <pre><code>#&gt; 
 #&gt; [[5]]</code></pre>
-<p><img src="customized_model_files/figure-html/unnamed-chunk-4-7.png" width="768"></p>
+<p><img src="customized_model_files/figure-html/unnamed-chunk-5-7.png" width="768"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">season_vars &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plot_Kc_eip_delta.html">plot_Kc_eip_delta</a></span>(model_outputs)
 grid<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/grid/topics/grid.draw">grid.draw</a></span>(season_vars)</code></pre></div>
-<p><img src="customized_model_files/figure-html/unnamed-chunk-5-1.png" width="768"></p>
+<p><img src="customized_model_files/figure-html/unnamed-chunk-6-1.png" width="768"></p>
 </div>
   </div>
 

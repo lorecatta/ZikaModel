@@ -89,7 +89,7 @@
       <h1>Run a seasonal model</h1>
                         <h4 class="author">Lorenzo Cattarino</h4>
             
-            <h4 class="date">2019-12-18</h4>
+            <h4 class="date">2019-12-19</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/mrc-ide/ZikaModel/blob/master/vignettes/deterministic_seasonal_model.Rmd"><code>vignettes/deterministic_seasonal_model.Rmd</code></a></small>
       <div class="hidden name"><code>deterministic_seasonal_model.Rmd</code></div>
@@ -113,7 +113,7 @@
 Figure 1. Schematic of the model patch structure in relation to seasonality.
 </p>
 </div>
-<p><br> A deterministic model which includes the effect of seasonality can be implemented with the following:</p>
+<p><br> We first create all the objects required to run a base model:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ZikaModel)
 
 age_init &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>)
@@ -134,12 +134,12 @@ time_years &lt;-<span class="st"> </span><span class="dv">50</span> <span class=
 
 my_dt &lt;-<span class="st"> </span><span class="dv">1</span>
 
-time_frame &lt;-<span class="st"> </span>(<span class="dv">364</span> <span class="op">*</span><span class="st"> </span>time_years) <span class="op">/</span><span class="st"> </span>my_dt
-
-model_outputs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/run_model.html">run_model</a></span>(<span class="dt">agec =</span> age_init,
+time_frame &lt;-<span class="st"> </span>(<span class="dv">364</span> <span class="op">*</span><span class="st"> </span>time_years) <span class="op">/</span><span class="st"> </span>my_dt</code></pre></div>
+<p>A deterministic model which includes the effect of seasonality can be implemented by setting to <code>TRUE</code> the <code>season</code> argument of <code><a href="../reference/run_model.html">run_model()</a></code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model_outputs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/run_model.html">run_model</a></span>(<span class="dt">agec =</span> age_init,
                            <span class="dt">death =</span> deathrt,
-                           nn_links,
-                           amplitudes_phases,
+                           <span class="dt">nn_links =</span> nn_links,
+                           <span class="dt">amplitudes_phases =</span> amplitudes_phases,
                            <span class="dt">time =</span> time_frame,
                            <span class="dt">season =</span> <span class="ot">TRUE</span>)
 <span class="co">#&gt; Equations use index variables i on the rhs outside of an index.</span>
@@ -158,36 +158,36 @@ model_outputs &lt;-<span class="st"> </span><span class="kw"><a href="../referen
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">diagnostics &lt;-<span class="st"> </span><span class="kw"><a href="../reference/post_processing.html">post_processing</a></span>(model_outputs, my_dt)
 
 <span class="kw"><a href="../reference/plot_compartments.html">plot_compartments</a></span>(diagnostics<span class="op">$</span>compartments)</code></pre></div>
-<p><img src="deterministic_seasonal_model_files/figure-html/unnamed-chunk-3-1.png" width="576"></p>
+<p><img src="deterministic_seasonal_model_files/figure-html/unnamed-chunk-4-1.png" width="576"></p>
 <p>The dynamics look more jagged compared to the baseline model due to the effect of seasonality on transmission which makes them jumping more up and down. Let’s calculate and plot the rest of the diagnostics:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/plot_demographics.html">plot_demographics</a></span>(diagnostics<span class="op">$</span>demographics)
 <span class="co">#&gt; [[1]]</span></code></pre></div>
-<p><img src="deterministic_seasonal_model_files/figure-html/unnamed-chunk-4-1.png" width="768"></p>
+<p><img src="deterministic_seasonal_model_files/figure-html/unnamed-chunk-5-1.png" width="768"></p>
 <pre><code>#&gt; 
 #&gt; [[2]]</code></pre>
-<p><img src="deterministic_seasonal_model_files/figure-html/unnamed-chunk-4-2.png" width="768"></p>
+<p><img src="deterministic_seasonal_model_files/figure-html/unnamed-chunk-5-2.png" width="768"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 mosquito_diagnostics &lt;-<span class="st"> </span><span class="kw"><a href="../reference/post_processing_mos.html">post_processing_mos</a></span>(model_outputs)
 
 <span class="kw"><a href="../reference/plot_demographics.html">plot_demographics</a></span>(mosquito_diagnostics)
 <span class="co">#&gt; [[1]]</span></code></pre></div>
-<p><img src="deterministic_seasonal_model_files/figure-html/unnamed-chunk-4-3.png" width="768"></p>
+<p><img src="deterministic_seasonal_model_files/figure-html/unnamed-chunk-5-3.png" width="768"></p>
 <pre><code>#&gt; 
 #&gt; [[2]]</code></pre>
-<p><img src="deterministic_seasonal_model_files/figure-html/unnamed-chunk-4-4.png" width="768"></p>
+<p><img src="deterministic_seasonal_model_files/figure-html/unnamed-chunk-5-4.png" width="768"></p>
 <pre><code>#&gt; 
 #&gt; [[3]]</code></pre>
-<p><img src="deterministic_seasonal_model_files/figure-html/unnamed-chunk-4-5.png" width="768"></p>
+<p><img src="deterministic_seasonal_model_files/figure-html/unnamed-chunk-5-5.png" width="768"></p>
 <pre><code>#&gt; 
 #&gt; [[4]]</code></pre>
-<p><img src="deterministic_seasonal_model_files/figure-html/unnamed-chunk-4-6.png" width="768"></p>
+<p><img src="deterministic_seasonal_model_files/figure-html/unnamed-chunk-5-6.png" width="768"></p>
 <pre><code>#&gt; 
 #&gt; [[5]]</code></pre>
-<p><img src="deterministic_seasonal_model_files/figure-html/unnamed-chunk-4-7.png" width="768"></p>
+<p><img src="deterministic_seasonal_model_files/figure-html/unnamed-chunk-5-7.png" width="768"></p>
 <p>Finally, we also plot the variables directly modified by seasonality, namely mosquito larve carrying capacity (Kc), extrinsic incubation period (eip) and adult mosquito mortality rate (delta). To simplify, we plot the average of each variable across all patches.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">season_vars &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plot_Kc_eip_delta.html">plot_Kc_eip_delta</a></span>(model_outputs)
 grid<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/grid/topics/grid.draw">grid.draw</a></span>(season_vars)</code></pre></div>
-<p><img src="deterministic_seasonal_model_files/figure-html/unnamed-chunk-5-1.png" width="768"></p>
+<p><img src="deterministic_seasonal_model_files/figure-html/unnamed-chunk-6-1.png" width="768"></p>
 </div>
   </div>
 
