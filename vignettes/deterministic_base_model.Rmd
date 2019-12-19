@@ -17,16 +17,17 @@ knitr::opts_chunk$set(
 ```
 
 ## Running the base model
-To run the deterministic version of the model, without seasonality and interventions, 
-you can do the following:
+Here we consider a deterministic model without seasonality and interventions. The model has an age-stratified human host populations with 11 human age groups. To run the model we need to define some objects first, such as:
+
+* the width of each human age groups;
+* the mortality rate in each age group, and
+* the length of time we want to run the model for.
 
 ```{r}
 library(ZikaModel)
 
-# create a vector of human age groups 
 age_init <- c(1, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10)
   
-# create a vector of human mortality rates 
 deathrt <- c(1e-10, 
              1e-10, 
              1e-10, 
@@ -47,12 +48,15 @@ my_dt <- 1
 
 # number of model time steps
 time_frame <- (364 * time_years) / my_dt
+```
 
-# run the model
+We run the deterministic version of the model with `run_model()`. Note that the `nn_links` and `amplitudes_phases` objects are datasets of the nearest neighboring patches to each patch and the amplitude and phase of seasonal forcing in each patch, respectively, and are provided with the package.
+
+```{r}
 model_outputs <- run_model(agec = age_init,
                            death = deathrt,
-                           nn_links,
-                           amplitudes_phases,
+                           nn_links = nn_links,
+                           amplitudes_phases = amplitudes_phases,
                            time = time_frame)
 ```
 

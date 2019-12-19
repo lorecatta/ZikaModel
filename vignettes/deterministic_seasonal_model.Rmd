@@ -32,8 +32,7 @@ and phase parameters, which were chosen to mimic the seasonality of dengue trans
 knitr::include_graphics("patch_structure.png")
 ```
 <br>
-A deterministic model which includes the effect of seasonality can be implemented
-with the following:
+We first create all the objects required to run a base model:
 
 ```{r}
 library(ZikaModel)
@@ -57,11 +56,15 @@ time_years <- 50 # years
 my_dt <- 1
 
 time_frame <- (364 * time_years) / my_dt
+```
 
+A deterministic model which includes the effect of seasonality can be implemented by setting to `TRUE` the `season` argument of `run_model()`.
+
+```{r}
 model_outputs <- run_model(agec = age_init,
                            death = deathrt,
-                           nn_links,
-                           amplitudes_phases,
+                           nn_links = nn_links,
+                           amplitudes_phases = amplitudes_phases,
                            time = time_frame,
                            season = TRUE)
 ```
