@@ -18,7 +18,7 @@ model_param_list_create(YL = 364, DT = 1, NP = 21, age_per = 1,
   vacc_cu_minage = 2, vacc_cu_maxage = 15, vacc_cu_coverage = 0.7,
   vacc_cu_time = 30, dis_pri = 0.2, rho_prim = 1, phi_prim = 1,
   vacceff_prim = 1, other_foi = 0.025, other_prop_immune = 0,
-  propTransGlobal = 5e-04, propTransNN = 0.005, BG_FOI = 1e-08,
+  propTransGlobal = 5e-04, propTransNN = 0, BG_FOI = 1e-08,
   AGE_REC = 2, PropDiseaseReported = 1)
 }
 \arguments{
@@ -120,9 +120,9 @@ by a \emph{general} type of intervention. Default = 0.}
 
 \item{propTransGlobal}{Proportion of transmission between all patches. Default = 0.0005.}
 
-\item{propTransNN}{Proportion of transmssion with nearest-neighbor patches. Default = 0.005.}
+\item{propTransNN}{Proportion of transmssion with nearest-neighbor patches. Default = 0.}
 
-\item{BG_FOI}{Background FOI. Default = 10e-8.}
+\item{BG_FOI}{Seeding FOI. Default = 1e-8.}
 
 \item{AGE_REC}{Default = 2.}
 
