@@ -56,8 +56,8 @@
 #' @param other_foi Default = 0.025.
 #' @param other_prop_immune Default = 0.
 #' @param propTransGlobal Proportion of transmission between all patches. Default = 0.0005.
-#' @param propTransNN Proportion of transmssion with nearest-neighbor patches. Default = 0.005.
-#' @param BG_FOI Background FOI. Default = 10e-8.
+#' @param propTransNN Proportion of transmssion with nearest-neighbor patches. Default = 0.
+#' @param BG_FOI Seeding FOI. Default = 1e-8.
 #' @param AGE_REC Default = 2.
 #' @param PropDiseaseReported Reporting rate of symptomatic cases. Default = 0.1.
 
@@ -117,7 +117,7 @@ model_param_list_create <- function(
   other_foi = 0.025,
   other_prop_immune = 0,
   propTransGlobal = 0.0005,
-  propTransNN = 0.005,
+  propTransNN = 0,
   BG_FOI = 1e-8,
   AGE_REC = 2,
   PropDiseaseReported = 1){
