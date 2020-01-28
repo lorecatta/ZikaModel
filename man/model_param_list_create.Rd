@@ -13,13 +13,13 @@ model_param_list_create(YL = 364, DT = 1, NP = 21, age_per = 1,
   TimeMwtControlOff = 2.5, Wb_cyto = 1, Wb_mat = 1, Wb_fM = 0.95,
   Wb_fF = 0.95, Wb_relsusc1 = 0.9, Wb_relinf1 = 0.5,
   Wb_starttime = 1, Wb_introlevel = 0, Wb_introduration = 60,
-  vacc_child_age = 1, vacc_child_coverage = 0,
-  vacc_child_starttime = 30, vacc_child_stoptime = 30,
-  vacc_cu_minage = 2, vacc_cu_maxage = 15, vacc_cu_coverage = 0.7,
-  vacc_cu_time = 30, dis_pri = 0.2, rho_prim = 1, phi_prim = 1,
-  vacceff_prim = 1, other_foi = 0.025, other_prop_immune = 0,
-  propTransGlobal = 5e-04, propTransNN = 0, BG_FOI = 1e-08,
-  AGE_REC = 2, PropDiseaseReported = 1)
+  vacc_child_age = c(0, 0, 3, 4, 5, 6, 0, 0, 0, 0, 0),
+  vacc_child_coverage = 0, vacc_child_starttime = 30,
+  vacc_child_stoptime = 30, vacc_cu_minage = 2, vacc_cu_maxage = 15,
+  vacc_cu_coverage = 0.7, vacc_cu_time = 30, dis_pri = 0.2,
+  rho_prim = 1, phi_prim = 1, vacceff_prim = 1, other_foi = 0.025,
+  other_prop_immune = 0, propTransGlobal = 5e-04, propTransNN = 0,
+  BG_FOI = 1e-08, AGE_REC = 2, PropDiseaseReported = 1)
 }
 \arguments{
 \item{YL}{Duration of a calendar year. Default = 364.}
@@ -90,7 +90,7 @@ by a \emph{general} type of intervention. Default = 0.}
 
 \item{Wb_introduration}{Duration of Wolbachia release (days). Default = 60.}
 
-\item{vacc_child_age}{Age at which children are vaccinated. Deafult = 1.}
+\item{vacc_child_age}{Numeric vector of the age groups at which vaccination occurs. Default = c(0,0,3,4,5,6,0,0,0,0,0).}
 
 \item{vacc_child_coverage}{Proportion of children vaccinated. Default = 0.}
 
