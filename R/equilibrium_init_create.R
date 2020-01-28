@@ -97,8 +97,8 @@ equilibrium_init_create <- function(agec, death, nn_links, amplitudes_phases, mo
   N_eq[1:(NP-1)] <- N_human
   N_eq[NP] <- N_human / 10
 
-  #Nb <- N_eq / lifespan # number of births
-  Nb <- N_eq * (14.9/1000)
+  Nb <- N_eq / lifespan # number of births
+
   amplitudes_phases[, "phase"] <- amplitudes_phases[, "phase"] * YL
 
   Wb_introtime <- c()
