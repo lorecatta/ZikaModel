@@ -124,7 +124,7 @@ vacc_cu_coverage <- user()
 
 vacc_noncov[, 1] <- (if ((TIME >= YL * vacc_child_starttime) &&
                              (TIME < YL * vacc_child_stoptime) &&
-                             (i == vacc_child_age)) (1 - vacc_child_coverage) else 1) *
+                             (i == vacc_child_age[i])) (1 - vacc_child_coverage) else 1) *
   (if ((TIME == vacc_cu_rndtime) &&
        (i >= vacc_cu_minage) &&
        (i <= vacc_cu_maxage)) (1 - vacc_cu_coverage) else 1)
