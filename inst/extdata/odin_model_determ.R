@@ -114,7 +114,7 @@ Delta_wb[] <- Delta[i] / Wb_fM
 
 vacc_child_starttime <- user()
 vacc_child_stoptime <- user()
-vacc_child_age <- user()
+vacc_child_age[] <- user()
 vacc_child_coverage <- user()
 
 vacc_cu_rndtime <- user()
