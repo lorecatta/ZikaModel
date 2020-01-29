@@ -213,7 +213,7 @@ equilibrium_init_create <- function(agec,
               init_I1 = init_I1,
               init_R1 = init_R1,
               pTG_bigpatch = pTG_bigpatch,
-              vaccine_age = vaccine_age_2,
+              vacc_child_age = vaccine_age_2,
               pi = pi)
 
   append(res, mpl)
