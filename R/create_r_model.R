@@ -13,7 +13,7 @@
 #'
 #' @param odin_model_path Character path to odin model.
 #'
-#' @param ... Additional arguments passed on to \code{model_param_list_create}
+#' @param ... Additional arguments passed on to \code{model_param_list_create()}
 #'
 #' @return list of generator function, initial state, model parameters and generator
 #'
@@ -24,7 +24,9 @@ create_r_model <- function(odin_model_path,
                            agec,
                            death,
                            nn_links,
-                           amplitudes_phases, ...){
+                           amplitudes_phases,
+                           vaccine_age = NULL,
+                           ...){
 
   ## create model param list using necessary variables
   mpl <- model_param_list_create(...)
@@ -34,6 +36,7 @@ create_r_model <- function(odin_model_path,
                                         death = death,
                                         nn_links = nn_links,
                                         amplitudes_phases = amplitudes_phases,
+                                        vaccine_age = vaccine_age,
                                         model_parameter_list = mpl)
 
   # create odin generator
