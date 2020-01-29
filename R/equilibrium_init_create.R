@@ -31,6 +31,8 @@ equilibrium_init_create <- function(agec,
                                     vaccine_age = NULL,
                                     model_parameter_list){
 
+  na <- as.integer(length(agec))  # number of age groups
+
   ## Check parameters
   if(!is.null(vaccine_age) | length(vaccine_age) != na)
     stop("length of age groups to vaccinate is different from number of age groups")
@@ -41,8 +43,6 @@ equilibrium_init_create <- function(agec,
   NP <- mpl$NP
 
   nn[nn > NP] <- NP
-
-  na <- as.integer(length(agec))  # number of age groups
 
   surv <- ageb <- mean_surv <- mean_age <- lifeexpec <- corr_death <- c()
 
