@@ -14,6 +14,9 @@
 #'
 #' @param amplitudes_phases Amplitude and phase of seasonal forcing for each patch.
 #'
+#' @param vaccine_age Vector of binary indicators for age groups vaccination.
+#'  1 = vaccinate, 0 = do not vaccinate. Same length as \code{agec}. Default = NULL.
+#'
 #' @param model_parameter_list List of user-defined model parameters.
 #'
 #' @importFrom stats rnorm
@@ -21,7 +24,16 @@
 #' @export
 
 
-equilibrium_init_create <- function(agec, death, nn_links, amplitudes_phases, model_parameter_list){
+equilibrium_init_create <- function(agec,
+                                    death,
+                                    nn_links,
+                                    amplitudes_phases,
+                                    vaccine_age = NULL,
+                                    model_parameter_list){
+
+  ## Check parameters
+  if(!is.null(vaccine_age) | length(vaccine_age) != na)
+    stop("length of age groups to vaccinate is different from number of age groups")
 
   mpl <- model_parameter_list
   nn <- nn_links
@@ -168,6 +180,16 @@ equilibrium_init_create <- function(agec, death, nn_links, amplitudes_phases, mo
 
   pTG_bigpatch <- pTG / 10
 
+  if(!is.null(vaccine_age)) {
+
+    vaccine_age_2 <- vaccine_age
+
+  } else {
+
+    vaccine_age_2 <- rep(0, na)
+
+  }
+
   res <- list(nn = nn,
               amplitudes_phases = amplitudes_phases,
               na = na,
@@ -191,6 +213,7 @@ equilibrium_init_create <- function(agec, death, nn_links, amplitudes_phases, mo
               init_I1 = init_I1,
               init_R1 = init_R1,
               pTG_bigpatch = pTG_bigpatch,
+              vaccine_age = vaccine_age_2,
               pi = pi)
 
   append(res, mpl)
