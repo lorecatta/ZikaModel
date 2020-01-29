@@ -41,7 +41,6 @@
 #' @param Wb_introlevel Ratio of Wolbachia-infected to wild type mosquitoes at introduction.
 #'   (Not the proportion of Wolbachia AFTER introduction). Default = 0.
 #' @param Wb_introduration Duration of Wolbachia release (days). Default = 60.
-#' @param vacc_child_age Numeric vector of the age groups at which vaccination occurs. Default = c(0,0,3,4,5,6,0,0,0,0,0).
 #' @param vacc_child_coverage Proportion of children vaccinated. Default = 0.
 #' @param vacc_child_starttime Time when vaccination starts. Default = 30.
 #' @param vacc_child_stoptime Time when vaccination stops. Default = 30.
@@ -101,7 +100,6 @@ model_param_list_create <- function(
   Wb_introlevel = 0,
   Wb_introduration = 60,
 
-  vacc_child_age = c(0,0,3,4,5,6,0,0,0,0,0),
   vacc_child_coverage = 0,
   vacc_child_starttime = 30,
   vacc_child_stoptime = 30,
@@ -180,7 +178,6 @@ model_param_list_create <- function(
   mp_list$Wb_starttime <- Wb_starttime
   mp_list$Wb_introlevel <- Wb_introlevel
   mp_list$Wb_introduration <- Wb_introduration
-  mp_list$vacc_child_age <- vacc_child_age
   mp_list$vacc_child_coverage <- vacc_child_coverage
   mp_list$vacc_child_starttime <- vacc_child_starttime
   mp_list$vacc_child_stoptime <- vacc_child_stoptime
