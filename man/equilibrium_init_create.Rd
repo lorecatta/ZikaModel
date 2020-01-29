@@ -5,7 +5,7 @@
 \title{Generate equilibrium state}
 \usage{
 equilibrium_init_create(agec, death, nn_links, amplitudes_phases,
-  model_parameter_list)
+  vaccine_age = NULL, model_parameter_list)
 }
 \arguments{
 \item{agec}{Vector of age group widths.}
@@ -15,6 +15,9 @@ equilibrium_init_create(agec, death, nn_links, amplitudes_phases,
 \item{nn_links}{8 nearest-neigbors to each patch.}
 
 \item{amplitudes_phases}{Amplitude and phase of seasonal forcing for each patch.}
+
+\item{vaccine_age}{Vector of binary indicators for age groups vaccination.
+1 = vaccinate, 0 = do not vaccinate. Same length as \code{agec}. Default = NULL.}
 
 \item{model_parameter_list}{List of user-defined model parameters.}
 }
