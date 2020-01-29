@@ -34,7 +34,7 @@ equilibrium_init_create <- function(agec,
   na <- as.integer(length(agec))  # number of age groups
 
   ## Check parameters
-  if(!is.null(vaccine_age) | length(vaccine_age) != na)
+  if(!is.null(vaccine_age) & length(vaccine_age) != na)
     stop("length of age groups to vaccinate is different from number of age groups")
 
   mpl <- model_parameter_list
