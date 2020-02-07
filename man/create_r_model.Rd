@@ -5,7 +5,7 @@
 \title{Create an odin generator function}
 \usage{
 create_r_model(odin_model_path, agec, death, nn_links, amplitudes_phases,
-  vaccine_age = NULL, ...)
+  vaccine_age = NULL, params = NULL)
 }
 \arguments{
 \item{odin_model_path}{Character path to odin model.}
@@ -21,7 +21,8 @@ create_r_model(odin_model_path, agec, death, nn_links, amplitudes_phases,
 \item{vaccine_age}{Vector of binary indicators for age groups vaccination.
 1 = vaccinate, 0 = do not vaccinate. Same length as \code{agec}. Default = NULL.}
 
-\item{...}{Additional arguments passed on to \code{model_param_list_create()}}
+\item{params}{List of user-defined parameters.
+Use same names as in \code{model_param_list_create()}. Default = NULL.}
 }
 \value{
 list of generator function, initial state, model parameters and generator

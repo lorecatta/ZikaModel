@@ -8,8 +8,6 @@ post_processing(dat, DT)
 }
 \arguments{
 \item{dat}{list of model outputs from the model run.}
-
-\item{DT}{Time step size. Default = 1.}
 }
 \description{
 The function processes model outputs to calculate metrics of interest.

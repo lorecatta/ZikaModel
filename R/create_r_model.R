@@ -13,7 +13,8 @@
 #'
 #' @param odin_model_path Character path to odin model.
 #'
-#' @param ... Additional arguments passed on to \code{model_param_list_create()}
+#' @param params List of user-defined parameters.
+#'   Use same names as in \code{model_param_list_create()}. Default = NULL.
 #'
 #' @return list of generator function, initial state, model parameters and generator
 #'
@@ -26,10 +27,18 @@ create_r_model <- function(odin_model_path,
                            nn_links,
                            amplitudes_phases,
                            vaccine_age = NULL,
-                           ...){
+                           params = NULL) {
 
-  ## create model param list using necessary variables
-  mpl <- model_param_list_create(...)
+
+  # create model param list with default values
+  mpl <- create_model_param_list()
+
+  # replace default parameters with user-defined ones
+  if(!is.null(params)) {
+
+    mpl[names(params)] <- params
+
+  }
 
   # generate initial state variables from equilibrium solution
   state_init <- equilibrium_init_create(agec = agec,
