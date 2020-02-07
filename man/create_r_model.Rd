@@ -22,7 +22,7 @@ create_r_model(odin_model_path, agec, death, nn_links, amplitudes_phases,
 1 = vaccinate, 0 = do not vaccinate. Same length as \code{agec}. Default = NULL.}
 
 \item{params}{List of user-defined parameters.
-Use same names as in \code{model_param_list_create()}. Default = NULL.}
+Use same names as in \code{create_model_param_list()}. Default = NULL.}
 }
 \value{
 list of generator function, initial state, model parameters and generator

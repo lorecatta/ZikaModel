@@ -8,7 +8,7 @@
 #'
 #' @inheritParams equilibrium_init_create
 #'
-#' @inheritParams model_param_list_create
+#' @inheritParams create_model_param_list
 #'
 #' @param time time in days.
 #'

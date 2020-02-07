@@ -7,7 +7,7 @@
 #'
 #' @param dat list of model outputs from the model run.
 #'
-#' @inheritParams model_param_list_create
+#' @inheritParams create_model_param_list
 #'
 #' @importFrom stats setNames
 #'

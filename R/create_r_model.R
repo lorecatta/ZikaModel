@@ -9,12 +9,12 @@
 #'
 #' @inheritParams equilibrium_init_create
 #'
-#' @inheritParams model_param_list_create
+#' @inheritParams create_model_param_list
 #'
 #' @param odin_model_path Character path to odin model.
 #'
 #' @param params List of user-defined parameters.
-#'   Use same names as in \code{model_param_list_create()}. Default = NULL.
+#'   Use same names as in \code{create_model_param_list()}. Default = NULL.
 #'
 #' @return list of generator function, initial state, model parameters and generator
 #'

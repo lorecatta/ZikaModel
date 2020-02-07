@@ -16,6 +16,8 @@ run_model(agec, death, nn_links, amplitudes_phases, time, season = FALSE)
 \item{amplitudes_phases}{Amplitude and phase of seasonal forcing for each patch.}
 
 \item{time}{time in days.}
+
+\item{season}{Logical for controlling the effect of seasonality.}
 }
 \value{
 list of model outputs
