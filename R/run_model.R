@@ -8,6 +8,8 @@
 #'
 #' @inheritParams equilibrium_init_create
 #'
+#' @inheritParams create_model_param_list
+#'
 #' @param time time in days.
 #'
 #' @importFrom reshape2 melt
@@ -23,9 +25,10 @@ run_model <- function(agec,
                       death,
                       nn_links,
                       amplitudes_phases,
-                      time) {
+                      time,
+                      season = FALSE) {
 
-  mpl <- create_model_param_list()
+  mpl <- create_model_param_list(season = season)
 
   # generate initial state variables from equilibrium solution
   state_init <- equilibrium_init_create(agec = agec,
