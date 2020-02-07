@@ -25,7 +25,7 @@ run_model <- function(agec,
                       amplitudes_phases,
                       time) {
 
-  mpl <- create_model_param_list(season = season)
+  mpl <- create_model_param_list()
 
   # generate initial state variables from equilibrium solution
   state_init <- equilibrium_init_create(agec = agec,
