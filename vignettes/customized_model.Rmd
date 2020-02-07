@@ -57,6 +57,10 @@ propMwtControl <- 0.2
 Running a customized model requires to use a the `create_r_model()` function. When called it returns a function that generates an instance of the model and we can use that instance to run the model with user-defined parameters. The function `create_r_model()` has an argument `...` which passes arguments to `model_param_list_create()` thus overriding the defaults values of the model parameters. To keep it simple we will assume no effect of seasonality across patches. This is analogous to run the model with only one patch.
 
 ```{r}
+params <- list(DT = my_dt,
+               season = FALSE,
+               propMwtControl = propMwtControl)
+
 odin_model_path <- system.file("extdata/odin_model_determ.R", package = "ZikaModel")
 
 create_generator <- create_r_model(odin_model_path = odin_model_path,
@@ -64,9 +68,7 @@ create_generator <- create_r_model(odin_model_path = odin_model_path,
                                    death = deathrt,
                                    nn_links = nn_links,
                                    amplitudes_phases = amplitudes_phases,
-                                   DT = my_dt,
-                                   season = FALSE,
-                                   propMwtControl = propMwtControl)
+                                   params = params)
 
 # this generates an instance of the model using an initial equilibrium initialisation state 
 gen <- create_generator$generator(user = create_generator$state)
