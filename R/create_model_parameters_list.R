@@ -84,7 +84,7 @@ create_model_param_list <- function(
   Kappa = 0.5,
   Beta_hm_1 = 0.7,
   Beta_mh_1 = 0.7,
-  season,
+  season = FALSE,
 
   propMwtControl = 0,
   TimeMwtControlOn = 1.5,
