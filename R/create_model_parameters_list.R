@@ -63,7 +63,7 @@
 #' @export
 
 
-model_param_list_create <- function(
+create_model_param_list <- function(
 
   YL = 364,
   DT = 1,
