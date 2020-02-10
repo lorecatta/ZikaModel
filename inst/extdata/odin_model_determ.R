@@ -666,4 +666,4 @@ dim(Mwt_propinf) <- NP
 dim(Mwb_propinf) <- NP
 dim(M_propinf) <- NP
 dim(vacc_noncov) <- c(vnc_row, 2)
-dim(vacc_child_age) <- na
+dim(vacc_child_age) <- vnc_row
