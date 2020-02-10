@@ -182,7 +182,7 @@ equilibrium_init_create <- function(agec,
 
   if(!is.null(vaccine_age)) {
 
-    vaccine_age_2 <- vaccine_age
+    vaccine_age_2 <- c(0, vaccine_age)
 
   } else {
 
