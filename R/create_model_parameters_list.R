@@ -46,12 +46,12 @@
 #' @param vacc_child_stoptime Time when vaccination stops. Default = 30.
 #' @param vacc_cu_minage Minimum age at which children who missed vaccination can catch up. Default = 2.
 #' @param vacc_cu_maxage Maximum age at which children who missed vaccination can catch up. Default = 15.
-#' @param vacc_cu_coverage Proportion of children who undergo catch up vaccination. Default = 0.7.
+#' @param vacc_cu_coverage Proportion of children who undergo catch up vaccination. Default = 0.
 #' @param vacc_cu_time Time when catch up vaccination occurs. Default = 30.
 #' @param dis_pri Proportion of infections which are symptomatic. Default = 0.2.
 #' @param rho_prim Default = 1.
 #' @param phi_prim Default = 1.
-#' @param vacceff_prim Efficacy of vaccination in reducing infection. Default = 0.3.
+#' @param vacceff_prim Efficacy of vaccination in reducing infection. Default = 0.75.
 #' @param other_foi Default = 0.025.
 #' @param other_prop_immune Default = 0.
 #' @param propTransGlobal Proportion of transmission between all patches. Default = 0.0005.
@@ -105,13 +105,13 @@ create_model_param_list <- function(
   vacc_child_stoptime = 30,
   vacc_cu_minage = 2,
   vacc_cu_maxage = 15,
-  vacc_cu_coverage = 0.7,
+  vacc_cu_coverage = 0,
   vacc_cu_time = 30,
 
   dis_pri = 0.2,
   rho_prim = 1,
   phi_prim = 1,
-  vacceff_prim = 1,
+  vacceff_prim = 0.75,
   other_foi = 0.025,
   other_prop_immune = 0,
   propTransGlobal = 0.0005,

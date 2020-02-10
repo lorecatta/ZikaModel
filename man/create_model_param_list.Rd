@@ -15,10 +15,11 @@ create_model_param_list(YL = 364, DT = 1, NP = 21, age_per = 1,
   Wb_starttime = 1, Wb_introlevel = 0, Wb_introduration = 60,
   vacc_child_coverage = 0, vacc_child_starttime = 30,
   vacc_child_stoptime = 30, vacc_cu_minage = 2, vacc_cu_maxage = 15,
-  vacc_cu_coverage = 0.7, vacc_cu_time = 30, dis_pri = 0.2,
-  rho_prim = 1, phi_prim = 1, vacceff_prim = 1, other_foi = 0.025,
-  other_prop_immune = 0, propTransGlobal = 5e-04, propTransNN = 0,
-  BG_FOI = 1e-08, AGE_REC = 2, PropDiseaseReported = 1)
+  vacc_cu_coverage = 0, vacc_cu_time = 30, dis_pri = 0.2,
+  rho_prim = 1, phi_prim = 1, vacceff_prim = 0.75,
+  other_foi = 0.025, other_prop_immune = 0, propTransGlobal = 5e-04,
+  propTransNN = 0, BG_FOI = 1e-08, AGE_REC = 2,
+  PropDiseaseReported = 1)
 }
 \arguments{
 \item{YL}{Duration of a calendar year. Default = 364.}
@@ -99,7 +100,7 @@ by a \emph{general} type of intervention. Default = 0.}
 
 \item{vacc_cu_maxage}{Maximum age at which children who missed vaccination can catch up. Default = 15.}
 
-\item{vacc_cu_coverage}{Proportion of children who undergo catch up vaccination. Default = 0.7.}
+\item{vacc_cu_coverage}{Proportion of children who undergo catch up vaccination. Default = 0.}
 
 \item{vacc_cu_time}{Time when catch up vaccination occurs. Default = 30.}
 
@@ -109,7 +110,7 @@ by a \emph{general} type of intervention. Default = 0.}
 
 \item{phi_prim}{Default = 1.}
 
-\item{vacceff_prim}{Efficacy of vaccination in reducing infection. Default = 0.3.}
+\item{vacceff_prim}{Efficacy of vaccination in reducing infection. Default = 0.75.}
 
 \item{other_foi}{Default = 0.025.}
 
