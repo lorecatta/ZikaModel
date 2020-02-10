@@ -186,7 +186,7 @@ equilibrium_init_create <- function(agec,
 
   } else {
 
-    vaccine_age_2 <- rep(0, na)
+    vaccine_age_2 <- rep(0, na + 1)
 
   }
 
