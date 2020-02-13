@@ -28,7 +28,7 @@ lag_diff <- function(x, lag) {
 
     }
 
-    if(is.vectro(x)) {
+    if(is.vector(x)) {
 
       pad <- rep(0, lag)
 
