@@ -4,7 +4,7 @@
 \alias{run_model}
 \title{Runs and odin model}
 \usage{
-run_model(agec, death, nn_links, amplitudes_phases, time, season = FALSE)
+run_model(agec, death, nn_links, amplitudes_phases, time)
 }
 \arguments{
 \item{agec}{Vector of age group widths.}
@@ -16,8 +16,6 @@ run_model(agec, death, nn_links, amplitudes_phases, time, season = FALSE)
 \item{amplitudes_phases}{Amplitude and phase of seasonal forcing for each patch.}
 
 \item{time}{time in days.}
-
-\item{season}{Logical for controlling the effect of seasonality.}
 }
 \value{
 list of model outputs
