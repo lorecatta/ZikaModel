@@ -7,6 +7,9 @@
     <loc>https://mrc-ide.github.io/ZikaModel//reference/amplitudes_phases.html</loc>
   </url>
   <url>
+    <loc>https://mrc-ide.github.io/ZikaModel//reference/create_model_param_list.html</loc>
+  </url>
+  <url>
     <loc>https://mrc-ide.github.io/ZikaModel//reference/create_r_model.html</loc>
   </url>
   <url>
@@ -14,9 +17,6 @@
   </url>
   <url>
     <loc>https://mrc-ide.github.io/ZikaModel//reference/lag_diff.html</loc>
-  </url>
-  <url>
-    <loc>https://mrc-ide.github.io/ZikaModel//reference/model_param_list_create.html</loc>
   </url>
   <url>
     <loc>https://mrc-ide.github.io/ZikaModel//reference/nn_links.html</loc>

@@ -89,7 +89,7 @@
       <h1>Run a seasonal model</h1>
                         <h4 class="author">Lorenzo Cattarino</h4>
             
-            <h4 class="date">2020-01-24</h4>
+            <h4 class="date">2020-03-03</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/mrc-ide/ZikaModel/blob/master/vignettes/deterministic_seasonal_model.Rmd"><code>vignettes/deterministic_seasonal_model.Rmd</code></a></small>
       <div class="hidden name"><code>deterministic_seasonal_model.Rmd</code></div>
@@ -149,7 +149,7 @@ time_frame &lt;-<span class="st"> </span>(<span class="dv">364</span> <span clas
 <span class="co">#&gt; This note will disappear in a version after odin 1.0.0</span>
 <span class="co">#&gt;  vacc_noncov[, 1] &lt;- (if ((TIME &gt;= YL * vacc_child_starttime) &amp;&amp; # (line 125)</span>
 <span class="co">#&gt;                               (TIME &lt; YL * vacc_child_stoptime) &amp;&amp; # (line 126)</span>
-<span class="co">#&gt;                               (i == vacc_child_age)) (1 - vacc_child_coverage) else 1) * # (line 127)</span>
+<span class="co">#&gt;                               (vacc_child_age[i] == 1)) (1 - vacc_child_coverage) else 1) * # (line 127)</span>
 <span class="co">#&gt;    (if ((TIME == vacc_cu_rndtime) &amp;&amp; # (line 128)</span>
 <span class="co">#&gt;         (i &gt;= vacc_cu_minage) &amp;&amp; # (line 129)</span>
 <span class="co">#&gt;         (i &lt;= vacc_cu_maxage)) (1 - vacc_cu_coverage) else 1) # (line 130)</span>
@@ -184,8 +184,15 @@ mosquito_diagnostics &lt;-<span class="st"> </span><span class="kw"><a href="../
 <pre><code>#&gt; 
 #&gt; [[5]]</code></pre>
 <p><img src="deterministic_seasonal_model_files/figure-html/unnamed-chunk-5-7.png" width="768"></p>
-<p>Finally, we also plot the variables directly modified by seasonality, namely mosquito larve carrying capacity (Kc), extrinsic incubation period (eip) and adult mosquito mortality rate (delta). To simplify, we plot the average of each variable across all patches.</p>
+<p>Finally, we also plot the variables directly modified by seasonality (average across patches).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">season_vars &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plot_Kc_eip_delta.html">plot_Kc_eip_delta</a></span>(model_outputs)
+<span class="co">#&gt; Called from: plot_Kc_eip_delta(model_outputs)</span>
+<span class="co">#&gt; debug: R0_p &lt;- ggplot(data = R0_r, aes(x = R0_r$x, y = R0_r$y)) + geom_line(color = "royalblue", </span>
+<span class="co">#&gt;     size = 0.5) + scale_x_continuous("Years", breaks = my_breaks, </span>
+<span class="co">#&gt;     labels = my_breaks/364) + scale_y_continuous(expression("Mean patch R"["0"] * </span>
+<span class="co">#&gt;     "")) + ggtitle(expression("Reproduction number, R"["0"] * </span>
+<span class="co">#&gt;     "")) + theme_bw()</span>
+<span class="co">#&gt; debug: arrangeGrob(Kc_p, eip_p, delta_p, R0_p, ncol = 2)</span>
 grid<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/grid/topics/grid.draw">grid.draw</a></span>(season_vars)</code></pre></div>
 <p><img src="deterministic_seasonal_model_files/figure-html/unnamed-chunk-6-1.png" width="768"></p>
 </div>

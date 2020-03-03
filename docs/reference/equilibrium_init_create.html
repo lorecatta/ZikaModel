@@ -134,7 +134,7 @@ later model runs.</p>
     </div>
 
     <pre class="usage"><span class='fu'>equilibrium_init_create</span>(<span class='no'>agec</span>, <span class='no'>death</span>, <span class='no'>nn_links</span>, <span class='no'>amplitudes_phases</span>,
-  <span class='no'>model_parameter_list</span>)</pre>
+  <span class='kw'>vaccine_age</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>model_parameter_list</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -154,6 +154,11 @@ later model runs.</p>
     <tr>
       <th>amplitudes_phases</th>
       <td><p>Amplitude and phase of seasonal forcing for each patch.</p></td>
+    </tr>
+    <tr>
+      <th>vaccine_age</th>
+      <td><p>Vector of binary indicators for age groups vaccination.
+1 = vaccinate, 0 = do not vaccinate. Same length as <code>agec</code>. Default = NULL.</p></td>
     </tr>
     <tr>
       <th>model_parameter_list</th>
