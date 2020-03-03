@@ -231,6 +231,8 @@ prop_wb[] <- Mwb_tot[i] / (M_tot[i] + 1e-10)
 R0t_1[] <- Kappa * Kappa * (Mwt_tot[i] + Wb_relsusc1 * Wb_relinf1 * Mwb_tot[i]) *
   Beta_hm_1 * inf_per * Beta_mh_1 / (1 + Delta[i] * eip[i]) / Delta[i] / NTp[i]
 
+R0t_1av <- (sum(R0t_1[]) - R0t_1[NP]) / (NP - 1)
+
 Lwb_birth_lambda[] <- DT *(Gamma * Wb_fF * Wb_mat * Mwb_tot[i])
 Lwb_birth[] <- Lwb_birth_lambda[i]
 
@@ -487,6 +489,7 @@ output(Y1T[]) <- TRUE
 output(Deltaav) <- TRUE
 output(Kcav) <- TRUE
 output(eipav) <- TRUE
+output(R0t_1av) <- TRUE
 output(FOI1[]) <- TRUE
 output(FOI1p[]) <- TRUE
 output(FOI1nn[]) <- TRUE
