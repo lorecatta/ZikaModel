@@ -118,8 +118,8 @@ plot_Kc_eip_delta <- function(out) {
   R0_p <- ggplot(data = R0_r, aes(x = R0_r$x, y = R0_r$y)) +
     geom_line(color = 'royalblue', size = 0.5) +
     scale_x_continuous("Years", breaks = my_breaks, labels = my_breaks/364) +
-    scale_y_continuous("Mean patch Delta") +
-    ggtitle("Adult mosquito daily mortality rate") +
+    scale_y_continuous(expression('Mean patch R'['0']*''))
+    ggtitle(expression('Reproduction number, R'['0']*''))
     theme_bw()
 
   arrangeGrob(Kc_p, eip_p, delta_p, R0_p, ncol = 2)
