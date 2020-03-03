@@ -190,6 +190,26 @@ equilibrium_init_create <- function(agec,
 
   }
 
+  # Scaling factors (between 0 and 1) for effect of seasonality.
+  # 1 = maximum effect of seasonality.
+  # 0 = no effect of seasonality.
+
+  season <- mpl$season
+
+  if(season) {
+
+    Kc_season <- 1
+    eip_season <- 1
+    Delta_season <- 1
+
+  } else {
+
+    Kc_season <- 0
+    eip_season <- 0
+    Delta_season <- 0
+
+  }
+
   res <- list(nn = nn,
               amplitudes_phases = amplitudes_phases,
               na = na,
@@ -214,6 +234,9 @@ equilibrium_init_create <- function(agec,
               init_R1 = init_R1,
               pTG_bigpatch = pTG_bigpatch,
               vacc_child_age = vaccine_age_2,
+              Kc_season = Kc_season,
+              eip_season = eip_season,
+              Delta_season = Delta_season,
               pi = pi)
 
   append(res, mpl)

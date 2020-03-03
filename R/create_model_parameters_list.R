@@ -120,23 +120,6 @@ create_model_param_list <- function(
   AGE_REC = 2,
   PropDiseaseReported = 1){
 
-  # Scaling factors (between 0 and 1) for effect of seasonality.
-  # 1 = maximum effect of seasonality.
-  # 0 = no effect of seasonality.
-
-  if(season) {
-
-    Kc_season <- 1
-    eip_season <- 1
-    Delta_season <- 1
-
-  } else {
-
-    Kc_season <- 0
-    eip_season <- 0
-    Delta_season <- 0
-
-  }
 
   # set up model param list
   mp_list <- list()
@@ -163,9 +146,6 @@ create_model_param_list <- function(
   mp_list$Kappa <- Kappa
   mp_list$Beta_hm_1 <- Beta_hm_1
   mp_list$Beta_mh_1 <- Beta_mh_1
-  mp_list$Delta_season <- Delta_season
-  mp_list$Kc_season <- Kc_season
-  mp_list$eip_season <- eip_season
   mp_list$propMwtControl <- propMwtControl
   mp_list$TimeMwtControlOn <- TimeMwtControlOn
   mp_list$TimeMwtControlOff <- TimeMwtControlOff
