@@ -65,8 +65,8 @@ plot_demographics <- function(df){
 # -----------------------------------------------------------------------------
 
 #' The function makes plots of the mosquito larvae carrying capacity, virus extrinsic
-#'  incubation period and adult mosquito mortality rate, and arrange them in a grid.
-#'  These variables are those directly affected by seasonality in the model.
+#'  incubation period, adult mosquito mortality rate and reproduction number,
+#'  averaged across patches, and arrange them in a grid.
 #'
 #' @title Plot seasonally-varying variables
 #'
@@ -113,6 +113,15 @@ plot_Kc_eip_delta <- function(out) {
     ggtitle("Adult mosquito daily mortality rate") +
     theme_bw()
 
-  arrangeGrob(Kc_p, eip_p, delta_p, ncol = 2)
+  R0_r <- data.frame(x = out$TIME, y = out$R0t_1av)
+
+  R0_p <- ggplot(data = R0_r, aes(x = R0_r$x, y = R0_r$y)) +
+    geom_line(color = 'royalblue', size = 0.5) +
+    scale_x_continuous("Years", breaks = my_breaks, labels = my_breaks/364) +
+    scale_y_continuous("Mean patch Delta") +
+    ggtitle("Adult mosquito daily mortality rate") +
+    theme_bw()
+
+  arrangeGrob(Kc_p, eip_p, delta_p, R0_p, ncol = 2)
 
 }

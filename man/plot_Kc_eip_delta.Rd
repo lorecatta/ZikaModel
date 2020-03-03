@@ -11,6 +11,6 @@ plot_Kc_eip_delta(out)
 }
 \description{
 The function makes plots of the mosquito larvae carrying capacity, virus extrinsic
- incubation period and adult mosquito mortality rate, and arrange them in a grid.
- These variables are those directly affected by seasonality in the model.
+ incubation period, adult mosquito mortality rate and reproduction number,
+ averaged across patches, and arrange them in a grid.
 }
