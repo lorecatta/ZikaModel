@@ -87,7 +87,7 @@ mosquito_diagnostics <- post_processing_mos(model_outputs)
 plot_demographics(mosquito_diagnostics)
 ```
 
-Finally, we also plot the variables directly modified by seasonality, namely mosquito larve carrying capacity (Kc), extrinsic incubation period (eip) and adult mosquito mortality rate (delta). To simplify, we plot the average of each variable across all patches.
+Finally, we also plot the variables directly modified by seasonality (average across patches).
 
 ```{r, fig.height = 6, fig.width = 8}
 season_vars <- plot_Kc_eip_delta(model_outputs)
