@@ -64,11 +64,15 @@ Virus generation time = serial interval. Default = 1 / 21.}
 
 \item{Kappa}{Mosquito biting rate. Default = 0.5.}
 
-\item{Beta_hm_1}{Per bite transmission probability from humans to mosquitoes. Default = 0.7.}
+\item{Beta_hm_1}{Per bite transmission probability from humans to mosquitoes.
+Default = 0.7. This value is assigned to give a mean reproduction number, R0,
+across patches of 2.3 (with seasonal forcing).}
 
-\item{Beta_mh_1}{Per bite transmission probability from mosquitoes to humans. Default = 0.7.}
+\item{Beta_mh_1}{Per bite transmission probability from mosquitoes to humans.
+Arbitrarily assigned. Default = 0.7.}
 
-\item{season}{Logical for controlling the effect of seasonality. TRUE = maximum effect of seasonality.
+\item{season}{Logical for controlling the effect of seasonality.
+TRUE = maximum effect of seasonality.
 FALSE = no effect of seasonality. Default = FALSE}
 
 \item{propMwtControl}{Increase in mortality of adult wild type mosquitoes induced
@@ -122,13 +126,14 @@ by a \emph{general} type of intervention. Default = 0.}
 
 \item{other_foi}{Default = 0.025.}
 
-\item{other_prop_immune}{Default = 0.}
+\item{other_prop_immune}{Propotion of population with pre-existing immunity. Default = 0.}
 
 \item{propTransGlobal}{Proportion of transmission between all patches. Default = 0.0005.}
 
 \item{propTransNN}{Proportion of transmssion with nearest-neighbor patches. Default = 0.}
 
-\item{BG_FOI}{Seeding FOI. Default = 1e-8.}
+\item{BG_FOI}{Force of infection on humans resulting from imported cases in
+travelers visiting from elsewhere. Default = 1e-8.}
 
 \item{AGE_REC}{Default = 2.}
 
