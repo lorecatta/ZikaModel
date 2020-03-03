@@ -86,3 +86,12 @@ plot_demographics(diagnostics$demographics)
 ```{r, fig.height = 6, fig.width = 8}
 plot_demographics(mosquito_diagnostics)
 ```
+
+As a sanity check, we also plot the variables which are directly modified by seasonal forcing, namely mosquito larve carrying capacity (Kc), extrinsic incubation period (eip) and adult mosquito mortality rate (delta), and the reproduction number ($R_0$). The mean value across patches of these variables should not change throughout the simulation when seasonality is turned off.
+
+```{r, fig.height = 6, fig.width = 8}
+season_vars <- plot_Kc_eip_delta(model_outputs)
+grid::grid.draw(season_vars)
+```
+
+Good.
