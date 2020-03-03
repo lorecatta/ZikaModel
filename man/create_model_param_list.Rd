@@ -39,13 +39,19 @@ create_model_param_list(YL = 364, DT = 1, NP = 21, age_per = 1,
 
 \item{Sigma}{Larval mosquito mortality rate. Default = 0.025}
 
-\item{Epsilon}{Larval mean development rate (1 / larvae mean development time in days). Default = 1/19.}
+\item{Epsilon}{Larval mean development rate (1 / larvae mean development time in days).
+Default = 1/19.}
 
-\item{Rm}{Mosquito reproduction number (based on adult female fecundity and mortality rates). Default = 2.69.}
+\item{Rm}{Mosquito reproduction number (based on adult female fecundity and mortality rates).
+Default = 2.69.}
 
-\item{Mwt_mean}{Mean of the lognorm distribution of the at-equilibrium number of adult female mosquitos per person, per patch, without seasonality. Default = 1.5.}
+\item{Mwt_mean}{Mean of the lognorm distribution of the at-equilibrium number
+of adult female mosquitos per person, per patch, without seasonality.
+Default = 1.5.}
 
-\item{Mwt_cv}{Standard deviation of the lognorm distribution of the at-equilibrium number of adult female mosquitos per person, per patch, without seasonality. Default = 0.15}
+\item{Mwt_cv}{Standard deviation of the lognorm distribution of the
+at-equilibrium number of adult female mosquitos per person, per patch,
+without seasonality. Default = 0.15}
 
 \item{eip_mean}{Mean Extrinsic Incubation Period (days). Default = 8.4.}
 
@@ -53,7 +59,8 @@ create_model_param_list(YL = 364, DT = 1, NP = 21, age_per = 1,
 
 \item{inf_per}{Total duration of human infectiousness (days). Default = 6.}
 
-\item{nu}{Inverse of virus generation time (1 / days). Virus generation time = serial interval. Default = 1 / 21.}
+\item{nu}{Inverse of virus generation time (1 / days).
+Virus generation time = serial interval. Default = 1 / 21.}
 
 \item{Kappa}{Mosquito biting rate. Default = 0.5.}
 
@@ -61,7 +68,8 @@ create_model_param_list(YL = 364, DT = 1, NP = 21, age_per = 1,
 
 \item{Beta_mh_1}{Per bite transmission probability from mosquitoes to humans. Default = 0.7.}
 
-\item{season}{Logical for controlling the effect of seasonality.}
+\item{season}{Logical for controlling the effect of seasonality. TRUE = maximum effect of seasonality.
+FALSE = no effect of seasonality. Default = FALSE}
 
 \item{propMwtControl}{Increase in mortality of adult wild type mosquitoes induced
 by a \emph{general} type of intervention. Default = 0.}

@@ -14,18 +14,30 @@
 #'   0 = no density dependence. Default = 1.
 #' @param DeltaBase Adult mosquito mortality rate. Default = 0.2.
 #' @param Sigma Larval mosquito mortality rate. Default = 0.025
-#' @param Epsilon Larval mean development rate (1 / larvae mean development time in days). Default = 1/19.
-#' @param Rm Mosquito reproduction number (based on adult female fecundity and mortality rates). Default = 2.69.
-#' @param Mwt_mean Mean of the lognorm distribution of the at-equilibrium number of adult female mosquitos per person, per patch, without seasonality. Default = 1.5.
-#' @param Mwt_cv Standard deviation of the lognorm distribution of the at-equilibrium number of adult female mosquitos per person, per patch, without seasonality. Default = 0.15
+#' @param Epsilon Larval mean development rate (1 / larvae mean development time in days).
+#'   Default = 1/19.
+#' @param Rm Mosquito reproduction number (based on adult female fecundity and mortality rates).
+#'   Default = 2.69.
+#' @param Mwt_mean Mean of the lognorm distribution of the at-equilibrium number
+#'   of adult female mosquitos per person, per patch, without seasonality.
+#'   Default = 1.5.
+#' @param Mwt_cv Standard deviation of the lognorm distribution of the
+#'   at-equilibrium number of adult female mosquitos per person, per patch,
+#'   without seasonality. Default = 0.15
 #' @param eip_mean Mean Extrinsic Incubation Period (days). Default = 8.4.
 #' @param incub Intrinsic Incubation Period (days). Default = 5.5.
 #' @param inf_per Total duration of human infectiousness (days). Default = 6.
-#' @param nu Inverse of virus generation time (1 / days). Virus generation time = serial interval. Default = 1 / 21.
+#' @param nu Inverse of virus generation time (1 / days).
+#'   Virus generation time = serial interval. Default = 1 / 21.
 #' @param Kappa Mosquito biting rate. Default = 0.5.
-#' @param Beta_hm_1 Per bite transmission probability from humans to mosquitoes. Default = 0.7.
-#' @param Beta_mh_1 Per bite transmission probability from mosquitoes to humans. Default = 0.7.
+#' @param Beta_hm_1 Per bite transmission probability from humans to mosquitoes.
+#'   Default = 0.7. This value is assigned to give a mean reproduction number, R0,
+#'   across patches of 2.3 (with seasonal forcing).
+#' @param Beta_mh_1 Per bite transmission probability from mosquitoes to humans.
+#'   Arbitrarily assigned. Default = 0.7.
 #' @param season Logical for controlling the effect of seasonality.
+#'   TRUE = maximum effect of seasonality.
+#'   FALSE = no effect of seasonality. Default = FALSE
 #' @param propMwtControl Increase in mortality of adult wild type mosquitoes induced
 #'   by a \emph{general} type of intervention. Default = 0.
 #' @param TimeMwtControlOn Year of start of control of adult wild type mosquitoes. Default = 2.
@@ -53,10 +65,11 @@
 #' @param phi_prim Default = 1.
 #' @param vacceff_prim Efficacy of vaccination in reducing infection. Default = 0.75.
 #' @param other_foi Default = 0.025.
-#' @param other_prop_immune Default = 0.
+#' @param other_prop_immune Propotion of population with pre-existing immunity. Default = 0.
 #' @param propTransGlobal Proportion of transmission between all patches. Default = 0.0005.
 #' @param propTransNN Proportion of transmssion with nearest-neighbor patches. Default = 0.
-#' @param BG_FOI Seeding FOI. Default = 1e-8.
+#' @param BG_FOI Force of infection on humans resulting from imported cases in
+#'   travelers visiting from elsewhere. Default = 1e-8.
 #' @param AGE_REC Default = 2.
 #' @param PropDiseaseReported Reporting rate of symptomatic cases. Default = 0.1.
 
@@ -146,6 +159,7 @@ create_model_param_list <- function(
   mp_list$Kappa <- Kappa
   mp_list$Beta_hm_1 <- Beta_hm_1
   mp_list$Beta_mh_1 <- Beta_mh_1
+  mp_list$season <- season
   mp_list$propMwtControl <- propMwtControl
   mp_list$TimeMwtControlOn <- TimeMwtControlOn
   mp_list$TimeMwtControlOff <- TimeMwtControlOff
