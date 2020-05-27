@@ -118,18 +118,13 @@ vacc_child_age[] <- user()
 vacc_child_coverage <- user()
 
 vacc_cu_rndtime <- user()
-vacc_cu_minage <- user()
-vacc_cu_maxage <- user()
+vacc_cu_age[] <- user()
 vacc_cu_coverage <- user()
 
-vacc_noncov[, 1] <- (if ((TIME >= YL * vacc_child_starttime) &&
-                             (TIME < YL * vacc_child_stoptime) &&
-                             (vacc_child_age[i] == 1)) (1 - vacc_child_coverage) else 1)
+vacc_noncov[, 1] <- (if ((TIME >= YL * vacc_child_starttime) && (TIME < YL * vacc_child_stoptime) && (vacc_child_age[i] == 1)) (1 - vacc_child_coverage) else 1)
 vacc_noncov[, 2] <- 1
 
-vcu_noncov[, 1] <- (if ((TIME == vacc_cu_rndtime) &&
-                            (i >= vacc_cu_minage) &&
-                            (i <= vacc_cu_maxage)) (1 - vacc_cu_coverage) else 1)
+vcu_noncov[, 1] <- (if ((TIME == vacc_cu_rndtime) && (vacc_cu_age[i] == 1)) (1 - vacc_cu_coverage) else 1)
 vcu_noncov[, 2] <- 1
 
 
@@ -675,3 +670,4 @@ dim(M_propinf) <- NP
 dim(vacc_noncov) <- c(vnc_row, 2)
 dim(vacc_child_age) <- vnc_row
 dim(vcu_noncov) <- c(vnc_row, 2)
+dim(vacc_cu_age) <- vnc_row
