@@ -9,11 +9,7 @@
 #'
 #' @inheritParams parameters_deterministic_model
 #'
-#' @importFrom stats setNames
-#'
 #' @export
-
-
 post_processing <- function(dat, DT) {
 
   weekly_lag_time <- 7 / DT
@@ -84,11 +80,7 @@ post_processing <- function(dat, DT) {
 #'
 #' @param dat list of model outputs from the model run.
 #'
-#' @importFrom stats setNames
-#'
 #' @export
-
-
 post_processing_mos <- function(dat) {
 
   diagno_mos_wt <- c("Lwt", "Mwt_S", "Mwt_E1", "Mwt_E2", "Mwt_I1", "Mwt_tot", "Lwt_birth",

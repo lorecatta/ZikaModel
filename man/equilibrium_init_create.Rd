@@ -16,6 +16,9 @@ equilibrium_init_create(agec, death, vaccine_age = NULL, model_parameter_list)
 
 \item{model_parameter_list}{List of user-defined model parameters.}
 }
+\value{
+Initial states of the model
+}
 \description{
 The function creates an equilibrium initialisation state to be used within
 later model runs.

@@ -12,8 +12,6 @@
 #' @param lag the lag value (numeric)
 #'
 #' @export
-
-
 lag_diff <- function(x, lag) {
 
   ret1 <- diff(x, lag = lag, differences = 1)

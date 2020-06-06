@@ -15,11 +15,9 @@
 #'
 #' @param model_parameter_list List of user-defined model parameters.
 #'
-#' @importFrom stats rnorm
+#' @return Initial states of the model
 #'
 #' @export
-
-
 equilibrium_init_create <- function(agec,
                                     death,
                                     vaccine_age = NULL,

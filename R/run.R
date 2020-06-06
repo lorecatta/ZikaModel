@@ -228,6 +228,8 @@ run_deterministic_model <- function(
 
   out <- list(output = results, parameters = pars, model = mod)
 
+  class(out) <- c("Zika_model_simulation")
+
   # shape output
   # mod$transform_variables(mod_run)
 
