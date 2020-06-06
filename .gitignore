@@ -4,3 +4,5 @@
 .Ruserdata
 *.rds
 inst/doc
+*.dll
+*.o
