@@ -10,8 +10,12 @@
 #' @param DT Time step size. Default = 1.
 #' @param time Length of simulation. Default = ?.
 #' @param NP Number of patches. Default = 21.
-#' @param agec Vector of age group widths.
-#' @param death Numeric of mortality rates.
+#' @param agec NUmeric vector of age group widths.
+#'   Default = c(1, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10)
+#' @param death Numeric vector of mortality rates.
+#'   Default = deathrt <- c(1e-10, 1e-10, 1e-10,
+#'   0.00277068683332695, 0.0210680857689784, 0.026724997685722, 0.0525354529367476,
+#'   0.0668013582441452, 0.119271483740379, 0.279105747097929, 0.390197266957464)
 #' @param season Logical for controlling the effect of seasonality.
 #'   TRUE = maximum effect of seasonality.
 #'   FALSE = no effect of seasonality. Default = FALSE

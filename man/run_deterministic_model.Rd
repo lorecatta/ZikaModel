@@ -69,9 +69,13 @@ run_deterministic_model(
 
 \item{NP}{Number of patches. Default = 21.}
 
-\item{agec}{Vector of age group widths.}
+\item{agec}{NUmeric vector of age group widths.
+Default = c(1, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10)}
 
-\item{death}{Numeric of mortality rates.}
+\item{death}{Numeric vector of mortality rates.
+Default = deathrt <- c(1e-10, 1e-10, 1e-10,
+0.00277068683332695, 0.0210680857689784, 0.026724997685722, 0.0525354529367476,
+0.0668013582441452, 0.119271483740379, 0.279105747097929, 0.390197266957464)}
 
 \item{season}{Logical for controlling the effect of seasonality.
 TRUE = maximum effect of seasonality.
