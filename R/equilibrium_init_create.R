@@ -10,10 +10,6 @@
 #'
 #' @param death Numeric of mortality rates.
 #'
-#' @param nn_links 8 nearest-neigbors to each patch.
-#'
-#' @param amplitudes_phases Amplitude and phase of seasonal forcing for each patch.
-#'
 #' @param vaccine_age Vector of binary indicators for age groups vaccination.
 #'  1 = vaccinate, 0 = do not vaccinate. Same length as \code{agec}. Default = NULL.
 #'
@@ -26,10 +22,8 @@
 
 equilibrium_init_create <- function(agec,
                                     death,
-                                    nn_links,
-                                    amplitudes_phases,
                                     vaccine_age = NULL,
-                                    model_parameter_list){
+                                    model_parameter_list) {
 
   na <- as.integer(length(agec))  # number of age groups
 
@@ -38,7 +32,7 @@ equilibrium_init_create <- function(agec,
     stop("length of age groups to vaccinate is different from number of age groups")
 
   mpl <- model_parameter_list
-  nn <- nn_links
+  nn <- ZikaModel::nn_links # 8 nearest-neigbors to each patch.
 
   NP <- mpl$NP
 
@@ -111,47 +105,6 @@ equilibrium_init_create <- function(agec,
 
   Nb <- N_eq / lifespan # number of births
 
-  amplitudes_phases[, "phase"] <- amplitudes_phases[, "phase"] * YL
-
-  Wb_introtime <- c()
-
-  Wb_starttime <- mpl$Wb_starttime
-
-  for (i in seq_len(NP - 1)){
-
-    Wb_introtime[i] <- Wb_starttime # + trunc(6 * (i - 1) / NP) * 0.5
-
-  }
-
-  Wb_introtime[NP] <- 1000
-
-  vacc_cu_time <- mpl$vacc_cu_time
-  age_per <- mpl$age_per
-
-  vacc_cu_rndtime <- trunc(vacc_cu_time*YL/age_per)*age_per
-
-  dis_pri <- c()
-  dis_pri_value <- mpl$dis_pri
-
-  dis_pri[1:2] <- dis_pri_value
-  dis1 <- dis_pri
-
-  rho1 <- c()
-  rho_prim_value <- mpl$rho_prim
-  vacceff_prim <- mpl$vacceff_prim
-
-  rho1[1] <- rho_prim_value
-  rho1[2] <- rho_prim_value * (1 - vacceff_prim)
-
-  phi_prim <- c()
-  phi_prim_value <- mpl$phi_prim
-
-  phi_prim[1:2] <- phi_prim_value
-  phi1 <- phi_prim
-
-  other_prop_immune <- mpl$other_prop_immune
-  other_foi <- mpl$other_foi
-
   # initial compartment states
 
   aa <- bb <- c()
@@ -176,45 +129,8 @@ equilibrium_init_create <- function(agec,
 
   init_R1[1:na, 1, 1:NP] <- trunc(bb %o% Nb)
 
-  pTG <- mpl$propTransGlobal
-
-  pTG_bigpatch <- pTG / 10
-
-  if(!is.null(vaccine_age)) {
-
-    vaccine_age_2 <- c(0, vaccine_age)
-
-  } else {
-
-    vaccine_age_2 <- rep(0, na + 1)
-
-  }
-
-  # Scaling factors (between 0 and 1) for effect of seasonality.
-  # 1 = maximum effect of seasonality.
-  # 0 = no effect of seasonality.
-
-  season <- mpl$season
-
-  if(season) {
-
-    Kc_season <- 1
-    eip_season <- 1
-    Delta_season <- 1
-
-  } else {
-
-    Kc_season <- 0
-    eip_season <- 0
-    Delta_season <- 0
-
-  }
-
   res <- list(nn = nn,
-              amplitudes_phases = amplitudes_phases,
               na = na,
-              agec = agec,
-              death = death,
               surv = surv,
               mean_surv = mean_surv,
               mean_age = mean_age,
@@ -224,22 +140,10 @@ equilibrium_init_create <- function(agec,
               lifespan = lifespan,
               N_eq = N_eq,
               Nb = Nb,
-              Wb_introtime = Wb_introtime,
-              vacc_cu_rndtime = vacc_cu_rndtime,
-              dis1 = dis1,
-              rho1 = rho1,
-              phi1 = phi1,
               init_S = init_S_sign,
               init_I1 = init_I1,
-              init_R1 = init_R1,
-              pTG_bigpatch = pTG_bigpatch,
-              vacc_child_age = vaccine_age_2,
-              vacc_cu_age = vaccine_age_2,
-              Kc_season = Kc_season,
-              eip_season = eip_season,
-              Delta_season = Delta_season,
-              pi = pi)
+              init_R1 = init_R1)
 
-  append(res, mpl)
+  return(res)
 
 }
