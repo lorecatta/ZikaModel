@@ -4,7 +4,9 @@
 \name{nn_links}
 \alias{nn_links}
 \title{Patches' nearest neighbors}
-\format{A matrix with 21 rows and 8 columns:}
+\format{
+A matrix with 21 rows and 8 columns:
+}
 \usage{
 nn_links
 }
