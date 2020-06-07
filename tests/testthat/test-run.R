@@ -1,4 +1,12 @@
-test_that("dt is used to calculate time steps", {
+test_that("run works", {
+
+  set.seed(123)
+
+  r1 <- run_deterministic_model()
+
+})
+
+test_that("dt is used correctly to calculate time steps", {
 
   age_init <- c(1, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10)
 
