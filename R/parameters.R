@@ -5,7 +5,7 @@
 #'
 #' @title Create a list of parameters
 #'
-#' @param YL Duration of a calendar year. Default = 364.
+#' @param YL Duration of a calendar year. Default = 365.
 #' @param DT Time step size. Default = 1.
 #' @param NP Number of patches. Default = 21.
 #' @param agec Vector of age group widths.
@@ -92,7 +92,7 @@
 parameters_deterministic_model <- function(
 
   # initial state, duration, patches
-  YL = 364,
+  YL = 365,
   DT = 1,
   NP = 21,
 

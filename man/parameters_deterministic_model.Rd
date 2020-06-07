@@ -5,7 +5,7 @@
 \title{Create a list of parameters}
 \usage{
 parameters_deterministic_model(
-  YL = 364,
+  YL = 365,
   DT = 1,
   NP = 21,
   agec,
@@ -60,7 +60,7 @@ parameters_deterministic_model(
 )
 }
 \arguments{
-\item{YL}{Duration of a calendar year. Default = 364.}
+\item{YL}{Duration of a calendar year. Default = 365.}
 
 \item{DT}{Time step size. Default = 1.}
 

@@ -5,9 +5,9 @@
 \title{Run the deterministic version of the Zika model}
 \usage{
 run_deterministic_model(
-  YL = 364,
+  YL = 365,
   DT = 1,
-  time,
+  time = 365,
   NP = 21,
   agec,
   death,
@@ -61,11 +61,11 @@ run_deterministic_model(
 )
 }
 \arguments{
-\item{YL}{Duration of a calendar year. Default = 364.}
+\item{YL}{Duration of a calendar year. Default = 365.}
 
 \item{DT}{Time step size. Default = 1.}
 
-\item{time}{Length of simulation. Default = ?.}
+\item{time}{Length of simulation. Default = 365.}
 
 \item{NP}{Number of patches. Default = 21.}
 

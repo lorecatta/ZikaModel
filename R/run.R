@@ -6,9 +6,9 @@
 #'
 #' @title Run the deterministic version of the Zika model
 #'
-#' @param YL Duration of a calendar year. Default = 364.
+#' @param YL Duration of a calendar year. Default = 365.
 #' @param DT Time step size. Default = 1.
-#' @param time Length of simulation. Default = ?.
+#' @param time Length of simulation. Default = 365.
 #' @param NP Number of patches. Default = 21.
 #' @param agec NUmeric vector of age group widths.
 #'   Default = c(1, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10)
@@ -98,9 +98,9 @@
 run_deterministic_model <- function(
 
   # initial state, duration, patches
-  YL = 364,
+  YL = 365,
   DT = 1,
-  time,
+  time = 365,
   NP = 21,
 
   # demography
@@ -226,16 +226,14 @@ run_deterministic_model <- function(
 
   # Running the Model
   mod <- odin_model_determ(user = pars, unused_user_action = "ignore")
-  tt <- seq(0, time, 1)
-  # t <- seq(from = 1, to = time_period/dt)
+
+  tt <- seq(from = 1, to = time_period / DT)
+
   results <- mod$run(tt)
 
   out <- list(output = results, parameters = pars, model = mod)
 
   class(out) <- c("Zika_model_simulation")
-
-  # shape output
-  # mod$transform_variables(mod_run)
 
   return(out)
 
