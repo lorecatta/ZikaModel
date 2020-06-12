@@ -1,5 +1,23 @@
 
-#------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+
+#' Return the default demographic information
+#'
+#' @return list of default demographics by age group
+default_demographics <- function() {
+
+  list(agec = c(1, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10),
+       death = c(1e-10, 1e-10, 1e-10,
+                 0.00277068683332695, 0.0210680857689784, 0.026724997685722,
+                 0.0525354529367476, 0.0668013582441452, 0.119271483740379,
+                 0.279105747097929, 0.390197266957464))
+
+}
+
+default_demog <- default_demographics()
+
+
+# -----------------------------------------------------------------------------
 
 #' The function creates an odin generator function and runs an instance of the model
 #' using user-defined parameters and an equilibrium initialisation state.
@@ -104,8 +122,8 @@ run_deterministic_model <- function(
   NP = 21,
 
   # demography
-  agec,
-  death,
+  agec = default_demog$agec,
+  death = default_demog$death,
 
   # seasonality
   season = FALSE,
