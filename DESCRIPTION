@@ -11,16 +11,16 @@ Description: The package implements the deterministic and stochastic versions of
     using the R package odin.
 License: MIT + file LICENSE
 Depends:
-    R (>= 2.10)
+    R (>= 3.5.0)
 Encoding: UTF-8
 LazyData: true
 Imports: 
+    dde (>= 1.0.2),    
+    odin,
     reshape2,
     ggplot2,
     ggforce,
-    odin,
     scales,
-    dde,
     gridExtra
 RoxygenNote: 7.1.0
 Suggests: 
