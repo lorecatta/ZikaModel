@@ -176,7 +176,9 @@ parameters_deterministic_model <- function(
   PropDiseaseReported = 1) {
 
   # Check parameters
-  assert_same_length(vaccine_child_age, agec)
+  if(!is.null(vaccine_child_age)) {
+    assert_same_length(vaccine_child_age, agec)
+  }
   assert_same_length(vaccine_cu_age, agec)
 
   pars_to_equlibrium_init_create <- list(NP = NP,
