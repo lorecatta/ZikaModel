@@ -322,7 +322,7 @@ parameters_deterministic_model <- function(
                   lifespan = state_init$lifespan,
                   N_eq = state_init$N_eq,
                   Nb = state_init$Nb,
-                  init_S = state_init$init_S_sign,
+                  init_S = state_init$init_S,
                   init_I1 = state_init$init_I1,
                   init_R1 = state_init$init_R1,
                   pTG_bigpatch = pTG_bigpatch,
