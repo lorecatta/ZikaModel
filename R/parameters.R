@@ -202,7 +202,7 @@ parameters_deterministic_model <- function(
   phi_prim_values <- c()
   phi_prim_values[1:2] <- phi_prim
 
-  pTG_bigpatch <- pTG / 10
+  pTG_bigpatch <- propTransGlobal / 10
 
   if(!is.null(vaccine_age)) {
 
