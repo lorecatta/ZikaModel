@@ -264,6 +264,8 @@ parameters_deterministic_model <- function(
   mp_list <- list(YL = YL,
                   DT = DT,
                   NP = NP,
+                  agec = agec,
+                  death = death,
                   age_per = age_per,
                   N_human = N_human,
                   incub = incub,
