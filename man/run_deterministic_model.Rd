@@ -7,7 +7,7 @@
 run_deterministic_model(
   YL = 365,
   DT = 1,
-  time = 365,
+  time_period = 365,
   NP = 21,
   agec = default_demog$agec,
   death = default_demog$death,
@@ -66,6 +66,8 @@ run_deterministic_model(
 \item{YL}{Duration of a calendar year. Default = 365.}
 
 \item{DT}{Time step size. Default = 1.}
+
+\item{time_period}{Length of simulation. Default = 365.}
 
 \item{NP}{Number of patches. Default = 21.}
 
@@ -204,8 +206,6 @@ travelers visiting from elsewhere. Default = 1e-8.}
 \item{AGE_REC}{Default = 2.}
 
 \item{PropDiseaseReported}{Reporting rate of symptomatic cases. Default = 0.1.}
-
-\item{time_period}{Length of simulation. Default = 365.}
 }
 \value{
 Simulation output

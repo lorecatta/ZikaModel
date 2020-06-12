@@ -124,7 +124,7 @@ run_deterministic_model <- function(
   # initial state, duration, patches
   YL = 365,
   DT = 1,
-  time = 365,
+  time_period = 365,
   NP = 21,
 
   # demography
