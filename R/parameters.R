@@ -175,11 +175,9 @@ parameters_deterministic_model <- function(
   AGE_REC = 2,
   PropDiseaseReported = 1) {
 
-  na <- as.integer(length(agec))  # number of age groups
-
-  ## Check parameters
-  assert_same_length(vaccine_child_age, na)
-  assert_same_length(vaccine_cu_age, na)
+  # Check parameters
+  assert_same_length(vaccine_child_age, agec)
+  assert_same_length(vaccine_cu_age, agec)
 
   pars_to_equlibrium_init_create <- list(NP = NP,
                                          YL = YL,
@@ -219,6 +217,8 @@ parameters_deterministic_model <- function(
   phi_prim_values[1:2] <- phi_prim
 
   pTG_bigpatch <- propTransGlobal / 10
+
+  na <- as.integer(length(agec))  # number of age groups
 
   if(!is.null(vaccine_child_age)) {
 
