@@ -178,8 +178,8 @@ parameters_deterministic_model <- function(
   na <- as.integer(length(agec))  # number of age groups
 
   ## Check parameters
-  if(!is.null(vaccine_age) & length(vaccine_age) != na)
-    stop("length of age groups to vaccinate is different from number of age groups")
+  assert_same_length(vaccine_child_age, na)
+  assert_same_length(vaccine_cu_age, na)
 
   pars_to_equlibrium_init_create <- list(NP = NP,
                                          YL = YL,
