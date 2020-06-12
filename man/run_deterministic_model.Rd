@@ -67,8 +67,6 @@ run_deterministic_model(
 
 \item{DT}{Time step size. Default = 1.}
 
-\item{time}{Length of simulation. Default = 365.}
-
 \item{NP}{Number of patches. Default = 21.}
 
 \item{agec}{Numeric vector of age group widths.
@@ -206,6 +204,8 @@ travelers visiting from elsewhere. Default = 1e-8.}
 \item{AGE_REC}{Default = 2.}
 
 \item{PropDiseaseReported}{Reporting rate of symptomatic cases. Default = 0.1.}
+
+\item{time_period}{Length of simulation. Default = 365.}
 }
 \value{
 Simulation output

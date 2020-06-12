@@ -26,7 +26,7 @@ default_demog <- default_demographics()
 #'
 #' @param YL Duration of a calendar year. Default = 365.
 #' @param DT Time step size. Default = 1.
-#' @param time Length of simulation. Default = 365.
+#' @param time_period Length of simulation. Default = 365.
 #' @param NP Number of patches. Default = 21.
 #' @param agec Numeric vector of age group widths.
 #'   Default = c(1, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10).
