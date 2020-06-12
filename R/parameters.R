@@ -7,6 +7,7 @@
 #'
 #' @param YL Duration of a calendar year. Default = 365.
 #' @param DT Time step size. Default = 1.
+#' @param time_period Length of simulation. Default = 365.
 #' @param NP Number of patches. Default = 21.
 #' @param agec Numeric vector of age group widths.
 #'   Default = c(1, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10).
@@ -104,6 +105,7 @@ parameters_deterministic_model <- function(
   # initial state, duration, patches
   YL = 365,
   DT = 1,
+  time_period = 365,
   NP = 21,
 
   # demography
@@ -263,6 +265,7 @@ parameters_deterministic_model <- function(
   # Collate Parameters Into List
   mp_list <- list(YL = YL,
                   DT = DT,
+                  time_period = time_period,
                   NP = NP,
                   agec = agec,
                   death = death,

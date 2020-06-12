@@ -199,6 +199,7 @@ run_deterministic_model <- function(
   # create parameter list
   pars <- parameters_deterministic_model(YL = YL,
                                          DT = DT,
+                                         time_period = time_period,
                                          NP = NP,
                                          agec = agec,
                                          death = death,
