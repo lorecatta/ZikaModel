@@ -167,7 +167,9 @@ parameters_deterministic_model <- function(
   pars_to_equlibrium_init_create <- list(NP = NP,
                                          YL = YL,
                                          DT = DT,
-                                         N_human = N_human)
+                                         N_human = N_human,
+                                         other_prop_immune = other_prop_immune,
+                                         other_foi = other_foi)
 
   # generate initial state variables from equilibrium solution
   state_init <- equilibrium_init_create(agec,

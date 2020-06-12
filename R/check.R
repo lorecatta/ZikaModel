@@ -105,6 +105,9 @@ equilibrium_init_create <- function(agec,
 
   # initial compartment states
 
+  other_prop_immune <- mpl$other_prop_immune
+  other_foi <- mpl$other_foi
+
   aa <- bb <- c()
 
   for (i in 2:(na+1)){
