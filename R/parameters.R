@@ -331,6 +331,7 @@ parameters_deterministic_model <- function(
                   Kc_season = Kc_season,
                   eip_season = eip_season,
                   Delta_season = Delta_season,
+                  amplitudes_phases = amp_phas,
                   pi = pi)
 
   return(mp_list)
