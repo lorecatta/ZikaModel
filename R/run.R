@@ -28,12 +28,12 @@ default_demog <- default_demographics()
 #' @param DT Time step size. Default = 1.
 #' @param time Length of simulation. Default = 365.
 #' @param NP Number of patches. Default = 21.
-#' @param agec NUmeric vector of age group widths.
-#'   Default = c(1, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10)
+#' @param agec Numeric vector of age group widths.
+#'   Default = c(1, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10).
 #' @param death Numeric vector of mortality rates.
 #'   Default = deathrt <- c(1e-10, 1e-10, 1e-10,
 #'   0.00277068683332695, 0.0210680857689784, 0.026724997685722, 0.0525354529367476,
-#'   0.0668013582441452, 0.119271483740379, 0.279105747097929, 0.390197266957464)
+#'   0.0668013582441452, 0.119271483740379, 0.279105747097929, 0.390197266957464).
 #' @param season Logical for controlling the effect of seasonality.
 #'   TRUE = maximum effect of seasonality.
 #'   FALSE = no effect of seasonality. Default = FALSE
@@ -87,6 +87,9 @@ default_demog <- default_demographics()
 #' @param vacc_child_coverage Proportion of children vaccinated. Default = 0.
 #' @param vacc_child_starttime Time when vaccination starts. Default = 30.
 #' @param vacc_child_stoptime Time when vaccination stops. Default = 30.
+#' @param vaccine_child_age Vector of binary indicators for routine vaccination
+#'  of age groups. 1 = vaccinate, 0 = do not vaccinate. Same length as \code{agec}.
+#'  Default = NULL.
 #' @param vacc_cu_minage Minimum age at which children who missed vaccination can
 #'   catch up. Default = 2.
 #' @param vacc_cu_maxage Maximum age at which children who missed vaccination can
@@ -94,6 +97,9 @@ default_demog <- default_demographics()
 #' @param vacc_cu_coverage Proportion of children who undergo catch up vaccination.
 #'   Default = 0.
 #' @param vacc_cu_time Time when catch up vaccination occurs. Default = 30.
+#' @param vaccine_cu_age Vector of binary indicators for catch up vaccination
+#'  of age groups. 1 = vaccinate, 0 = do not vaccinate. Same length as \code{agec}.
+#'  Default = c(0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0), from 9 to 49.
 #' @param vacceff_prim Efficacy of vaccination in reducing infection. Default = 0.75.
 #' #' @param other_foi Default = 0.025.
 #' @param other_prop_immune Propotion of population with pre-existing immunity.
@@ -168,10 +174,12 @@ run_deterministic_model <- function(
   vacc_child_coverage = 0,
   vacc_child_starttime = 30,
   vacc_child_stoptime = 30,
+  vaccine_child_age = NULL,
   vacc_cu_minage = 2,
   vacc_cu_maxage = 15,
   vacc_cu_coverage = 0,
   vacc_cu_time = 30,
+  vaccine_cu_age = c(0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0),
   vacceff_prim = 0.75,
 
   # FOI
@@ -226,10 +234,12 @@ run_deterministic_model <- function(
                                          vacc_child_coverage = vacc_child_coverage,
                                          vacc_child_starttime = vacc_child_starttime,
                                          vacc_child_stoptime = vacc_child_stoptime,
+                                         vaccine_child_age = vaccine_child_age,
                                          vacc_cu_minage = vacc_cu_minage,
                                          vacc_cu_maxage = vacc_cu_maxage,
                                          vacc_cu_coverage = vacc_cu_coverage,
                                          vacc_cu_time = vacc_cu_time,
+                                         vaccine_cu_age = vaccine_cu_age,
                                          vacceff_prim = vacceff_prim,
                                          other_foi = other_foi,
                                          other_prop_immune = other_prop_immune,

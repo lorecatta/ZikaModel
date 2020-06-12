@@ -10,9 +10,6 @@
 #'
 #' @param death Numeric of mortality rates.
 #'
-#' @param vaccine_age Vector of binary indicators for age groups vaccination.
-#'  1 = vaccinate, 0 = do not vaccinate. Same length as \code{agec}. Default = NULL.
-#'
 #' @param model_parameter_list List of user-defined model parameters.
 #'
 #' @return Initial states of the model
@@ -20,14 +17,9 @@
 #' @export
 equilibrium_init_create <- function(agec,
                                     death,
-                                    vaccine_age = NULL,
                                     model_parameter_list) {
 
   na <- as.integer(length(agec))  # number of age groups
-
-  ## Check parameters
-  if(!is.null(vaccine_age) & length(vaccine_age) != na)
-    stop("length of age groups to vaccinate is different from number of age groups")
 
   mpl <- model_parameter_list
   nn <- ZikaModel::nn_links # 8 nearest-neigbors to each patch.

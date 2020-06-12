@@ -8,8 +8,12 @@
 #' @param YL Duration of a calendar year. Default = 365.
 #' @param DT Time step size. Default = 1.
 #' @param NP Number of patches. Default = 21.
-#' @param agec Vector of age group widths.
-#' @param death Numeric of mortality rates.
+#' @param agec Numeric vector of age group widths.
+#'   Default = c(1, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10).
+#' @param death Numeric vector of mortality rates.
+#'   Default = deathrt <- c(1e-10, 1e-10, 1e-10,
+#'   0.00277068683332695, 0.0210680857689784, 0.026724997685722, 0.0525354529367476,
+#'   0.0668013582441452, 0.119271483740379, 0.279105747097929, 0.390197266957464).
 #' @param season Logical for controlling the effect of seasonality.
 #'   TRUE = maximum effect of seasonality.
 #'   FALSE = no effect of seasonality. Default = FALSE
@@ -63,6 +67,9 @@
 #' @param vacc_child_coverage Proportion of children vaccinated. Default = 0.
 #' @param vacc_child_starttime Time when vaccination starts. Default = 30.
 #' @param vacc_child_stoptime Time when vaccination stops. Default = 30.
+#' @param vaccine_child_age Vector of binary indicators for routine vaccination
+#'  of age groups. 1 = vaccinate, 0 = do not vaccinate. Same length as \code{agec}.
+#'  Default = NULL.
 #' @param vacc_cu_minage Minimum age at which children who missed vaccination can
 #'   catch up. Default = 2.
 #' @param vacc_cu_maxage Maximum age at which children who missed vaccination can
@@ -70,6 +77,9 @@
 #' @param vacc_cu_coverage Proportion of children who undergo catch up vaccination.
 #'   Default = 0.
 #' @param vacc_cu_time Time when catch up vaccination occurs. Default = 30.
+#' @param vaccine_cu_age Vector of binary indicators for catch up vaccination
+#'  of age groups. 1 = vaccinate, 0 = do not vaccinate. Same length as \code{agec}.
+#'  Default = c(0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0), from 9 to 49.
 #' @param vacceff_prim Efficacy of vaccination in reducing infection. Default = 0.75.
 #' #' @param other_foi Default = 0.025.
 #' @param other_prop_immune Propotion of population with pre-existing immunity.
@@ -97,8 +107,8 @@ parameters_deterministic_model <- function(
   NP = 21,
 
   # demography
-  agec,
-  death,
+  agec = default_demog$agec,
+  death = default_demog$death,
 
   # seasonality
   season = FALSE,
@@ -143,10 +153,12 @@ parameters_deterministic_model <- function(
   vacc_child_coverage = 0,
   vacc_child_starttime = 30,
   vacc_child_stoptime = 30,
+  vaccine_child_age = NULL,
   vacc_cu_minage = 2,
   vacc_cu_maxage = 15,
   vacc_cu_coverage = 0,
   vacc_cu_time = 30,
+  vaccine_cu_age = c(0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0),
   vacceff_prim = 0.75,
 
   # FOI
@@ -163,6 +175,11 @@ parameters_deterministic_model <- function(
   AGE_REC = 2,
   PropDiseaseReported = 1) {
 
+  na <- as.integer(length(agec))  # number of age groups
+
+  ## Check parameters
+  if(!is.null(vaccine_age) & length(vaccine_age) != na)
+    stop("length of age groups to vaccinate is different from number of age groups")
 
   pars_to_equlibrium_init_create <- list(NP = NP,
                                          YL = YL,
@@ -174,7 +191,6 @@ parameters_deterministic_model <- function(
   # generate initial state variables from equilibrium solution
   state_init <- equilibrium_init_create(agec,
                                         death,
-                                        vaccine_age = NULL,
                                         pars_to_equlibrium_init_create)
 
   amp_phas <- ZikaModel::amplitudes_phases # Amplitude and phase of seasonal forcing for each patch.
@@ -204,13 +220,23 @@ parameters_deterministic_model <- function(
 
   pTG_bigpatch <- propTransGlobal / 10
 
-  if(!is.null(vaccine_age)) {
+  if(!is.null(vaccine_child_age)) {
 
-    vaccine_age_2 <- c(0, vaccine_age)
+    vaccine_child_age_2 <- c(0, vaccine_child_age)
 
   } else {
 
-    vaccine_age_2 <- rep(0, na + 1)
+    vaccine_child_age_2 <- rep(0, na + 1)
+
+  }
+
+  if(!is.null(vaccine_cu_age)) {
+
+    vaccine_cu_age_2 <- c(0, vaccine_cu_age)
+
+  } else {
+
+    vaccine_cu_age_2 <- rep(0, na + 1)
 
   }
 
@@ -296,8 +322,8 @@ parameters_deterministic_model <- function(
                   init_I1 = state_init$init_I1,
                   init_R1 = state_init$init_R1,
                   pTG_bigpatch = pTG_bigpatch,
-                  vacc_child_age = vaccine_age_2,
-                  vacc_cu_age = vaccine_age_2,
+                  vacc_child_age = vaccine_child_age_2,
+                  vacc_cu_age = vaccine_cu_age_2,
                   Kc_season = Kc_season,
                   eip_season = eip_season,
                   Delta_season = Delta_season,

@@ -43,10 +43,12 @@ run_deterministic_model(
   vacc_child_coverage = 0,
   vacc_child_starttime = 30,
   vacc_child_stoptime = 30,
+  vaccine_child_age = NULL,
   vacc_cu_minage = 2,
   vacc_cu_maxage = 15,
   vacc_cu_coverage = 0,
   vacc_cu_time = 30,
+  vaccine_cu_age = c(0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0),
   vacceff_prim = 0.75,
   other_foi = 0.025,
   other_prop_immune = 0,
@@ -69,13 +71,13 @@ run_deterministic_model(
 
 \item{NP}{Number of patches. Default = 21.}
 
-\item{agec}{NUmeric vector of age group widths.
-Default = c(1, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10)}
+\item{agec}{Numeric vector of age group widths.
+Default = c(1, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10).}
 
 \item{death}{Numeric vector of mortality rates.
 Default = deathrt <- c(1e-10, 1e-10, 1e-10,
 0.00277068683332695, 0.0210680857689784, 0.026724997685722, 0.0525354529367476,
-0.0668013582441452, 0.119271483740379, 0.279105747097929, 0.390197266957464)}
+0.0668013582441452, 0.119271483740379, 0.279105747097929, 0.390197266957464).}
 
 \item{season}{Logical for controlling the effect of seasonality.
 TRUE = maximum effect of seasonality.
@@ -161,6 +163,10 @@ introduction. (Not the proportion of Wolbachia AFTER introduction). Default = 0.
 
 \item{vacc_child_stoptime}{Time when vaccination stops. Default = 30.}
 
+\item{vaccine_child_age}{Vector of binary indicators for routine vaccination
+of age groups. 1 = vaccinate, 0 = do not vaccinate. Same length as \code{agec}.
+Default = NULL.}
+
 \item{vacc_cu_minage}{Minimum age at which children who missed vaccination can
 catch up. Default = 2.}
 
@@ -171,6 +177,10 @@ catch up. Default = 15.}
 Default = 0.}
 
 \item{vacc_cu_time}{Time when catch up vaccination occurs. Default = 30.}
+
+\item{vaccine_cu_age}{Vector of binary indicators for catch up vaccination
+of age groups. 1 = vaccinate, 0 = do not vaccinate. Same length as \code{agec}.
+Default = c(0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0), from 9 to 49.}
 
 \item{vacceff_prim}{Efficacy of vaccination in reducing infection. Default = 0.75.
 #' @param other_foi Default = 0.025.}
