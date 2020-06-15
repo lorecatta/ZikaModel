@@ -477,6 +477,8 @@ FOI1nn[1:(NP-1)] <- (FOI1p[nn[i,1]] + FOI1p[nn[i,2]] + FOI1p[nn[i,3]] +
                      FOI1p[nn[i,4]] + FOI1p[nn[i,5]] + FOI1p[nn[i,6]] +
                      FOI1p[nn[i,7]] + FOI1p[nn[i,8]]) / 8
 
+FOI1av <- (sum(FOI1p[]) - FOI1p[NP]) / (NP - 1)
+
 FOI1[1:(NP-1)] <- propTransNN * FOI1nn[i] + propTransGlobal * FOI1av +
   (1 - propTransGlobal - propTransNN) * FOI1p[i] + DT * BG_FOI / YL
 # FOI1[NP] <- pTG_bigpatch * FOI1av + (1 - pTG_bigpatch) * FOI1p[i]
