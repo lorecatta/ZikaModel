@@ -39,7 +39,7 @@ default_demog <- default_demographics()
 #'   FALSE = no effect of seasonality. Default = FALSE
 #' @param age_per Time (weeks) between age updates. Default = 1.
 #' @param N_human Human population in each patch. Default = 30000000.
-#' #' @param incub Intrinsic Incubation Period (days). Default = 5.5.
+#' @param incub Intrinsic Incubation Period (days). Default = 5.5.
 #' @param inf_per Total duration of human infectiousness (days). Default = 6.
 #' @param nu Inverse of virus generation time (1 / days).
 #'   Virus generation time = serial interval. Default = 1 / 21.
@@ -86,14 +86,10 @@ default_demog <- default_demographics()
 #' @param Wb_introduration Duration of Wolbachia release (days). Default = 60.
 #' @param vacc_child_coverage Proportion of children vaccinated. Default = 0.
 #' @param vacc_child_starttime Time when vaccination starts. Default = 30.
-#' @param vacc_child_stoptime Time when vaccination stops. Default = 30.
+#' @param vacc_child_stoptime Time when vaccination ends. Default = 30.
 #' @param vaccine_child_age Vector of binary indicators for routine vaccination
-#'  of age groups. 1 = vaccinate, 0 = do not vaccinate. Same length as \code{agec}.
-#'  Default = NULL.
-#' @param vacc_cu_minage Minimum age at which children who missed vaccination can
-#'   catch up. Default = 2.
-#' @param vacc_cu_maxage Maximum age at which children who missed vaccination can
-#'   catch up. Default = 15.
+#'   of age groups. 1 = vaccinate, 0 = do not vaccinate. Same length as \code{agec}.
+#'   Default = NULL.
 #' @param vacc_cu_coverage Proportion of children who undergo catch up vaccination.
 #'   Default = 0.
 #' @param vacc_cu_time Time when catch up vaccination occurs. Default = 30.
@@ -101,18 +97,18 @@ default_demog <- default_demographics()
 #'  of age groups. 1 = vaccinate, 0 = do not vaccinate. Same length as \code{agec}.
 #'  Default = c(0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0), from 9 to 49.
 #' @param vacceff_prim Efficacy of vaccination in reducing infection. Default = 0.75.
-#' #' @param other_foi Default = 0.025.
+#' @param rho_prim Decay of protection from vaccine. Default = 1.
+#' @param other_foi Default = 0.025.
 #' @param other_prop_immune Propotion of population with pre-existing immunity.
 #'   Default = 0.
 #' @param propTransGlobal Proportion of transmission between all patches.
 #'   Default = 0.0005.
-#' @param propTransNN Proportion of transmssion with nearest-neighbor patches.
+#' @param propTransNN Proportion of transmission with nearest-neighbor patches.
 #'   Default = 0.
 #' @param BG_FOI Force of infection on humans resulting from imported cases in
 #'   travelers visiting from elsewhere. Default = 1e-8.
+#' @param phi_prim Degree of cross-immunity  (not applicable for Zika). Default = 1.
 #' @param dis_pri Proportion of infections which are symptomatic. Default = 0.2.
-#' @param rho_prim Default = 1.
-#' @param phi_prim Default = 1.
 #' @param AGE_REC Default = 2.
 #' @param PropDiseaseReported Reporting rate of symptomatic cases. Default = 0.1.
 #'
@@ -175,12 +171,11 @@ run_deterministic_model <- function(
   vacc_child_starttime = 30,
   vacc_child_stoptime = 30,
   vaccine_child_age = NULL,
-  vacc_cu_minage = 2,
-  vacc_cu_maxage = 15,
   vacc_cu_coverage = 0,
   vacc_cu_time = 30,
   vaccine_cu_age = c(0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0),
   vacceff_prim = 0.75,
+  rho_prim = 1,
 
   # FOI
   other_foi = 0.025,
@@ -188,11 +183,10 @@ run_deterministic_model <- function(
   propTransGlobal = 0.0005,
   propTransNN = 0,
   BG_FOI = 1e-8,
+  phi_prim = 1,
 
   # disease
   dis_pri = 0.2,
-  rho_prim = 1,
-  phi_prim = 1,
   AGE_REC = 2,
   PropDiseaseReported = 1) {
 
@@ -236,8 +230,6 @@ run_deterministic_model <- function(
                                          vacc_child_starttime = vacc_child_starttime,
                                          vacc_child_stoptime = vacc_child_stoptime,
                                          vaccine_child_age = vaccine_child_age,
-                                         vacc_cu_minage = vacc_cu_minage,
-                                         vacc_cu_maxage = vacc_cu_maxage,
                                          vacc_cu_coverage = vacc_cu_coverage,
                                          vacc_cu_time = vacc_cu_time,
                                          vaccine_cu_age = vaccine_cu_age,

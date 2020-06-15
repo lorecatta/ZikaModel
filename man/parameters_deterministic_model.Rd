@@ -44,20 +44,18 @@ parameters_deterministic_model(
   vacc_child_starttime = 30,
   vacc_child_stoptime = 30,
   vaccine_child_age = NULL,
-  vacc_cu_minage = 2,
-  vacc_cu_maxage = 15,
   vacc_cu_coverage = 0,
   vacc_cu_time = 30,
   vaccine_cu_age = c(0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0),
   vacceff_prim = 0.75,
+  rho_prim = 1,
   other_foi = 0.025,
   other_prop_immune = 0,
   propTransGlobal = 5e-04,
   propTransNN = 0,
   BG_FOI = 1e-08,
-  dis_pri = 0.2,
-  rho_prim = 1,
   phi_prim = 1,
+  dis_pri = 0.2,
   AGE_REC = 2,
   PropDiseaseReported = 1
 )
@@ -85,8 +83,9 @@ FALSE = no effect of seasonality. Default = FALSE}
 
 \item{age_per}{Time (weeks) between age updates. Default = 1.}
 
-\item{N_human}{Human population in each patch. Default = 30000000.
-#' @param incub Intrinsic Incubation Period (days). Default = 5.5.}
+\item{N_human}{Human population in each patch. Default = 30000000.}
+
+\item{incub}{Intrinsic Incubation Period (days). Default = 5.5.}
 
 \item{inf_per}{Total duration of human infectiousness (days). Default = 6.}
 
@@ -161,17 +160,11 @@ introduction. (Not the proportion of Wolbachia AFTER introduction). Default = 0.
 
 \item{vacc_child_starttime}{Time when vaccination starts. Default = 30.}
 
-\item{vacc_child_stoptime}{Time when vaccination stops. Default = 30.}
+\item{vacc_child_stoptime}{Time when vaccination ends. Default = 30.}
 
 \item{vaccine_child_age}{Vector of binary indicators for routine vaccination
 of age groups. 1 = vaccinate, 0 = do not vaccinate. Same length as \code{agec}.
 Default = NULL.}
-
-\item{vacc_cu_minage}{Minimum age at which children who missed vaccination can
-catch up. Default = 2.}
-
-\item{vacc_cu_maxage}{Maximum age at which children who missed vaccination can
-catch up. Default = 15.}
 
 \item{vacc_cu_coverage}{Proportion of children who undergo catch up vaccination.
 Default = 0.}
@@ -182,8 +175,11 @@ Default = 0.}
 of age groups. 1 = vaccinate, 0 = do not vaccinate. Same length as \code{agec}.
 Default = c(0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0), from 9 to 49.}
 
-\item{vacceff_prim}{Efficacy of vaccination in reducing infection. Default = 0.75.
-#' @param other_foi Default = 0.025.}
+\item{vacceff_prim}{Efficacy of vaccination in reducing infection. Default = 0.75.}
+
+\item{rho_prim}{Decay of protection from vaccine. Default = 1.}
+
+\item{other_foi}{Default = 0.025.}
 
 \item{other_prop_immune}{Propotion of population with pre-existing immunity.
 Default = 0.}
@@ -191,17 +187,15 @@ Default = 0.}
 \item{propTransGlobal}{Proportion of transmission between all patches.
 Default = 0.0005.}
 
-\item{propTransNN}{Proportion of transmssion with nearest-neighbor patches.
+\item{propTransNN}{Proportion of transmission with nearest-neighbor patches.
 Default = 0.}
 
 \item{BG_FOI}{Force of infection on humans resulting from imported cases in
 travelers visiting from elsewhere. Default = 1e-8.}
 
+\item{phi_prim}{Degree of cross-immunity  (not applicable for Zika). Default = 1.}
+
 \item{dis_pri}{Proportion of infections which are symptomatic. Default = 0.2.}
-
-\item{rho_prim}{Default = 1.}
-
-\item{phi_prim}{Default = 1.}
 
 \item{AGE_REC}{Default = 2.}
 
