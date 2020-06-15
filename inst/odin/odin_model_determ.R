@@ -471,7 +471,6 @@ infectious1[] <- infectiousA[i] + infectiousB[i]
 
 
 FOI1p[] <- DT * Beta_mh_1 * Kappa * (Mwt_I1[i] + Mwb_I1[i] * Wb_relinf1) / NTp[i]
-FOI1Y[] <- YL * FOI1p[i] / DT
 
 FOI1nn[1:(NP-1)] <- (FOI1p[nn[i,1]] + FOI1p[nn[i,2]] + FOI1p[nn[i,3]] +
                      FOI1p[nn[i,4]] + FOI1p[nn[i,5]] + FOI1p[nn[i,6]] +
@@ -611,7 +610,6 @@ dim(agert) <- na
 dim(Mwt_FOI1) <- NP
 dim(Mwb_FOI1) <- NP
 dim(FOI1p) <- NP
-dim(FOI1Y) <- NP
 dim(FOI1nn) <- NP
 dim(FOI1) <- NP
 dim(R0t_1) <- NP
