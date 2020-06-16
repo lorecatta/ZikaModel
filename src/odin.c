@@ -2784,12 +2784,12 @@ SEXP odin_model_determ_set_user(SEXP internal_p, SEXP user) {
   internal->ln_mean = log(internal->Mwt_mean) - (internal->ln_sd * internal->ln_sd) / (double) 2;
   internal->N_eq = (double*) user_get_array(user, false, internal->N_eq, "N_eq", NA_REAL, NA_REAL, 1, internal->dim_N_eq);
   internal->Nb = (double*) user_get_array(user, false, internal->Nb, "Nb", NA_REAL, NA_REAL, 1, internal->dim_Nb);
-  internal->offset_output_Delta = 1 + internal->dim_FOI1p + internal->dim_R0t_1;
-  internal->offset_output_eip = 1 + internal->dim_FOI1p + internal->dim_R0t_1 + internal->dim_Delta + internal->dim_Kc;
-  internal->offset_output_inf_1 = 1 + internal->dim_FOI1p + internal->dim_R0t_1 + internal->dim_Delta + internal->dim_Kc + internal->dim_eip + internal->dim_prop_wb;
-  internal->offset_output_Kc = 1 + internal->dim_FOI1p + internal->dim_R0t_1 + internal->dim_Delta;
-  internal->offset_output_prop_wb = 1 + internal->dim_FOI1p + internal->dim_R0t_1 + internal->dim_Delta + internal->dim_Kc + internal->dim_eip;
-  internal->offset_output_R0t_1 = 1 + internal->dim_FOI1p;
+  internal->offset_output_Delta = 1 + internal->dim_FOI1 + internal->dim_R0t_1;
+  internal->offset_output_eip = 1 + internal->dim_FOI1 + internal->dim_R0t_1 + internal->dim_Delta + internal->dim_Kc;
+  internal->offset_output_inf_1 = 1 + internal->dim_FOI1 + internal->dim_R0t_1 + internal->dim_Delta + internal->dim_Kc + internal->dim_eip + internal->dim_prop_wb;
+  internal->offset_output_Kc = 1 + internal->dim_FOI1 + internal->dim_R0t_1 + internal->dim_Delta;
+  internal->offset_output_prop_wb = 1 + internal->dim_FOI1 + internal->dim_R0t_1 + internal->dim_Delta + internal->dim_Kc + internal->dim_eip;
+  internal->offset_output_R0t_1 = 1 + internal->dim_FOI1;
   internal->offset_variable_incubA = internal->dim_Lwt + internal->dim_Mwt_S + internal->dim_Mwt_E1 + internal->dim_Mwt_E2 + internal->dim_Mwt_I1 + internal->dim_Lwb + internal->dim_Mwb_S + internal->dim_Mwb_E1 + internal->dim_Mwb_E2 + internal->dim_Mwb_I1;
   internal->offset_variable_incubB = internal->dim_Lwt + internal->dim_Mwt_S + internal->dim_Mwt_E1 + internal->dim_Mwt_E2 + internal->dim_Mwt_I1 + internal->dim_Lwb + internal->dim_Mwb_S + internal->dim_Mwb_E1 + internal->dim_Mwb_E2 + internal->dim_Mwb_I1 + internal->dim_incubA;
   internal->offset_variable_infectiousA = internal->dim_Lwt + internal->dim_Mwt_S + internal->dim_Mwt_E1 + internal->dim_Mwt_E2 + internal->dim_Mwt_I1 + internal->dim_Lwb + internal->dim_Mwb_S + internal->dim_Mwb_E1 + internal->dim_Mwb_E2 + internal->dim_Mwb_I1 + internal->dim_incubA + internal->dim_incubB;
@@ -2978,7 +2978,7 @@ SEXP odin_model_determ_metadata(SEXP internal_p) {
   SEXP output_names = PROTECT(allocVector(STRSXP, 8));
   setAttrib(output_length, R_NamesSymbol, output_names);
   SET_VECTOR_ELT(output_length, 0, R_NilValue);
-  SET_VECTOR_ELT(output_length, 1, ScalarInteger(internal->dim_FOI1p));
+  SET_VECTOR_ELT(output_length, 1, ScalarInteger(internal->dim_FOI1));
   SET_VECTOR_ELT(output_length, 2, ScalarInteger(internal->dim_R0t_1));
   SET_VECTOR_ELT(output_length, 3, ScalarInteger(internal->dim_Delta));
   SET_VECTOR_ELT(output_length, 4, ScalarInteger(internal->dim_Kc));
@@ -2990,7 +2990,7 @@ SEXP odin_model_determ_metadata(SEXP internal_p) {
   dim_inf_1[1] = internal->dim_inf_1_2;
   dim_inf_1[2] = internal->dim_inf_1_3;
   SET_STRING_ELT(output_names, 0, mkChar("time"));
-  SET_STRING_ELT(output_names, 1, mkChar("FOI1p"));
+  SET_STRING_ELT(output_names, 1, mkChar("FOI1"));
   SET_STRING_ELT(output_names, 2, mkChar("R0t_1"));
   SET_STRING_ELT(output_names, 3, mkChar("Delta"));
   SET_STRING_ELT(output_names, 4, mkChar("Kc"));
@@ -2999,7 +2999,7 @@ SEXP odin_model_determ_metadata(SEXP internal_p) {
   SET_STRING_ELT(output_names, 7, mkChar("inf_1"));
   SET_VECTOR_ELT(ret, 1, output_length);
   UNPROTECT(2);
-  SET_VECTOR_ELT(ret, 2, ScalarInteger(1 + internal->dim_FOI1p + internal->dim_R0t_1 + internal->dim_Delta + internal->dim_Kc + internal->dim_eip + internal->dim_prop_wb + internal->dim_inf_1));
+  SET_VECTOR_ELT(ret, 2, ScalarInteger(1 + internal->dim_FOI1 + internal->dim_R0t_1 + internal->dim_Delta + internal->dim_Kc + internal->dim_eip + internal->dim_prop_wb + internal->dim_inf_1));
   UNPROTECT(2);
   return ret;
 }
@@ -3552,8 +3552,8 @@ void odin_model_determ_rhs(odin_model_determ_internal* internal, size_t step, do
   for (int i = 1; i <= internal->dim_R0t_1; ++i) {
     internal->R0t_1[i - 1] = internal->Kappa * internal->Kappa * (internal->Mwt_tot[i - 1] + internal->Wb_relsusc1 * internal->Wb_relinf1 * internal->Mwb_tot[i - 1]) * internal->Beta_hm_1 * internal->inf_per * internal->Beta_mh_1 / (double) (1 + internal->Delta[i - 1] * internal->eip[i - 1]) / (double) internal->Delta[i - 1] / (double) internal->NTp[i - 1];
   }
-  memcpy(output + 1, internal->FOI1p, internal->dim_FOI1p * sizeof(double));
   memcpy(output + internal->offset_output_R0t_1, internal->R0t_1, internal->dim_R0t_1 * sizeof(double));
+  memcpy(output + 1, internal->FOI1, internal->dim_FOI1 * sizeof(double));
   memcpy(output + internal->offset_output_inf_1, internal->inf_1, internal->dim_inf_1 * sizeof(double));
 }
 void odin_model_determ_rhs_dde(size_t n_eq, size_t step, double * state, double * state_next, size_t n_out, double * output, void * internal) {
@@ -3562,7 +3562,7 @@ void odin_model_determ_rhs_dde(size_t n_eq, size_t step, double * state, double 
 SEXP odin_model_determ_rhs_r(SEXP internal_p, SEXP step, SEXP state) {
   SEXP state_next = PROTECT(allocVector(REALSXP, LENGTH(state)));
   odin_model_determ_internal *internal = odin_model_determ_get_internal(internal_p, 1);
-  SEXP output_ptr = PROTECT(allocVector(REALSXP, 1 + internal->dim_FOI1p + internal->dim_R0t_1 + internal->dim_Delta + internal->dim_Kc + internal->dim_eip + internal->dim_prop_wb + internal->dim_inf_1));
+  SEXP output_ptr = PROTECT(allocVector(REALSXP, 1 + internal->dim_FOI1 + internal->dim_R0t_1 + internal->dim_Delta + internal->dim_Kc + internal->dim_eip + internal->dim_prop_wb + internal->dim_inf_1));
   setAttrib(state_next, install("output"), output_ptr);
   UNPROTECT(1);
   double *output = REAL(output_ptr);
