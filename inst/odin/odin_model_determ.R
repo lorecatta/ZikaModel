@@ -656,6 +656,4 @@ output(R0t_1) <- TRUE
 output(Delta[]) <- TRUE
 output(Kc[]) <- TRUE
 output(eip[]) <- TRUE
-output(Mwt_FOI1[]) <- TRUE
-output(Mwb_FOI1) <- TRUE
 output(prop_wb[]) <- TRUE
