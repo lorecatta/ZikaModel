@@ -1,4 +1,20 @@
 
+#' @noRd
+`%||%` <- function(a, b) {
+  if (is.null(a)) b else a
+}
+
+# -----------------------------------------------------------------------------
+
+## Index locations of outputs in odin model
+
+#' @noRd
+odin_index <- function(model) {
+  n_out <- environment(model$initialize)$private$n_out %||% 0
+  n_state <- length(model$initial(0))
+  model$transform_variables(seq_len(1L + n_state + n_out))
+}
+
 # -----------------------------------------------------------------------------
 
 #' The function returns a vector of lagged difference values using \code{diff}
