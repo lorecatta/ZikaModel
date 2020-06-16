@@ -293,8 +293,6 @@ parameters_deterministic_model <- function(
                   vacc_child_coverage = vacc_child_coverage,
                   vacc_child_starttime = vacc_child_starttime,
                   vacc_child_stoptime = vacc_child_stoptime,
-                  vacc_cu_minage = vacc_cu_minage,
-                  vacc_cu_maxage = vacc_cu_maxage,
                   vacc_cu_coverage = vacc_cu_coverage,
                   vacc_cu_time = vacc_cu_time,
                   propTransGlobal = propTransGlobal,
