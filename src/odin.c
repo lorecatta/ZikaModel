@@ -2999,7 +2999,7 @@ SEXP odin_model_determ_metadata(SEXP internal_p) {
   dim_inf_1[0] = internal->dim_inf_1_1;
   dim_inf_1[1] = internal->dim_inf_1_2;
   dim_inf_1[2] = internal->dim_inf_1_3;
-  SET_STRING_ELT(output_names, 0, mkChar("TIME"));
+  SET_STRING_ELT(output_names, 0, mkChar("time"));
   SET_STRING_ELT(output_names, 1, mkChar("FOI1p"));
   SET_STRING_ELT(output_names, 2, mkChar("R0t_1"));
   SET_STRING_ELT(output_names, 3, mkChar("Delta"));
@@ -3018,11 +3018,11 @@ SEXP odin_model_determ_metadata(SEXP internal_p) {
 SEXP odin_model_determ_initial_conditions(SEXP internal_p, SEXP step_ptr) {
   int step = INTEGER(step_ptr)[0];
   odin_model_determ_internal *internal = odin_model_determ_get_internal(internal_p, 1);
-  double TIME = step * internal->DT;
-  double MwtCont = ((TIME >= internal->TimeMwtControlOn * internal->YL) && (TIME < internal->TimeMwtControlOff * internal->YL) ? (1 - internal->propMwtControl) : 1);
+  double time = step * internal->DT;
+  double MwtCont = ((time >= internal->TimeMwtControlOn * internal->YL) && (time < internal->TimeMwtControlOff * internal->YL) ? (1 - internal->propMwtControl) : 1);
   double DeltaMean = internal->DeltaBase / (double) MwtCont;
   for (int i = 1; i <= (internal->NP - 1); ++i) {
-    internal->Delta[i - 1] = DeltaMean / (double) (1 + internal->season_amp[i - 1] * internal->Delta_season * cos(2 * internal->pi * (TIME + internal->season_phases[i - 1]) / (double) internal->YL));
+    internal->Delta[i - 1] = DeltaMean / (double) (1 + internal->season_amp[i - 1] * internal->Delta_season * cos(2 * internal->pi * (time + internal->season_phases[i - 1]) / (double) internal->YL));
   }
   {
      int i = internal->NP;
@@ -3071,9 +3071,9 @@ void odin_model_determ_rhs(odin_model_determ_internal* internal, size_t step, do
   double * incubB = state + internal->offset_variable_incubB;
   double * infectiousA = state + internal->offset_variable_infectiousA;
   double * infectiousB = state + internal->offset_variable_infectiousB;
-  double TIME = step * internal->DT;
-  double agerts = (trunc(TIME / (double) internal->age_per) == TIME / (double) internal->age_per ? internal->age_per / (double) internal->YL : 0);
-  double MwtCont = ((TIME >= internal->TimeMwtControlOn * internal->YL) && (TIME < internal->TimeMwtControlOff * internal->YL) ? (1 - internal->propMwtControl) : 1);
+  double time = step * internal->DT;
+  double agerts = (trunc(time / (double) internal->age_per) == time / (double) internal->age_per ? internal->age_per / (double) internal->YL : 0);
+  double MwtCont = ((time >= internal->TimeMwtControlOn * internal->YL) && (time < internal->TimeMwtControlOff * internal->YL) ? (1 - internal->propMwtControl) : 1);
   for (int i = 1; i <= internal->dim_incubB; ++i) {
     state_next[internal->offset_variable_incubB + i - 1] = incubB[i - 1] + internal->DT * 2 * (incubA[i - 1] - incubB[i - 1]) / (double) internal->incub;
   }
@@ -3131,21 +3131,21 @@ void odin_model_determ_rhs(odin_model_determ_internal* internal, size_t step, do
     internal->recov1_prob[i - 1] = fmax(fmin(internal->nu / (double) (internal->nu + internal->agert[i - 1] + internal->deathrt[i - 1]), 1), 0);
   }
   for (int i = 1; i <= (internal->NP - 1); ++i) {
-    internal->Delta[i - 1] = DeltaMean / (double) (1 + internal->season_amp[i - 1] * internal->Delta_season * cos(2 * internal->pi * (TIME + internal->season_phases[i - 1]) / (double) internal->YL));
+    internal->Delta[i - 1] = DeltaMean / (double) (1 + internal->season_amp[i - 1] * internal->Delta_season * cos(2 * internal->pi * (time + internal->season_phases[i - 1]) / (double) internal->YL));
   }
   {
      int i = internal->NP;
      internal->Delta[i - 1] = DeltaMean;
   }
   for (int i = 1; i <= internal->dim_eip; ++i) {
-    internal->eip[i - 1] = internal->eip_mean * (1 - internal->season_amp[i - 1] * internal->eip_season * cos(2 * internal->pi * (TIME + internal->season_phases[i - 1]) / (double) internal->YL));
+    internal->eip[i - 1] = internal->eip_mean * (1 - internal->season_amp[i - 1] * internal->eip_season * cos(2 * internal->pi * (time + internal->season_phases[i - 1]) / (double) internal->YL));
   }
   for (int i = 1; i <= (internal->NP - 1); ++i) {
-    internal->Kc[i - 1] = internal->Mwt[i - 1] * internal->Kc_mean * (1 + internal->season_amp[i - 1] * internal->Kc_season * cos(2 * internal->pi * (TIME + internal->season_phases[i - 1]) / (double) internal->YL));
+    internal->Kc[i - 1] = internal->Mwt[i - 1] * internal->Kc_mean * (1 + internal->season_amp[i - 1] * internal->Kc_season * cos(2 * internal->pi * (time + internal->season_phases[i - 1]) / (double) internal->YL));
   }
   {
      int i = internal->NP;
-     internal->Kc[i - 1] = MwtCont * internal->Mwt_mean * internal->Kc_mean * (1 + internal->season_amp[i - 1] * internal->Kc_season * cos(2 * internal->pi * (TIME + internal->season_phases[i - 1]) / (double) internal->YL));
+     internal->Kc[i - 1] = MwtCont * internal->Mwt_mean * internal->Kc_mean * (1 + internal->season_amp[i - 1] * internal->Kc_season * cos(2 * internal->pi * (time + internal->season_phases[i - 1]) / (double) internal->YL));
   }
   for (int i = 1; i <= internal->dim_Lwb_birth; ++i) {
     internal->Lwb_birth[i - 1] = internal->Lwb_birth_lambda[i - 1];
@@ -3183,7 +3183,7 @@ void odin_model_determ_rhs(odin_model_determ_internal* internal, size_t step, do
   }
   for (int i = 1; i <= internal->dim_vacc_noncov_1; ++i) {
     int j = 1;
-    internal->vacc_noncov[i - 1 + internal->dim_vacc_noncov_1 * (j - 1)] = (((TIME >= internal->YL * internal->vacc_child_starttime) && (TIME < internal->YL * internal->vacc_child_stoptime) && (internal->vacc_child_age[i - 1] == 1) ? (1 - internal->vacc_child_coverage) : 1));
+    internal->vacc_noncov[i - 1 + internal->dim_vacc_noncov_1 * (j - 1)] = (((time >= internal->YL * internal->vacc_child_starttime) && (time < internal->YL * internal->vacc_child_stoptime) && (internal->vacc_child_age[i - 1] == 1) ? (1 - internal->vacc_child_coverage) : 1));
   }
   for (int i = 1; i <= internal->dim_vacc_noncov_1; ++i) {
     int j = 2;
@@ -3191,7 +3191,7 @@ void odin_model_determ_rhs(odin_model_determ_internal* internal, size_t step, do
   }
   for (int i = 1; i <= internal->dim_vcu_noncov_1; ++i) {
     int j = 1;
-    internal->vcu_noncov[i - 1 + internal->dim_vcu_noncov_1 * (j - 1)] = (((TIME == internal->vacc_cu_rndtime) && (internal->vacc_cu_age[i - 1] == 1) ? (1 - internal->vacc_cu_coverage) : 1));
+    internal->vcu_noncov[i - 1 + internal->dim_vcu_noncov_1 * (j - 1)] = (((time == internal->vacc_cu_rndtime) && (internal->vacc_cu_age[i - 1] == 1) ? (1 - internal->vacc_cu_coverage) : 1));
   }
   for (int i = 1; i <= internal->dim_vcu_noncov_1; ++i) {
     int j = 2;
@@ -3222,7 +3222,7 @@ void odin_model_determ_rhs(odin_model_determ_internal* internal, size_t step, do
     internal->Mwb_E2_incub_prob[i - 1] = fmax(fmin(1 / (double) (internal->Delta[i - 1] * internal->eip[i - 1] / (double) 2 + 1), 1), 0);
   }
   for (int i = 1; i <= internal->dim_Mwb_intro; ++i) {
-    internal->Mwb_intro[i - 1] = ((TIME >= internal->Wb_introtime[i - 1] * internal->YL) && (TIME < internal->Wb_introtime[i - 1] * internal->YL + internal->Wb_introduration) ? internal->Wb_introrate[i - 1] : 0);
+    internal->Mwb_intro[i - 1] = ((time >= internal->Wb_introtime[i - 1] * internal->YL) && (time < internal->Wb_introtime[i - 1] * internal->YL + internal->Wb_introduration) ? internal->Wb_introrate[i - 1] : 0);
   }
   for (int i = 1; i <= internal->dim_Mwt_E1_incub_prob; ++i) {
     internal->Mwt_E1_incub_prob[i - 1] = fmax(fmin(1 / (double) (internal->Delta[i - 1] * internal->eip[i - 1] / (double) 2 + 1), 1), 0);
@@ -3550,7 +3550,7 @@ void odin_model_determ_rhs(odin_model_determ_internal* internal, size_t step, do
       state_next[internal->offset_variable_S + i - 1 + internal->dim_S_1 * (j - 1) + internal->dim_S_12 * (k - 1)] = (1 - internal->vcu_noncov[internal->dim_vcu_noncov_1 * 0 + i - 1]) * internal->n_S[internal->dim_n_S_12 * (k - 1) + internal->dim_n_S_1 * 0 + i - 1] + internal->n_S[internal->dim_n_S_12 * (k - 1) + internal->dim_n_S_1 * 1 + i - 1];
     }
   }
-  output[0] = TIME;
+  output[0] = time;
   for (int i = 1; i <= internal->dim_M_tot; ++i) {
     internal->M_tot[i - 1] = internal->Mwt_tot[i - 1] + internal->Mwb_tot[i - 1];
   }

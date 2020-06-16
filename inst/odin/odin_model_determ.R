@@ -10,7 +10,7 @@
 
 
 DT <- user() # time step
-TIME <- step * DT # time value
+time <- step * DT # time value
 YL <- user() # year length
 pi <- user()
 
@@ -159,8 +159,8 @@ init_R1[,,] <- user()
 
 vnc_row <- na + 1 # position 1 is like position 0 in BM
 
-MwtCont <- if ((TIME >= TimeMwtControlOn * YL) &&
-               (TIME < TimeMwtControlOff * YL)) (1 - propMwtControl) else 1
+MwtCont <- if ((time >= TimeMwtControlOn * YL) &&
+               (time < TimeMwtControlOff * YL)) (1 - propMwtControl) else 1
 
 # Number of eggs produced per female mosquito per time step (baseline fecundity). Rm is fixed.
 Gamma <- Rm * DeltaBase * (Epsilon + Sigma) / Epsilon
@@ -197,23 +197,23 @@ season_amp[] <- amplitudes_phases[i, 2]
 season_phases[] <- amplitudes_phases[i, 3]
 
 Delta[1:(NP-1)] <- DeltaMean /
-  (1 + season_amp[i] * Delta_season * cos(2 * pi * (TIME + season_phases[i]) / YL))
+  (1 + season_amp[i] * Delta_season * cos(2 * pi * (time + season_phases[i]) / YL))
 Delta[NP] <- DeltaMean
 
 Kc[1:(NP-1)] <- Mwt[i] * Kc_mean *
-  (1 + season_amp[i] * Kc_season * cos(2 * pi * (TIME + season_phases[i]) / YL))
+  (1 + season_amp[i] * Kc_season * cos(2 * pi * (time + season_phases[i]) / YL))
 Kc[NP] <- MwtCont * Mwt_mean * Kc_mean *
-  (1 + season_amp[i] * Kc_season * cos(2 * pi * (TIME + season_phases[i]) / YL))
+  (1 + season_amp[i] * Kc_season * cos(2 * pi * (time + season_phases[i]) / YL))
 
 eip[] <- eip_mean *
-  (1 - season_amp[i] * eip_season * cos(2 * pi * (TIME + season_phases[i]) / YL))
+  (1 - season_amp[i] * eip_season * cos(2 * pi * (time + season_phases[i]) / YL))
 
 Delta_wb[] <- Delta[i] / Wb_fM
 
-vacc_noncov[, 1] <- (if ((TIME >= YL * vacc_child_starttime) && (TIME < YL * vacc_child_stoptime) && (vacc_child_age[i] == 1)) (1 - vacc_child_coverage) else 1)
+vacc_noncov[, 1] <- (if ((time >= YL * vacc_child_starttime) && (time < YL * vacc_child_stoptime) && (vacc_child_age[i] == 1)) (1 - vacc_child_coverage) else 1)
 vacc_noncov[, 2] <- 1
 
-vcu_noncov[, 1] <- (if ((TIME == vacc_cu_rndtime) && (vacc_cu_age[i] == 1)) (1 - vacc_cu_coverage) else 1)
+vcu_noncov[, 1] <- (if ((time == vacc_cu_rndtime) && (vacc_cu_age[i] == 1)) (1 - vacc_cu_coverage) else 1)
 vcu_noncov[, 2] <- 1
 
 
@@ -317,8 +317,8 @@ Mwb_inf1[] <- O_Mwb_S[i] * Mwb_inf1_prob[i]
 
 Wb_introrate[] <- Wb_introlevel * Mwt[i] * N_eq[i] * DT / Wb_introduration
 
-Mwb_intro[] <- if((TIME >= Wb_introtime[i] * YL) &&
-                  (TIME < Wb_introtime[i] * YL + Wb_introduration)) Wb_introrate[i] else 0
+Mwb_intro[] <- if((time >= Wb_introtime[i] * YL) &&
+                  (time < Wb_introtime[i] * YL + Wb_introduration)) Wb_introrate[i] else 0
 
 update(Mwb_S[]) <- Lwb_mature[i] + Mwb_intro[i] + Mwb_S[i] - O_Mwb_S[i]
 
@@ -353,7 +353,7 @@ update(Mwb_I1[]) <- Mwb_E2_incub[i] + Mwb_I1[i] - O_Mwb_I1[i]
 
 
 
-agerts <- if (trunc(TIME / age_per) == TIME / age_per) age_per / YL else 0
+agerts <- if (trunc(time / age_per) == time / age_per) age_per / YL else 0
 # agerts=DT/YL
 agert[] <- agerts / agec[i] # ageing rate per age group
 
@@ -649,7 +649,7 @@ dim(vcu_noncov) <- c(vnc_row, 2)
 dim(vacc_cu_age) <- vnc_row
 
 ## extra outputs
-output(TIME) <- TRUE
+output(time) <- TRUE
 output(inf_1[,,]) <- TRUE
 output(FOI1p) <- TRUE
 output(R0t_1) <- TRUE
