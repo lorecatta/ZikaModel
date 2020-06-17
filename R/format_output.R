@@ -3,17 +3,101 @@
 
 # -----------------------------------------------------------------------------
 
-#' The function format model outputs as a long data frame.
+#' The function formats human-realetd model outputs as a long data frame.
 #'
-#' @title Format model outputs
+#' @title Format human model outputs
 #'
 #' @param x Zika_model_simulation object.
 #'
-#' @param var_select Vector of compartment names, e.g. \code{c("S", "R")}. In
+#' @param var_select Vector of human compartment names, e.g. \code{c("S", "R")}. In
 #'   addition a number of additional variables can be requested. These include:
 #' \itemize{
 #'       \item{"infections_w"}{ Weekly Infections }
 #'       \item{"micro_cases_w"}{ Weekly Microcephaly Cases }
+#'       }
+#' @export
+format_output_H <- function(x,
+                            var_select = NULL,
+                            keep = NULL) {
+
+  # Get model details
+  nt <- nrow(x$output)
+  index <- odin_index(x$model)
+
+  # Extracting relevant columns for compartment variables
+  # -> if var_select = NULL extract all compartments
+  # -> if var_select = names specific compartments, extract those
+
+  # Summarise
+  # -> if keep = NULL calculate totals across age, vaccine status and patches
+  # -> if keep = patch summarise by patch
+  # -> if keep = vaccine summarise by vaccine status
+
+  ## calculate number of microcephaly cases
+  MC <- calculate_microcases(x)
+
+  num_vars <- c("S", "I1", "R1", "inf_1")
+
+  inc_vars <- c("inf_1", "MC")
+
+  if(is.null(var_select)) {
+
+    # here the option of summarising by patch or vaccine status
+    human_compartments_output_list <- lapply(num_vars, function(j) {
+
+      temp <- x$output[,unlist(index[j])]
+      temp_array <- array(temp, dim = c(dim(temp)[1], x$parameters$na, 2, x$parameters$NP))
+      sum_across_array_dims(temp_array, keep)
+
+    })
+
+    names(human_compartments_output_list) <- num_vars
+
+    MC_output <- sum_across_array_dims(MC, keep)
+
+  }
+
+  browser()
+
+  if(is.null(keep)) {
+
+    output_list <- c(human_compartments_output_list, MC = list(MC_output))
+
+    vars <- names(output_list)
+
+    out <- data.frame(t = as.numeric(x$output[,index$time]),
+                      compartment = as.character(mapply(rep, vars, nt)),
+                      y = unlist(output_list, use.names = FALSE))
+
+  }
+
+  # # Disaggregating var_select into compartments and summary variables
+  # compartments <- var_select[!(var_select %in% mean_vars)]
+  # compartments <- if (identical(compartments, character(0))) NULL else compartments
+  # summaries <- var_select[var_select %in% mean_vars]
+  # summaries <- if (identical(summaries, character(0))) NULL else summaries
+
+  out
+
+}
+
+# -----------------------------------------------------------------------------
+
+
+
+
+
+# -----------------------------------------------------------------------------
+
+#' The function formats mosquito-related model outputs as a long data frame.
+#'
+#' @title Format mosquito model outputs
+#'
+#' @param x Zika_model_simulation object.
+#'
+#' @param var_select Vector of mosquito compartment names, e.g. \code{c("S", "R")}. In
+#'   addition a number of additional variables can be requested. These include:
+#' \itemize{
 #'       \item{"Kcav"}{ Average mosquito larvae carrying capacity by patch }
 #'       \item{"eipav"}{ Average EIP by patch }
 #'       \item{"Deltaav"}{ Average adult mosquito mortality rate by patch }
@@ -21,15 +105,13 @@
 #'       \item{"FOI1av"}{ Average FOI by patch }
 #'       }
 #' @export
-format_output <- function(x,
-                          var_select = NULL,
-                          keep = NULL) {
+format_output_M <- function(x,
+                            var_select = NULL,
+                            keep = NULL) {
 
   # Get model details
   nt <- nrow(x$output)
   index <- odin_index(x$model)
-
-  browser()
 
   # Extracting relevant columns for compartment variables
   # -> if var_select = NULL extract all compartments
@@ -105,6 +187,8 @@ format_output <- function(x,
 
 
 }
+
+
 
 # -----------------------------------------------------------------------------
 
