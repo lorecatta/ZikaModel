@@ -9,11 +9,14 @@ format_output_H(x, var_select = NULL, keep = NULL)
 \arguments{
 \item{x}{Zika_model_simulation object.}
 
-\item{var_select}{Vector of human compartment names, e.g. \code{c("S", "R")}. In
+\item{var_select}{Vector of human compartment names, \code{c("S", "I1", "R1")}. In
   addition a number of additional variables can be requested. These include:
 \itemize{
-      \item{"infections_w"}{ Weekly Infections }
-      \item{"micro_cases_w"}{ Weekly Microcephaly Cases }
+      \item{"Ntotal"}{ Total number of people }
+      \item{"inf_1"}{ Daily infections }
+      \item{"MC"}{ Daily microcephaly cases }
+      \item{"inf_1_w"}{ Weekly infections per 1000 }
+      \item{"MC_w"}{ Weekly microcephaly cases per 1000 }
       }}
 }
 \description{
