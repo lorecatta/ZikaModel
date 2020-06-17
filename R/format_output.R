@@ -1,6 +1,5 @@
 
 
-
 # -----------------------------------------------------------------------------
 
 #' The function formats human-realetd model outputs as a long data frame.
@@ -9,11 +8,14 @@
 #'
 #' @param x Zika_model_simulation object.
 #'
-#' @param var_select Vector of human compartment names, e.g. \code{c("S", "R")}. In
+#' @param var_select Vector of human compartment names, \code{c("S", "I1", "R1")}. In
 #'   addition a number of additional variables can be requested. These include:
 #' \itemize{
-#'       \item{"infections_w"}{ Weekly Infections }
-#'       \item{"micro_cases_w"}{ Weekly Microcephaly Cases }
+#'       \item{"Ntotal"}{ Total number of people }
+#'       \item{"inf_1"}{ Daily infections }
+#'       \item{"MC"}{ Daily microcephaly cases }
+#'       \item{"inf_1_w"}{ Weekly infections per 1000 }
+#'       \item{"MC_w"}{ Weekly microcephaly cases per 1000 }
 #'       }
 #' @export
 format_output_H <- function(x,
@@ -26,24 +28,25 @@ format_output_H <- function(x,
 
   # Extracting relevant columns for compartment variables
   # -> if var_select = NULL extract all compartments
-  # -> if var_select = names specific compartments, extract those
+  # -> if var_select = names extract specific compartments or summary variables
 
   # Summarise
   # -> if keep = NULL calculate totals across age, vaccine status and patches
   # -> if keep = patch summarise by patch
   # -> if keep = vaccine summarise by vaccine status
 
-  ## calculate number of microcephaly cases
-  MC <- calculate_microcases(x)
+  compartments <- c("S", "I1", "R1")
 
-  num_vars <- c("S", "I1", "R1", "inf_1")
+  summary_vars_present <- c("Ntotal", "inf_1")
 
-  inc_vars <- c("inf_1", "MC")
+  summary_vars_not_present <- c("MC")
 
-  if(is.null(var_select)) {
+  weekly_summary_vars <- c("inf_1_w", "MC_w")
+
+  if (is.null(var_select)) {
 
     # here the option of summarising by patch or vaccine status
-    human_compartments_output_list <- lapply(num_vars, function(j) {
+    compartments_output_list <- lapply(compartments, function(j) {
 
       temp <- x$output[,unlist(index[j])]
       temp_array <- array(temp, dim = c(dim(temp)[1], x$parameters$na, 2, x$parameters$NP))
@@ -51,40 +54,124 @@ format_output_H <- function(x,
 
     })
 
-    names(human_compartments_output_list) <- num_vars
+    names(compartments_output_list) <- compartments
 
-    MC_output <- sum_across_array_dims(MC, keep)
+    output_list <- compartments_output_list
+
+  } else {
+
+    compartments_requested <- var_select[var_select %in% compartments]
+    compartments_requested <- if (identical(compartments_requested, character(0))) NULL else compartments_requested
+
+    summary_vars_present_requested <- var_select[var_select %in% summary_vars_present]
+    summary_vars_present_requested <- if (identical(summary_vars_present_requested, character(0))) NULL else summary_vars_present_requested
+
+    summary_vars_not_present_requested <- var_select[var_select %in% summary_vars_not_present]
+    summary_vars_not_present_requested <- if (identical(summary_vars_not_present_requested, character(0))) NULL else summary_vars_not_present_requested
+
+    weekly_summary_vars_requested <- var_select[var_select %in% weekly_summary_vars]
+    weekly_summary_vars_requested <- if (identical(weekly_summary_vars_requested, character(0))) NULL else weekly_summary_vars_requested
+
+    output_list <- list()
+
+    vars_present <- c(compartments_requested, summary_vars_present_requested)
+
+    if (!is.null(vars_present)) {
+
+      compartments_output_list <- lapply(vars_present, function(j) {
+
+        temp <- x$output[,unlist(index[j])]
+        temp_array <- array(temp, dim = c(dim(temp)[1], x$parameters$na, 2, x$parameters$NP))
+        sum_across_array_dims(temp_array, keep)
+
+      })
+
+      names(compartments_output_list) <- vars_present
+
+      output_list <- c(output_list, compartments_output_list)
+
+    }
+
+    requested_vars <- c(compartments_requested,
+                        summary_vars_present_requested,
+                        summary_vars_not_present_requested,
+                        weekly_summary_vars_requested)
+
+    if ("MC" %in% requested_vars) {
+
+      MC <- calculate_microcases(x)
+
+      MC_output <- sum_across_array_dims(MC, keep)
+
+      output_list <- c(output_list, MC = list(MC_output))
+
+    }
+
+    if ("MC_w" %in% requested_vars) {
+
+      MC <- calculate_microcases(x)
+
+      Ntotal <- unpack_odin(x, "Ntotal")
+
+      sum_MC <- sum_across_array_dims(MC, keep)
+
+      sum_Ntotal <- sum_across_array_dims(Ntotal, keep)
+
+      cumsum_sum_MC <- cumsum_across_array_dims(sum_MC, keep)
+
+      MC_w <- calculate_incidence(cumsum_sum_MC, sum_Ntotal, 7)
+
+      output_list <- c(output_list, MC_w = list(MC_w))
+
+    }
+
+    if ("inf_1_w" %in% requested_vars) {
+
+      inf_1 <- unpack_odin(x, "inf_1")
+
+      Ntotal <- unpack_odin(x, "Ntotal")
+
+      sum_inf_1 <- sum_across_array_dims(inf_1, keep)
+
+      sum_Ntotal <- sum_across_array_dims(Ntotal, keep)
+
+      cumsum_sum_inf_1 <- cumsum_across_array_dims(sum_inf_1, keep)
+
+      inf_1_w <- calculate_incidence(cumsum_sum_inf_1, sum_Ntotal, 7)
+
+      output_list <- c(output_list, inf_1_w = list(inf_1_w))
+
+    }
 
   }
 
-  browser()
+  vars <- names(output_list)
 
   if(is.null(keep)) {
-
-    output_list <- c(human_compartments_output_list, MC = list(MC_output))
-
-    vars <- names(output_list)
 
     out <- data.frame(t = as.numeric(x$output[,index$time]),
                       compartment = as.character(mapply(rep, vars, nt)),
                       y = unlist(output_list, use.names = FALSE))
 
-  }
+  } else if (keep == "patch") {
 
-  # # Disaggregating var_select into compartments and summary variables
-  # compartments <- var_select[!(var_select %in% mean_vars)]
-  # compartments <- if (identical(compartments, character(0))) NULL else compartments
-  # summaries <- var_select[var_select %in% mean_vars]
-  # summaries <- if (identical(summaries, character(0))) NULL else summaries
+    out <- data.frame(t = as.numeric(x$output[,index$time]),
+                      patch = rep(seq_len(x$parameters$NP), each = nt),
+                      compartment = as.character(mapply(rep, vars, x$parameters$NP*nt)),
+                      y = unlist(output_list, use.names = FALSE))
+
+  } else if (keep == "vaccine") {
+
+    out <- data.frame(t = as.numeric(x$output[,index$time]),
+                      vaccine = rep(seq_len(2), each = nt),
+                      compartment = as.character(mapply(rep, vars, 2*nt)),
+                      y = unlist(output_list, use.names = FALSE))
+
+  }
 
   out
 
 }
-
-# -----------------------------------------------------------------------------
-
-
-
 
 
 # -----------------------------------------------------------------------------
@@ -189,55 +276,6 @@ format_output_M <- function(x,
 }
 
 
-
-# -----------------------------------------------------------------------------
-
-#' The function calculates the mean across patches of a model output,
-#' by ignoring the \emph{rest of the world} patch.
-#'
-#' @title Calculate the mean across patches of a model output
-#'
-#' @param my_vector vector of model outputs by patch.
-#'
-#' @export
-calculate_mean_of_patch_variables <- function(my_vector) {
-
-  NP <- length(my_vector)
-
-  ret <- (sum(my_vector) - my_vector[NP]) / (NP - 1)
-
-  return(ret)
-
-  # FOI1av <- (sum(FOI1p[]) - FOI1p[NP]) / (NP - 1)
-  # R0t_1av <- (sum(R0t_1[]) - R0t_1[NP]) / (NP - 1)
-  # Deltaav <- (sum(Delta[]) - Delta[NP]) / (NP - 1)
-  # Kcav <- (sum(Kc[]) - Kc[NP]) / (NP - 1)
-  # eipav <- (sum(eip[]) - eip[NP]) / (NP - 1)
-  # Mwt_FOI1av <- (sum(Mwt_FOI1[]) - Mwt_FOI1[NP]) / (NP - 1)
-  # Mwb_FOI1av <- (sum(Mwb_FOI1[]) - Mwb_FOI1[NP]) / (NP - 1)
-
-}
-
-sum_across_array_dims <- function(array_to_sum, keep = NULL) {
-
-  if(is.null(keep)) {
-
-    ret <- apply(array_to_sum, 1, sum)
-
-  } else if(keep == "patch") {
-
-    ret <- apply(array_to_sum, c(1, 4), sum)
-
-  } else if(keep == "vaccine") {
-
-    ret <- apply(array_to_sum, c(1, 3), sum)
-
-  }
-
-  ret
-
-}
-
 # -----------------------------------------------------------------------------
 
 #' The function processes model outputs to calculate metrics of interest.
@@ -307,7 +345,6 @@ post_processing <- function(dat, DT) {
   list("compartments" = droplevels(diagno_1), "demographics" = droplevels(diagno_2))
 
 }
-
 
 
 # -----------------------------------------------------------------------------
