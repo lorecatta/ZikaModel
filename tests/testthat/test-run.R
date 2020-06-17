@@ -14,7 +14,7 @@ test_that("dt is used correctly to calculate time steps", {
 
   max_t <- r2$parameters$time_period / r2$parameters$DT
   tt <- seq(from = 1, to = max_t)
-  expect_identical(tt * r2$parameters$DT, results$TIME)
+  expect_identical(tt * r2$parameters$DT, results$time)
 })
 
 test_that("format output works", {
@@ -25,12 +25,18 @@ test_that("format output works", {
   ## summarise by compartment
   o1 <- format_output_H(r1)
 
-  n_comp <- unique(o1$compartment)
-  expect_type(o1, "data.frame")
-  expect_equal(now(o1), n_comp * r2$parameters$time_period)
+  n_comp <- length(levels(o1$compartment))
+  expect_s3_class(o1, "data.frame")
+  expect_equal(nrow(o1), n_comp * r1$parameters$time_period)
 
   ##summarise by patch
-  browser()
   o2 <- format_output_H(r1, keep = "patch")
+  n_comp <- length(levels(o2$compartment))
+  expect_equal(nrow(o2), n_comp * r1$parameters$time_period * r1$parameters$NP)
+
+  ##summarise by vaccine status
+  o3 <- format_output_H(r1, keep = "vaccine")
+  n_comp <- length(levels(o3$compartment))
+  expect_equal(nrow(o3), n_comp * r1$parameters$time_period * 2)
 
 })
