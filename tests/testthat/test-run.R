@@ -22,6 +22,10 @@ test_that("format output works", {
   set.seed(123)
   r1 <- run_deterministic_model()
 
+
+  ### only human compartments
+
+
   ## summarise by compartment
   o1 <- format_output_H(r1)
 
@@ -29,14 +33,22 @@ test_that("format output works", {
   expect_s3_class(o1, "data.frame")
   expect_equal(nrow(o1), n_comp * r1$parameters$time_period)
 
-  ##summarise by patch
+  ## summarise by patch
   o2 <- format_output_H(r1, keep = "patch")
   n_comp <- length(levels(o2$compartment))
   expect_equal(nrow(o2), n_comp * r1$parameters$time_period * r1$parameters$NP)
 
-  ##summarise by vaccine status
+  ## summarise by vaccine status
   o3 <- format_output_H(r1, keep = "vaccine")
   n_comp <- length(levels(o3$compartment))
   expect_equal(nrow(o3), n_comp * r1$parameters$time_period * 2)
+
+
+  ### selected variables
+
+
+  ## summarise by compartment
+  o4 <- format_output_H(r1, var_select = c("S", "R1", "inf_1", "MC_w"))
+
 
 })
