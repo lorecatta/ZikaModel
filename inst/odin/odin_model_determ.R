@@ -650,6 +650,7 @@ dim(vacc_cu_age) <- vnc_row
 
 ## extra outputs
 output(time) <- TRUE
+output(Ntotal[,,]) <- TRUE
 output(inf_1[,,]) <- TRUE
 output(FOI1) <- TRUE
 output(R0t_1) <- TRUE
