@@ -90,6 +90,7 @@
 #'   travelers visiting from elsewhere. Default = 1e-8.
 #' @param phi_prim Degree of cross-immunity  (not applicable for Zika). Default = 1.
 #' @param dis_pri Proportion of infections which are symptomatic. Default = 0.2.
+#' @param mc_baseline. Baseline per birth microcephaly incidence rate. Default = 0.0002.
 #' @param AGE_REC Default = 2.
 #' @param PropDiseaseReported Reporting rate of symptomatic cases. Default = 0.1.
 #'
@@ -168,6 +169,7 @@ parameters_deterministic_model <- function(
 
   # disease
   dis_pri = 0.2,
+  mc_baseline = 0.0002,
   AGE_REC = 2,
   PropDiseaseReported = 1) {
 
@@ -301,6 +303,7 @@ parameters_deterministic_model <- function(
                   dis1 = dis_pri_values,
                   rho1 = rho1_values,
                   phi1 = phi_prim_values,
+                  mc_baseline = mc_baseline,
                   AGE_REC = AGE_REC,
                   PropDiseaseReported = PropDiseaseReported,
                   Wb_introtime = Wb_introtime,

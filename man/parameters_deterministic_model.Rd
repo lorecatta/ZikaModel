@@ -56,6 +56,7 @@ parameters_deterministic_model(
   BG_FOI = 1e-08,
   phi_prim = 1,
   dis_pri = 0.2,
+  mc_baseline = 2e-04,
   AGE_REC = 2,
   PropDiseaseReported = 1
 )
@@ -200,6 +201,8 @@ travelers visiting from elsewhere. Default = 1e-8.}
 \item{AGE_REC}{Default = 2.}
 
 \item{PropDiseaseReported}{Reporting rate of symptomatic cases. Default = 0.1.}
+
+\item{mc_baseline.}{Baseline per birth microcephaly incidence rate. Default = 0.0002.}
 }
 \value{
 Parameter list

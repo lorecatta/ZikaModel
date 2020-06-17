@@ -4,13 +4,12 @@
 \alias{calculate_microcases_ZIKV}
 \title{Estimates number of microcephaly cases caused by Zika infection}
 \usage{
-calculate_microcases_ZIKV(N_inf, pregnancy_risk_curve, birth_rates)
+calculate_microcases_ZIKV(model, birth_rates)
 }
 \arguments{
-\item{x}{Zika_model_simulation object.}
+\item{model}{Zika_model_simulation object.}
 
-\item{var_select}{Vector of compartment names, e.g. \code{c("S", "R")}. In
-addition a number of additional variables can be requested. These include:}
+\item{birth_rates}{age specific birth rates for Brazil.}
 }
 \description{
 The function estimates the number of microcephaly cases due to ZIKV infection

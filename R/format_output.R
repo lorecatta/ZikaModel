@@ -1,4 +1,111 @@
 
+
+
+# -----------------------------------------------------------------------------
+
+#' The function format model outputs as a long data frame.
+#'
+#' @title Format model outputs
+#'
+#' @param x Zika_model_simulation object.
+#'
+#' @param var_select Vector of compartment names, e.g. \code{c("S", "R")}. In
+#'   addition a number of additional variables can be requested. These include:
+#' \itemize{
+#'       \item{"infections_w"}{ Weekly Infections }
+#'       \item{"micro_cases_w"}{ Weekly Microcephaly Cases }
+#'       \item{"Kcav"}{ Average mosquito larvae carrying capacity by patch }
+#'       \item{"eipav"}{ Average EIP by patch }
+#'       \item{"Deltaav"}{ Average adult mosquito mortality rate by patch }
+#'       \item{"R0t_1av"}{ Average Rt by patch }
+#'       \item{"FOI1av"}{ Average FOI by patch }
+#'       }
+#' @export
+format_output <- function(x,
+                          var_select = NULL,
+                          keep = NULL) {
+
+  # Get model details
+  nt <- nrow(x$output)
+  index <- odin_index(x$model)
+
+  browser()
+
+  # Extracting relevant columns for compartment variables
+  # -> if var_select = NULL extract all compartments
+  # -> if var_select = names specific compartments, extract those
+
+  # Summarise
+  # -> if keep = NULL calculate totals across age, vaccine status and patches
+  # -> if keep = patch summarise by patch
+  # -> if keep = vaccine summarise by vaccine status
+
+  ## calculate number of microcephaly cases
+  MC <- calculate_microcases(x)
+
+  patch_vars_to_sum <- c("Lwt", "Mwt_S", "Mwt_E1", "Mwt_E2", "Mwt_I1",
+                         "Lwb", "Mwb_S", "Mwb_E1", "Mwb_E2", "Mwb_I1")
+
+  patch_vars_to_average <- c("Kc", "eip", "Delta", "R0t_1", "FOI1")
+
+  human_compartments <- c("S", "I1", "R1")
+
+  inc_vars <- c("infections_w", "micro_cases_w")
+
+  if(is.null(var_select)) {
+
+    patch_vars_to_sum_output_list <- lapply(patch_vars_to_sum, function(j) {
+
+      temp_array <- x$output[,unlist(index[j])]
+      apply(temp_array, 1, sum)
+
+    })
+
+    names(patch_vars_to_sum_output_list) <- patch_vars_to_sum
+
+    patch_vars_to_average_output_list <- lapply(patch_vars_to_average, function(j) {
+
+      temp_array <- x$output[,unlist(index[j])]
+      apply(temp_array, 1, calculate_mean_of_patch_variables)
+
+    })
+
+    names(patch_vars_to_average_output_list) <- patch_vars_to_average
+
+    # here the option of summarising by patch or vaccine status
+    human_compartments_output_list <- lapply(human_compartments, function(j) {
+
+      temp <- x$output[,unlist(index[j])]
+      temp_array <- array(temp, dim = c(dim(temp)[1], x$parameters$na, 2, x$parameters$NP))
+      sum_across_array_dims(temp_array, keep)
+
+    })
+
+    names(human_compartments_output_list) <- human_compartments
+
+  }
+
+  browser()
+
+  if(is.null(keep)) {
+
+    output_list <- c(human_compartments_output_list)
+
+    mos_out <- data.frame(t = as.numeric(x$output[,index$time]),
+                          y = unlist(output_list))
+
+  }
+
+
+  # Disaggregating var_select into compartments and summary variables
+  compartments <- var_select[!(var_select %in% mean_vars)]
+  compartments <- if (identical(compartments, character(0))) NULL else compartments
+  summaries <- var_select[var_select %in% mean_vars]
+  summaries <- if (identical(summaries, character(0))) NULL else summaries
+
+
+}
+
 # -----------------------------------------------------------------------------
 
 #' The function calculates the mean across patches of a model output,
@@ -27,6 +134,25 @@ calculate_mean_of_patch_variables <- function(my_vector) {
 
 }
 
+sum_across_array_dims <- function(array_to_sum, keep = NULL) {
+
+  if(is.null(keep)) {
+
+    ret <- apply(array_to_sum, 1, sum)
+
+  } else if(keep == "patch") {
+
+    ret <- apply(array_to_sum, c(1, 4), sum)
+
+  } else if(keep == "vaccine") {
+
+    ret <- apply(array_to_sum, c(1, 3), sum)
+
+  }
+
+  ret
+
+}
 
 # -----------------------------------------------------------------------------
 

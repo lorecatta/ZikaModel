@@ -17,6 +17,17 @@ odin_index <- function(model) {
 
 # -----------------------------------------------------------------------------
 
+## get one odin output
+
+#' @noRd
+unpack_odin <- function(x, var_to_unpack) {
+  index <- odin_index(x$model)
+  temp <- x$output[,unlist(index[var_to_unpack])]
+  array(temp, dim = c(dim(temp)[1], x$parameters$na, 2, x$parameters$NP))
+}
+
+# -----------------------------------------------------------------------------
+
 #' The function returns a vector of lagged difference values using \code{diff}
 #' with initial padding
 #'

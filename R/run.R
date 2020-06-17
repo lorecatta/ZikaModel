@@ -187,6 +187,7 @@ run_deterministic_model <- function(
 
   # disease
   dis_pri = 0.2,
+  mc_baseline = 0.0002,
   AGE_REC = 2,
   PropDiseaseReported = 1) {
 
@@ -234,14 +235,15 @@ run_deterministic_model <- function(
                                          vacc_cu_time = vacc_cu_time,
                                          vaccine_cu_age = vaccine_cu_age,
                                          vacceff_prim = vacceff_prim,
+                                         rho_prim = rho_prim,
                                          other_foi = other_foi,
                                          other_prop_immune = other_prop_immune,
                                          propTransGlobal = propTransGlobal,
                                          propTransNN = propTransNN,
                                          BG_FOI = BG_FOI,
-                                         dis_pri = dis_pri,
-                                         rho_prim = rho_prim,
                                          phi_prim = phi_prim,
+                                         dis_pri = dis_pri,
+                                         mc_baseline = mc_baseline,
                                          AGE_REC = AGE_REC,
                                          PropDiseaseReported = PropDiseaseReported)
 
