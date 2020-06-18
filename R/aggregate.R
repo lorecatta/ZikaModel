@@ -31,7 +31,12 @@ sum_across_array_dims <- function(my_array, keep = NULL, compartment = NULL) {
 
   summary_vars_to_average <- c("Kc", "eip", "Delta", "R0t_1", "FOI1")
 
-  if (length(dim(my_array)) == 2) {
+  no_array_dims <- length(dim(my_array))
+
+  if (!is.null(keep) && (no_array_dims == 2 &  keep == "vaccine"))
+    stop("Can not summarise mosquito-related variables or compartments by vaccine status")
+
+  if (no_array_dims == 2) {
 
     if(is.null(keep)) {
 
