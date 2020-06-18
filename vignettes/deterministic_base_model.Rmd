@@ -36,7 +36,13 @@ The returned object is a `Zika_model_simulation` object, which is a list of two 
 plot(r1, type = "H")
 ```
 
-This will plot all human compartments of the model. The argument `type` is used to specify which part of the model we want to plot, the human (`H`) or the mosquito (`M`) part. We can select which compartment to plot with the `var_select` argument. Arguments passed to `var_select` must be one of the variables in the above plot. 
+This will plot all the human compartments of the model, namely:
+
+* `S` - Susceptibles 
+* `I1` - Exposed and Infectious
+* `R1` - Recovered
+
+The argument `type` is used to specify which part of the model we want to plot, the human (`H`) or the mosquito (`M`) part. We can select which compartment to plot with the `var_select` argument. Arguments passed to `var_select` must be one of the variables in the above plot. 
 
 ```{r, fig.height = 6, fig.width = 8}
 plot(r1, type = "H", var_select = c("S", "I1"))
@@ -82,6 +88,23 @@ By specifing the same arguments `var_select` and `keep` arguments in the plot fu
 plot(r1, type = "H", var_select = "S", keep = "patch")
 ```
 
+We can also plot the mosquito compartments of the model using the same `plot` function. To do that we modify the value of the `type` argument.
+
+```{r, fig.height = 6, fig.width = 8}
+plot(r1, type = "M")
+```
+
+This plots the following mosquito compartments:
+
+* `Mwt_S` - Susceptible wild type adult 
+* `Mwt_E1` - Exposed wild type in incubation stage 1
+* `Mwt_E2` - Exposed wild type in incubation stage 2
+* `Mwt_I1` - Infectious wild type
+* `Mwb_S` - Susceptible wolbachia-infected adult 
+* `Mwb_E1` - Exposed wolbachia-infected in incubation stage 1
+* `Mwb_E2` - Exposed wolbachia-infected in incubation stage 2
+* `Mwb_I1` - Infectious wolbachia-infected
+
 As a sanity check, we also plot the variables which are directly modified by seasonal forcing, namely mosquito larve carrying capacity (`Kc`), extrinsic incubation period (`eip`) and adult mosquito mortality rate (`Delta`), and the reproduction number ($R_0$). We can make use of the function `format_output_M()`, which allows to format the model outputs. `format_output_M()` by default extracts the mean value of `Kc`, `eip` and `Delta` across patches. Once we have extracted the model output we can write our own plotting code: 
 
 ```{r, fig.height = 6, fig.width = 8}
@@ -120,8 +143,7 @@ Rt_p <- ggplot(Rt, aes(x = t, y = y)) +
   ggtitle("Time varying reprodution number") +
   theme_bw()
 
-all <- Kc_p + eip_p + delta_p + Rt_p +
-  plot_layout(guides = 'collect')
+all <- Kc_p + eip_p + delta_p + Rt_p
 all
 ```
 A expected the mean value of `Kc`, `eip` and `Delta` does no change throughout the simulation when seasonality is turned off.
