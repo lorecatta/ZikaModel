@@ -17,81 +17,110 @@ knitr::opts_chunk$set(
 ```
 
 ## Running the base model
-Here we consider a deterministic model without seasonality and interventions. The model has an age-stratified human host populations with 11 human age groups. To run the model we need to define some objects first, such as:
-
-* the width of each human age groups;
-* the mortality rate in each age group, and
-* the length of time we want to run the model for.
+Here we consider a deterministic model without seasonality and interventions. By defaut the model uses Brazil demographics (annual per capita birth and death rates) ofr the human compartments. This will likeley be modifed in future versions. 
+We run the deterministic version of the model with `run_deterministic_model()`:
 
 ```{r}
-library(ZikaModel)
-
-age_init <- c(1, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10)
-  
-deathrt <- c(1e-10, 
-             1e-10, 
-             1e-10, 
-             0.00277068683332695, 
-             0.0210680857689784,
-             0.026724997685722,
-             0.0525354529367476,
-             0.0668013582441452,
-             0.119271483740379,
-             0.279105747097929,
-             0.390197266957464)
-
-# number of years to run the simulation for
-time_years <- 50 # years
-
-# time step
-my_dt <- 1
-
-# number of model time steps
-time_frame <- (364 * time_years) / my_dt
+r1 <- run_deterministic_model(time_period = 365 * 5)
 ```
 
-We run the deterministic version of the model with `run_model()`. Note that the `nn_links` and `amplitudes_phases` objects are datasets of the nearest neighboring patches to each patch and the amplitude and phase of seasonal forcing in each patch, respectively, and are provided with the package.
+The returned object is a Zika_model_simulation object, which is a list of two ojects:
+
+* `output` - model output
+* `parameters` - model parameters
+
+`Zika_model_simulation` objects can be plotted as follows:
 
 ```{r}
-model_outputs <- run_model(agec = age_init,
-                           death = deathrt,
-                           nn_links = nn_links,
-                           amplitudes_phases = amplitudes_phases,
-                           time = time_frame)
+plot(r1, type = "H")
 ```
 
-We can calculate the proportions of the total human population in each compartment 
-and few other useful demographics of the human host population using the `post_processing` function
+This will plot all human compartments of the model. The argument `type` is used to specify which part of the model we want to plot, the human (`H`) or the mosquito (`M`) part. We can select which compartment to plot with the `var_select` argument. Arguments passed to `var_select` must be one of the variables in the above plot. 
 
 ```{r}
-diagnostics <- post_processing(model_outputs, my_dt)
+plot(r1, type = "H", var_select = c("S", "I1"))
 ```
 
-The demographic diagnostics of the vector population can be calculated with the `post_processing_mos` function
+Alternatively one of the following variables can be selected: 
+
+* `Ntotal` - total size of the human population  
+* `inf_1` - daily incidence of infections
+* `MC` - daily incidence of microcepahly cases 
+* `inf_1_w` - weekly incidence of infections per 1000 individuals 
+* `MC_w` - weekly incidence of microcepahly cases per 1000 individuals.
+
+First we plot the daily infections
 
 ```{r}
-mosquito_diagnostics <- post_processing_mos(model_outputs)
+plot(r1, type = "H", var_select = "inf_1")
 ```
 
-Now we plot all the diagnostics
+and then the numebr of microcephaly cases 
 
-```{r, fig.height = 4, fig.width = 6}
-plot_compartments(diagnostics$compartments)
+```{r}
+plot(r1, type = "H", var_select = "inf_1")
 ```
 
-```{r, fig.height = 6, fig.width = 8}
-plot_demographics(diagnostics$demographics)
+By default the plot function uses internally the `format_output_H()` or the `format_output_M()` function, depending on the value of the `type` argument. Here we extract the `S` compartment 
+
+```{r}
+S_output <- format_output_H(r1, var_select = "S")
+head(S_output)
 ```
 
-```{r, fig.height = 6, fig.width = 8}
-plot_demographics(mosquito_diagnostics)
+By using the `keep` argument we can extract the value of these variables for each of the 21 patches or each of the two vaccine status (1 = non vaccinated, 2 = vaccinated). Now the output has an additional column for the patch:
+
+```{r}
+S_output <- format_output_H(r1, var_select = "S", keep = "patch")
+head(S_output)
 ```
 
-As a sanity check, we also plot the variables which are directly modified by seasonal forcing, namely mosquito larve carrying capacity (Kc), extrinsic incubation period (eip) and adult mosquito mortality rate (delta), and the reproduction number ($R_0$). The mean value across patches of these variables should not change throughout the simulation when seasonality is turned off.
+An now we can specify the same arguments in the plot function to plot the `S` compartment by patch:
 
-```{r, fig.height = 6, fig.width = 8}
-season_vars <- plot_Kc_eip_delta(model_outputs)
-grid::grid.draw(season_vars)
+```{r}
+plot(r1, type = "H", var_select = "S", keep = "patch")
 ```
 
-Good.
+As a sanity check, we also plot the variables which are directly modified by seasonal forcing, namely mosquito larve carrying capacity (Kc), extrinsic incubation period (eip) and adult mosquito mortality rate (Delta), and the reproduction number ($R_0$). We can make use of the function `format_output_M()`, which is used internally to plot and which allows to format the model outputs. The function `format_output_M()` by default extracts the mean value of `Kc`, `eip` and `Delta` across patches. Once we have extracted the model output we can write our own plotting code. 
+
+```{r}
+library(ggplot2)
+library(patchwork)
+
+Kc <- format_output_M(r1, var_select = "Kc")
+Kc_p <- ggplot(Kc, aes(x = t, y = y)) +
+  geom_line(color = 'royalblue', size = 0.5) +
+  scale_x_continuous("Time") +
+  scale_y_continuous("Mean across patches") +
+  ggtitle("Mosquito larvae carrying capacity") +
+  theme_bw()
+
+eip <- format_output_M(r1, var_select = "eip")
+eip_p <- ggplot(eip, aes(x = t, y = y)) +
+  geom_line(color = 'royalblue', size = 0.5) +
+  scale_x_continuous("Time") +
+  scale_y_continuous("Mean across patches") +
+  ggtitle("Extrinsic Incubation Period") +
+  theme_bw()
+
+delta <- format_output_M(r1, var_select = "Delta")  
+delta_p <- ggplot(delta, aes(x = t, y = y)) +
+  geom_line(color = 'royalblue', size = 0.5) +
+  scale_x_continuous("Time") +
+  scale_y_continuous("Mean across patches") +
+  ggtitle("Adult mosquito daily mortality rate") +
+  theme_bw()
+
+Rt <- format_output_M(r1, var_select = "R0t_1")  
+Rt_p <- ggplot(Rt, aes(x = t, y = y)) +
+  geom_line(color = 'royalblue', size = 0.5) +
+  scale_x_continuous("Time") +
+  scale_y_continuous("Mean across patches") +
+  ggtitle("Time varying reprodution number") +
+  theme_bw()
+
+all <- Kc_p + eip_p + delta_p + Rt_p
+  plot_layout(guides = 'collect')
+all
+```
+A expcted the mean value of `Kc`, `eip` and `Delta` does no change throughout the simulation when seasonality is turned off.
