@@ -2,17 +2,22 @@
 % Please edit documentation in R/object.R
 \name{plot.Zika_model_simulation}
 \alias{plot.Zika_model_simulation}
-\title{Plot human states}
+\title{Plot human or mosquitoes states}
 \usage{
-\method{plot}{Zika_model_simulation}(x, var_select = NULL, summarise = NULL)
+\method{plot}{Zika_model_simulation}(x, type, var_select = NULL, keep = NULL)
 }
 \arguments{
 \item{x}{Zika_model_simulation object.}
 
+\item{type}{Character of model compartment type to plot.
+allowed are \code{c("H", "M")} for Human and Mosquito.}
+
 \item{var_select}{Vector of variable names to plot (default is all)}
 
-\item{summarise}{name of variables by which to stratify (default is no stratification)}
+\item{keep}{name of variables to stratify by
+(allowed are \code{c("patch", "vaccine")} for type H and
+\code{"patch"} for type M. Default is no stratification)}
 }
 \description{
-The function makes a plot of the model human compartments.
+The function makes a plot of the model compartments.
 }
