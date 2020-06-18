@@ -9,15 +9,9 @@ format_output_M(x, var_select = NULL, keep = NULL)
 \arguments{
 \item{x}{Zika_model_simulation object.}
 
-\item{var_select}{Vector of mosquito compartment names, e.g. \code{c("S", "R")}. In
-  addition a number of additional variables can be requested. These include:
-\itemize{
-      \item{"Kcav"}{ Average mosquito larvae carrying capacity by patch }
-      \item{"eipav"}{ Average EIP by patch }
-      \item{"Deltaav"}{ Average adult mosquito mortality rate by patch }
-      \item{"R0t_1av"}{ Average Rt by patch }
-      \item{"FOI1av"}{ Average FOI by patch }
-      }}
+\item{var_select}{Vector of mosquito compartment names,
+e.g. \code{c("Lwt", "Mwt_S", "Mwb_E1")}, or mosquito-related variables,
+e.g. \code{c("Kc", "Delta", "R0t_1")}.}
 }
 \description{
 The function formats mosquito-related model outputs as a long data frame.

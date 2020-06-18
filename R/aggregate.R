@@ -27,19 +27,45 @@ calculate_mean_of_patch_variables <- function(my_vector) {
 
 }
 
-sum_across_array_dims <- function(my_array, keep = NULL) {
+sum_across_array_dims <- function(my_array, keep = NULL, compartment = NULL) {
 
-  if (is.null(keep)) {
+  summary_vars_to_average <- c("Kc", "eip", "Delta", "R0t_1", "FOI1")
 
-    ret <- apply(my_array, 1, sum)
+  if (length(dim(my_array)) == 2) {
 
-  } else if (keep == "patch") {
+    if(is.null(keep)) {
 
-    ret <- apply(my_array, c(1, 4), sum)
+      if(compartment %in% summary_vars_to_average) {
 
-  } else if (keep == "vaccine") {
+        ret <- apply(my_array, 1, calculate_mean_of_patch_variables)
 
-    ret <- apply(my_array, c(1, 3), sum)
+      } else {
+
+        ret <- apply(my_array, 1, sum)
+
+      }
+
+    } else if (keep == "patch") {
+
+      ret <- my_array
+
+    }
+
+  } else {
+
+    if (is.null(keep)) {
+
+      ret <- apply(my_array, 1, sum)
+
+    } else if (keep == "patch") {
+
+      ret <- apply(my_array, c(1, 4), sum)
+
+    } else if (keep == "vaccine") {
+
+      ret <- apply(my_array, c(1, 3), sum)
+
+    }
 
   }
 
