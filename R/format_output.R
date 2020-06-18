@@ -206,10 +206,10 @@ format_output_M <- function(x,
   # -> if keep = NULL calculate totals across patches (sum or mean depending on the variable)
   # -> if keep = patch summarise by patch
 
-  compartments <- c("Lwt", "Mwt_S", "Mwt_E1", "Mwt_E2", "Mwt_I1",
-                    "Lwb", "Mwb_S", "Mwb_E1", "Mwb_E2", "Mwb_I1")
+  compartments <- c("Mwt_S", "Mwt_E1", "Mwt_E2", "Mwt_I1",
+                    "Mwb_S", "Mwb_E1", "Mwb_E2", "Mwb_I1")
 
-  summary_vars <- c("Kc", "eip", "Delta", "R0t_1", "FOI1")
+  summary_vars <- c("Lwt", "Lwb", "Kc", "eip", "Delta", "R0t_1", "FOI1")
 
   compartments_requested <- var_select[var_select %in% compartments]
   compartments_requested <- if (identical(compartments_requested, character(0))) NULL else compartments_requested
