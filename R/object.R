@@ -1,5 +1,56 @@
 
 
+
+# -----------------------------------------------------------------------------
+
+#' The function makes a plot of the model human compartments.
+#'
+#' @title Plot human states
+#'
+#' @param x Zika_model_simulation object.
+#'
+#' @param var_select Vector of variable names to plot (default is all)
+#'
+#' @param summarise name of variables by which to stratify (default is no stratification)
+#'
+#' @export
+plot.Zika_model_simulation <- function(x, var_select = NULL, summarise = NULL) {
+
+
+  pds <- format_output_H(x, var_select = var_select)
+
+  # Plot
+  p <- ggplot2::ggplot()
+
+  if(is.null(summarise)) {
+    p <- p + ggplot2::geom_line(data = pds,
+                                ggplot2::aes(x = .data$t, y = .data$y,
+                                             col = .data$compartment))
+  } else if (summarise == "patch") {
+    p <- p + ggplot2::geom_line(data = pds,
+                                ggplot2::aes(x = .data$t, y = .data$y,
+                                             col = .data$compartment)) +
+      facet_wrap(as.formula(paste("~", summarise)), ncol = 4)
+  }
+
+  # Add remaining formatting
+  p <- p +
+    ggplot2::scale_color_discrete(name = "") +
+    ggplot2::scale_fill_discrete(guide = FALSE) +
+    ggplot2::scale_x_continuous(name = "Time") +
+    ggplot2::scale_y_continuous(name = "N", labels = scales::comma) +
+    ggplot2::theme_bw()
+
+  return(p)
+
+}
+
+
+
+
+
+
+
 # -----------------------------------------------------------------------------
 
 #' The function makes a plot of the model human compartments.
