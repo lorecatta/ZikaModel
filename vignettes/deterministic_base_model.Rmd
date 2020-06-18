@@ -17,27 +17,28 @@ knitr::opts_chunk$set(
 ```
 
 ## Running the base model
-Here we consider a deterministic model without seasonality and interventions. By defaut the model uses Brazil demographics (annual per capita birth and death rates) ofr the human compartments. This will likeley be modifed in future versions. 
-We run the deterministic version of the model with `run_deterministic_model()`:
+Here we consider a deterministic model without seasonality and interventions. By defaut the model uses Brazil demographics (annual per capita human birth and death rates). This will likeley be modifed in future versions. We run the deterministic version of the model with `run_deterministic_model()`:
 
 ```{r}
+library(ZikaModel)
+
 r1 <- run_deterministic_model(time_period = 365 * 5)
 ```
 
-The returned object is a Zika_model_simulation object, which is a list of two ojects:
+The returned object is a `Zika_model_simulation` object, which is a list of two objects:
 
 * `output` - model output
 * `parameters` - model parameters
 
 `Zika_model_simulation` objects can be plotted as follows:
 
-```{r}
+```{r, fig.height = 6, fig.width = 8}
 plot(r1, type = "H")
 ```
 
 This will plot all human compartments of the model. The argument `type` is used to specify which part of the model we want to plot, the human (`H`) or the mosquito (`M`) part. We can select which compartment to plot with the `var_select` argument. Arguments passed to `var_select` must be one of the variables in the above plot. 
 
-```{r}
+```{r, fig.height = 6, fig.width = 8}
 plot(r1, type = "H", var_select = c("S", "I1"))
 ```
 
@@ -49,41 +50,41 @@ Alternatively one of the following variables can be selected:
 * `inf_1_w` - weekly incidence of infections per 1000 individuals 
 * `MC_w` - weekly incidence of microcepahly cases per 1000 individuals.
 
-First we plot the daily infections
+First, we plot the weekly number of infections:
 
-```{r}
-plot(r1, type = "H", var_select = "inf_1")
+```{r, fig.height = 6, fig.width = 8}
+plot(r1, type = "H", var_select = "inf_1_w")
 ```
 
-and then the numebr of microcephaly cases 
+and then the weekly number of microcephaly cases: 
 
-```{r}
-plot(r1, type = "H", var_select = "inf_1")
+```{r, fig.height = 6, fig.width = 8}
+plot(r1, type = "H", var_select = "MC_w")
 ```
 
-By default the plot function uses internally the `format_output_H()` or the `format_output_M()` function, depending on the value of the `type` argument. Here we extract the `S` compartment 
+By default the `plot` function uses internally the `format_output_H()` or the `format_output_M()` function, depending on the value of the `type` argument. We show here the use of the `format_output_H` function to extract the `S` compartment: 
 
-```{r}
+```{r, fig.height = 6, fig.width = 8}
 S_output <- format_output_H(r1, var_select = "S")
 head(S_output)
 ```
 
-By using the `keep` argument we can extract the value of these variables for each of the 21 patches or each of the two vaccine status (1 = non vaccinated, 2 = vaccinated). Now the output has an additional column for the patch:
+By using the `keep` argument we can extract the value of these variables for each of the 21 patches or each of the two vaccine status (1 = non vaccinated, 2 = vaccinated) of the model. By setting `keep` equal to `patch`, the output has an additional column for the patch:
 
-```{r}
+```{r, fig.height = 6, fig.width = 8}
 S_output <- format_output_H(r1, var_select = "S", keep = "patch")
 head(S_output)
 ```
 
-An now we can specify the same arguments in the plot function to plot the `S` compartment by patch:
+By specifing the same arguments `var_select` and `keep` arguments in the plot function we plot the `S` compartment by patch:
 
-```{r}
+```{r, fig.height = 6, fig.width = 8}
 plot(r1, type = "H", var_select = "S", keep = "patch")
 ```
 
-As a sanity check, we also plot the variables which are directly modified by seasonal forcing, namely mosquito larve carrying capacity (Kc), extrinsic incubation period (eip) and adult mosquito mortality rate (Delta), and the reproduction number ($R_0$). We can make use of the function `format_output_M()`, which is used internally to plot and which allows to format the model outputs. The function `format_output_M()` by default extracts the mean value of `Kc`, `eip` and `Delta` across patches. Once we have extracted the model output we can write our own plotting code. 
+As a sanity check, we also plot the variables which are directly modified by seasonal forcing, namely mosquito larve carrying capacity (`Kc`), extrinsic incubation period (`eip`) and adult mosquito mortality rate (`Delta`), and the reproduction number ($R_0$). We can make use of the function `format_output_M()`, which allows to format the model outputs. `format_output_M()` by default extracts the mean value of `Kc`, `eip` and `Delta` across patches. Once we have extracted the model output we can write our own plotting code: 
 
-```{r}
+```{r, fig.height = 6, fig.width = 8}
 library(ggplot2)
 library(patchwork)
 
@@ -119,8 +120,8 @@ Rt_p <- ggplot(Rt, aes(x = t, y = y)) +
   ggtitle("Time varying reprodution number") +
   theme_bw()
 
-all <- Kc_p + eip_p + delta_p + Rt_p
+all <- Kc_p + eip_p + delta_p + Rt_p +
   plot_layout(guides = 'collect')
 all
 ```
-A expcted the mean value of `Kc`, `eip` and `Delta` does no change throughout the simulation when seasonality is turned off.
+A expected the mean value of `Kc`, `eip` and `Delta` does no change throughout the simulation when seasonality is turned off.
