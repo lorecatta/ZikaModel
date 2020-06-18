@@ -101,7 +101,7 @@ calculate_microcases <- function(model) {
 
   birth_rates <- ZikaModel::br_brazil_age
 
-  birth_rates_2 <- birth_rates / model$parameters$YL * model$parameters$DT
+  birth_rates_2 <- model$parameters$DT * birth_rates / model$parameters$YL
 
   a <- calculate_microcases_ZIKV(model, birth_rates_2)
 
