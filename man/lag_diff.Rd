@@ -8,7 +8,7 @@ lag_diff(x, lag)
 }
 \arguments{
 \item{x}{vector or matrix of numeric values. In the case of a matrix,
-the rows indicate the time-varying obeservations.}
+the rows indicate the time-varying observations.}
 
 \item{lag}{the lag value (numeric)}
 }

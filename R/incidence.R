@@ -7,7 +7,7 @@
 #' @title Calculate lagged differences
 #'
 #' @param x vector or matrix of numeric values. In the case of a matrix,
-#'   the rows indicate the time-varying obeservations.
+#'   the rows indicate the time-varying observations.
 #'
 #' @param lag the lag value (numeric)
 #'
@@ -44,7 +44,19 @@ lag_diff <- function(x, lag) {
 
 }
 
-lag_diff_array <- my_fun <- function(my_array, lag_time) {
+# -----------------------------------------------------------------------------
+
+#' The function returns an array of lagged difference values using \code{diff}
+#' with initial padding
+#'
+#' @title Calculate lagged differences for array
+#'
+#' @param my_array array of numeric values with more than 2 dimensions.
+#'
+#' @param lag the lag value (numeric)
+#'
+#' @export
+lag_diff_array <- my_fun <- function(my_array, lag) {
 
   dims <- dim(my_array)
 
@@ -59,7 +71,7 @@ lag_diff_array <- my_fun <- function(my_array, lag_time) {
 
       # browser()
 
-      out[,,i,j] <- lag_diff(my_array[,,i,j], lag_time)
+      out[,,i,j] <- lag_diff(my_array[,,i,j], lag)
 
     }
 
@@ -69,6 +81,19 @@ lag_diff_array <- my_fun <- function(my_array, lag_time) {
 
 }
 
+# -----------------------------------------------------------------------------
+
+#' The function calculates per capita incidence rates per 1000 individuals
+#'
+#' @title Calculate incidence
+#'
+#' @param cum_infections array of cumulative number of infections.
+#'
+#' @param Ntotal array of total number of individuals.
+#'
+#' @param time_window time window over which to calculate incidence.
+#'
+#' @export
 calculate_incidence <- function(cum_infections, Ntotal, time_window) {
 
   n_dims <- length(dim(cum_infections))
