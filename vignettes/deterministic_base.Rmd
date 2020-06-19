@@ -54,18 +54,18 @@ Alternatively one of the following variables can be selected:
 * `inf_1` - daily incidence of infections
 * `MC` - daily incidence of microcepahly cases 
 * `inf_1_w` - weekly incidence of infections per 1000 individuals 
-* `MC_w` - weekly incidence of microcepahly cases per 1000 individuals.
+* `MC_w` - weekly incidence of microcepahly cases per 1000 individuals
 
 First, we plot the weekly number of infections:
 
 ```{r, fig.height = 6, fig.width = 8}
-plot(r1, type = "H", var_select = "inf_1_w")
+plot(r1, type = "H", var_select = "inf_1")
 ```
 
 and then the weekly number of microcephaly cases: 
 
 ```{r, fig.height = 6, fig.width = 8}
-plot(r1, type = "H", var_select = "MC_w")
+plot(r1, type = "H", var_select = "MC")
 ```
 
 By default the `plot` function uses internally the `format_output_H()` or the `format_output_M()` function, depending on the value of the `type` argument. We show here the use of the `format_output_H` function to extract the `S` compartment: 
@@ -105,7 +105,19 @@ This plots the following mosquito compartments:
 * `Mwb_E2` - Exposed wolbachia-infected in incubation stage 2
 * `Mwb_I1` - Infectious wolbachia-infected
 
-As a sanity check, we also plot the variables which are directly modified by seasonal forcing, namely mosquito larve carrying capacity (`Kc`), extrinsic incubation period (`eip`) and adult mosquito mortality rate (`Delta`), and the reproduction number ($R_0$). We can make use of the function `format_output_M()`, which allows to format the model outputs. `format_output_M()` by default extracts the mean value of `Kc`, `eip` and `Delta` across patches. Once we have extracted the model output we can write our own plotting code: 
+We can select which of the above mosquito compartments to plot with the `var_select` argument (and `type = "M"`). Or we can choose among the following variables:
+
+* `Lwt` - Wild type mosquito larvae   
+* `Lwb` - Wolbachia-infectedmosquito larvae
+* `Kc` - Mosquito larvae carrying capacity
+* `eip` - Extrinsic incubation period 
+* `Delta` - Adult mosquito mortality rate
+* `R0t_1` - Time varying reproduction number
+* `FOI1` - Force of infection
+
+Using the argument `keep` we can choose whether to plot the above variables as summary across all patches (default) or by patch (`keep = "patch"`). 
+
+Now, as a sanity check, we plot the variables which are directly modified by seasonal forcing, namely `Kc`, `eip` and `Delta` and the time-varying reproduction number ($R_t$). We can make use of the function `format_output_M()`, which allows to format the model outputs. `format_output_M()` by default extracts the mean value of `Kc`, `eip` and `Delta` across patches. Once we have extracted the model output we can write our own plotting code: 
 
 ```{r, fig.height = 6, fig.width = 8}
 library(ggplot2)
