@@ -16,6 +16,8 @@
 #'   (allowed are \code{c("patch", "vaccine")} for type H and
 #'   \code{"patch"} for type M. Default is no stratification)
 #'
+#' @param ... additional arguments affecting the plot produced.
+#'
 #' @export
 plot.Zika_model_simulation <- function(x,
                                        type,

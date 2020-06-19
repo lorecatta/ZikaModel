@@ -17,6 +17,8 @@ allowed are \code{c("H", "M")} for Human and Mosquito.}
 \item{keep}{name of variable to stratify by
 (allowed are \code{c("patch", "vaccine")} for type H and
 \code{"patch"} for type M. Default is no stratification)}
+
+\item{...}{additional arguments affecting the plot produced.}
 }
 \description{
 The function makes a plot of the model compartments.

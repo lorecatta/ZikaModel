@@ -22,6 +22,9 @@ format_output_H(x, var_select = NULL, keep = NULL)
 \item{keep}{name of variable to stratify by
 (allowed are \code{c("patch", "vaccine")}. Default is no stratification)}
 }
+\value{
+Formatted long data.frame
+}
 \description{
 The function formats human-realetd model outputs as a long data frame.
 }

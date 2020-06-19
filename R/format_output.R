@@ -20,6 +20,8 @@
 #' @param keep name of variable to stratify by
 #'   (allowed are \code{c("patch", "vaccine")}. Default is no stratification)
 #'
+#' @return Formatted long data.frame
+#'
 #' @export
 format_output_H <- function(x,
                             var_select = NULL,
@@ -195,6 +197,8 @@ format_output_H <- function(x,
 #'
 #' @param keep name of variable to stratify by
 #'   (only allowed \code{"patch"}. Default is no stratification)
+#'
+#' @return Formatted long data.frame
 #'
 #' @export
 format_output_M <- function(x,

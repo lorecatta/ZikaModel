@@ -16,6 +16,9 @@ e.g. \code{c("Kc", "Delta", "R0t_1")}.}
 \item{keep}{name of variable to stratify by
 (only allowed \code{"patch"}. Default is no stratification)}
 }
+\value{
+Formatted long data.frame
+}
 \description{
 The function formats mosquito-related model outputs as a long data frame.
 }
