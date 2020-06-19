@@ -10,25 +10,28 @@
 #' @param type Character of model compartment type to plot.
 #'   allowed are \code{c("H", "M")} for Human and Mosquito.
 #'
-#' @param var_select Vector of variable names to plot (default is all).
+#' @param var_select Vector of variable names to plot (default is all)
 #'
-#' @param ... additional arguments affecting the plot produced.
+#' @param keep name of variable to stratify by
+#'   (allowed are \code{c("patch", "vaccine")} for type H and
+#'   \code{"patch"} for type M. Default is no stratification)
 #'
 #' @export
 plot.Zika_model_simulation <- function(x,
                                        type,
                                        var_select = NULL,
+                                       keep = NULL,
                                        ...) {
 
   if (type == "H") {
 
-    pds <- format_output_H(x, var_select = var_select, ...)
+    pds <- format_output_H(x, var_select = var_select, keep = keep)
 
   }
 
   if (type == "M") {
 
-    pds <- format_output_M(x, var_select = var_select, ...)
+    pds <- format_output_M(x, var_select = var_select, keep = keep)
 
   }
 
