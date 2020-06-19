@@ -17,7 +17,11 @@
 #'   \code{"patch"} for type M. Default is no stratification)
 #'
 #' @export
-plot.Zika_model_simulation <- function(x, type, var_select = NULL, keep = NULL) {
+plot.Zika_model_simulation <- function(x,
+                                       type,
+                                       var_select = NULL,
+                                       keep = NULL,
+                                       ...) {
 
   if (type == "H") {
 

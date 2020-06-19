@@ -4,7 +4,7 @@
 \alias{plot.Zika_model_simulation}
 \title{Plot human or mosquitoes states}
 \usage{
-\method{plot}{Zika_model_simulation}(x, type, var_select = NULL, keep = NULL)
+\method{plot}{Zika_model_simulation}(x, type, var_select = NULL, keep = NULL, ...)
 }
 \arguments{
 \item{x}{Zika_model_simulation object.}
