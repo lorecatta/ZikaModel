@@ -4,7 +4,7 @@ author: "Lorenzo Cattarino"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Run a custom model}
+  %\VignetteIndexEntry{Modelling the impact of mosquito control}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
