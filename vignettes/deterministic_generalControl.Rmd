@@ -1,10 +1,10 @@
 ---
-title: "Modelling the impact of mosquito control"
+title: "Modelling control strategies"
 author: "Lorenzo Cattarino"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Modelling the impact of mosquito control}
+  %\VignetteIndexEntry{Modelling control strategies}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Modelling mosquito control
+## General mosquito control
 
 `ZikaModel` allows the user to change the value of all the model parameters. This allows more flexibility in the range of scenarios considered (e.g. inteventions to control the disease). Also, by taking advantage of this feature it is also possible to simulate the transmission dynamics of other immunizing single-strain infections transmitted by _Aedes aegypti_ mosquitoes, such as chikungunya. 
 
