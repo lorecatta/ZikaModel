@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generate equilibrium state — equilibrium_init_create • ZikaModel</title>
+<title>Estimates baseline number of microcephaly cases — calculate_microcases_baseline • ZikaModel</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,9 @@
 
 
 
-<meta property="og:title" content="Generate equilibrium state — equilibrium_init_create" />
-<meta property="og:description" content="The function creates an equilibrium initialisation state to be used within
-later model runs." />
+<meta property="og:title" content="Estimates baseline number of microcephaly cases — calculate_microcases_baseline" />
+<meta property="og:description" content="The function estimates the baseline number of microcephaly cases
+(not due to ZIKV infection during pregnancy)." />
 
 
 
@@ -130,38 +130,31 @@ later model runs." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Generate equilibrium state</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mrc-ide/ZikaModel/blob/master/R/check.R'><code>R/check.R</code></a></small>
-    <div class="hidden name"><code>equilibrium_init_create.Rd</code></div>
+    <h1>Estimates baseline number of microcephaly cases</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mrc-ide/ZikaModel/blob/master/R/microcephaly.R'><code>R/microcephaly.R</code></a></small>
+    <div class="hidden name"><code>calculate_microcases_baseline.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The function creates an equilibrium initialisation state to be used within
-later model runs.</p>
+    <p>The function estimates the baseline number of microcephaly cases
+(not due to ZIKV infection during pregnancy).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>equilibrium_init_create</span>(<span class='no'>agec</span>, <span class='no'>death</span>, <span class='no'>model_parameter_list</span>)</pre>
+    <pre class="usage"><span class='fu'>calculate_microcases_baseline</span>(<span class='no'>model</span>, <span class='no'>birth_rates</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>agec</th>
-      <td><p>Vector of age group widths.</p></td>
+      <th>model</th>
+      <td><p>Zika_model_simulation object.</p></td>
     </tr>
     <tr>
-      <th>death</th>
-      <td><p>Numeric of mortality rates.</p></td>
-    </tr>
-    <tr>
-      <th>model_parameter_list</th>
-      <td><p>List of user-defined model parameters.</p></td>
+      <th>birth_rates</th>
+      <td><p>age specific birth rates for Brazil.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>Initial states of the model</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

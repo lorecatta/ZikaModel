@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generate equilibrium state — equilibrium_init_create • ZikaModel</title>
+<title>Return the default demographic information — default_demographics • ZikaModel</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,8 @@
 
 
 
-<meta property="og:title" content="Generate equilibrium state — equilibrium_init_create" />
-<meta property="og:description" content="The function creates an equilibrium initialisation state to be used within
-later model runs." />
+<meta property="og:title" content="Return the default demographic information — default_demographics" />
+<meta property="og:description" content="Return the default demographic information" />
 
 
 
@@ -130,38 +129,21 @@ later model runs." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Generate equilibrium state</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mrc-ide/ZikaModel/blob/master/R/check.R'><code>R/check.R</code></a></small>
-    <div class="hidden name"><code>equilibrium_init_create.Rd</code></div>
+    <h1>Return the default demographic information</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mrc-ide/ZikaModel/blob/master/R/run.R'><code>R/run.R</code></a></small>
+    <div class="hidden name"><code>default_demographics.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The function creates an equilibrium initialisation state to be used within
-later model runs.</p>
+    <p>Return the default demographic information</p>
     </div>
 
-    <pre class="usage"><span class='fu'>equilibrium_init_create</span>(<span class='no'>agec</span>, <span class='no'>death</span>, <span class='no'>model_parameter_list</span>)</pre>
+    <pre class="usage"><span class='fu'>default_demographics</span>()</pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>agec</th>
-      <td><p>Vector of age group widths.</p></td>
-    </tr>
-    <tr>
-      <th>death</th>
-      <td><p>Numeric of mortality rates.</p></td>
-    </tr>
-    <tr>
-      <th>model_parameter_list</th>
-      <td><p>List of user-defined model parameters.</p></td>
-    </tr>
-    </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Initial states of the model</p>
+    <p>list of default demographics by age group</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
