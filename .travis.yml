@@ -3,14 +3,13 @@
 language: R
 cache: packages
 
+addons:
+  apt:
+    packages:
+      - libv8-dev
 r_github_packages:
-  - r-lib/covr
-
-r_build_args: --no-build-vignettes --no-manual --no-resave-data
-
-r_check_args: --no-build-vignettes --no-manual
-
+  - mrc-ide/dde
+r_packages:
+  - covr
 after_success:
   - Rscript -e 'covr::codecov()'
-
-warnings_are_errors: false
