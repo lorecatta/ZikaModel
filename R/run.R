@@ -76,8 +76,8 @@ default_demog <- default_demographics()
 #' @param Wb_fM Increase in mortality induced by Wolbachia. Default = 0.95.
 #' @param Wb_fF Reduction in fecundity induced by Wolbachia. Default = 0.95.
 #' @param Wb_relsusc1 Infectivity of a human host to Wolbachia infected mosquitoes
-#'   (time τ after host infection). Default = 0.9.
-#' @param Wb_relinf1 Infectiousness of Wolbachia-infected mosquitoes time τ after
+#'   (time T after host infection). Default = 0.9.
+#' @param Wb_relinf1 Infectiousness of Wolbachia-infected mosquitoes time T after
 #'   infection. Default = 0.75.
 #' @param Wb_starttime Time of first release of Wolbachia-infected mosquiotes (years).
 #'   Default = 1.
