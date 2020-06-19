@@ -14,7 +14,7 @@ allowed are \code{c("H", "M")} for Human and Mosquito.}
 
 \item{var_select}{Vector of variable names to plot (default is all)}
 
-\item{keep}{name of variables to stratify by
+\item{keep}{name of variable to stratify by
 (allowed are \code{c("patch", "vaccine")} for type H and
 \code{"patch"} for type M. Default is no stratification)}
 }

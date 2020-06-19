@@ -198,6 +198,9 @@ travelers visiting from elsewhere. Default = 1e-8.}
 
 \item{dis_pri}{Proportion of infections which are symptomatic. Default = 0.2.}
 
+\item{mc_baseline}{Baseline per birth microcephaly incidence rate.
+Default = 0.0002.}
+
 \item{AGE_REC}{Default = 2.}
 
 \item{PropDiseaseReported}{Reporting rate of symptomatic cases. Default = 0.1.}

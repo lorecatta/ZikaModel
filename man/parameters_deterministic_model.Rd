@@ -202,7 +202,8 @@ travelers visiting from elsewhere. Default = 1e-8.}
 
 \item{PropDiseaseReported}{Reporting rate of symptomatic cases. Default = 0.1.}
 
-\item{mc_baseline.}{Baseline per birth microcephaly incidence rate. Default = 0.0002.}
+\item{mc_baseline.}{Baseline per birth microcephaly incidence rate.
+Default = 0.0002.}
 }
 \value{
 Parameter list

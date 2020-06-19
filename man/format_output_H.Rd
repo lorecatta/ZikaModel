@@ -18,6 +18,9 @@ format_output_H(x, var_select = NULL, keep = NULL)
       \item{"inf_1_w"}{ Weekly infections per 1000 }
       \item{"MC_w"}{ Weekly microcephaly cases per 1000 }
       }}
+
+\item{keep}{name of variable to stratify by
+(allowed are \code{c("patch", "vaccine")}. Default is no stratification)}
 }
 \description{
 The function formats human-realetd model outputs as a long data frame.

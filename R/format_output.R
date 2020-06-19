@@ -16,6 +16,10 @@
 #'       \item{"inf_1_w"}{ Weekly infections per 1000 }
 #'       \item{"MC_w"}{ Weekly microcephaly cases per 1000 }
 #'       }
+#'
+#' @param keep name of variable to stratify by
+#'   (allowed are \code{c("patch", "vaccine")}. Default is no stratification)
+#'
 #' @export
 format_output_H <- function(x,
                             var_select = NULL,
@@ -188,6 +192,9 @@ format_output_H <- function(x,
 #' @param var_select Vector of mosquito compartment names,
 #' e.g. \code{c("Lwt", "Mwt_S", "Mwb_E1")}, or mosquito-related variables,
 #' e.g. \code{c("Kc", "Delta", "R0t_1")}.
+#'
+#' @param keep name of variable to stratify by
+#'   (only allowed \code{"patch"}. Default is no stratification)
 #'
 #' @export
 format_output_M <- function(x,
