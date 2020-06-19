@@ -8,7 +8,7 @@ ZikaModel
 
 `ZikaModel` is an R package for running the Zika transmission model developed at Imperial College London using R odin.
 
-The transmission model is a metapopulation model which includes the dynamics of the *Aedes aegypti* mosquito vector and the age-stratified human host populations. The model which has a stochastic and a deterministic version, simulates also the effect of seasonality and the impact of control strategies, such as the release of Wolbachia-infected mosquitoes and child vaccinationon.
+The transmission model is a metapopulation model which includes the dynamics of the *Aedes aegypti* mosquito vector and the age-stratified human host populations. The model which has a stochastic and a deterministic version, simulates also the effect of seasonality and the impact of control strategies, such as the release of Wolbachia-infected mosquitoes and child vaccination.
 
 For details of the original transmission model please see the original [article](https://science.sciencemag.org/content/353/6297/353) where the model is published.
 
@@ -41,4 +41,4 @@ library(ZikaModel)
 Running the base model
 ----------------------
 
-Check out this vignette on how to run the [deterministic](https://mrc-ide.github.io/ZikaModel/articles/deterministic_base_model.html) base version of the model.
+Check out this vignette on how to run the [deterministic](https://mrc-ide.github.io/ZikaModel/articles/deterministic_base.html) base version of the model.

@@ -42,7 +42,7 @@ plot.Zika_model_simulation <- function(x, type, var_select = NULL, keep = NULL) 
     p <- p + ggplot2::geom_line(data = pds,
                                 ggplot2::aes(x = .data$t, y = .data$y,
                                              col = .data$compartment)) +
-      ggplot2::facet_wrap(as.formula(paste("~", keep)),
+      ggplot2::facet_wrap(stats::as.formula(paste("~", keep)),
                           ncol = 4,
                           scales = "free_y")
   }
