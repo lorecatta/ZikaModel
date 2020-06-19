@@ -90,7 +90,7 @@
 #'   travelers visiting from elsewhere. Default = 1e-8.
 #' @param phi_prim Degree of cross-immunity  (not applicable for Zika). Default = 1.
 #' @param dis_pri Proportion of infections which are symptomatic. Default = 0.2.
-#' @param mc_baseline. Baseline per birth microcephaly incidence rate.
+#' @param mc_baseline Baseline per birth microcephaly incidence rate.
 #'   Default = 0.0002.
 #' @param AGE_REC Default = 2.
 #' @param PropDiseaseReported Reporting rate of symptomatic cases. Default = 0.1.
