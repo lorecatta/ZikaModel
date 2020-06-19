@@ -1,7 +1,5 @@
 ---
 title: "Modelling control strategies"
-author: "Lorenzo Cattarino"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Modelling control strategies}

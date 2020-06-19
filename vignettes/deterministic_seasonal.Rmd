@@ -1,7 +1,5 @@
 ---
 title: "Add the effect of seasonality"
-author: "Lorenzo Cattarino"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Add the effect of seasonality}
