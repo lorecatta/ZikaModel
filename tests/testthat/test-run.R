@@ -31,7 +31,7 @@ test_that("format output works", {
 
   n_comp <- length(levels(o1$compartment))
   expect_s3_class(o1, "data.frame")
-  expect_equal(nrow(o1), n_comp * r1$parameters$time_period)
+  expect_true(nrow(o1) == n_comp * r1$parameters$time_period)
 
   ## summarise by patch
   o2 <- format_output_H(r1, keep = "patch")
