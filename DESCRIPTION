@@ -15,13 +15,14 @@ Depends:
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    dde (>= 1.0.2),    
+    dde (>= 1.0.2),
     odin,
     reshape2,
     ggplot2,
     ggforce,
     scales,
-    gridExtra
+    gridExtra,
+    patchwork
 RoxygenNote: 7.1.0
 Suggests: 
     knitr,
