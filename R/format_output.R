@@ -194,7 +194,7 @@ format_output_H <- function(x,
 #' e.g. \code{c("Kc", "Delta", "R0t_1")}.
 #'
 #' @param keep name of variable to stratify by
-#'   (only allowed \code{"patch"}. Default is no stratification)
+#'   (only allowed \code{"patch"}. Default is no stratification).
 #'
 #' @export
 format_output_M <- function(x,
