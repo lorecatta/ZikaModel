@@ -152,7 +152,7 @@ Rt_p <- ggplot(Rt, aes(x = t, y = y)) +
   geom_line(color = 'royalblue', size = 0.5) +
   scale_x_continuous("Time") +
   scale_y_continuous("Mean across patches") +
-  ggtitle("Time varying reprodution number") +
+  ggtitle("Time-varying ZIKV reprodution number") +
   theme_bw()
 
 all <- Kc_p + eip_p + delta_p + Rt_p
