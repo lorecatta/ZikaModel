@@ -1,24 +1,28 @@
-url: https://mrc-ide.github.io/ZikaModel/
+destination: docs
+
+template:
+  params:
+    bootswatch: flatly
 
 navbar:
   title: "ZikaModel"
-  type: inverse
+  type: default
   left:
     - href: index.html
-      icon: fa-home fa-lg
+      icon: fa-home
     - text: "Functions"
       href: reference/index.html
     - text: "Articles"
       menu:
       - text: "Run a base model"
-        href: articles/deterministic_base_model.html
-      - text: "Run a seasonal model"
-        href: articles/deterministic_seasonal_model.html
-      - text: "Run a customized model"
-        href: articles/customized_model.html
+        href: articles/deterministic_base.html
+      - text: "Add the effect of seasonality"
+        href: articles/deterministic_seasonal.html
+      - text: "Modelling control strategies"
+        href: articles/deterministic_generalControl.html
     - text: "News"
       href: news/index.html
   right:
-    - icon: fa-github fa-lg
+    - icon: fa-github
       href: https://github.com/mrc-ide/ZikaModel
 
