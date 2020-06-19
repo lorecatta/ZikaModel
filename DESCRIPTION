@@ -17,11 +17,8 @@ LazyData: true
 Imports: 
     dde (>= 1.0.2),
     odin,
-    reshape2,
     ggplot2,
-    ggforce,
     scales,
-    gridExtra,
     patchwork
 RoxygenNote: 7.1.0
 Suggests: 
