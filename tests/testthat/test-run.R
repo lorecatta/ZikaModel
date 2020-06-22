@@ -35,3 +35,21 @@ test_that("there are no infections when BG_FOI is 0", {
   expect_equal(results$S[t_max,,,], r1$parameters$init_S)
 
 })
+
+test_that("no one is vaccinated when vaccination coverages are 0", {
+
+  r1 <- run_deterministic_model()
+
+  o1 <- format_output_H(r1, keep = "vaccine")
+  expect_true(all(o1[o1$vaccine == 2, "y"] == 0))
+
+})
+
+test_that("there are no wb mosquitoes when wb/wt ratio at introduction is 0", {
+
+  r1 <- run_deterministic_model()
+
+  o1 <- format_output_M(r1, var_select = c("Mwb_S", "Mwb_E1", "Mwb_E2", "Mwb_I1"))
+  expect_true(all(o1[, "y"] == 0))
+
+})
