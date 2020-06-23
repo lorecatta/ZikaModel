@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![Travis build status](https://travis-ci.org/mrc-ide/ZikaModel.svg?branch=master)](https://travis-ci.org/mrc-ide/ZikaModel)
 [![Codecov test coverage](https://codecov.io/gh/mrc-ide/ZikaModel/branch/master/graph/badge.svg)](https://codecov.io/gh/mrc-ide/ZikaModel?branch=master)
+[![R build status](https://github.com/mrc-ide/ZikaModel/workflows/R-CMD-check/badge.svg)](https://github.com/mrc-ide/ZikaModel/actions)
 <!-- badges: end -->
 
 `ZikaModel` is an R package for running the Zika transmission model 
