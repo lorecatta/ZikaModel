@@ -53,3 +53,17 @@ test_that("there are no wb mosquitoes when wb/wt ratio at introduction is 0", {
   expect_true(all(o1[, "y"] == 0))
 
 })
+
+test_that("general mosquitoes control increases adult mosquitoes mortality", {
+
+  r1 <- run_deterministic_model(time_period = 365 * 5,
+                                propMwtControl = 0.2)
+
+  o1 <- format_output_M(r1, var_select = "Delta")
+
+  YL <- r1$parameters$YL
+  start <- ceiling(r1$parameters$TimeMwtControlOn * YL)
+  end <- floor(r1$parameters$TimeMwtControlOff * YL)
+  expect_true(all(o1[start:end, "y"] == 0.25))
+
+})
