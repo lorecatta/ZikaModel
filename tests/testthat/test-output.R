@@ -81,7 +81,7 @@ test_that("format output mosquitoes proportions works", {
   o2 <- format_output_Mprop(r1, keep = "patch")
 
   expect_equal(dim(o1), c(100, 3))
-  expect_equal(dim(o1), c(2100, 4))
+  expect_equal(dim(o2), c(2100, 4))
 
 })
 

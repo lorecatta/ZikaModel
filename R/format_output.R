@@ -343,7 +343,7 @@ format_output_Mprop <- function(x, keep = NULL) {
     out <- data.frame(t = as.numeric(x$output[,index$time]),
                       patch = rep(seq_len(x$parameters$NP), each = nt),
                       compartment = rep(vars, x$parameters$NP*nt),
-                      y = unlist(prop_wb, use.names = FALSE),
+                      y = c(prop_wb),
                       stringsAsFactors = FALSE)
 
   }
