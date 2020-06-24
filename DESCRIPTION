@@ -29,7 +29,7 @@ Suggests:
     pkgdown
 VignetteBuilder: knitr
 Remotes:
-    mrc-ide/dde
+    mrc-ide/dde,
     jameshay218/zikaInfer
 URL: https://github.com/mrc-ide/ZikaModel
 BugReports: https://github.com/mrc-ide/ZikaModel/issues
