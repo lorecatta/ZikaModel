@@ -73,6 +73,18 @@ test_that("format output works", {
 
 })
 
+test_that("format output mosquitoes proportions works", {
+
+  r1 <- run_deterministic_model(time_period = 100)
+
+  o1 <- format_output_Mprop(r1)
+  o2 <- format_output_Mprop(r1, keep = "patch")
+
+  expect_equal(dim(o1), c(100, 3))
+  expect_equal(dim(o1), c(2100, 4))
+
+})
+
 test_that("summarising mosquito variables by vaccine status throws error", {
 
   r1 <- run_deterministic_model()

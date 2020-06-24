@@ -281,3 +281,73 @@ format_output_M <- function(x,
   out
 
 }
+
+
+# -----------------------------------------------------------------------------
+
+#' The function formats mosquito-related proportions as a long data frame.
+#'
+#' @title Format mosquito proportions
+#'
+#' @param x Zika_model_simulation object.
+#'
+#' @param keep name of variable to stratify by
+#'   (only allowed \code{"patch"}. Default is no stratification)
+#'
+#' @return Formatted long data.frame
+#'
+#' @export
+format_output_Mprop <- function(x, keep = NULL) {
+
+  # Get model details
+  nt <- nrow(x$output)
+  index <- odin_index(x$model)
+
+  # Summarise
+  # -> if keep = NULL calculate totals across patches (sum or mean depending on the variable)
+  # -> if keep = patch summarise by patch
+
+  Mwt_comp <- c("Mwt_S", "Mwt_E1", "Mwt_E2", "Mwt_I1")
+  Mwb_comp <- c("Mwb_S", "Mwb_E1", "Mwb_E2", "Mwb_I1")
+
+  M_comp <- c(Mwt_comp, Mwb_comp)
+
+  # here the option of summarising by patch
+  output_list <- lapply(c(Mwt_comp, Mwb_comp), function(j) {
+
+    temp <- x$output[,unlist(index[j])]
+    temp_array <- array(temp, dim = c(dim(temp)[1], x$parameters$NP))
+    sum_across_array_dims(temp_array, keep, j)
+
+  })
+
+  names(output_list) <- M_comp
+
+  M_tot <- Reduce(`+`, output_list)
+
+  Mwb_tot <- Reduce(`+`, output_list[Mwb_comp])
+
+  prop_wb <- Mwb_tot / (M_tot + 1e-10)
+
+  vars <- "prop_wb"
+
+  if(is.null(keep)) {
+
+    out <- data.frame(t = as.numeric(x$output[,index$time]),
+                      compartment = rep(vars, nt),
+                      y = unlist(prop_wb, use.names = FALSE),
+                      stringsAsFactors = FALSE)
+
+  } else if (keep == "patch") {
+
+    out <- data.frame(t = as.numeric(x$output[,index$time]),
+                      patch = rep(seq_len(x$parameters$NP), each = nt),
+                      compartment = rep(vars, x$parameters$NP*nt),
+                      y = unlist(prop_wb, use.names = FALSE),
+                      stringsAsFactors = FALSE)
+
+  }
+
+  out
+
+}
