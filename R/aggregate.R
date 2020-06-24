@@ -1,4 +1,3 @@
-
 # -----------------------------------------------------------------------------
 
 #' The function calculates the mean across patches of a model output,
@@ -19,6 +18,20 @@ calculate_mean_of_patch_variables <- function(my_vector) {
 
 }
 
+
+# -----------------------------------------------------------------------------
+
+#' The function applies a sum over the margin of an array.
+#'
+#' @title Sum over aray margin
+#'
+#' @param my_array array to sum.
+#'
+#' @param keep character vector of which variable / dimension to keep.
+#'
+#' @param compartment character vector of compartment name.
+#'
+#' @export
 sum_across_array_dims <- function(my_array, keep = NULL, compartment = NULL) {
 
   summary_vars_to_average <- c("Kc", "eip", "Delta", "R0t_1", "FOI1")
@@ -70,6 +83,18 @@ sum_across_array_dims <- function(my_array, keep = NULL, compartment = NULL) {
 
 }
 
+
+# -----------------------------------------------------------------------------
+
+#' The function applies a cumulative sum over the margin of an array.
+#'
+#' @title Cumulative sum over array margin
+#'
+#' @param my_array array to sum.
+#'
+#' @param keep character vector of which variable / dimension to keep
+#'
+#' @export
 cumsum_across_array_dims <- function(my_array, keep = NULL) {
 
   if (is.null(keep)) {
