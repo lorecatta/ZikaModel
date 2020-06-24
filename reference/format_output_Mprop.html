@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sum over aray margin — sum_across_array_dims • ZikaModel</title>
+<title>Format mosquito proportions — format_output_Mprop • ZikaModel</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Sum over aray margin — sum_across_array_dims" />
-<meta property="og:description" content="The function applies a sum over the margin of an array." />
+<meta property="og:title" content="Format mosquito proportions — format_output_Mprop" />
+<meta property="og:description" content="The function formats mosquito-related proportions as a long data frame." />
 
 
 
@@ -129,34 +129,34 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Sum over aray margin</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mrc-ide/ZikaModel/blob/master/R/aggregate.R'><code>R/aggregate.R</code></a></small>
-    <div class="hidden name"><code>sum_across_array_dims.Rd</code></div>
+    <h1>Format mosquito proportions</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mrc-ide/ZikaModel/blob/master/R/format_output.R'><code>R/format_output.R</code></a></small>
+    <div class="hidden name"><code>format_output_Mprop.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The function applies a sum over the margin of an array.</p>
+    <p>The function formats mosquito-related proportions as a long data frame.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sum_across_array_dims</span>(<span class='no'>my_array</span>, <span class='kw'>keep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>compartment</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>format_output_Mprop</span>(<span class='no'>x</span>, <span class='kw'>keep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>my_array</th>
-      <td><p>array to sum.</p></td>
+      <th>x</th>
+      <td><p>Zika_model_simulation object.</p></td>
     </tr>
     <tr>
       <th>keep</th>
-      <td><p>character vector of which variable / dimension to keep.</p></td>
-    </tr>
-    <tr>
-      <th>compartment</th>
-      <td><p>character vector of compartment name.</p></td>
+      <td><p>name of variable to stratify by
+(only allowed <code>"patch"</code>. Default is no stratification)</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Formatted long data.frame</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
