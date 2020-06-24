@@ -85,7 +85,7 @@
 
       
 
-      </header><script src="deterministic_generalControl_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Modelling control strategies</h1>
@@ -112,75 +112,61 @@
 <code>TimeMwtControlOff</code> - the time when the control ends</li>
 </ul>
 <p>Let’s assume that control increases mortality of adult mosquitoes by 20%. For now we will use the default values of <code>TimeMwtControlOn</code> and <code>TimeMwtControlOff</code>, which will simulate control for one year starting on the second year of the simulation.To keep it simple we will assume no effect of seasonality across patches. This is analogous to run the model with only one patch.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/mrc-ide/ZikaModel">ZikaModel</a></span>)
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ZikaModel</span>)
 
-<span class="kw">r1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/run_deterministic_model.html">run_deterministic_model</a></span>(time_period = <span class="fl">365</span> <span class="op">*</span> <span class="fl">5</span>,
-                              propMwtControl = <span class="fl">0.2</span>)
-</pre></div>
+<span class="no">r1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ZikaModel/man/run_deterministic_model.html">run_deterministic_model</a></span>(<span class="kw">time_period</span> <span class="kw">=</span> <span class="fl">365</span> * <span class="fl">5</span>,
+                              <span class="kw">propMwtControl</span> <span class="kw">=</span> <span class="fl">0.2</span>)</pre></body></html></div>
 <p>Now plotting, as done before. Human compartments:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">r1</span>, type = <span class="st">"H"</span>)
-</pre></div>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">r1</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"H"</span>)</pre></body></html></div>
 <p><img src="deterministic_generalControl_files/figure-html/unnamed-chunk-3-1.png" width="576"></p>
 <p>and mosquito compartments:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">r1</span>, type = <span class="st">"M"</span>)
-</pre></div>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">r1</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"M"</span>)</pre></body></html></div>
 <p><img src="deterministic_generalControl_files/figure-html/unnamed-chunk-4-1.png" width="576"></p>
 <p>We can see how mosquito control has the effect of delaying the epidemic. As expected, the increase in adult mosquitoes mortality causes also a drop in the pool of susceptibles adult mosquitoes. We now plot other statistics as well:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">r1</span>, type = <span class="st">"H"</span>, var_select = <span class="st">"inf_1"</span>)
-</pre></div>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">r1</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"H"</span>, <span class="kw">var_select</span> <span class="kw">=</span> <span class="st">"inf_1"</span>)</pre></body></html></div>
 <p><img src="deterministic_generalControl_files/figure-html/unnamed-chunk-5-1.png" width="768"></p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">r1</span>, type = <span class="st">"H"</span>, var_select = <span class="st">"MC"</span>)
-</pre></div>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">r1</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"H"</span>, <span class="kw">var_select</span> <span class="kw">=</span> <span class="st">"MC"</span>)</pre></body></html></div>
 <p><img src="deterministic_generalControl_files/figure-html/unnamed-chunk-5-2.png" width="768"></p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">r1</span>, type = <span class="st">"M"</span>, var_select = <span class="st">"Lwt"</span>)
-</pre></div>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">r1</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"M"</span>, <span class="kw">var_select</span> <span class="kw">=</span> <span class="st">"Lwt"</span>)</pre></body></html></div>
 <p><img src="deterministic_generalControl_files/figure-html/unnamed-chunk-5-3.png" width="768"></p>
 <p>We can see a drop in the mosquito larvae as well during the time of control. We now plot the variables directly modified by seasonality:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://patchwork.data-imaginist.com">patchwork</a></span>)
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">patchwork</span>)
 
-<span class="kw">Kc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_output_M.html">format_output_M</a></span>(<span class="kw">r1</span>, var_select = <span class="st">"Kc"</span>)
-<span class="kw">Kc_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">Kc</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">t</span>, y = <span class="kw">y</span>)) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(color = <span class="st">'royalblue'</span>, size = <span class="fl">0.5</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span>(<span class="st">"Time"</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(<span class="st">"Mean across patches"</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">"Mosquito larvae carrying capacity"</span>) <span class="op">+</span>
+<span class="no">Kc</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ZikaModel/man/format_output_M.html">format_output_M</a></span>(<span class="no">r1</span>, <span class="kw">var_select</span> <span class="kw">=</span> <span class="st">"Kc"</span>)
+<span class="no">Kc_p</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">Kc</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">t</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>)) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="kw">color</span> <span class="kw">=</span> <span class="st">'royalblue'</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">0.5</span>) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span>(<span class="st">"Time"</span>) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(<span class="st">"Mean across patches"</span>) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">"Mosquito larvae carrying capacity"</span>) +
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>()
 
-<span class="kw">eip</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_output_M.html">format_output_M</a></span>(<span class="kw">r1</span>, var_select = <span class="st">"eip"</span>)
-<span class="kw">eip_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">eip</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">t</span>, y = <span class="kw">y</span>)) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(color = <span class="st">'royalblue'</span>, size = <span class="fl">0.5</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span>(<span class="st">"Time"</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(<span class="st">"Mean across patches"</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">"Extrinsic Incubation Period"</span>) <span class="op">+</span>
+<span class="no">eip</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ZikaModel/man/format_output_M.html">format_output_M</a></span>(<span class="no">r1</span>, <span class="kw">var_select</span> <span class="kw">=</span> <span class="st">"eip"</span>)
+<span class="no">eip_p</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">eip</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">t</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>)) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="kw">color</span> <span class="kw">=</span> <span class="st">'royalblue'</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">0.5</span>) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span>(<span class="st">"Time"</span>) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(<span class="st">"Mean across patches"</span>) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">"Extrinsic Incubation Period"</span>) +
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>()
 
-<span class="kw">delta</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_output_M.html">format_output_M</a></span>(<span class="kw">r1</span>, var_select = <span class="st">"Delta"</span>)  
-<span class="kw">delta_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">delta</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">t</span>, y = <span class="kw">y</span>)) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(color = <span class="st">'royalblue'</span>, size = <span class="fl">0.5</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span>(<span class="st">"Time"</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(<span class="st">"Mean across patches"</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">"Adult mosquito daily mortality rate"</span>) <span class="op">+</span>
+<span class="no">delta</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ZikaModel/man/format_output_M.html">format_output_M</a></span>(<span class="no">r1</span>, <span class="kw">var_select</span> <span class="kw">=</span> <span class="st">"Delta"</span>)
+<span class="no">delta_p</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">delta</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">t</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>)) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="kw">color</span> <span class="kw">=</span> <span class="st">'royalblue'</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">0.5</span>) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span>(<span class="st">"Time"</span>) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(<span class="st">"Mean across patches"</span>) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">"Adult mosquito daily mortality rate"</span>) +
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>()
 
-<span class="kw">Rt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_output_M.html">format_output_M</a></span>(<span class="kw">r1</span>, var_select = <span class="st">"R0t_1"</span>)  
-<span class="kw">Rt_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">Rt</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">t</span>, y = <span class="kw">y</span>)) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(color = <span class="st">'royalblue'</span>, size = <span class="fl">0.5</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span>(<span class="st">"Time"</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(<span class="st">"Mean across patches"</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">"Time-varying ZIKV reprodution number"</span>) <span class="op">+</span>
+<span class="no">Rt</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ZikaModel/man/format_output_M.html">format_output_M</a></span>(<span class="no">r1</span>, <span class="kw">var_select</span> <span class="kw">=</span> <span class="st">"R0t_1"</span>)
+<span class="no">Rt_p</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">Rt</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">t</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>)) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="kw">color</span> <span class="kw">=</span> <span class="st">'royalblue'</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">0.5</span>) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span>(<span class="st">"Time"</span>) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(<span class="st">"Mean across patches"</span>) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">"Time-varying ZIKV reprodution number"</span>) +
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>()
 
-<span class="kw">all</span> <span class="op">&lt;-</span> <span class="kw">Kc_p</span> <span class="op">+</span> <span class="kw">eip_p</span> <span class="op">+</span> <span class="kw">delta_p</span> <span class="op">+</span> <span class="kw">Rt_p</span>
-<span class="kw">all</span>
-</pre></div>
+<span class="no">all</span> <span class="kw">&lt;-</span> <span class="no">Kc_p</span> + <span class="no">eip_p</span> + <span class="no">delta_p</span> + <span class="no">Rt_p</span>
+<span class="no">all</span></pre></body></html></div>
 <p><img src="deterministic_generalControl_files/figure-html/unnamed-chunk-6-1.png" width="768"></p>
 </div>
   </div>
@@ -200,7 +186,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
