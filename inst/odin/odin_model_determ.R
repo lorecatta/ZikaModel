@@ -290,9 +290,6 @@ update(Mwt_I1[]) <- Mwt_E2_incub[i] + Mwt_I1[i] - O_Mwt_I1[i]
 
 Mwb_tot[] <- Mwb_S[i] + Mwb_E1[i] + Mwb_E2[i] + Mwb_I1[i]
 
-M_tot[] <- Mwt_tot[i] + Mwb_tot[i]
-prop_wb[] <- Mwb_tot[i] / (M_tot[i] + 1e-10)
-
 R0t_1[] <- Kappa * Kappa * (Mwt_tot[i] + Wb_relsusc1 * Wb_relinf1 * Mwb_tot[i]) *
   Beta_hm_1 * inf_per * Beta_mh_1 / (1 + Delta[i] * eip[i]) / Delta[i] / NTp[i]
 
@@ -617,8 +614,6 @@ dim(phi1) <- 2
 
 # for intermediate outputs
 dim(agec) <- na
-dim(M_tot) <- NP
-dim(prop_wb) <- NP
 dim(Mwt) <- NP
 dim(Mwt_tot) <- NP
 dim(Mwb_tot) <- NP
@@ -657,4 +652,3 @@ output(R0t_1) <- TRUE
 output(Delta[]) <- TRUE
 output(Kc[]) <- TRUE
 output(eip[]) <- TRUE
-output(prop_wb[]) <- TRUE
