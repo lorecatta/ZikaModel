@@ -188,7 +188,7 @@ format_output_H <- function(x,
   } else if (keep == "all") {
 
     out <- data.frame(t = rep(as.numeric(x$output[,index$time]), x$parameters$na*2*x$parameters$NP),
-                      age = as.character(rep(seq_len(x$parameters$na), each = nt)),
+                      age = as.factor(rep(seq_len(x$parameters$na), each = nt)),
                       vaccine = rep(seq_len(2), each = nt*x$parameters$na),
                       patch = rep(seq_len(x$parameters$NP), each = nt*x$parameters$na*2),
                       compartment = as.character(mapply(rep, vars, nt*x$parameters$na*2*x$parameters$NP)),
