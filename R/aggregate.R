@@ -109,6 +109,10 @@ cumsum_across_array_dims <- function(my_array, keep = NULL) {
 
     ret <- apply(my_array, 2, cumsum)
 
+  } else if (keep == "all") {
+
+    ret <- apply(my_array, c(2, 3, 4), cumsum)
+
   }
 
   ret
