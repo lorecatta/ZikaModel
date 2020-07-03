@@ -85,7 +85,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="deterministic_base_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Run a base model</h1>
@@ -101,10 +101,12 @@
 <div id="running-the-base-model" class="section level2">
 <h2 class="hasAnchor">
 <a href="#running-the-base-model" class="anchor"></a>Running the base model</h2>
-<p>Here we consider a deterministic model without seasonality and interventions. By defaut the model uses Brazil demographics (annual per capita human birth and death rates). This will likeley be modifed in future versions. We run the deterministic version of the model with <code><a href="https://rdrr.io/pkg/ZikaModel/man/run_deterministic_model.html">run_deterministic_model()</a></code>:</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ZikaModel</span>)
+<p>Here we consider a deterministic model without seasonality and interventions. By defaut the model uses Brazil demographics (annual per capita human birth and death rates). This will likeley be modifed in future versions. We run the deterministic version of the model with <code><a href="../reference/run_deterministic_model.html">run_deterministic_model()</a></code>:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/mrc-ide/ZikaModel">ZikaModel</a></span>)
 
-<span class="no">r1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ZikaModel/man/run_deterministic_model.html">run_deterministic_model</a></span>(<span class="kw">time_period</span> <span class="kw">=</span> <span class="fl">365</span> * <span class="fl">5</span>)</pre></body></html></div>
+<span class="kw">r1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/run_deterministic_model.html">run_deterministic_model</a></span>(time_period = <span class="fl">365</span> <span class="op">*</span> <span class="fl">5</span>)
+</pre></div>
 <p>The returned object is a <code>Zika_model_simulation</code> object, which is a list of two objects:</p>
 <ul>
 <li>
@@ -113,7 +115,9 @@
 <code>parameters</code> - model parameters</li>
 </ul>
 <p><code>Zika_model_simulation</code> objects can be plotted as follows:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">r1</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"H"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">r1</span>, type = <span class="st">"H"</span>)
+</pre></div>
 <p><img src="deterministic_base_files/figure-html/unnamed-chunk-3-1.png" width="768"></p>
 <p>This will plot all the human compartments of the model, namely:</p>
 <ul>
@@ -125,7 +129,9 @@
 <code>R1</code> - Recovered</li>
 </ul>
 <p>The argument <code>type</code> is used to specify which part of the model we want to plot, the human (<code>H</code>) or the mosquito (<code>M</code>) part. We can select which compartment to plot with the <code>var_select</code> argument. Arguments passed to <code>var_select</code> must be one of the variables in the above plot.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">r1</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"H"</span>, <span class="kw">var_select</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"S"</span>, <span class="st">"I1"</span>))</pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">r1</span>, type = <span class="st">"H"</span>, var_select = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"S"</span>, <span class="st">"I1"</span>))
+</pre></div>
 <p><img src="deterministic_base_files/figure-html/unnamed-chunk-4-1.png" width="768"></p>
 <p>Alternatively one of the following variables can be selected:</p>
 <ul>
@@ -142,36 +148,48 @@
 <code>MC_w</code> - weekly incidence of microcepahly cases per 1000 individuals</li>
 </ul>
 <p>First, we plot the weekly number of infections:</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">r1</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"H"</span>, <span class="kw">var_select</span> <span class="kw">=</span> <span class="st">"inf_1"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">r1</span>, type = <span class="st">"H"</span>, var_select = <span class="st">"inf_1"</span>)
+</pre></div>
 <p><img src="deterministic_base_files/figure-html/unnamed-chunk-5-1.png" width="768"></p>
 <p>and then the weekly number of microcephaly cases:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">r1</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"H"</span>, <span class="kw">var_select</span> <span class="kw">=</span> <span class="st">"MC"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">r1</span>, type = <span class="st">"H"</span>, var_select = <span class="st">"MC"</span>)
+</pre></div>
 <p><img src="deterministic_base_files/figure-html/unnamed-chunk-6-1.png" width="768"></p>
-<p>By default the <code>plot</code> function uses internally the <code><a href="https://rdrr.io/pkg/ZikaModel/man/format_output_H.html">format_output_H()</a></code> or the <code><a href="https://rdrr.io/pkg/ZikaModel/man/format_output_M.html">format_output_M()</a></code> function, depending on the value of the <code>type</code> argument. We show here the use of the <code>format_output_H</code> function to extract the <code>S</code> compartment:</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">S_output</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ZikaModel/man/format_output_H.html">format_output_H</a></span>(<span class="no">r1</span>, <span class="kw">var_select</span> <span class="kw">=</span> <span class="st">"S"</span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">S_output</span>)
+<p>By default the <code>plot</code> function uses internally the <code><a href="../reference/format_output_H.html">format_output_H()</a></code> or the <code><a href="../reference/format_output_M.html">format_output_M()</a></code> function, depending on the value of the <code>type</code> argument. We show here the use of the <code>format_output_H</code> function to extract the <code>S</code> compartment:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="kw">S_output</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_output_H.html">format_output_H</a></span>(<span class="kw">r1</span>, var_select = <span class="st">"S"</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="kw">S_output</span>)
 <span class="co">#&gt;   t compartment         y</span>
 <span class="co">#&gt; 1 1           S 602999874</span>
 <span class="co">#&gt; 2 2           S 602999874</span>
 <span class="co">#&gt; 3 3           S 602999874</span>
 <span class="co">#&gt; 4 4           S 602999874</span>
 <span class="co">#&gt; 5 5           S 602999874</span>
-<span class="co">#&gt; 6 6           S 602999874</span></pre></body></html></div>
+<span class="co">#&gt; 6 6           S 602999874</span>
+</pre></div>
 <p>By using the <code>keep</code> argument we can extract the value of these variables for each of the 21 patches or each of the two vaccine status (1 = non vaccinated, 2 = vaccinated) of the model. By setting <code>keep</code> equal to <code>patch</code>, the output has an additional column for the patch:</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">S_output</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ZikaModel/man/format_output_H.html">format_output_H</a></span>(<span class="no">r1</span>, <span class="kw">var_select</span> <span class="kw">=</span> <span class="st">"S"</span>, <span class="kw">keep</span> <span class="kw">=</span> <span class="st">"patch"</span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">S_output</span>)
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="kw">S_output</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_output_H.html">format_output_H</a></span>(<span class="kw">r1</span>, var_select = <span class="st">"S"</span>, keep = <span class="st">"patch"</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="kw">S_output</span>)
 <span class="co">#&gt;   t patch compartment        y</span>
 <span class="co">#&gt; 1 1     1           S 29999994</span>
 <span class="co">#&gt; 2 2     1           S 29999994</span>
 <span class="co">#&gt; 3 3     1           S 29999994</span>
 <span class="co">#&gt; 4 4     1           S 29999994</span>
 <span class="co">#&gt; 5 5     1           S 29999994</span>
-<span class="co">#&gt; 6 6     1           S 29999994</span></pre></body></html></div>
+<span class="co">#&gt; 6 6     1           S 29999994</span>
+</pre></div>
 <p>By specifing the same arguments <code>var_select</code> and <code>keep</code> arguments in the plot function we plot the <code>S</code> compartment by patch:</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">r1</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"H"</span>, <span class="kw">var_select</span> <span class="kw">=</span> <span class="st">"S"</span>, <span class="kw">keep</span> <span class="kw">=</span> <span class="st">"patch"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">r1</span>, type = <span class="st">"H"</span>, var_select = <span class="st">"S"</span>, keep = <span class="st">"patch"</span>)
+</pre></div>
 <p><img src="deterministic_base_files/figure-html/unnamed-chunk-9-1.png" width="768"></p>
 <p>We can also plot the mosquito compartments of the model using the same <code>plot</code> function. To do that we modify the value of the <code>type</code> argument.</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">r1</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"M"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb9"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">r1</span>, type = <span class="st">"M"</span>)
+</pre></div>
 <p><img src="deterministic_base_files/figure-html/unnamed-chunk-10-1.png" width="768"></p>
 <p>This plots the following mosquito compartments:</p>
 <ul>
@@ -211,44 +229,46 @@
 <code>FOI1</code> - Force of infection</li>
 </ul>
 <p>Using the argument <code>keep</code> we can choose whether to plot the above variables as summary across all patches (default) or by patch (<code>keep = "patch"</code>).</p>
-<p>Now, as a sanity check, we plot the variables which are directly modified by seasonal forcing, namely <code>Kc</code>, <code>eip</code> and <code>Delta</code> and the time-varying reproduction number (<span class="math inline">\(R_t\)</span>). We can make use of the function <code><a href="https://rdrr.io/pkg/ZikaModel/man/format_output_M.html">format_output_M()</a></code>, which allows to format the model outputs. <code><a href="https://rdrr.io/pkg/ZikaModel/man/format_output_M.html">format_output_M()</a></code> by default extracts the mean value of <code>Kc</code>, <code>eip</code> and <code>Delta</code> across patches. Once we have extracted the model output we can write our own plotting code:</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">patchwork</span>)
+<p>Now, as a sanity check, we plot the variables which are directly modified by seasonal forcing, namely <code>Kc</code>, <code>eip</code> and <code>Delta</code> and the time-varying reproduction number (<span class="math inline">\(R_t\)</span>). We can make use of the function <code><a href="../reference/format_output_M.html">format_output_M()</a></code>, which allows to format the model outputs. <code><a href="../reference/format_output_M.html">format_output_M()</a></code> by default extracts the mean value of <code>Kc</code>, <code>eip</code> and <code>Delta</code> across patches. Once we have extracted the model output we can write our own plotting code:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://patchwork.data-imaginist.com">patchwork</a></span>)
 
-<span class="no">Kc</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ZikaModel/man/format_output_M.html">format_output_M</a></span>(<span class="no">r1</span>, <span class="kw">var_select</span> <span class="kw">=</span> <span class="st">"Kc"</span>)
-<span class="no">Kc_p</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">Kc</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">t</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="kw">color</span> <span class="kw">=</span> <span class="st">'royalblue'</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">0.5</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span>(<span class="st">"Time"</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(<span class="st">"Mean across patches"</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">"Mosquito larvae carrying capacity"</span>) +
+<span class="kw">Kc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_output_M.html">format_output_M</a></span>(<span class="kw">r1</span>, var_select = <span class="st">"Kc"</span>)
+<span class="kw">Kc_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">Kc</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">t</span>, y = <span class="kw">y</span>)) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(color = <span class="st">'royalblue'</span>, size = <span class="fl">0.5</span>) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span>(<span class="st">"Time"</span>) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(<span class="st">"Mean across patches"</span>) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">"Mosquito larvae carrying capacity"</span>) <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>()
 
-<span class="no">eip</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ZikaModel/man/format_output_M.html">format_output_M</a></span>(<span class="no">r1</span>, <span class="kw">var_select</span> <span class="kw">=</span> <span class="st">"eip"</span>)
-<span class="no">eip_p</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">eip</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">t</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="kw">color</span> <span class="kw">=</span> <span class="st">'royalblue'</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">0.5</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span>(<span class="st">"Time"</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(<span class="st">"Mean across patches"</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">"Extrinsic Incubation Period"</span>) +
+<span class="kw">eip</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_output_M.html">format_output_M</a></span>(<span class="kw">r1</span>, var_select = <span class="st">"eip"</span>)
+<span class="kw">eip_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">eip</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">t</span>, y = <span class="kw">y</span>)) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(color = <span class="st">'royalblue'</span>, size = <span class="fl">0.5</span>) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span>(<span class="st">"Time"</span>) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(<span class="st">"Mean across patches"</span>) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">"Extrinsic Incubation Period"</span>) <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>()
 
-<span class="no">delta</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ZikaModel/man/format_output_M.html">format_output_M</a></span>(<span class="no">r1</span>, <span class="kw">var_select</span> <span class="kw">=</span> <span class="st">"Delta"</span>)
-<span class="no">delta_p</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">delta</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">t</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="kw">color</span> <span class="kw">=</span> <span class="st">'royalblue'</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">0.5</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span>(<span class="st">"Time"</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(<span class="st">"Mean across patches"</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">"Adult mosquito daily mortality rate"</span>) +
+<span class="kw">delta</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_output_M.html">format_output_M</a></span>(<span class="kw">r1</span>, var_select = <span class="st">"Delta"</span>)  
+<span class="kw">delta_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">delta</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">t</span>, y = <span class="kw">y</span>)) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(color = <span class="st">'royalblue'</span>, size = <span class="fl">0.5</span>) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span>(<span class="st">"Time"</span>) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(<span class="st">"Mean across patches"</span>) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">"Adult mosquito daily mortality rate"</span>) <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>()
 
-<span class="no">Rt</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ZikaModel/man/format_output_M.html">format_output_M</a></span>(<span class="no">r1</span>, <span class="kw">var_select</span> <span class="kw">=</span> <span class="st">"R0t_1"</span>)
-<span class="no">Rt_p</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">Rt</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">t</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="kw">color</span> <span class="kw">=</span> <span class="st">'royalblue'</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">0.5</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span>(<span class="st">"Time"</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(<span class="st">"Mean across patches"</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">"Time-varying ZIKV reprodution number"</span>) +
+<span class="kw">Rt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_output_M.html">format_output_M</a></span>(<span class="kw">r1</span>, var_select = <span class="st">"R0t_1"</span>)  
+<span class="kw">Rt_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">Rt</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">t</span>, y = <span class="kw">y</span>)) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(color = <span class="st">'royalblue'</span>, size = <span class="fl">0.5</span>) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span>(<span class="st">"Time"</span>) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(<span class="st">"Mean across patches"</span>) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">"Time-varying ZIKV reprodution number"</span>) <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>()
 
-<span class="no">all</span> <span class="kw">&lt;-</span> <span class="no">Kc_p</span> + <span class="no">eip_p</span> + <span class="no">delta_p</span> + <span class="no">Rt_p</span>
-<span class="no">all</span></pre></body></html></div>
+<span class="kw">all</span> <span class="op">&lt;-</span> <span class="kw">Kc_p</span> <span class="op">+</span> <span class="kw">eip_p</span> <span class="op">+</span> <span class="kw">delta_p</span> <span class="op">+</span> <span class="kw">Rt_p</span>
+<span class="kw">all</span>
+</pre></div>
 <p><img src="deterministic_base_files/figure-html/unnamed-chunk-11-1.png" width="768"> A expected the mean value of <code>Kc</code>, <code>eip</code> and <code>Delta</code> does no change throughout the simulation when seasonality is turned off.</p>
 </div>
   </div>
@@ -268,7 +288,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>
