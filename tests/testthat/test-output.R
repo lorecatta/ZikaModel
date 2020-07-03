@@ -92,3 +92,16 @@ test_that("summarising mosquito variables by vaccine status throws error", {
   expect_error(format_output_M(r1, keep = "vaccine"), "Can not summarise mosquito-related variables or compartments by vaccine status")
 
 })
+
+test_that("format output works when stratifying by age, vaccine status and patch", {
+
+  r1 <- run_deterministic_model(time_period = 100)
+
+  ## summarise by age, vaccine and patch
+  o1 <- format_output_H(r1, var_select = "S", keep = "all")
+
+  expect_equal(dim(o1), c(46200, 6))
+  expect_equal(nrow(o1[o1$patch == 1 & o1$age == 1 & o1$vaccine == 1, ]), 100)
+  expect_error(format_output_H(r1, keep = "all"), "Can not select more than one compartment when stratifying by both patch and vaccine status")
+
+})

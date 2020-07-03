@@ -4,7 +4,7 @@
 \alias{format_output_H}
 \title{Format human model outputs}
 \usage{
-format_output_H(x, var_select = NULL, keep = NULL)
+format_output_H(x, var_select = NULL, keep = NULL, patch_id = NULL)
 }
 \arguments{
 \item{x}{Zika_model_simulation object.}
@@ -20,7 +20,9 @@ format_output_H(x, var_select = NULL, keep = NULL)
       }}
 
 \item{keep}{name of variable to stratify by
-(allowed are \code{c("patch", "vaccine")}. Default is no stratification)}
+(allowed are \code{c("patch", "vaccine", "all")}. Default is no stratification)}
+
+\item{patch_id}{ID of patch to keep in the summary. Default to keep all patches.}
 }
 \value{
 Formatted long data.frame

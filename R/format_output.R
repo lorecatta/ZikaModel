@@ -18,14 +18,23 @@
 #'       }
 #'
 #' @param keep name of variable to stratify by
-#'   (allowed are \code{c("patch", "vaccine")}. Default is no stratification)
+#'   (allowed are \code{c("patch", "vaccine", "all")}. Default is no stratification)
+#'
+#' @param patch_id ID of patch to keep in the summary. Default to keep all patches.
 #'
 #' @return Formatted long data.frame
 #'
 #' @export
 format_output_H <- function(x,
                             var_select = NULL,
-                            keep = NULL) {
+                            keep = NULL,
+                            patch_id = NULL) {
+
+  if(!is.null(keep) && keep == "all") {
+
+    if((!is.null(var_select) && (length(var_select) > 1)) | is.null(var_select))
+      stop("Can not select more than one compartment when stratifying by both patch and vaccine status")
+  }
 
   # Get model details
   nt <- nrow(x$output)
@@ -164,17 +173,32 @@ format_output_H <- function(x,
 
   } else if (keep == "patch") {
 
-    out <- data.frame(t = as.numeric(x$output[,index$time]),
+    out <- data.frame(t = rep(as.numeric(x$output[,index$time]), x$parameters$NP),
                       patch = rep(seq_len(x$parameters$NP), each = nt),
                       compartment = as.character(mapply(rep, vars, x$parameters$NP*nt)),
                       y = unlist(output_list, use.names = FALSE))
 
   } else if (keep == "vaccine") {
 
-    out <- data.frame(t = as.numeric(x$output[,index$time]),
+    out <- data.frame(t = rep(as.numeric(x$output[,index$time]), 2),
                       vaccine = rep(seq_len(2), each = nt),
                       compartment = as.character(mapply(rep, vars, 2*nt)),
                       y = unlist(output_list, use.names = FALSE))
+
+  } else if (keep == "all") {
+
+    out <- data.frame(t = rep(as.numeric(x$output[,index$time]), x$parameters$na*2*x$parameters$NP),
+                      age = as.character(rep(seq_len(x$parameters$na), each = nt)),
+                      vaccine = rep(seq_len(2), each = nt*x$parameters$na),
+                      patch = rep(seq_len(x$parameters$NP), each = nt*x$parameters$na*2),
+                      compartment = as.character(mapply(rep, vars, nt*x$parameters$na*2*x$parameters$NP)),
+                      y = unlist(output_list, use.names = FALSE))
+
+    if(!is.null(patch_id)) {
+
+      out <- subset(out, patch == patch_id)
+
+    }
 
   }
 

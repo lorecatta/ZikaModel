@@ -51,6 +51,14 @@ plot.Zika_model_simulation <- function(x,
       ggplot2::facet_wrap(stats::as.formula(paste("~", keep)),
                           ncol = 4,
                           scales = "free_y")
+  } else if (keep == "all") {
+    pds <- subset(pds, patch == 1)
+    p <- p + ggplot2::geom_line(data = pds,
+                                ggplot2::aes(x = .data$t, y = .data$y,
+                                             col = .data$age)) +
+      ggplot2::facet_wrap(stats::as.formula(paste("~", "vaccine")),
+                          ncol = 1,
+                          scales = "free_y")
   }
 
   # Add remaining formatting

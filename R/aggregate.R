@@ -75,6 +75,10 @@ sum_across_array_dims <- function(my_array, keep = NULL, compartment = NULL) {
 
       ret <- apply(my_array, c(1, 3), sum)
 
+    } else if (keep == "all") {
+
+      ret <- my_array
+
     }
 
   }
