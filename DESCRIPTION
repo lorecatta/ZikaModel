@@ -25,7 +25,7 @@ LinkingTo:
     dust
 Suggests: 
     odin,
-    odin.dust
+    odin.dust,
     knitr,
     rmarkdown,
     covr,
