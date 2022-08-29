@@ -24,6 +24,8 @@ LinkingTo:
     cpp11,
     dust
 Suggests: 
+    odin,
+    odin.dust
     knitr,
     rmarkdown,
     covr,
