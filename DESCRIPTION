@@ -20,6 +20,8 @@ Imports:
     scales,
     patchwork
 RoxygenNote: 7.1.0
+LinkingTo:
+    cpp11
 Suggests: 
     knitr,
     rmarkdown,
