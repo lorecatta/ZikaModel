@@ -11,7 +11,7 @@ Description: The package implements the deterministic and stochastic versions of
     using the R package odin.
 License: MIT + file LICENSE
 Depends:
-    R (>= 3.5.0)
+    R (>= 4.0.0)
 Encoding: UTF-8
 LazyData: true
 Imports: 
@@ -27,6 +27,7 @@ Suggests:
     testthat,
     pkgdown
 VignetteBuilder: knitr
+SystemRequirements: C++11
 Remotes:
     mrc-ide/odin,
     jameshay218/zikaInfer
