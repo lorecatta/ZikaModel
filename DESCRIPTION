@@ -15,6 +15,7 @@ Depends:
 Encoding: UTF-8
 LazyData: true
 Imports: 
+    odin,
     ggplot2,
     scales,
     patchwork
@@ -22,8 +23,6 @@ RoxygenNote: 7.1.0
 LinkingTo:
     cpp11
 Suggests: 
-    dde,
-    odin,
     knitr,
     rmarkdown,
     covr,
