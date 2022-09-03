@@ -46,7 +46,7 @@ library(devtools)
 - Then, in a fresh R session, install the `ZikaModel` package
 
 ```{r include = TRUE, eval = FALSE}
-devtools::install_github("mrc-ide/ZikaModel")
+devtools::install_github("lorecatta/ZikaModel")
 ```
 
 - Load and attach it 
@@ -55,5 +55,5 @@ library(ZikaModel)
 ```
 
 ## Running the base model
-Check out this vignette on how to run the [deterministic](https://mrc-ide.github.io/ZikaModel/articles/deterministic_base.html) 
+Check out this vignette on how to run the [deterministic](https://lorecatta.github.io/ZikaModel/articles/deterministic_base.html) 
 base version of the model. 
