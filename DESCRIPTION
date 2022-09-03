@@ -19,7 +19,7 @@ Imports:
     ggplot2,
     scales,
     patchwork
-RoxygenNote: 7.1.0
+RoxygenNote: 7.2.1
 LinkingTo:
     cpp11
 Suggests: 
