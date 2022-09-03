@@ -20,11 +20,10 @@ Imports:
     patchwork
 RoxygenNote: 7.1.0
 LinkingTo:
-    cpp11,
-    dust
+    cpp11
 Suggests: 
+    dde,
     odin,
-    odin.dust,
     knitr,
     rmarkdown,
     covr,
@@ -33,9 +32,7 @@ Suggests:
 VignetteBuilder: knitr
 SystemRequirements: C++11
 Remotes:
-    mrc-ide/dust,
     mrc-ide/odin,
-    mrc-ide/odin.dust,
     jameshay218/zikaInfer
 URL: https://github.com/mrc-ide/ZikaModel
 BugReports: https://github.com/mrc-ide/ZikaModel/issues
