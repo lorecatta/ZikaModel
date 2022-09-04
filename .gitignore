@@ -7,3 +7,5 @@ inst/doc
 *.dll
 *.o
 docs
+/doc/
+/Meta/
