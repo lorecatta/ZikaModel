@@ -7,6 +7,7 @@
 
 [![Codecov test
 coverage](https://codecov.io/gh/mrc-ide/ZikaModel/branch/master/graph/badge.svg)](https://codecov.io/gh/mrc-ide/ZikaModel?branch=master)
+[![R-CMD-check](https://github.com/lorecatta/ZikaModel/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/lorecatta/ZikaModel/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 `ZikaModel` is an R package for running the Zika transmission model
