@@ -34,5 +34,5 @@ SystemRequirements: C++11
 Remotes:
     mrc-ide/odin,
     jameshay218/zikaInfer
-URL: https://github.com/lorecatta/ZikaModel
+URL: https://lorecatta.github.io/ZikaModel/
 BugReports: https://github.com/lorecatta/ZikaModel/issues
