@@ -1,4 +1,15 @@
 
+#------------------------------------------------
+# The following commands ensure that package dependencies are listed in the NAMESPACE file.
+#' @useDynLib ZikaModel, .registration = TRUE
+#------------------------------------------------
+# unload DLL when package is unloaded
+#' @noRd
+.onUnload <- function(libpath) {
+  library.dynam.unload("ZikaModel", libpath)
+}
+
+
 # -----------------------------------------------------------------------------
 
 #' Return the default demographic information
