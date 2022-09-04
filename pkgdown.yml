@@ -5,7 +5,7 @@ articles:
   deterministic_base: deterministic_base.html
   deterministic_generalControl: deterministic_generalControl.html
   deterministic_seasonal: deterministic_seasonal.html
-last_built: 2022-09-04T16:17Z
+last_built: 2022-09-04T16:21Z
 urls:
   reference: https://lorecatta.github.io/ZikaModel/reference
   article: https://lorecatta.github.io/ZikaModel/articles
