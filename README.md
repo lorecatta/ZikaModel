@@ -5,8 +5,6 @@
 
 <!-- badges: start -->
 
-[![Travis build
-status](https://travis-ci.org/mrc-ide/ZikaModel.svg?branch=master)](https://travis-ci.org/mrc-ide/ZikaModel)
 [![Codecov test
 coverage](https://codecov.io/gh/mrc-ide/ZikaModel/branch/master/graph/badge.svg)](https://codecov.io/gh/mrc-ide/ZikaModel?branch=master)
 <!-- badges: end -->
